@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Propostas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+  <!-- Card com a proposta -->
+  <ion-card *ngFor="let proposta of propostas">
+    <img *ngIf="proposta.foto != null" src={{proposta.foto}} />
+    <ion-card-content>
+      <ion-card-title>
+        {{proposta.descricao}}
+      </ion-card-title>
+      <p *ngIf="proposta.bairro != null">
+        Bairro: {{proposta.bairro}}
+      </p>
+      <p *ngIf="proposta.rua != null">
+        Rua : {{proposta.rua}}
+      </p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="proposta.apoiada = true">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>{{proposta.apoios}} Apoios</div>
+            </button>
+      </ion-col>
+      <ion-col *ngIf="proposta.apoiada == true">
+        <button ion-button icon-left clear small color="dark" (click)="proposta.apoiada = false">
+              <ion-icon name="close"></ion-icon>
+              <div>Desfazer</div>
+            </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="adicionarProposta()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

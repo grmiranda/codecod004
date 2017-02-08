@@ -1,0 +1,28 @@
+<!--Conteudo da tela com logo-->
+<ion-content class="background">
+  <h2 class="logo">LOGO</h2>
+  <p class="logo">Texto de boas vindas</p>
+
+  <!--Footer para manter o campo de login na parte inferior da tela-->
+  <ion-footer class="footer-login">
+
+    <div class="login-button-div">
+      <!--Botão para login com Facebook-->
+      <button ion-button icon-left full text-capitalize class="facebook-button" (click)="logar('facebook')">
+        <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon> Entre com Facebook
+      </button>
+
+      <!--Botão para login com Google +-->
+      <button ion-button icon-left full text-capitalize class="google-button" (click)="logar('google')">
+        <ion-icon ios="logo-google" md="logo-google"></ion-icon> Entre com Google+
+      </button>
+    </div>
+
+    <div>
+      <ion-row>
+        <button ion-button clear block text-capitalize class="aux-button" [navPush]="loginEmail" >Entrar com Email</button>
+        <button ion-button clear block text-capitalize class="aux-button" [navPush]="cadastrarNovoUser">Cadastrar</button>
+      </ion-row>
+    </div>
+  </ion-footer>
+</ion-content>

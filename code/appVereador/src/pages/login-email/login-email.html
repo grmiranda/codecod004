@@ -1,0 +1,22 @@
+<!--Cabeçalho da página-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Login com Email</ion-title>
+  </ion-navbar>
+</ion-header>
+<!--Conteudo da página-->
+<ion-content padding>
+  <!--Campos de preenchimento para cadastro-->
+  <ion-list>
+    <ion-item>
+      <ion-label floating >Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Senha</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <p class="esqueci-senha" [navPush]="esqueciSenha">Esqueci minha senha</p>
+    <button ion-button type="submit" block class="submit-button" color="submit" (click)="login()">Entrar</button>
+  </ion-list>
+</ion-content>

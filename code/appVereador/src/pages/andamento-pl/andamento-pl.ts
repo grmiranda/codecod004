@@ -12,6 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'andamento-pl.html'
 })
 export class AndamentoPLPage {
+  votos = 15;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

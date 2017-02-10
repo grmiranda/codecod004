@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { Platform, MenuController, Nav, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, MenuController, Nav} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
 //paginas do Side Menu
-import { AndamentoPLPage } from '../andamento-pl/andamento-pl';
-import { AvaliarPropostaPage } from '../avaliar-proposta/avaliar-proposta';
-import { HistoriaVereadorPage } from '../historia-vereador/historia-vereador';
-import { PerfilPage } from '../perfil/perfil';
-import { SobrePage } from '../sobre/sobre';
-import { SolicitacaoPLPage } from './solicitacao-pl/solicitacao-pl';
-import { TelefonesUteisPage } from '../telefones-uteis/telefones-uteis';
-import { TrofeuCidadaniaPage } from '../trofeu-cidadania/trofeu-cidadania';
+import { AndamentoPLPage } from '../pages/andamento-pl/andamento-pl';
+import { AvaliarPropostaPage } from '../pages/avaliar-proposta/avaliar-proposta';
+import { HistoriaVereadorPage } from '../pages/historia-vereador/historia-vereador';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { SobrePage } from '../pages/sobre/sobre';
+import { SolicitacaoPLPage } from '../pages/solicitacao-pl/solicitacao-pl';
+import { TelefonesUteisPage } from '../pages/telefones-uteis/telefones-uteis';
+import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
 
 
 @Component({

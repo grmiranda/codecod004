@@ -26,6 +26,10 @@ ion-navbar, ion-toolbar{
   background-color: rgb(37, 190, 6);
 }
 //Configuração de elementos de uso comum
+.on-top-navbar{
+  z-index: 997;
+}
+
 .floating-button button{
   //COR DO BOTÃO
 }

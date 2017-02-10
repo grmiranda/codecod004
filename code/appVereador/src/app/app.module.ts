@@ -13,10 +13,26 @@ import { AprovadosPage } from '../pages/aprovados/aprovados';
 import { RecusadosPage } from '../pages/recusados/recusados';
 import { SolicitadosPage } from '../pages/solicitados/solicitados';
 import { PropostasPage } from '../pages/propostas/propostas';
+import { AndamentoPLPage } from '../pages/andamento-pl/andamento-pl';
+import { AvaliarPropostaPage } from '../pages/avaliar-proposta/avaliar-proposta';
+import { HistoriaVereadorPage } from '../pages/historia-vereador/historia-vereador';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { SobrePage } from '../pages/sobre/sobre';
+import { SolicitacaoPLPage } from '../pages/solicitacao-pl/solicitacao-pl';
+import { TelefonesUteisPage } from '../pages/telefones-uteis/telefones-uteis';
+import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
 
 
 @NgModule({
   declarations: [
+    AndamentoPLPage,
+    AvaliarPropostaPage,
+    HistoriaVereadorPage,
+    PerfilPage,
+    SobrePage,
+    SolicitacaoPLPage,
+    TelefonesUteisPage,
+    TrofeuCidadaniaPage,
     MyApp,
     LoginPage,
     InicioTabsPage,
@@ -35,6 +51,14 @@ import { PropostasPage } from '../pages/propostas/propostas';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    AndamentoPLPage,
+    AvaliarPropostaPage,
+    HistoriaVereadorPage,
+    PerfilPage,
+    SobrePage,
+    SolicitacaoPLPage,
+    TelefonesUteisPage,
+    TrofeuCidadaniaPage,
     MyApp,
     LoginPage,
     InicioTabsPage,

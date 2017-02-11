@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { AdicionarPropostaPage } from '../adicionar-proposta/adicionar-proposta';
+import { SolicitarPropostaPage } from '../solicitar-proposta/solicitar-proposta';
+
 /*
   Generated class for the Propostas page.
 
@@ -13,6 +16,8 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PropostasPage {
   propostas = [];
+  addPorposta = AdicionarPropostaPage;
+  solicitarProposta = SolicitarPropostaPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.inicializarItens();
@@ -68,5 +73,13 @@ export class PropostasPage {
       })
     }
 
+  }
+
+  solicitar(){
+    this.navCtrl.push(this.solicitarProposta);
+  }
+
+  adicionarProposta(){
+     this.navCtrl.push(this.addPorposta);
   }
 }

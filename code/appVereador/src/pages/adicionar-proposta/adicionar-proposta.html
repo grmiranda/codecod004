@@ -1,0 +1,41 @@
+<!--
+  Generated template for the AdicionarProposta page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar class="on-top-navbar" color="primary">
+    <ion-title>Adicionar Proposta</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Descrição</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Bairro</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Rua</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <div class="perfil-pic">
+        <div>Imagem</div>
+        <!--para simular a imagem-->
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <button ion-button block class="botao-duplo-l">Importar</button>
+        <button ion-button block class="botao-duplo-r">Tirar Foto</button>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <!--Botão para adicionar publicação-->
+  <button ion-button block (click)="adicionar()">Adicionar</button>
+</ion-content>

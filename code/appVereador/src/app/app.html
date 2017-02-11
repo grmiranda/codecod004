@@ -31,14 +31,16 @@
             <button ion-item (click)="openPage('historia')" >
                 História do Vereador
             </button>
-            <button ion-item (click)="openPage('sobre')" >
-                Sobre
-            </button>
             <button ion-item (click)="openPage('sair')" >
                 Sair
             </button>
         </ion-list>
     </ion-content>
+    <ion-footer>
+        <button ion-item small clear (click)="openPage('sobre')" >
+            CODE On Demand
+        </button>
+    </ion-footer>   
 </ion-menu>
 
 <ion-nav id="nav" #content [root]="rootPage"></ion-nav>

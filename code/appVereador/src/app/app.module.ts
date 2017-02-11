@@ -21,6 +21,10 @@ import { SobrePage } from '../pages/sobre/sobre';
 import { SolicitacaoPLPage } from '../pages/solicitacao-pl/solicitacao-pl';
 import { TelefonesUteisPage } from '../pages/telefones-uteis/telefones-uteis';
 import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
+import { AdicionarPropostaPage } from '../pages/adicionar-proposta/adicionar-proposta';
+import { SolicitarPropostaPage } from '../pages/solicitar-proposta/solicitar-proposta';
+import { AdicionarSolicitacaoPage } from '../pages/adicionar-solicitacao/adicionar-solicitacao';
+
 
 
 @NgModule({
@@ -42,7 +46,10 @@ import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania'
     AprovadosPage,
     RecusadosPage,
     SolicitadosPage,
-    PropostasPage
+    PropostasPage,
+    AdicionarPropostaPage,
+    SolicitarPropostaPage,
+    AdicionarSolicitacaoPage
 
   ],
   imports: [
@@ -68,7 +75,11 @@ import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania'
     AprovadosPage,
     RecusadosPage,
     SolicitadosPage,
-    PropostasPage
+    PropostasPage,
+    AdicionarPropostaPage,
+    SolicitarPropostaPage,
+    AdicionarSolicitacaoPage
+    
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

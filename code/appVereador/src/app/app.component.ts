@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav} from 'ionic-angular';
+import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
@@ -30,7 +30,6 @@ export class MyApp {
   telefones = TelefonesUteisPage;
   historia = HistoriaVereadorPage;
   sobre = SobrePage;
-  sair = LoginPage
 
   constructor(platform: Platform, public menu: MenuController) {
     platform.ready().then(() => {
@@ -67,8 +66,7 @@ export class MyApp {
       this.nav.push(this.sobre);
       this.menu.close();
     }else if(pagina == 'sair'){
-      this.nav.push(this.sair);
-      this.menu.close();
+      this.nav.setRoot(this.rootPage);
     }
 
   }

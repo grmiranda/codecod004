@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { AdicionarSolicitacaoPage } from '../adicionar-solicitacao/adicionar-solicitacao';
+
 /*
   Generated class for the Solicitados page.
 
@@ -14,6 +16,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class SolicitadosPage {
   propostas = [];
   filtro: string = "descricao";
+  addSolicitacao = AdicionarSolicitacaoPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.inicializarItens();
@@ -55,5 +58,8 @@ export class SolicitadosPage {
       })
     }
 
+  }
+  adicionarSolicitacao(){
+    this.navCtrl.push(this.addSolicitacao);
   }
 }

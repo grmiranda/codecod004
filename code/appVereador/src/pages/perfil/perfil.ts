@@ -12,11 +12,19 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'perfil.html'
 })
 export class PerfilPage {
-
+  editar = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
+  }
+  editarAction(){
+    if(this.editar){
+      this.editar = false
+    }else{
+      this.editar = true;
+    }
+
   }
 
 }

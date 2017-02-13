@@ -1,30 +1,30 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-
-import { AdicionarPlPage } from '../adicionar-pl/adicionar-pl';
+import { PlTabsPage } from '../pl-tabs/pl-tabs';
 
 /*
-  Generated class for the AndamentoPL page.
+  Generated class for the AdicionarPl page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-andamento-pl',
-  templateUrl: 'andamento-pl.html'
+  selector: 'page-adicionar-pl',
+  templateUrl: 'adicionar-pl.html'
 })
-export class AndamentoPLPage {
-  votos = 15;
+export class AdicionarPlPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AndamentoPLPage');
+    console.log('ionViewDidLoad AdicionarPlPage');
   }
 
-  adicionarPL(){
-    this.navCtrl.push(AdicionarPlPage);
+  adicionar(){
+    this.navCtrl.pop();
   }
-
+  cancelar(){
+    this.navCtrl.pop();
+  }
 }

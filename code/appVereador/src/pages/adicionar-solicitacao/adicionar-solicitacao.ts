@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { SolicitacaoTabsPage } from '../solicitacao-tabs/solicitacao-tabs';
+
 /*
   Generated class for the AdicionarSolicitacao page.
 
@@ -19,6 +21,9 @@ export class AdicionarSolicitacaoPage {
     console.log('ionViewDidLoad AdicionarSolicitacaoPage');
   }
   adicionar(){
+    this.navCtrl.pop();
+  }
+  cancelar(){
     this.navCtrl.pop();
   }
 }

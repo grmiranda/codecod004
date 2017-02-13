@@ -27,7 +27,10 @@ ion-navbar, ion-toolbar{
 }
 //Configuração de elementos de uso comum
 .on-top-navbar{
-  z-index: 997;
+  z-index: 200;
+}
+.on-top-navbar-menu{
+  z-index: 100;
 }
 
 .floating-button button{

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { AdicionarPropostaPlPage } from '../adicionar-proposta-pl/adicionar-proposta-pl';
 /*
   Generated class for the SolicitacaoPL page.
 
@@ -19,4 +20,7 @@ export class SolicitacaoPLPage {
     console.log('ionViewDidLoad SolicitacaoPLPage');
   }
 
+  adicionarPL(){
+    this.navCtrl.push(AdicionarPropostaPlPage);
+  }
 }

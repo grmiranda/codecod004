@@ -18,5 +18,5 @@ export class TelefonesUteisPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TelefonesUteisPage');
   }
-
+  
 }

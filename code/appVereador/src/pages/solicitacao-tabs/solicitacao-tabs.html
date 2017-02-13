@@ -1,0 +1,14 @@
+<ion-header >
+  <ion-navbar color="primary">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Solicitações</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-tabs color="primary">
+   <ion-tab color="primary" tabIcon="list" tabTitle="Propostas" [root]="propostas"></ion-tab>
+   <ion-tab color="primary" tabIcon="paper" tabTitle="Solicitados" [root]="solicitados"></ion-tab>
+   <ion-tab color="primary" tabIcon="checkmark-circle" tabTitle="Aprovados" [root]="aprovados"></ion-tab>
+   <ion-tab color="primary" tabIcon="remove-circle" tabTitle="Recusados" [root]="recusados"></ion-tab>
+ </ion-tabs>

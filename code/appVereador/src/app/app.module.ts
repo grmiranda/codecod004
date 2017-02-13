@@ -8,7 +8,9 @@ import { LoginEmailPage } from '../pages/login-email/login-email';
 import { CadastrarUsuarioPage } from '../pages/cadastrar-usuario/cadastrar-usuario';
 import { EsqueciSenhaPage } from '../pages/esqueci-senha/esqueci-senha';
 //Telas Inicio
-import { InicioTabsPage } from '../pages/inicio-tabs/inicio-tabs';
+import { BoasVindasPage } from '../pages/boas-vindas/boas-vindas';
+import { SolicitacaoTabsPage } from '../pages/solicitacao-tabs/solicitacao-tabs';
+import { PlTabsPage } from '../pages/pl-tabs/pl-tabs';
 import { AprovadosPage } from '../pages/aprovados/aprovados';
 import { RecusadosPage } from '../pages/recusados/recusados';
 import { SolicitadosPage } from '../pages/solicitados/solicitados';
@@ -20,15 +22,22 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { SobrePage } from '../pages/sobre/sobre';
 import { SolicitacaoPLPage } from '../pages/solicitacao-pl/solicitacao-pl';
 import { TelefonesUteisPage } from '../pages/telefones-uteis/telefones-uteis';
+import { CategoriasTelefonePage } from '../pages/categorias-telefone/categorias-telefone';
 import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
 import { AdicionarPropostaPage } from '../pages/adicionar-proposta/adicionar-proposta';
 import { SolicitarPropostaPage } from '../pages/solicitar-proposta/solicitar-proposta';
 import { AdicionarSolicitacaoPage } from '../pages/adicionar-solicitacao/adicionar-solicitacao';
+import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
+import { AdicionarPropostaPlPage } from '../pages/adicionar-proposta-pl/adicionar-proposta-pl';
+import { AdicionarPlPage } from '../pages/adicionar-pl/adicionar-pl';
+import { AprovadosPlPage } from '../pages/aprovados-pl/aprovados-pl';
 
 
 
 @NgModule({
   declarations: [
+    BoasVindasPage,
+    AprovadosPlPage,
     AndamentoPLPage,
     AvaliarPropostaPage,
     HistoriaVereadorPage,
@@ -39,7 +48,7 @@ import { AdicionarSolicitacaoPage } from '../pages/adicionar-solicitacao/adicion
     TrofeuCidadaniaPage,
     MyApp,
     LoginPage,
-    InicioTabsPage,
+    SolicitacaoTabsPage,
     LoginEmailPage,
     CadastrarUsuarioPage,
     EsqueciSenhaPage,
@@ -49,7 +58,12 @@ import { AdicionarSolicitacaoPage } from '../pages/adicionar-solicitacao/adicion
     PropostasPage,
     AdicionarPropostaPage,
     SolicitarPropostaPage,
-    AdicionarSolicitacaoPage
+    AdicionarSolicitacaoPage,
+    AvaliarPlPage,
+    PlTabsPage,
+    AdicionarPropostaPlPage,
+    AdicionarPlPage,
+    CategoriasTelefonePage
 
   ],
   imports: [
@@ -58,6 +72,8 @@ import { AdicionarSolicitacaoPage } from '../pages/adicionar-solicitacao/adicion
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    BoasVindasPage,
+    AprovadosPlPage,
     AndamentoPLPage,
     AvaliarPropostaPage,
     HistoriaVereadorPage,
@@ -68,7 +84,7 @@ import { AdicionarSolicitacaoPage } from '../pages/adicionar-solicitacao/adicion
     TrofeuCidadaniaPage,
     MyApp,
     LoginPage,
-    InicioTabsPage,
+    SolicitacaoTabsPage,
     LoginEmailPage,
     CadastrarUsuarioPage,
     EsqueciSenhaPage,
@@ -78,7 +94,12 @@ import { AdicionarSolicitacaoPage } from '../pages/adicionar-solicitacao/adicion
     PropostasPage,
     AdicionarPropostaPage,
     SolicitarPropostaPage,
-    AdicionarSolicitacaoPage
+    AdicionarSolicitacaoPage,
+    AvaliarPlPage,
+    PlTabsPage,
+    AdicionarPropostaPlPage,
+    AdicionarPlPage,
+    CategoriasTelefonePage
     
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]

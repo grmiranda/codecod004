@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { EsqueciSenhaPage } from '../esqueci-senha/esqueci-senha';
-import { InicioTabsPage } from '../inicio-tabs/inicio-tabs';
+import { BoasVindasPage } from '../boas-vindas/boas-vindas';
 /*
   Generated class for the LoginEmail page.
 
@@ -23,6 +23,6 @@ export class LoginEmailPage {
     console.log('ionViewDidLoad LoginEmailPage');
   }
   login(){
-    this.navCtrl.setRoot(InicioTabsPage);
+    this.navCtrl.setRoot(BoasVindasPage);
   }
 }

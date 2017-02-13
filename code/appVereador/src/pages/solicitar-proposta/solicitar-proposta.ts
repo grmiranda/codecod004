@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { SolicitacaoTabsPage } from '../solicitacao-tabs/solicitacao-tabs';
+
 /*
   Generated class for the SolicitarProposta page.
 
@@ -19,6 +21,9 @@ export class SolicitarPropostaPage {
     console.log('ionViewDidLoad SolicitarPropostaPage');
   }
   adicionar(){
-    this.navCtrl.pop();
+    this.navCtrl.setRoot(SolicitacaoTabsPage);
+  }
+  cancelar(){
+    this.navCtrl.setRoot(SolicitacaoTabsPage);
   }
 }

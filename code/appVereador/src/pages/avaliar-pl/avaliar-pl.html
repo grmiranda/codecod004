@@ -1,46 +1,42 @@
+<!--
+  Generated template for the AvaliarPl page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
+
   <ion-navbar class="on-top-navbar" color="primary">
-    <ion-title>Projetos de Lei em andamento</ion-title>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Avaliar Projetos de Lei</ion-title>
   </ion-navbar>
+
 </ion-header>
+
+
 <ion-content>
-  <ion-card>
+<ion-card>
     <ion-card-header>
       Título
     </ion-card-header>
     <ion-card-content>
       Texto descrevendo o contedo do projeto de lei. É claro que o acompanhamento das preferências de consumo assume importantes posições no estabelecimento do fluxo de informações.
-      
-    <button ion-button icon-left clear small>
-        <ion-icon name="document"></ion-icon>
-        <div>Ver Documento</div>
-    </button>
-      
-      <ion-range [(ngModel)]="votos">
-        <ion-icon range-left small name="thumbs-up"> 12 </ion-icon>
-        <ion-icon range-right small name="close"> 2 </ion-icon>
-      </ion-range>
     </ion-card-content>
     <!-- Botões -->
     <ion-row padding>
       <ion-col>
         <button ion-button icon-left full color="trust">
-            <div>A favor</div>
+            <div>Aceitar</div>
         </button>
       </ion-col>
 
       <ion-col>
         <button ion-button icon-left full color="danger">
-            <div>Contra</div>
+            <div>Descartar</div>
         </button>
       </ion-col>
     </ion-row>
-    <button ion-button icon-left clear small>
-      <div>Aprovar Projeto de Lei</div>
-    </button>
   </ion-card>
-
-  <ion-fab right bottom>
-    <button ion-fab (click)="adicionarPL()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
 </ion-content>

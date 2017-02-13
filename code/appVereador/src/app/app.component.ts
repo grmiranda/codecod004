@@ -4,14 +4,15 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
 //paginas do Side Menu
-import { AndamentoPLPage } from '../pages/andamento-pl/andamento-pl';
+import { PlTabsPage } from '../pages/pl-tabs/pl-tabs';
 import { AvaliarPropostaPage } from '../pages/avaliar-proposta/avaliar-proposta';
 import { HistoriaVereadorPage } from '../pages/historia-vereador/historia-vereador';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { SobrePage } from '../pages/sobre/sobre';
-import { SolicitacaoPLPage } from '../pages/solicitacao-pl/solicitacao-pl';
-import { TelefonesUteisPage } from '../pages/telefones-uteis/telefones-uteis';
 import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
+import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
+import { SolicitacaoTabsPage } from '../pages/solicitacao-tabs/solicitacao-tabs';
+import { CategoriasTelefonePage } from '../pages/categorias-telefone/categorias-telefone';
 
 
 @Component({
@@ -23,13 +24,16 @@ export class MyApp {
   rootPage = LoginPage;
   //paginas do side Nav
   perfil = PerfilPage;
-  projetosPL = AndamentoPLPage;
-  sugestaoPL = SolicitacaoPLPage;
+  solicitacoes = SolicitacaoTabsPage;
+  projetosPL = PlTabsPage;
+  
   avaliar = AvaliarPropostaPage;
   trofeu = TrofeuCidadaniaPage;
-  telefones = TelefonesUteisPage;
+  telefones = CategoriasTelefonePage;
   historia = HistoriaVereadorPage;
   sobre = SobrePage;
+  avaliarPL = AvaliarPlPage;
+  
 
   constructor(platform: Platform, public menu: MenuController) {
     platform.ready().then(() => {
@@ -40,34 +44,28 @@ export class MyApp {
     });
   }
 
-  openPage(pagina: string){
+  openPage(pagina: any){
     if(pagina == 'perfil'){
-      this.nav.push(this.perfil);
-      this.menu.close();
+      this.nav.setRoot(this.perfil);
+    }else if(pagina == 'solicitacoes'){
+      this.nav.setRoot(this.solicitacoes);
     }else if(pagina == 'projetosPL'){
-      this.nav.push(this.projetosPL);
-      this.menu.close();
-    }else if(pagina == 'sugestaoPL'){
-      this.nav.push(this.sugestaoPL);
-      this.menu.close();
+      this.nav.setRoot(this.projetosPL);
     }else if(pagina == 'avaliar'){
-      this.nav.push(this.avaliar);
-      this.menu.close();
+      this.nav.setRoot(this.avaliar);
+    }else if(pagina == 'avaliarPL'){
+      this.nav.setRoot(this.avaliarPL);
     }else if(pagina == 'trofeu'){
-      this.nav.push(this.trofeu);
-      this.menu.close();
+      this.nav.setRoot(this.trofeu);
     }else if(pagina == 'telefones'){
-      this.nav.push(this.telefones);
-      this.menu.close();
+      this.nav.setRoot(this.telefones);
     }else if(pagina == 'historia'){
-      this.nav.push(this.historia);
-      this.menu.close();
+      this.nav.setRoot(this.historia);
     }else if(pagina == 'sobre'){
-      this.nav.push(this.sobre);
-      this.menu.close();
+      this.nav.setRoot(this.sobre);
     }else if(pagina == 'sair'){
       this.nav.setRoot(this.rootPage);
     }
-
+    this.menu.close();
   }
 }

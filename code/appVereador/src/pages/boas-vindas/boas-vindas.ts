@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController  } from 'ionic-angular';
+import { AbrirFeedPage } from '../abrir-feed/abrir-feed';
 
 /*
   Generated class for the BoasVindas page.
@@ -19,6 +20,10 @@ export class BoasVindasPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BoasVindasPage');
+  }
+
+  abrirFeed(){
+    this.navCtrl.push(AbrirFeedPage);
   }
 
 }

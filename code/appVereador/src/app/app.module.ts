@@ -31,7 +31,8 @@ import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { AdicionarPropostaPlPage } from '../pages/adicionar-proposta-pl/adicionar-proposta-pl';
 import { AdicionarPlPage } from '../pages/adicionar-pl/adicionar-pl';
 import { AprovadosPlPage } from '../pages/aprovados-pl/aprovados-pl';
-
+import { AbrirFeedPage } from '../pages/abrir-feed/abrir-feed';
+import { DepoimentosPage } from '../pages/depoimentos/depoimentos';
 
 
 @NgModule({
@@ -63,7 +64,9 @@ import { AprovadosPlPage } from '../pages/aprovados-pl/aprovados-pl';
     PlTabsPage,
     AdicionarPropostaPlPage,
     AdicionarPlPage,
-    CategoriasTelefonePage
+    CategoriasTelefonePage,
+    AbrirFeedPage,
+    DepoimentosPage
 
   ],
   imports: [
@@ -99,7 +102,9 @@ import { AprovadosPlPage } from '../pages/aprovados-pl/aprovados-pl';
     PlTabsPage,
     AdicionarPropostaPlPage,
     AdicionarPlPage,
-    CategoriasTelefonePage
+    CategoriasTelefonePage,
+    AbrirFeedPage,
+    DepoimentosPage
     
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]

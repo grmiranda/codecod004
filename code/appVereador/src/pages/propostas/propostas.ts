@@ -16,8 +16,6 @@ import { SolicitarPropostaPage } from '../solicitar-proposta/solicitar-proposta'
 })
 export class PropostasPage {
   propostas = [];
-  addPorposta = AdicionarPropostaPage;
-  solicitarProposta = SolicitarPropostaPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.inicializarItens();
@@ -76,10 +74,10 @@ export class PropostasPage {
   }
 
   solicitar(){
-    this.navCtrl.push(this.solicitarProposta);
+    this.navCtrl.push(SolicitarPropostaPage);
   }
 
   adicionarProposta(){
-     this.navCtrl.push(this.addPorposta);
+     this.navCtrl.push(AdicionarPropostaPage);
   }
 }

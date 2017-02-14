@@ -1,29 +1,22 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-
-import { AdicionarPlPage } from '../adicionar-pl/adicionar-pl';
-
 /*
-  Generated class for the AndamentoPL page.
+  Generated class for the AbrirFeed page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-andamento-pl',
-  templateUrl: 'andamento-pl.html'
+  selector: 'page-abrir-feed',
+  templateUrl: 'abrir-feed.html'
 })
-export class AndamentoPLPage {
+export class AbrirFeedPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AndamentoPLPage');
-  }
-
-  adicionarPL(){
-    this.navCtrl.push(AdicionarPlPage);
+    console.log('ionViewDidLoad AbrirFeedPage');
   }
 
 }

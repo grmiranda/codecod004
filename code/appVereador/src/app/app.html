@@ -6,44 +6,43 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button ion-item (click)="openPage('perfil')">
+            <button ion-item (click)="openPage(perfil)">
                 <ion-avatar item-left>
                     <img src="../../imagens/anonimo.png">
                 </ion-avatar>
                 <h2>Nome Completo</h2>
                 <p>Meu Perfil</p>
             </button>
-            <button ion-item (click)="openPage('solicitacoes')" >
+            
+            <button ion-item (click)="openPage(solicitacoes)" >
                 Solicitações
             </button>
-            <button ion-item (click)="openPage('projetosPL')" >
+            <button ion-item (click)="openPage(projetosPL)" >
                 Projetos de lei
             </button>
-            <button ion-item (click)="openPage('avaliar')" >
+            <button ion-item (click)="openPage(avaliar)" >
                 Avaliar Propostas
             </button>
-            <button ion-item (click)="openPage('avaliarPL')" >
+            <button ion-item (click)="openPage(avaliarPL)" >
                 Avaliar Projetos de Lei
             </button>
-            <button ion-item (click)="openPage('trofeu')" >
+            <button ion-item (click)="openPage(trofeu)" >
                 Trofeu Cidadânia
             </button>
-            <button ion-item (click)="openPage('telefones')" >
+            <button ion-item (click)="openPage(telefones)" >
                 Telefones Úteis
             </button>
-            <button ion-item (click)="openPage('historia')" >
+            <button ion-item (click)="openPage(historia)" >
                 História do Vereador
             </button>
-            <button ion-item (click)="openPage('sair')" >
+            <button ion-item (click)="openPage(depoimento)" >
+                Depoimentos
+            </button>
+            <button ion-item (click)="openPage(login)" >
                 Sair
             </button>
         </ion-list>
-    </ion-content>
-    <ion-footer>
-        <button ion-item small clear (click)="openPage('sobre')" >
-            CODE On Demand
-        </button>
-    </ion-footer>   
+    </ion-content> 
 </ion-menu>
 
 <ion-nav id="nav" #content [root]="rootPage"></ion-nav>

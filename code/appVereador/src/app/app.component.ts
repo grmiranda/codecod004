@@ -13,6 +13,9 @@ import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania'
 import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { SolicitacaoTabsPage } from '../pages/solicitacao-tabs/solicitacao-tabs';
 import { CategoriasTelefonePage } from '../pages/categorias-telefone/categorias-telefone';
+import { DepoimentosPage } from '../pages/depoimentos/depoimentos';
+
+import { BoasVindasPage } from '../pages/boas-vindas/boas-vindas';
 
 
 @Component({
@@ -21,19 +24,21 @@ import { CategoriasTelefonePage } from '../pages/categorias-telefone/categorias-
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage = LoginPage;
+  rootPage = BoasVindasPage;
   //paginas do side Nav
   perfil = PerfilPage;
   solicitacoes = SolicitacaoTabsPage;
   projetosPL = PlTabsPage;
-  
+
   avaliar = AvaliarPropostaPage;
   trofeu = TrofeuCidadaniaPage;
   telefones = CategoriasTelefonePage;
   historia = HistoriaVereadorPage;
   sobre = SobrePage;
   avaliarPL = AvaliarPlPage;
-  
+  login = LoginPage;
+  depoimento = DepoimentosPage;
+
 
   constructor(platform: Platform, public menu: MenuController) {
     platform.ready().then(() => {
@@ -44,28 +49,10 @@ export class MyApp {
     });
   }
 
-  openPage(pagina: any){
-    if(pagina == 'perfil'){
-      this.nav.setRoot(this.perfil);
-    }else if(pagina == 'solicitacoes'){
-      this.nav.setRoot(this.solicitacoes);
-    }else if(pagina == 'projetosPL'){
-      this.nav.setRoot(this.projetosPL);
-    }else if(pagina == 'avaliar'){
-      this.nav.setRoot(this.avaliar);
-    }else if(pagina == 'avaliarPL'){
-      this.nav.setRoot(this.avaliarPL);
-    }else if(pagina == 'trofeu'){
-      this.nav.setRoot(this.trofeu);
-    }else if(pagina == 'telefones'){
-      this.nav.setRoot(this.telefones);
-    }else if(pagina == 'historia'){
-      this.nav.setRoot(this.historia);
-    }else if(pagina == 'sobre'){
-      this.nav.setRoot(this.sobre);
-    }else if(pagina == 'sair'){
-      this.nav.setRoot(this.rootPage);
-    }
+  openPage(pagina: any) {
     this.menu.close();
+    this.nav.setRoot(pagina);
+
+
   }
 }

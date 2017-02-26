@@ -3,6 +3,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { PushNotificationService } from '../providers/push-notification-service';
+import { Facebook } from 'ionic-native';
+import { FacebookService} from '../providers/facebook-service';
 
 //angularfire2 - comunicação com o banco de dados e login com face e gmail
 import { AngularFireModule } from 'angularfire2';
@@ -30,6 +32,6 @@ export const firebaseConfig = {
     MyApp,
     HomePage
   ],
-  providers: [PushNotificationService, {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [PushNotificationService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FacebookService, Facebook]
 })
 export class AppModule {}

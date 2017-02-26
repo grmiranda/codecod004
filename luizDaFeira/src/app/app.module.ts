@@ -6,6 +6,8 @@ import { PushNotificationService } from '../providers/push-notification-service'
 
 //angularfire2 - comunicação com o banco de dados e login com face e gmail
 import { AngularFireModule } from 'angularfire2';
+import { FacebookService } from '../providers/facebook-service';
+import { Facebook } from 'ionic-native';
 
 // constante de configuração da base de dados
 export const firebaseConfig = {
@@ -30,6 +32,6 @@ export const firebaseConfig = {
     MyApp,
     HomePage
   ],
-  providers: [PushNotificationService, {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [PushNotificationService, PushNotificationService, Facebook, {provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}

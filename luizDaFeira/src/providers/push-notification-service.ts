@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
+
 /*
   Generated class for the PushNotificationService provider.
 

@@ -1,3 +1,3 @@
 plugin do facebook
 
-ionic plugin add cordova-plugin-facebook4 --variable APP_ID="261342517653727" --variable APP_NAME="LuizDaFeira"
+ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1369381413123566" --variable APP_NAME="LuizDaFeira"

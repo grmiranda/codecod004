@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Facebook } from 'ionic-native';
 
+
+
 /*
   Generated class for the FacebookService provider.
 
@@ -14,7 +16,7 @@ import { Facebook } from 'ionic-native';
 export class FacebookService {
 
   constructor(public http: Http) {
-    Facebook.browserInit(261342517653727, "v2.8");
+    Facebook.browserInit(1369381413123566, "v2.8");
   }
 
   doFbLogin(): Promise<any> {
@@ -30,7 +32,7 @@ export class FacebookService {
   apiFacebook(response, type): Promise<any> {
     let userID = response.authResponse.userID;
     return Facebook.api('/' + response.authResponse.userID + '?fields=id,name,gender,email,picture', []).then(result =>{
-      
+      result;
     });
   }
 

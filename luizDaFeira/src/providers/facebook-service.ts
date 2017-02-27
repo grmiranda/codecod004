@@ -6,7 +6,7 @@ import { Facebook } from 'ionic-native';
 
 
 
-/*ffffffffffffffffffffff
+/*ffffffffffffffffffffffdsdsdsds
   Generated class for the FacebookService provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html

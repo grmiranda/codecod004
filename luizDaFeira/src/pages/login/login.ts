@@ -29,17 +29,7 @@ export class LoginPage {
   }
 
   private loginFacebook(): void {
-    this.fbService.doFbLogin().then(res => {
-      if(res != undefined){
-        if(this.fireService.fbLogin(res.userID)){
-        //vai pular para página inicial
-        this.navCtrl.setRoot(HomePage);
-      } else {
-        //vou para a página de cadastro de informações
-        this.navCtrl.push(CadastroPage);
-      }
-      }
-    })
+    this.fbService.logar();
   }
 
 }

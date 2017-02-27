@@ -74,6 +74,10 @@ export class CadastroPage {
     }
   }
 
+  cancelar(){
+    this.navCtrl.pop()
+  }
+
 
 
 }

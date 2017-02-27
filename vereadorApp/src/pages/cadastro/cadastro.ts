@@ -15,19 +15,29 @@ import { User } from '../../model/user';
 export class CadastroPage {
 
   private usuario: User = new User();
-
+  private loginFace;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-    let loginFace = this.navParams.get("facebook");
-    alert(JSON.stringify(loginFace));
-    this.usuario.nome = loginFace.name;
-    this.usuario.email = loginFace.email;
-    this.usuario.genero = loginFace.gender;
-    this.usuario.fotoURL = loginFace.picture;
-    this.usuario.fbID = loginFace.id;
+    this.loginFace = this.navParams.get("facebook");
+    this.teste();
+    alert(JSON.stringify(this.loginFace));
+    this.usuario.nome = this.loginFace.name;
+    this.usuario.email = this.loginFace.email;
+    this.usuario.genero = this.loginFace.gender;
+    this.usuario.fotoURL = this.loginFace.picture;
+    this.usuario.fbID = this.loginFace.id;
 
 
+  }
+
+  teste() {
+    console.log("login " + this.loginFace)
+    this.loginFace.name= "jao";
+    this.loginFace.email = "joao@joso";
+    this.loginFace.gender = "male";
+    this.loginFace.picture;
+    this.loginFace.id= "fdkjfkdjfkdjk";
   }
 
   ionViewDidLoad() {
@@ -53,6 +63,15 @@ export class CadastroPage {
       return false;
     }
     return true;
+  }
+
+  cadastrar(){
+    if(this.valido()){
+      alert("sucesso");
+    }else{
+      console.log("Deu ruim");
+      console.log(this.usuario);
+    }
   }
 
 

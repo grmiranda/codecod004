@@ -34,7 +34,7 @@ export class LoginPage {
         this.navCtrl.setRoot(HomePage);
       } else {
         //vai para cadastro
-        this.navCtrl.setRoot(CadastroPage, {facebook: rese});
+        this.navCtrl.push(CadastroPage, {facebook: rese});
       }
     });
   }

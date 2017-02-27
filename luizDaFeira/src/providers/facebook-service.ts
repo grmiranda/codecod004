@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+<<<<<<< HEAD
 import { AuthProviders, AngularFireAuth, FirebaseAuthState, AuthMethods } from 'angularfire2';
 import 'rxjs/add/operator/toPromise';
 import { Facebook } from 'ionic-native';
 import { Platform } from 'ionic-angular';
 import firebase from 'firebase';
+=======
+import 'rxjs/add/operator/toPromise';
+import { Facebook } from 'ionic-native';
+>>>>>>> 4143e7300c39961e007f36d7c5116c87d2f77cda
 
 /*
   Generated class for the FacebookService provider.
@@ -16,6 +21,7 @@ import firebase from 'firebase';
 @Injectable()
 export class FacebookService {
 
+<<<<<<< HEAD
   private authState: FirebaseAuthState;
 
   constructor(
@@ -62,4 +68,27 @@ export class FacebookService {
 
 
 
+=======
+  constructor(public http: Http) {
+    Facebook.browserInit(261342517653727, "v2.8");
+  }
+
+  doFbLogin(): Promise<any> {
+
+    return Facebook.login(["public_profile"])
+      .then(function (response) {
+        this.apiFacebook(response);
+    }).catch(error => {
+      alert("Erro ao se logar no facebook");
+    })
+  }
+
+  apiFacebook(response, type): Promise<any> {
+    let userID = response.authResponse.userID;
+    return Facebook.api('/' + response.authResponse.userID + '?fields=id,name,gender,email,picture', []).then(result =>{
+      
+    });
+  }
+
+>>>>>>> 4143e7300c39961e007f36d7c5116c87d2f77cda
 }

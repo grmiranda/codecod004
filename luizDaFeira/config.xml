@@ -37,8 +37,12 @@
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="onesignal-cordova-plugin" spec="~2.0.11" />
+<<<<<<< HEAD
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
         <variable name="APP_ID" value="1118808271561709" />
         <variable name="APP_NAME" value="Luiz da Feira" />
     </plugin>
+=======
+    <plugin name="cordova-plugin-nativestorage" spec="~2.2.1" />
+>>>>>>> 4143e7300c39961e007f36d7c5116c87d2f77cda
 </widget>

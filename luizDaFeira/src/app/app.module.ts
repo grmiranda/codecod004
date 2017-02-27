@@ -2,9 +2,11 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 import { PushNotificationService } from '../providers/push-notification-service';
-import { Facebook } from 'ionic-native';
-import { FacebookService} from '../providers/facebook-service';
+import { FirebaseService } from '../providers/firebase-service';
+import { CadastroPage } from '../pages/cadastro/cadastro';
+
 
 //angularfire2 - comunicação com o banco de dados e login com face e gmail
 import { AngularFireModule } from 'angularfire2';
@@ -23,7 +25,9 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    CadastroPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -32,12 +36,12 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    CadastroPage,
+    LoginPage
   ],
-<<<<<<< HEAD
-  providers: [PushNotificationService, PushNotificationService, Facebook, {provide: ErrorHandler, useClass: IonicErrorHandler}]
-=======
-  providers: [PushNotificationService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FacebookService, Facebook]
->>>>>>> 4143e7300c39961e007f36d7c5116c87d2f77cda
+
+  providers: [PushNotificationService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FacebookService, Facebook, FirebaseService, PushNotificationService]
+
 })
 export class AppModule {}

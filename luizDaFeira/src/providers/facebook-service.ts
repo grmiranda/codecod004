@@ -14,8 +14,8 @@ export class FacebookService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(public http: Http) {
-    //id do aplicativo: 255509854899402
-    Facebook.browserInit(255509854899402, "v2.8");
+    //id do aplicativo: 1297281393651334
+    Facebook.browserInit(1297281393651334, "v2.8");
   }
 
   logar(): Promise<any> {

@@ -16,18 +16,21 @@ import { User1 } from '../../model/user.1';
 export class CadastroPage {
 
   private usuario: User = new User();
-  private loginFace:User1 = new User1();
+  private loginFace: User1 = new User1();
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     this.loginFace = this.navParams.get("facebook");
     this.teste();
-    alert(JSON.stringify(this.loginFace));
-    this.usuario.nome = this.loginFace.name;
-    this.usuario.email = this.loginFace.email;
-    this.usuario.genero = this.loginFace.gender;
-    this.usuario.fotoURL = this.loginFace.picture;
-    this.usuario.fbID = this.loginFace.id;
+    if (this.loginFace != undefined) {
+      alert(JSON.stringify(this.loginFace));
+      this.usuario.nome = this.loginFace.name;
+      this.usuario.email = this.loginFace.email;
+      this.usuario.genero = this.loginFace.gender;
+      this.usuario.fotoURL = this.loginFace.picture;
+      this.usuario.fbID = this.loginFace.id;
+    }
+
 
 
   }
@@ -35,11 +38,11 @@ export class CadastroPage {
   teste() {
     console.log("login " + this.loginFace)
     this.loginFace = new User1();
-    this.loginFace.name= "jao";
+    this.loginFace.name = "jao";
     this.loginFace.email = "joao@joso";
     this.loginFace.gender = "male";
     this.loginFace.picture;
-    this.loginFace.id= "fdkjfkdjfkdjk";
+    this.loginFace.id = "fdkjfkdjfkdjk";
   }
 
   ionViewDidLoad() {
@@ -48,35 +51,43 @@ export class CadastroPage {
 
   private valido(): boolean {
     if (this.usuario.nome == "") {
+      alert("Preencha o campo nome");
       return false;
     } else if (this.usuario.email == "") {
+      alert("Preencha o campo email");
       return false;
     } else if (this.usuario.nascimento == "") {
+      alert("Preencha o campo nascimento");
       return false;
     } else if (this.usuario.telefone == "") {
+      alert("Preencha o campo telefone");
       return false;
-    } else if (this.usuario.endereco == "") {
+    } else if (this.usuario.telefone == "") {
+      alert("Preencha o campo telefone");
       return false;
     } else if (this.usuario.bairro == "") {
+      alert("Preencha o campo bairro");
       return false;
     } else if (this.usuario.cidade == "") {
+      alert("Preencha o campo cidade");
       return false;
     } else if (this.usuario.UF == "") {
+      alert("Preencha o campo Estado");
       return false;
     }
     return true;
   }
 
-  cadastrar(){
-    if(this.valido()){
+  cadastrar() {
+    if (this.valido()) {
       alert("sucesso");
-    }else{
+    } else {
       console.log("Deu ruim");
       console.log(this.usuario);
     }
   }
 
-  cancelar(){
+  cancelar() {
     this.navCtrl.pop()
   }
 

@@ -7,12 +7,68 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>cadastro</ion-title>
+    <ion-title>Cadastro</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+<ion-list>
 
+  <ion-item>
+    <ion-label floating>Nome</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>E-mail</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+    <ion-item>
+      <ion-label>Sexo</ion-label>
+      <ion-select [(ngModel)]="gender">
+        <ion-option value="male">Masculino</ion-option>
+        <ion-option value="female">Feminino</ion-option>
+      </ion-select>
+    </ion-item>
+  <ion-item>
+    <ion-label floating>CPF</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Nascimento</ion-label>
+    <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="nascimento"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Telefone</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Endereço</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Bairro</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Cidade</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Estado</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        <button ion-button color="secondary">Cadastrar</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button color="danger">Cancelar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-list>
 </ion-content>

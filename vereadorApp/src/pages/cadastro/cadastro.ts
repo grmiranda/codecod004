@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../model/user';
+import { User1 } from '../../model/user.1';
 
 /*
   Generated class for the Cadastro page.
@@ -15,7 +16,7 @@ import { User } from '../../model/user';
 export class CadastroPage {
 
   private usuario: User = new User();
-  private loginFace;
+  private loginFace:User1 = new User1();
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -33,6 +34,7 @@ export class CadastroPage {
 
   teste() {
     console.log("login " + this.loginFace)
+    this.loginFace = new User1();
     this.loginFace.name= "jao";
     this.loginFace.email = "joao@joso";
     this.loginFace.gender = "male";

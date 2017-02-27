@@ -18,7 +18,7 @@ export class FacebookService {
   }
 
   logar(): Promise<any> {
-    return Facebook.login(["public_profile"]).then(response =>
+    return Facebook.login(["public_profile","email"]).then(response =>
       this.api(response, "logar")).catch(this.erro);
   }
 

@@ -24386,3 +24386,25 @@ ion-navbar.toolbar {
     padding-top: calc(16px + 20px);
   }
 }
+
+.background {
+  background-image: url("../image/fundo-tela-login.jpeg");
+  background-position: center;
+  background-size: cover;
+}
+
+h1.titulo {
+  color: white;
+  text-align: center;
+}
+
+.divisoria {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  margin: auto;
+}

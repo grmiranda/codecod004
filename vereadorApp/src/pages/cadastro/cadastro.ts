@@ -35,17 +35,16 @@ export class CadastroPage {
     this.usuario.fotoURL = this.loginFace.picture.data.url;
     this.usuario.fbID = this.loginFace.id;
 
-
   }
 
   teste() {
     console.log("login " + this.loginFace)
     this.loginFace = new User1();
-    this.loginFace.name= "jao";
+    this.loginFace.name = "jao";
     this.loginFace.email = "joao@joso";
     this.loginFace.gender = "male";
     this.loginFace.picture;
-    this.loginFace.id= "fdkjfkdjfkdjk";
+    this.loginFace.id = "fdkjfkdjfkdjk";
   }
 
   ionViewDidLoad() {
@@ -81,6 +80,7 @@ export class CadastroPage {
     return true;
   }
 
+
   cadastrar(){
     if(this.valido()){
       this.firebaseService.cadastrar(this.usuario);
@@ -89,12 +89,11 @@ export class CadastroPage {
         this.navCtrl.setRoot(HomePage);
       });
     }else{
-      console.log("Deu ruim");
-      console.log(this.usuario);
+      alert("Deu ruim")
     }
   }
 
-  cancelar(){
+  cancelar() {
     this.navCtrl.pop()
   }
 

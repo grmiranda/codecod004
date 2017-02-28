@@ -29,13 +29,13 @@ export class LoginPage {
     this.facebookService.logar().then(rese=>{
       alert(JSON.stringify(rese));
       idFacebook = rese.id;
-      if(this.firebaseService.fbLogin(idFacebook)){
-        //vai para o app direto
-        this.navCtrl.setRoot(HomePage);
-      } else {
-        //vai para cadastro
-        this.navCtrl.push(CadastroPage, {facebook: rese});
-      }
+      this.firebaseService.fbLogin(idFacebook).then(result => {
+        if(result){
+          this.navCtrl.setRoot(HomePage);
+        } else {
+          this.navCtrl.push(CadastroPage,{facebook: rese});
+        }
+      })
     });
   }
 

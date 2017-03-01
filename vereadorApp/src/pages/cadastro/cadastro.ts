@@ -18,34 +18,16 @@ import { HomePage } from '../home/home';
 export class CadastroPage {
 
   private usuario: User = new User();
-  private loginFace;
 
   constructor(public navCtrl: NavController, 
   public navParams: NavParams,
   public firebaseService: FirebaseService) {
 
-    this.loginFace = this.navParams.get("facebook");
-    if(this.loginFace == undefined){
-      this.teste();
-    }
-    alert(JSON.stringify(this.loginFace));
-    this.usuario.nome = this.loginFace.name;
-    this.usuario.email = this.loginFace.email;
-    this.usuario.genero = this.loginFace.gender;
-    this.usuario.fotoURL = this.loginFace.picture.data.url;
-    this.usuario.fbID = this.loginFace.id;
+
 
   }
 
-  teste() {
-    console.log("login " + this.loginFace)
-    this.loginFace = new User1();
-    this.loginFace.name = "jao";
-    this.loginFace.email = "joao@joso";
-    this.loginFace.gender = "male";
-    this.loginFace.picture;
-    this.loginFace.id = "fdkjfkdjfkdjk";
-  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroPage');
@@ -82,15 +64,6 @@ export class CadastroPage {
 
 
   cadastrar(){
-    if(this.valido()){
-      this.firebaseService.cadastrar(this.usuario);
-      this.firebaseService.buscarPeloFace(this.usuario).then(result => {
-        this.usuario = result;
-        this.navCtrl.setRoot(HomePage);
-      });
-    }else{
-      alert("Deu ruim")
-    }
   }
 
   cancelar() {

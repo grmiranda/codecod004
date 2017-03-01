@@ -4,6 +4,7 @@ import { FacebookService } from '../../providers/facebook-service';
 import { FirebaseService } from '../../providers/firebase-service';
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
+import { GooglePlusService } from '../../providers/google-plus-service';
 
 
 
@@ -13,33 +14,39 @@ import { CadastroPage } from '../cadastro/cadastro';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private facebookService:FacebookService,
-    public firebaseService: FirebaseService) {
+    private facebookService: FacebookService,
+    public firebaseService: FirebaseService,
+    private gpService: GooglePlusService
+  ) {
 
-    }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  logar(){
+  logar() {
     let idFacebook;
-    this.facebookService.logar().then(rese=>{
+    this.facebookService.logar().then(rese => {
       alert(JSON.stringify(rese));
       idFacebook = rese.id;
       this.firebaseService.fbLogin(idFacebook).then(result => {
-        if(result){
+        if (result) {
           this.navCtrl.setRoot(HomePage);
         } else {
-          this.navCtrl.push(CadastroPage,{facebook: rese});
+          this.navCtrl.push(CadastroPage, { facebook: rese });
         }
       })
     });
   }
 
-  deslogar(){
+  logarGoogle() {
+    this.gpService.loginGoogle();
+  }
+
+  deslogar() {
     this.facebookService.logout();
   }
 

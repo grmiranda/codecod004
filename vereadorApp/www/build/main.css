@@ -29284,7 +29284,7 @@ ion-card {
   width: 100% !important;
 }
 
-h1.titulo {
+page-login h1.titulo {
   color: white;
   text-align: center;
   font-size: 3em;
@@ -29293,7 +29293,7 @@ h1.titulo {
   font-weight: bold;
 }
 
-h2.subtitulo {
+page-login h2.subtitulo {
   color: white;
   text-align: center;
   font-size: 2em;
@@ -29301,7 +29301,7 @@ h2.subtitulo {
   font-weight: bold;
 }
 
-.escurecer {
+page-login .escurecer {
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   top: 0;
@@ -29311,7 +29311,7 @@ h2.subtitulo {
   position: absolute;
 }
 
-.divisoria {
+page-login .divisoria {
   position: absolute;
   text-align: center;
   top: 0;
@@ -29322,18 +29322,18 @@ h2.subtitulo {
   margin: auto;
 }
 
-button {
+page-login button {
   height: 2em;
 }
 
-ion-footer {
+page-login ion-footer {
   padding: 20px;
 }
 
-button:first-of-type {
+page-login button:first-of-type {
   background-color: rgba(56, 126, 245, 0.6) !important;
 }
 
-button {
+page-login button {
   background-color: rgba(255, 0, 0, 0.6) !important;
 }

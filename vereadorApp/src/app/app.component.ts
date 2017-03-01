@@ -11,7 +11,7 @@ import { CadastroPage } from '../pages/cadastro/cadastro';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = HomePage;
+  rootPage = CadastroPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

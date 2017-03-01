@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { User } from '../../model/user';
-import { User1 } from '../../model/user.1';
+import { Usuario } from '../../model/user';
 import { FirebaseService } from '../../providers/firebase-service';
 import { HomePage } from '../home/home';
 
@@ -17,13 +16,13 @@ import { HomePage } from '../home/home';
 })
 export class CadastroPage {
 
-  private usuario: User = new User();
+  private usuario: Usuario = new Usuario();
 
-  constructor(public navCtrl: NavController, 
-  public navParams: NavParams,
-  public firebaseService: FirebaseService) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public firebaseService: FirebaseService) {
 
-
+    this.usuario = this.navParams.get("dados");
 
   }
 
@@ -46,11 +45,11 @@ export class CadastroPage {
     } else if (this.usuario.telefone == "") {
       alert("Preencha o campo telefone");
       return false;
-    } else if (this.usuario.telefone == "") {
-      alert("Preencha o campo telefone");
-      return false;
     } else if (this.usuario.bairro == "") {
       alert("Preencha o campo bairro");
+      return false;
+    } else if (this.usuario.genero == "") {
+      alert("Preencha o campo Sexo");
       return false;
     } else if (this.usuario.cidade == "") {
       alert("Preencha o campo cidade");
@@ -63,7 +62,7 @@ export class CadastroPage {
   }
 
 
-  cadastrar(){
+  cadastrar() {
   }
 
   cancelar() {

@@ -20,8 +20,7 @@ export class Usuario {
         this.email = "";
         this.genero = "";
         this.fotoURL = "";
-        this.fbID = "";
-        this.gID = "";
+        this.socialID = "";
         this.cpf = "";
         this.nascimento = "";
         this.telefone = "";

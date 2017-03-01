@@ -14,7 +14,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class GooglePlusService {
 
-  private link: string = "http://dsoutlet.com.br/apiLuiz/cadastro.php";
+  private link: string = "http://dsoutlet.com.br/apiLuiz/logar.php";
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(
@@ -28,7 +28,7 @@ export class GooglePlusService {
   public loginGoogle(): Promise<any> {
     return this.googleAuth.login().then(sucess => {
       alert(JSON.stringify(sucess));
-      this.http.post(this.link, JSON.stringify({token: sucess.token })).toPromise().then(res => {
+      this.http.post(this.link, JSON.stringify({token: sucess.token }), { headers: this.headers }).toPromise().then(res => {
         res = res.json();
       }).catch(() => alert("Erro ao se conectar com o servidor"));
 

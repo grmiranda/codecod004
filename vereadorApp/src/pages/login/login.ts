@@ -48,7 +48,7 @@ export class LoginPage {
     this.gpService.loginGoogle().then(resposta=>{
       alert(JSON.stringify(resposta));
       if(resposta=="cadastro"){
-        this.navCtrl.setRoot(CadastroPage);
+        this.navCtrl.setRoot(CadastroPage, {dados: this.gpService.getDados()});
       } else{
         this.storageService.set(resposta);        
         this.navCtrl.setRoot(HomePage);

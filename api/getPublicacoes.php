@@ -15,4 +15,5 @@
 			echo json_encode($vetor);
 		}
 	} 	
+	$con->close();	
 ?>

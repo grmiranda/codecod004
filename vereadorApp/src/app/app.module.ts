@@ -8,6 +8,24 @@ import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
 import { FirebaseService } from '../providers/firebase-service';
 
+
+//login com o google e com o facebook
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { GooglePlusService } from '../providers/google-plus-service';
+
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': 'f3c01288'
+  },
+  'auth': {
+    'google': {
+      'webClientId': '381691927831-4kh7e0baks3r21nejp4ob45gvmm9guf1.apps.googleusercontent.com',
+      'scope': []
+    }
+  }
+};
+
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
  
@@ -29,7 +47,8 @@ export const firebaseConfig = {
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,6 +57,6 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage
   ],
-  providers: [Facebook, FacebookService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FirebaseService]
+  providers: [Facebook, FacebookService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FirebaseService, GooglePlusService]
 })
 export class AppModule {}

@@ -6,7 +6,6 @@ import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
-import { FirebaseService } from '../providers/firebase-service';
 import { PublicacaoService } from '../providers/publicacao-service';
 
 //login com o google e com o facebook
@@ -61,6 +60,6 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage
   ],
-  providers: [Facebook, CadastroService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FirebaseService, GooglePlusService, StorageService]
+  providers: [Facebook, CadastroService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService, StorageService]
 })
 export class AppModule {}

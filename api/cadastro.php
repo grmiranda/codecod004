@@ -16,7 +16,7 @@
 		$cpf       = $request->cpf;
 		$fotoURL   = $request->fotoURL;
 		$genero    = $request->genero;
-		$socialID  = $request->token;
+		$socialID  = $request->socialID;
 		$permissao = 0;
 		$banido    = 0;
 

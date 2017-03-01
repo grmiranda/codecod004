@@ -7,7 +7,7 @@
 	$password = "HUf+oR1.J+lI";
 	$database = "luizdafeira";
 	//conectando ao banco
-	$con = mysqli_connect($hostname, $username, $password, $database) or die (mysqli_error());]
+	$con = mysqli_connect($hostname, $username, $password, $database) or die (mysqli_error());
 
     date_default_timezone_set('America/Bahia');
 ?>

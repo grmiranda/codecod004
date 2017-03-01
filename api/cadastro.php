@@ -69,6 +69,6 @@
 		} else {
 			echo json_encode(false);
 		}
-
 	}
+	$con->close();
 ?>

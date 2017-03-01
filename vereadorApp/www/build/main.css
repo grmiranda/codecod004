@@ -24394,8 +24394,18 @@ ion-navbar.toolbar {
 }
 
 h1.titulo {
-  color: white;
+  color: #f05a00;
   text-align: center;
+  font-size: 48px;
+  font-family: merienda-one, cursive;
+  line-height: 150%;
+}
+
+h2.subtitulo {
+  color: #f05a00;
+  text-align: center;
+  font-size: 28px;
+  line-height: 150%;
 }
 
 .divisoria {

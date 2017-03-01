@@ -2,9 +2,18 @@ page-login {
 
 }
 h1.titulo { 
-    color: white;
+    color: rgb(240, 90, 0);
     text-align: center;
+    font-size: 48px;
+    font-family: merienda-one, cursive;
+    line-height: 150%;
  } 
+ h2.subtitulo{
+    color: rgb(240, 90, 0);
+    text-align: center;
+    font-size: 28px;
+    line-height: 150%;
+ }
  .divisoria {
     position: absolute;
     text-align: center;

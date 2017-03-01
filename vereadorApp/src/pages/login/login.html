@@ -1,13 +1,17 @@
 <ion-content padding class="background">
+    <script src="//use.edgefonts.net/merienda-one.js"></script>
     <div class="divisoria">
         <h1 class="titulo">Luiz Da Feira</h1>
-        <p></p>
+        <h2 class="subtitulo">-</h2>
+        <h2 class="subtitulo">Aqui sua voz é ouvida</h2>
     </div>
   <ion-footer>
-    <button ion-button full (click)="logar()">
+    <button ion-button icon-left full (click)="logar()">
       <ion-icon name="logo-facebook"></ion-icon> Facebook
     </button>
-    <button ion-button color="light" full  (click)="deslogar()">Deslogar</button>
+    <button ion-button icon-left color="danger" full  (click)="deslogar()">
+      <ion-icon name="logo-googleplus"></ion-icon> Google
+    </button>
   </ion-footer>
   
 </ion-content>

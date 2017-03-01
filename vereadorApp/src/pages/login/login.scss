@@ -2,17 +2,30 @@ page-login {
 
 }
 h1.titulo { 
-    color: rgb(240, 90, 0);
+    color: white;
+    //color: rgb(240, 90, 0);
     text-align: center;
-    font-size: 48px;
+    font-size: 3em;
     font-family: merienda-one, cursive;
-    line-height: 150%;
+    line-height: 350%;
+    font-weight: bold;
  } 
  h2.subtitulo{
-    color: rgb(240, 90, 0);
+    color:white;
+    //color: rgb(240, 90, 0);
     text-align: center;
-    font-size: 28px;
+    font-size: 2em;
     line-height: 150%;
+    font-weight: bold;
+ }
+ .escurecer{
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
  }
  .divisoria {
     position: absolute;
@@ -23,4 +36,16 @@ h1.titulo {
     right: 0;
     height: 50%;
     margin: auto;    
+}
+button{
+    height: 2em;
+}
+ion-footer{
+    padding: 20px;
+}
+button:first-of-type{
+    background-color: rgba(56, 126, 245,0.6) !important;
+}
+button{
+    background-color: rgba(255, 0, 0,0.6) !important;
 }

@@ -29,7 +29,7 @@ export class PublicacaoService {
     return retorno;
   }
 
-  public getPublicacoes(): Promise<any>{
+  public getPublicacoes(): Promise<any> {
     return this.http.get('http://www.dsoutlet.com.br/apiLuiz/listaPublicacao.php?id')
       .toPromise()
       .then(response => this.extractGetData(response))
@@ -48,6 +48,22 @@ export class PublicacaoService {
     return retorno;
   }
 
+  public deletePublicacao(id: number): Promise<any> {
+    return this.http
+      .post('http://www.dsoutlet.com.br/igrejaApi/deletePublicacao.php', JSON.stringify(id), { headers: this.headers })
+      .toPromise()
+      .then(res => this.extractDelData(res))
+      .catch(this.handleErrorMessage);
+  }
+
+  private extractDelData(res: Response) {
+    let retorno = { error: false, value: false };
+    let data = res.json();
+    if (data === true) {
+      retorno.value = true;
+    }
+    return retorno;
+  }
 
   private handleErrorMessage(error: any) {
     let retorno = { error: true, data: [] };

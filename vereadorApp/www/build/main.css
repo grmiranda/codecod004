@@ -29244,6 +29244,46 @@ ion-navbar.toolbar {
   position: relative;
 }
 
+ion-title {
+  text-align: center;
+}
+
+ion-content {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+ul {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+li {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+ion-card {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
 h1.titulo {
   color: white;
   text-align: center;

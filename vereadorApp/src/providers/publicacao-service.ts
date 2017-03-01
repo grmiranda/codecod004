@@ -29,8 +29,28 @@ export class PublicacaoService {
     return retorno;
   }
 
+  public getPublicacoes(): Promise<any>{
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/listaPublicacao.php?id')
+      .toPromise()
+      .then(response => this.extractGetData(response))
+      .catch(this.handleErrorMessage);
+  }
+
+  private extractGetData(res: Response) {
+    let retorno = { error: false, data: [] };
+    let data = res.json();
+    if (data == null) {
+      retorno.error = true;
+      retorno.data = [];
+    } else {
+      retorno.data = data;
+    }
+    return retorno;
+  }
+
+
   private handleErrorMessage(error: any) {
-    let retorno = { error: true };
+    let retorno = { error: true, data: [] };
     return retorno;
   }
 

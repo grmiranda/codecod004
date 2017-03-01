@@ -5,6 +5,7 @@ import { FirebaseService } from '../../providers/firebase-service';
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
 import { GooglePlusService } from '../../providers/google-plus-service';
+import { StorageService } from '../../providers/storage-service';
 
 
 
@@ -18,7 +19,8 @@ export class LoginPage {
     public navParams: NavParams,
     private facebookService: FacebookService,
     public firebaseService: FirebaseService,
-    private gpService: GooglePlusService
+    private gpService: GooglePlusService,
+    private storageService : StorageService
   ) {
 
   }
@@ -43,7 +45,15 @@ export class LoginPage {
   }
 
   logarGoogle() {
-    this.gpService.loginGoogle();
+    this.gpService.loginGoogle().then(resposta=>{
+      alert(JSON.stringify(resposta));
+      if(resposta=="cadastro"){
+        this.navCtrl.setRoot(CadastroPage);
+      } else{
+        this.storageService.set(resposta);        
+        this.navCtrl.setRoot(HomePage);
+      }
+    })
   }
 
   deslogar() {

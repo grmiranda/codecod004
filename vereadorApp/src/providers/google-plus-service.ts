@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { GoogleAuth, User } from '@ionic/cloud-angular';
+import { Usuario } from '../model/user';
 import 'rxjs/add/operator/toPromise';
 
 /*
@@ -13,7 +14,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class GooglePlusService {
 
-  private link : string = "http://dsoutlet.com.br/apiLuiz/cadastro.php";
+  private link: string = "http://dsoutlet.com.br/apiLuiz/cadastro.php";
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(
@@ -27,13 +28,20 @@ export class GooglePlusService {
   public loginGoogle(): Promise<any> {
     return this.googleAuth.login().then(sucess => {
       alert(JSON.stringify(sucess));
-      let full_name = this.user.social.google.data.full_name;
-      let profile_picture = this.user.social.google.data.profile_picture;
-      this.http.post(this.link, JSON.stringify({nome: full_name, foto: profile_picture, token: sucess.token})).toPromise().then(res=>{
+      this.http.post(this.link, JSON.stringify({token: sucess.token })).toPromise().then(res => {
         res = res.json();
-      }).catch(()=>alert("Erro ao se conectar com o servidor"));
+      }).catch(() => alert("Erro ao se conectar com o servidor"));
 
     }).catch(() => alert("Erro ao se conectar com o google plus"));
+  }
+
+  public getDados(): Usuario {
+    let usuario = new Usuario();
+    usuario.nome = this.user.social.google.data.full_name;
+    usuario.fotoURL = this.user.social.google.data.profile_picture;
+    usuario.socialID = this.user.social.google.uid;
+    return usuario;
+
   }
 
 

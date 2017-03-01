@@ -14,6 +14,9 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { GooglePlusService } from '../providers/google-plus-service';
 
 
+import { StorageService } from '../providers/storage-service';
+
+
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': 'f3c01288'
@@ -57,6 +60,6 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage
   ],
-  providers: [Facebook, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FirebaseService, GooglePlusService]
+  providers: [Facebook, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FirebaseService, GooglePlusService, StorageService]
 })
 export class AppModule {}

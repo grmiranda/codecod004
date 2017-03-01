@@ -41,7 +41,6 @@ export class PublicacaoService {
     let data = res.json();
     if (data == null) {
       retorno.error = true;
-      retorno.data = [];
     } else {
       retorno.data = data;
     }
@@ -50,7 +49,7 @@ export class PublicacaoService {
 
   public deletePublicacao(id: number): Promise<any> {
     return this.http
-      .post('http://www.dsoutlet.com.br/igrejaApi/deletePublicacao.php', JSON.stringify(id), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/delPublicacao.php', JSON.stringify(id), { headers: this.headers })
       .toPromise()
       .then(res => this.extractDelData(res))
       .catch(this.handleErrorMessage);
@@ -65,8 +64,25 @@ export class PublicacaoService {
     return retorno;
   }
 
+  public editPublicacao(publicacao: Publicacao): Promise<any>{
+  return this.http
+    .post('http://www.dsoutlet.com.br/apiLuiz/editPublicacao.php', JSON.stringify(publicacao), { headers: this.headers })
+    .toPromise()
+    .then(res => this.extractEditData(res))
+    .catch(this.handleErrorMessage);
+}
+
+private extractEditData(res: Response) {
+  let retorno = { error: false, value: false };
+    let data = res.json();
+    if (data === true) {
+      retorno.value = true;
+    }
+    return retorno;
+  }
+
   private handleErrorMessage(error: any) {
-    let retorno = { error: true, data: [] };
+    let retorno = { error: true };
     return retorno;
   }
 

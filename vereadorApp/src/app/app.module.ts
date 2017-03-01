@@ -28,7 +28,7 @@ const cloudSettings: CloudSettings = {
 
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
- 
+
 // AF2 Settings
 export const firebaseConfig = {
   apiKey: "AIzaSyCurTBSL6YJBOTu9axp7DJ28yudC56XiX0",

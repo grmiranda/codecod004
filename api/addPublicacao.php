@@ -18,6 +18,8 @@
 		$sql= "INSERT INTO publicacao (titulo, texto, data, fotoURL) VALUES ('$titulo', '$texto', '$data', '$fotoURL')";
 		$con->query($sql);
 		
-		echo json_encode($con);
+		echo json_encode(true);
 	}
+	
+	$con->close();
 ?>

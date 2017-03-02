@@ -10,7 +10,7 @@
 	if (isset($postdata)){
 		$request  = json_decode($postdata);
 		
-        $socialID = $request->socialID;
+        $socialID = $request->token;
 
         $sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);

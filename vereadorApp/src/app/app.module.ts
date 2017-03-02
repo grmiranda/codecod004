@@ -4,6 +4,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
+import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
+import { NovaPublicacaoPage } from '../pages/nova-publicacao/nova-publicacao';
 import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
 import { FirebaseService } from '../providers/firebase-service';
@@ -45,7 +47,9 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    SolicitacoesPage,
+    NovaPublicacaoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -57,7 +61,9 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    SolicitacoesPage,
+    NovaPublicacaoPage
   ],
   providers: [Facebook, FacebookService, {provide: ErrorHandler, useClass: IonicErrorHandler}, FirebaseService, GooglePlusService]
 })

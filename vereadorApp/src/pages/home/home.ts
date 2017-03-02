@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { NovaPublicacaoPage } from '../nova-publicacao/nova-publicacao';
 import { NavController } from 'ionic-angular';
 import { FacebookService } from '../../providers/facebook-service';
 
@@ -16,5 +16,8 @@ export class HomePage {
     
   }
 
+  public novaPublicacao(){
+    this.navCtrl.push(NovaPublicacaoPage);
+  }
 
 }

@@ -34,6 +34,8 @@
 
 		if ($num !== 1 && $nome != ""){
 
+			$vetor = array();
+
 			if ($genero == 'male'){
 				$genero = 'm';
 			} else {
@@ -50,20 +52,28 @@
 
 			$id = $dados['IDUsuario'];
 
+			$vetor['id']         = $id;
+			$vetor['nome']       = $nome;
+			$vetor['genero']     = $genero;
+			$vetor['fotoURL']    = $fotoURL;
+			$vetor['socialID']   = $socialID;
+			$vetor['cpf']        = $cpf;
+			$vetor['nascimento'] = $nasc;
+			$vetor['telefone'] = $telefone;
+			$vetor['endereco'] = $endereco;
+			$vetor['bairro']   = $bairro;
+			$vetor['cidade']   = $cidade;
+			$vetor['UF']       = $UF;
+
 			$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
 			$con->query($sql);
 
-			$dados['telefone'] = $telefone;
+			
 
 			$sql = "INSERT INTO endereco (endereco, bairro, cidade, uf, IDUsuario) VALUES ('$endereco', '$bairro', '$cidade', '$UF', '$id')";
 			$con->query($sql);
-
-			$dados['endereco'] = $endereco;
-			$dados['bairro']   = $bairro;
-			$dados['cidade']   = $cidade;
-			$dados['UF']       = $UF;
-
-			echo json_encode($dados);
+			
+			echo json_encode($vetor);
 
 		} else {
 			echo json_encode(false);

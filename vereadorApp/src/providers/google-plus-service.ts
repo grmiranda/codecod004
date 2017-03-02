@@ -26,7 +26,7 @@ export class GooglePlusService {
   }
 
   public loginGoogle(): Promise<any> {
-    return this.googleAuth.login().then(sucess => this.api(sucess.token))
+    return this.googleAuth.login().then(sucess => this.api(this.user.social.google.uid))
     .catch(() => alert("Erro ao se conectar com o google plus"));
   }
   private api(token):Promise<any>{

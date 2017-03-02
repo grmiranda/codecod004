@@ -18,10 +18,11 @@ export class MyApp {
   pageAtual: string;
 
   constructor(platform: Platform, 
-  public menuCtrl: MenuController) {
+    public menuCtrl: MenuController) {
     this.pages = [{title: 'Notíticas', component: HomePage},
                   {title: 'Solicitações', component: SolicitacoesPage}]
     this.pageAtual = 'Notícias';
+    rootPage = LoginPage;
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

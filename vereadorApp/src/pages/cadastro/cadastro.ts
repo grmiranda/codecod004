@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { User } from '../../model/user';
-import { User1 } from '../../model/user.1';
-import { FirebaseService } from '../../providers/firebase-service';
+import { Usuario } from '../../model/user';
 import { HomePage } from '../home/home';
+import { CadastroService } from '../../providers/cadastro-service';
 
 /*
   Generated class for the Cadastro page.
@@ -17,13 +16,14 @@ import { HomePage } from '../home/home';
 })
 export class CadastroPage {
 
-  private usuario: User = new User();
+  private usuario: Usuario = new Usuario();
 
-  constructor(public navCtrl: NavController, 
-  public navParams: NavParams,
-  public firebaseService: FirebaseService) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public cadastroService: CadastroService
+  ) {
 
-
+    this.usuario = this.navParams.get("dados");
 
   }
 
@@ -46,11 +46,11 @@ export class CadastroPage {
     } else if (this.usuario.telefone == "") {
       alert("Preencha o campo telefone");
       return false;
-    } else if (this.usuario.telefone == "") {
-      alert("Preencha o campo telefone");
-      return false;
     } else if (this.usuario.bairro == "") {
       alert("Preencha o campo bairro");
+      return false;
+    } else if (this.usuario.genero == "") {
+      alert("Preencha o campo Sexo");
       return false;
     } else if (this.usuario.cidade == "") {
       alert("Preencha o campo cidade");
@@ -63,7 +63,16 @@ export class CadastroPage {
   }
 
 
-  cadastrar(){
+  cadastrar() {
+    this.cadastroService.cadastrar(this.usuario).then(res => {
+      if (res == false) {
+        alert("Erro ao cadastrar Usuario");
+      } else{ 
+ 
+        this.navCtrl.setRoot(HomePage);
+      }
+
+    })
   }
 
   cancelar() {

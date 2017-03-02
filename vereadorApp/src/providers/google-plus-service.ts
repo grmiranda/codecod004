@@ -26,13 +26,12 @@ export class GooglePlusService {
   }
 
   public loginGoogle(): Promise<any> {
-    return this.googleAuth.login().then(sucess => {
-      alert(JSON.stringify(sucess));
-      this.http.post(this.link, JSON.stringify({token: sucess.token }), { headers: this.headers }).toPromise().then(res => {
-        res = res.json();
-      }).catch(() => alert("Erro ao se conectar com o servidor"));
-
-    }).catch(() => alert("Erro ao se conectar com o google plus"));
+    return this.googleAuth.login().then(sucess => this.api(sucess.token))
+    .catch(() => alert("Erro ao se conectar com o google plus"));
+  }
+  private api(token):Promise<any>{
+    return this.http.post(this.link, JSON.stringify(token), { headers: this.headers }).toPromise().then(res => res = res.json()).
+    catch(() => alert("Erro ao se conectar com o servidor"));
   }
 
   public getDados(): Usuario {
@@ -40,6 +39,7 @@ export class GooglePlusService {
     usuario.nome = this.user.social.google.data.full_name;
     usuario.fotoURL = this.user.social.google.data.profile_picture;
     usuario.socialID = this.user.social.google.uid;
+    usuario.email = this.user.social.google.data.email;
     return usuario;
 
   }

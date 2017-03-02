@@ -13,7 +13,6 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { GooglePlusService } from '../providers/google-plus-service';
 
 
-import { StorageService } from '../providers/storage-service';
 import { CadastroService } from '../providers/cadastro-service';
 
 
@@ -60,6 +59,6 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage
   ],
-  providers: [Facebook, CadastroService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService, StorageService]
+  providers: [Facebook, CadastroService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 })
 export class AppModule {}

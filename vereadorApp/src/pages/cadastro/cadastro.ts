@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Usuario } from '../../model/user';
 import { HomePage } from '../home/home';
 import { CadastroService } from '../../providers/cadastro-service';
-import { StorageService } from '../../providers/storage-service';
 
 /*
   Generated class for the Cadastro page.
@@ -21,8 +20,7 @@ export class CadastroPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public cadastroService: CadastroService,
-    private storageService: StorageService
+    public cadastroService: CadastroService
   ) {
 
     this.usuario = this.navParams.get("dados");
@@ -70,7 +68,7 @@ export class CadastroPage {
       if (res == false) {
         alert("Erro ao cadastrar Usuario");
       } else{ 
-        this.storageService.set(res);
+ 
         this.navCtrl.setRoot(HomePage);
       }
 

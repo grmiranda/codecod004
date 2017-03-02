@@ -4,7 +4,7 @@ import { FacebookService } from '../../providers/facebook-service';
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
 import { GooglePlusService } from '../../providers/google-plus-service';
-import { StorageService } from '../../providers/storage-service';
+
 
 
 
@@ -17,8 +17,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private facebookService: FacebookService,
-    private gpService: GooglePlusService,
-    private storageService : StorageService
+    private gpService: GooglePlusService
   ) {
 
   }
@@ -28,7 +27,6 @@ export class LoginPage {
   }
 
   logar() {
-    let idFacebook;
     this.facebookService.logar().then(rese => {
     });
   }
@@ -39,7 +37,7 @@ export class LoginPage {
       if(resposta=="cadastro"){
         this.navCtrl.setRoot(CadastroPage, {dados: this.gpService.getDados()});
       } else{
-        this.storageService.set(resposta);        
+      
         this.navCtrl.setRoot(HomePage);
       }
     })

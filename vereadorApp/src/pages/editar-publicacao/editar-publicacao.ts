@@ -16,21 +16,16 @@ import { PublicacaoService } from '../../providers/publicacao-service';
 })
 export class EditarPublicacaoPage {
 
-  public publicacao: Publicacao;
+  public publicacao: Publicacao = new Publicacao();
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public publicacaoService: PublicacaoService) {
-    this.publicacao = this.navParams.get("publicacao");
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditarPublicacaoPage');
+    this.publicacao = JSON.parse(JSON.stringify(this.navParams.get("publicacao")));;
   }
 
   private editar() {
-    /*alert(JSON.stringify(this.publicacao));
-    this.publicacaoService.addPublicacao(this.publicacao).then(res => {
+    this.publicacaoService.editPublicacao(this.publicacao).then(res => {
       if (!res.error) {
         if (res.value) {
           this.navCtrl.pop();
@@ -40,7 +35,7 @@ export class EditarPublicacaoPage {
       } else {
         //error de conexao
       }
-    });*/
+    });
   }
 
   private importarFoto() {

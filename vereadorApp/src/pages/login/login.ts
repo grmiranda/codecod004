@@ -27,26 +27,30 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  logar() {
-    this.facebookService.logar().then(rese => {
-    });
-  }
-
-  logarGoogle() {
-    this.gpService.loginGoogle().then(resposta=>{
-      if(resposta=="cadastro"){
-        this.navCtrl.setRoot(CadastroPage, {dados: this.gpService.getDados()});
-      } else if(resposta=="banido"){
+  logarFacebook() {
+    this.facebookService.loginFacebook().then(resposta => {
+      if (resposta == "cadastro") {
+        this.navCtrl.setRoot(CadastroPage, { dados: this.facebookService.getDados() });
+      } else if (resposta == "banido") {
         alert("Conta foi banida do sistema");
-      } else if( resposta.socialID != "" && resposta.socialID != undefined){
-      
+      } else if (resposta.socialID != "" && resposta.socialID != undefined) {
+
         this.navCtrl.setRoot(HomePage);
       }
     })
   }
 
-  deslogar() {
-    this.facebookService.logout();
+  logarGoogle() {
+    this.gpService.loginGoogle().then(resposta => {
+      if (resposta == "cadastro") {
+        this.navCtrl.setRoot(CadastroPage, { dados: this.gpService.getDados() });
+      } else if (resposta == "banido") {
+        alert("Conta foi banida do sistema");
+      } else if (resposta.socialID != "" && resposta.socialID != undefined) {
+
+        this.navCtrl.setRoot(HomePage);
+      }
+    });
   }
 
 }

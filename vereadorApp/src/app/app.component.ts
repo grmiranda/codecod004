@@ -13,14 +13,14 @@ import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage = HomePage;
-  pages: Array<{title: string, component: any}>;
+  rootPage = LoginPage;
+  pages: Array<{ title: string, component: any }>;
   pageAtual: string;
 
   constructor(platform: Platform,
     public menuCtrl: MenuController) {
-    this.pages = [{title: 'Notíticas', component: HomePage},
-                  {title: 'Solicitações', component: SolicitacoesPage}]
+    this.pages = [{ title: 'Notíticas', component: HomePage },
+    { title: 'Solicitações', component: SolicitacoesPage }]
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {
@@ -32,18 +32,17 @@ export class MyApp {
   }
 
   openPage(page) {
-    if(this.pageAtual === page.title){
-      this.menuCtrl.close();
+    this.menuCtrl.close();
+    if (this.pageAtual === page.title) {
     } else {
       this.pageAtual = page.title;
       this.navCtrl.setRoot(page.component);
-      this.menuCtrl.close();
     }
   }
 
-  public sair(){
-    this.navCtrl.setRoot(LoginPage);
+  public sair() {
     this.menuCtrl.close();
+    this.navCtrl.setRoot(LoginPage);
   }
 
 

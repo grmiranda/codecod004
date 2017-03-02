@@ -9,23 +9,25 @@
 	
 	if (isset($postdata)){
 		$request  = json_decode($postdata);
+		
+		$user      = $request->usuario;
 
-		$nome      = $request->nome;
-		$email     = $request->email;
-		$nasc      = $request->nascimento;
-		$cpf       = $request->cpf;
-		$fotoURL   = $request->fotoURL;
-		$genero    = $request->genero;
-		$socialID  = $request->socialID;
+		$nome      = $user->nome;
+		$email     = $user->email;
+		$nasc      = $user->nascimento;
+		$cpf       = $user->cpf;
+		$fotoURL   = $user->fotoURL;
+		$genero    = $user->genero;
+		$socialID  = $user->socialID;
 		$permissao = 0;
 		$banido    = 0;
 
-		$telefone = $request->telefone;
+		$telefone = $user->telefone;
 		
-		$endereco = $request->endereco;
-		$bairro   = $request->bairro;
-		$cidade   = $request->cidade;
-		$UF       = $request->UF;
+		$endereco = $user->endereco;
+		$bairro   = $user->bairro;
+		$cidade   = $user->cidade;
+		$UF       = $user->UF;
 
 		$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);

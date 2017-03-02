@@ -29351,6 +29351,7 @@ page-nova-publicacao ion-title {
 page-nova-publicacao ion-list {
   padding: 0 !important;
   margin-left: 0 !important;
+  resize: vertical !important;
 }
 
 page-nova-publicacao ion-item {

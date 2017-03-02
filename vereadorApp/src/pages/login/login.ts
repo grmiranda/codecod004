@@ -39,7 +39,7 @@ export class LoginPage {
         this.navCtrl.setRoot(CadastroPage, {dados: this.gpService.getDados()});
       } else if(resposta=="banido"){
         alert("Conta foi banida do sistema");
-      } else{
+      } else if( resposta.socialID != "" && resposta.socialID != undefined){
       
         this.navCtrl.setRoot(HomePage);
       }

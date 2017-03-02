@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="laranja">
     <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
     </button>
@@ -10,6 +10,20 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ul [virtualScroll]="array">
+    <li *virtualItem="let item">
+      <ion-card>
+        <img src="../image/fundo-tela-login.png" />
+        <ion-card-content>
+          <ion-card-title>
+            {{item.nome}}
+          </ion-card-title>
+          <p>
+            The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </li>
+  </ul>
 </ion-content>

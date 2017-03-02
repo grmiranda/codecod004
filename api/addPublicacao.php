@@ -12,8 +12,9 @@
 		
 		$titulo = $request->titulo;
 		$texto = $request->texto;
-		$data = $request->data;
 		$fotoURL = $request->fotoURL;
+		
+		$data = date('Y-m-d');
 		
 		$sql= "INSERT INTO publicacao (titulo, texto, data, fotoURL) VALUES ('$titulo', '$texto', '$data', '$fotoURL')";
 		$con->query($sql);

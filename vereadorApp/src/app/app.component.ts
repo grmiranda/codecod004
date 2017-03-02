@@ -13,7 +13,7 @@ import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage = HomePage;
+  rootPage = LoginPage;
   pages: Array<{title: string, component: any}>;
   pageAtual: string;
 
@@ -22,7 +22,6 @@ export class MyApp {
     this.pages = [{title: 'Notíticas', component: HomePage},
                   {title: 'Solicitações', component: SolicitacoesPage}]
     this.pageAtual = 'Notícias';
-    rootPage = LoginPage;
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

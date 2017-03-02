@@ -73,9 +73,7 @@
 
 			$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
 			$con->query($sql);
-
 			
-
 			$sql = "INSERT INTO endereco (endereco, bairro, cidade, uf, IDUsuario) VALUES ('$endereco', '$bairro', '$cidade', '$UF', '$id')";
 			$con->query($sql);
 			

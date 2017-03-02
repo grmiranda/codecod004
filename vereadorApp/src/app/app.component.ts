@@ -17,7 +17,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
   pageAtual: string;
 
-  constructor(platform: Platform, 
+  constructor(platform: Platform,
     public menuCtrl: MenuController) {
     this.pages = [{title: 'Notíticas', component: HomePage},
                   {title: 'Solicitações', component: SolicitacoesPage}]

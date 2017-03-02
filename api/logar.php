@@ -8,9 +8,7 @@
 	$postdata = file_get_contents("php://input");
 	
 	if (isset($postdata)){
-		$request  = json_decode($postdata);
-		
-        $socialID = $request->token;
+		$socialID = json_decode($postdata);
 
         $sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);

@@ -23,6 +23,7 @@ export class PublicacaoService {
   private extractAddData(res: Response) {
     let retorno = { error: false, value: false };
     let data = res.json();
+    alert(JSON.stringify(data));
     if (data === true) {
       retorno.value = true;
     }

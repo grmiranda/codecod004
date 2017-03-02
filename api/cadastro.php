@@ -52,6 +52,12 @@
 
 			$id = $dados['IDUsuario'];
 
+			if ($genero == 'm'){
+				$genero == 'male';
+			} else {
+				$genero = 'female';
+			}
+
 			$vetor['id']         = $id;
 			$vetor['nome']       = $nome;
 			$vetor['genero']     = $genero;

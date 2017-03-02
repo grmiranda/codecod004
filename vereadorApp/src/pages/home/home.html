@@ -4,23 +4,23 @@
       <ion-icon name='menu'></ion-icon>
     </button>
     <ion-title>
-        Notícias
+      Notícias
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <ul [virtualScroll]="array">
-    <li *virtualItem="let item">
+  <ul [virtualScroll]="publicacoes">
+    <li *virtualItem="let publicacao">
       <ion-card>
-        <img src="../image/fundo-tela-login.png" />
+        <img [src]="publicacao.fotoURL" />
         <ion-card-content>
           <ion-card-title>
-            {{item.nome}}
+            {{ publicacao.titulo }}
           </ion-card-title>
           <p>
-            The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+            {{ publicacao.texto }}
           </p>
         </ion-card-content>
       </ion-card>

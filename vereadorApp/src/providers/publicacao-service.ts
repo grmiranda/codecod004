@@ -31,7 +31,7 @@ export class PublicacaoService {
   }
 
   public getPublicacoes(): Promise<any> {
-    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/listaPublicacao.php?id')
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getPublicacoes.php?id')
       .toPromise()
       .then(response => this.extractGetData(response))
       .catch(this.handleErrorMessage);
@@ -65,16 +65,16 @@ export class PublicacaoService {
     return retorno;
   }
 
-  public editPublicacao(publicacao: Publicacao): Promise<any>{
-  return this.http
-    .post('http://www.dsoutlet.com.br/apiLuiz/editPublicacao.php', JSON.stringify(publicacao), { headers: this.headers })
-    .toPromise()
-    .then(res => this.extractEditData(res))
-    .catch(this.handleErrorMessage);
-}
+  public editPublicacao(publicacao: Publicacao): Promise<any> {
+    return this.http
+      .post('http://www.dsoutlet.com.br/apiLuiz/editPublicacao.php', JSON.stringify(publicacao), { headers: this.headers })
+      .toPromise()
+      .then(res => this.extractEditData(res))
+      .catch(this.handleErrorMessage);
+  }
 
-private extractEditData(res: Response) {
-  let retorno = { error: false, value: false };
+  private extractEditData(res: Response) {
+    let retorno = { error: false, value: false };
     let data = res.json();
     if (data === true) {
       retorno.value = true;

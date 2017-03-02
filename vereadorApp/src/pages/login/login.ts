@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { FacebookService } from '../../providers/facebook-service';
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
@@ -17,9 +17,10 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private facebookService: FacebookService,
-    private gpService: GooglePlusService
+    private gpService: GooglePlusService,
+    private menu: MenuController
   ) {
-
+    this.menu.enable(false);
   }
 
   ionViewDidLoad() {
@@ -36,6 +37,8 @@ export class LoginPage {
       alert(JSON.stringify(resposta));
       if(resposta=="cadastro"){
         this.navCtrl.setRoot(CadastroPage, {dados: this.gpService.getDados()});
+      } else if(resposta=="banido"){
+        alert("Conta foi banida do sistema");
       } else{
       
         this.navCtrl.setRoot(HomePage);

@@ -34,7 +34,6 @@ export class LoginPage {
 
   logarGoogle() {
     this.gpService.loginGoogle().then(resposta=>{
-      alert(JSON.stringify(resposta));
       if(resposta=="cadastro"){
         this.navCtrl.setRoot(CadastroPage, {dados: this.gpService.getDados()});
       } else if(resposta=="banido"){

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Usuario } from '../../model/user';
 import { HomePage } from '../home/home';
 import { CadastroService } from '../../providers/cadastro-service';
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Cadastro page.
@@ -68,7 +69,7 @@ export class CadastroPage {
       if (res == false) {
         alert("Erro ao cadastrar Usuario");
       } else{ 
- 
+        alert(JSON.stringify(res));
         this.navCtrl.setRoot(HomePage);
       }
 
@@ -76,7 +77,7 @@ export class CadastroPage {
   }
 
   cancelar() {
-    this.navCtrl.pop()
+    this.navCtrl.setRoot(LoginPage);
   }
 
 

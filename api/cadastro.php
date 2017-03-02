@@ -8,26 +8,24 @@
 	$postdata = file_get_contents("php://input");
 	
 	if (isset($postdata)){
-		$request  = json_decode($postdata);
-		
-		$user      = $request->usuario;
+		$request  = json_decode($postdata);	
 
-		$nome      = $user->nome;
-		$email     = $user->email;
-		$nasc      = $user->nascimento;
-		$cpf       = $user->cpf;
-		$fotoURL   = $user->fotoURL;
-		$genero    = $user->genero;
-		$socialID  = $user->socialID;
+		$nome      = $request->nome;
+		$email     = $request->email;
+		$nasc      = $request->nascimento;
+		$cpf       = $request->cpf;
+		$fotoURL   = $request->fotoURL;
+		$genero    = $request->genero;
+		$socialID  = $request->socialID;
 		$permissao = 0;
 		$banido    = 0;
 
-		$telefone = $user->telefone;
+		$telefone = $request->telefone;
 		
-		$endereco = $user->endereco;
-		$bairro   = $user->bairro;
-		$cidade   = $user->cidade;
-		$UF       = $user->UF;
+		$endereco = $request->endereco;
+		$bairro   = $request->bairro;
+		$cidade   = $request->cidade;
+		$UF       = $request->UF;
 
 		$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);
@@ -36,14 +34,15 @@
 
 		if ($num !== 1 && $nome != ""){
 
+			$vetor = array();
+
 			if ($genero == 'male'){
 				$genero = 'm';
 			} else {
 				$genero = 'f';
 			}
 
-			$sql = "INSERT INTO usuario (nome, email, nascimento, cpf, fotoURL, genero, socialID, permissao, banido)
-					VALUES ('$nome', '$email', '$nasc', '$cpf', '$fotoURL', '$genero', '$socialID', '$permissao', '$banido')";
+			$sql = "INSERT INTO usuario (nome, email, nascimento, cpf, fotoURL, genero, socialID, permissao, banido) VALUES ('$nome', '$email', '$nasc', '$cpf', '$fotoURL', '$genero', '$socialID', '$permissao', '$banido')";
 			$con->query($sql);
 			
 			$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
@@ -53,20 +52,32 @@
 
 			$id = $dados['IDUsuario'];
 
+			if ($genero == 'm'){
+				$genero == 'male';
+			} else {
+				$genero = 'female';
+			}
+
+			$vetor['id']         = $id;
+			$vetor['nome']       = $nome;
+			$vetor['genero']     = $genero;
+			$vetor['fotoURL']    = $fotoURL;
+			$vetor['socialID']   = $socialID;
+			$vetor['cpf']        = $cpf;
+			$vetor['nascimento'] = $nasc;
+			$vetor['telefone'] = $telefone;
+			$vetor['endereco'] = $endereco;
+			$vetor['bairro']   = $bairro;
+			$vetor['cidade']   = $cidade;
+			$vetor['UF']       = $UF;
+
 			$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
 			$con->query($sql);
-
-			$dados['telefone'] = $telefone;
-
+			
 			$sql = "INSERT INTO endereco (endereco, bairro, cidade, uf, IDUsuario) VALUES ('$endereco', '$bairro', '$cidade', '$UF', '$id')";
 			$con->query($sql);
-
-			$dados['endereco'] = $endereco;
-			$dados['bairro']   = $bairro;
-			$dados['cidade']   = $cidade;
-			$dados['UF']       = $UF;
-
-			echo json_encode($dados);
+			
+			echo json_encode($vetor);
 
 		} else {
 			echo json_encode(false);

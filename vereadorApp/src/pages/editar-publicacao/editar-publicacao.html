@@ -1,0 +1,46 @@
+<!--
+  Generated template for the EditarPublicacao page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Editar Publicação</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="publicacao.titulo" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item class="itemtextarea">
+      <ion-label floating>Descrição</ion-label>
+      <ion-textarea rows="10" [(ngModel)]="publicacao.texto" name="texto"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <img *ngIf="publicacao.fotoURL !== ''" [src]="publicacao.fotoURL" style="width: 100%;" />
+      <ion-row>
+        <ion-col width-50>
+          <button (click)="importarFoto()" class="fabbuttons" ion-fab large>
+              <ion-icon name="image"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col width-50>
+          <button (click)="tiraFoto()" class="fabbuttons" ion-fab large>
+              <ion-icon name="camera"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <button class="blockbutton" (click)="editar()" ion-button block large>Finalizar</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

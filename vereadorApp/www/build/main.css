@@ -29244,6 +29244,45 @@ ion-navbar.toolbar {
   position: relative;
 }
 
+page-editar-publicacao ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-editar-publicacao ion-list {
+  padding: 0 !important;
+  margin-left: 0 !important;
+  resize: vertical !important;
+}
+
+page-editar-publicacao ion-item {
+  padding: 0 !important;
+  margin-left: 0 !important;
+}
+
+page-editar-publicacao ion-col {
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+page-editar-publicacao .fabbuttons {
+  -webkit-align-self: center !important;
+  -ms-flex-item-align: center !important;
+  -ms-grid-row-align: center !important;
+  align-self: center !important;
+  margin-left: 30%;
+}
+
+page-editar-publicacao .blockbutton {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 page-home ion-header button {
   width: 10%;
 }
@@ -29260,6 +29299,7 @@ page-home ion-content {
   margin-right: 0 !important;
   margin-left: 0 !important;
   width: 100% !important;
+  max-width: 100% !important;
 }
 
 page-home ul {
@@ -29269,6 +29309,7 @@ page-home ul {
   margin-right: 0 !important;
   margin-left: 0 !important;
   width: 100% !important;
+  max-width: 100% !important;
 }
 
 page-home li {
@@ -29278,6 +29319,7 @@ page-home li {
   margin-right: 0 !important;
   margin-left: 0 !important;
   width: 100% !important;
+  max-width: 100% !important;
 }
 
 page-home ion-card {
@@ -29287,6 +29329,27 @@ page-home ion-card {
   margin-right: 0 !important;
   margin-left: 0 !important;
   width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-home img {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-home ion-card-content {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 page-login h1.titulo {

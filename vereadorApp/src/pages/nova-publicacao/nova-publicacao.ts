@@ -12,7 +12,9 @@ export class NovaPublicacaoPage {
 
   private publicacao: Publicacao = new Publicacao();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public publicacaoService: PublicacaoService) {
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams, 
+  public publicacaoService: PublicacaoService) {
 
   }
 

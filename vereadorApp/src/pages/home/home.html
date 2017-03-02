@@ -1,11 +1,13 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
     <ion-title>
-      Notícias
+        Notícias
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 
 
 <ion-content>
@@ -24,4 +26,10 @@
       </ion-card>
     </li>
   </ul>
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="novaPublicacao()">
+      <ion-icon name="add">
+    </ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

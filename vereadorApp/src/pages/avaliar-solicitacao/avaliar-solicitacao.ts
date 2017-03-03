@@ -28,6 +28,7 @@ export class AvaliarSolicitacaoPage {
       }
     })
   }
+
   private abrirOpcoes(solicitacao: any) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',

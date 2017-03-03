@@ -17,6 +17,7 @@ import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
 import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
+import { SolicitacaoService } from '../providers/solicitacao-service';
 
 //login com o google e com o facebook
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -76,6 +77,6 @@ const cloudSettings: CloudSettings = {
     SolicSolicitadosPage,
     NovaPropostaPage
   ],
-  providers: [Facebook, CadastroService, FotoService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [Facebook, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 })
 export class AppModule {}

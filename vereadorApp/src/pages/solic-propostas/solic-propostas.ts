@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, MenuController, Platform } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform } from 'ionic-angular';
+import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 
@@ -9,19 +10,26 @@ import { Solicitacao } from '../../model/solicitacao';
 })
 export class SolicPropostasPage {
 
-  constructor(public platform: Platform,
-    public navCtrl: NavController, 
-    public navParams: NavParams,
-    public actionSheetCtrl: ActionSheetController, 
-    public menu:MenuController) {}
-
   private solicitacoes: Solicitacao[] = [];
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SolicPropostasPage');
+  constructor(public platform: Platform,
+    public navCtrl: NavController,
+    public solicitacaoService: SolicitacaoService,
+    public actionSheetCtrl: ActionSheetController) { }
+
+  ionViewWillEnter() {
+    this.carregarSolicitacoes();
   }
 
-  public novaProposta(){
+  private carregarSolicitacoes() {
+    this.solicitacaoService.getSolicitacoes('ap').then(res => {
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    })
+  }
+
+  public novaProposta() {
     this.navCtrl.push(NovaPropostaPage);
   }
 
@@ -34,14 +42,14 @@ export class SolicPropostasPage {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-            
+
           }
         },
         {
           text: 'Requerimento',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-            
+
           }
         },
         {

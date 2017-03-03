@@ -14,7 +14,7 @@ import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage = HomePage;
+  rootPage = LoginPage;
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
 

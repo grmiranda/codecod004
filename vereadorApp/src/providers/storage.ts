@@ -19,6 +19,8 @@ export class StorageService {
   }
 
   set(user: Usuario) {
+    alert("storage");
+    alert(JSON.stringify(user));
 
     NativeStorage.setItem('usuarioAtual', user)
       .then(
@@ -29,12 +31,12 @@ export class StorageService {
 
   get(): Promise<Usuario> {
 
-    return NativeStorage.getItem('usuarioAtual')
-  .then(
-    data => console.log(data),
+    return NativeStorage.getItem('usuarioAtual').then(
+    data => data,
     error => {
       return new Usuario();
-    });
+    }
+    );
 
   }
 

@@ -29647,15 +29647,6 @@ page-solic-reprovados ion-title {
   margin-right: 10%;
 }
 
-page-solic-solicitados ion-header button {
-  width: 10% !important;
-}
-
-page-solic-solicitados ion-title {
-  text-align: center;
-  margin-right: 10%;
-}
-
 page-solicitacoes ion-header button {
   width: 10%;
 }

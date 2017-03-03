@@ -3,8 +3,8 @@ import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 
 @Component({
-  selector: 'page-solic-solicitados',
-  templateUrl: 'solic-solicitados.html'
+  selector: 'page-solic-aprovados',
+  templateUrl: 'solic-aprovados.html'
 })
 export class SolicAprovadosPage {
 

@@ -24,7 +24,6 @@ export class LoginPage {
   ) {
     this.menu.enable(false);
     this.storage.get().then(response => {
-      alert(JSON.stringify(response));
       if (response.socialID != '') {
         this.navCtrl.setRoot(HomePage);
       }
@@ -47,7 +46,6 @@ export class LoginPage {
       } else if (resposta[0] == "banido") {
         alert("Conta foi banida do sistema");
       } else if (resposta[0] == "existe") {
-        alert(resposta[1]);
         this.storage.set(resposta[1]);
         this.navCtrl.setRoot(HomePage);
       }
@@ -61,11 +59,9 @@ export class LoginPage {
       } else if (resposta[0] == "banido") {
         alert("Conta foi banida do sistema");
       } else if (resposta[0] == "existe") {
-        alert(resposta[1]);
         this.storage.set(resposta[1]);
-        this.storage.get().then(response => alert(JSON.stringify(response)));
         this.navCtrl.setRoot(HomePage);
-        this.navCtrl.setRoot(HomePage);
+
       }
     });
   }

@@ -3,8 +3,8 @@ import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 
 @Component({
-  selector: 'page-solic-aprovados',
-  templateUrl: 'solic-aprovados.html'
+  selector: 'page-solic-solicitados',
+  templateUrl: 'solic-solicitados.html'
 })
 export class SolicAprovadosPage {
 
@@ -12,5 +12,15 @@ export class SolicAprovadosPage {
 
   constructor(public solicitacaoService: SolicitacaoService) { }
 
+  ionViewWillEnter() {
+    this.carregarSolicitacoes();
+  }
 
+  private carregarSolicitacoes() {
+    this.solicitacaoService.getSolicitacoes('cp').then(res => {
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    })
+  }
 }

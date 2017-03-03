@@ -1,22 +1,27 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { SolicitacaoService } from '../../providers/solicitacao-service';
+import { Solicitacao } from '../../model/solicitacao';
 
-/*
-  Generated class for the SolicReprovados page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-solic-reprovados',
   templateUrl: 'solic-reprovados.html'
 })
 export class SolicReprovadosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  private solicitacoes: Solicitacao[] = [];
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SolicReprovadosPage');
+  constructor(public solicitacaoService: SolicitacaoService) { }
+
+  ionViewWillEnter() {
+    this.carregarSolicitacoes();
+  }
+
+  private carregarSolicitacoes() {
+    this.solicitacaoService.getSolicitacoes('cn').then(res => {
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    })
   }
 
 }

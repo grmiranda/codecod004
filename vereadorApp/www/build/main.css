@@ -29408,7 +29408,7 @@ page-login button {
 
 page-nova-proposta ion-title {
   text-align: center;
-  margin-right: 15%;
+  margin-right: 15% !important;
 }
 
 page-nova-proposta ion-list {
@@ -29449,7 +29449,7 @@ page-nova-proposta .blockbutton {
 
 page-nova-publicacao ion-title {
   text-align: center;
-  margin-right: 10%;
+  margin-right: 15% !important;
 }
 
 page-nova-publicacao ion-list {
@@ -29479,10 +29479,6 @@ page-nova-publicacao .fabbuttons {
 
 page-nova-publicacao .blockbutton {
   text-align: center !important;
-  -webkit-align-self: center !important;
-  -ms-flex-item-align: center !important;
-  -ms-grid-row-align: center !important;
-  align-self: center !important;
   margin-left: 20px;
   margin-right: 20px;
 }

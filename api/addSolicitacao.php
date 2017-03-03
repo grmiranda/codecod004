@@ -10,14 +10,17 @@
 	if (isset($postdata)){
 		$request  = json_decode($postdata);
 		
-		$titulo = $request->titulo;
-		$texto = $request->texto;
 		$fotoURL = $request->fotoURL;
+		$titulo = $request->titulo;
+		$descricao = $request->descricao;
+		$andamento = $request->andamento;
 		
-		$data = date('Y-m-d');
+		$dataEntrada = date('Y-m-d');
+		
+		$IDUsuario = $request->IDUsuario;
 		
 		if (isset($titulo)){
-			$sql= "INSERT INTO publicacao (titulo, texto, data, fotoURL) VALUES ('$titulo', '$texto', '$data', '$fotoURL')";
+			$sql= "INSERT INTO solicitacao (fotoURL, titulo, descricao, andamento, estado, dataEntrada, IDUsuario) VALUES ('$fotoURL', '$titulo', '$descricao', '$andamento', 'sa', '$dataEntrada', '$IDUsuario')";
 			$con->query($sql);
 			echo json_encode(true);
 		}else{

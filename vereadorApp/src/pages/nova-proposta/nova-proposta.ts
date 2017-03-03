@@ -27,7 +27,7 @@ export class NovaPropostaPage {
         if (res.value) {
           //works fine
           this.displayToast('Requisição enviada!');
-          //this.navCtrl.pop();
+          this.navCtrl.pop();
         }
       } else {
         //error

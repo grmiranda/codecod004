@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
+import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class MyApp {
     private storage : StorageService
     ) {
     this.pages = [{ title: 'Notíticas', component: HomePage },
-    { title: 'Solicitações', component: SolicitacoesPage }]
+    { title: 'Solicitações', component: SolicitacoesPage },
+    { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage}]
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {

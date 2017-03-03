@@ -9,6 +9,7 @@ import { SolicAprovadosPage } from '../pages/solic-aprovados/solic-aprovados';
 import { SolicPropostasPage } from '../pages/solic-propostas/solic-propostas';
 import { SolicSolicitadosPage } from '../pages/solic-solicitados/solic-solicitados';
 import { SolicReprovadosPage } from '../pages/solic-reprovados/solic-reprovados';
+import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
 import { NovaPropostaPage } from '../pages/nova-proposta/nova-proposta';
 import { NovaPublicacaoPage } from '../pages/nova-publicacao/nova-publicacao';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
@@ -55,7 +56,8 @@ const cloudSettings: CloudSettings = {
     SolicPropostasPage,
     SolicReprovadosPage,
     SolicSolicitadosPage,
-    NovaPropostaPage
+    NovaPropostaPage,
+    AvaliarSolicitacaoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -75,7 +77,8 @@ const cloudSettings: CloudSettings = {
     SolicPropostasPage,
     SolicReprovadosPage,
     SolicSolicitadosPage,
-    NovaPropostaPage
+    NovaPropostaPage,
+    AvaliarSolicitacaoPage
   ],
 
   providers: [Facebook, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]

@@ -11,7 +11,21 @@
 
 
 <ion-content padding>
-  
+  <ul [virtualScroll]="solicitacoes">
+    <li *virtualItem="let solicitacao">
+      <ion-card (click)="abrirOpcoes(solicitacao)">
+        <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
+        <ion-card-content>
+          <ion-card-title>
+            {{ solicitacao.titulo }}
+          </ion-card-title>
+          <p>
+            {{ solicitacao.descricao }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </li>
+  </ul>
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="novaProposta()">
       <ion-icon name="add">

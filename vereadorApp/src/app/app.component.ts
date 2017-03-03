@@ -41,6 +41,7 @@ export class MyApp {
   }
 
   public sair() {
+
     this.menuCtrl.close();
     this.navCtrl.setRoot(LoginPage);
   }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NovaPublicacaoPage } from '../nova-publicacao/nova-publicacao';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 
@@ -12,8 +12,8 @@ export class HomePage {
 
   private publicacoes: Publicacao[] = [];
 
-  constructor(public navCtrl: NavController, private publicacaoService: PublicacaoService) {
-
+  constructor(public navCtrl: NavController, private publicacaoService: PublicacaoService, menu:MenuController) {
+    menu.enable(true);
     this.carregarFeed();
   }
 

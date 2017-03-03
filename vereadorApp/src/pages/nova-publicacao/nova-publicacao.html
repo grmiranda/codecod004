@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="laranja">
     <ion-title>Nova Notícia</ion-title>
   </ion-navbar>
 
@@ -22,19 +22,19 @@
       <img *ngIf="publicacao.fotoURL !== ''" [src]="publicacao.fotoURL" style="width: 100%;" />
       <ion-row>
         <ion-col width-50>
-          <button (click)="importarFoto()" class="fabbuttons" ion-fab large>
+          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
               <ion-icon name="image"></ion-icon>
             </button>
         </ion-col>
         <ion-col width-50>
-          <button (click)="tirarFoto()" class="fabbuttons" ion-fab large>
+          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
               <ion-icon name="camera"></ion-icon>
             </button>
         </ion-col>
       </ion-row>
     </ion-item>
     <ion-item>
-      <button class="blockbutton" (click)="publicar()" ion-button block large>Publicar</button>
+      <button class="blockbutton" (click)="publicar()" color="secondary" ion-button block large>Publicar</button>
     </ion-item>
   </ion-list>
 

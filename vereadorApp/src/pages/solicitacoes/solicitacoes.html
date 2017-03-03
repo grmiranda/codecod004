@@ -1,29 +1,6 @@
-<ion-header>
-  <ion-navbar color="laranja">
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>
-      Solicitações
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-
-<ion-content>
-  <ul [virtualScroll]="array">
-    <li *virtualItem="let item">
-      <ion-card>
-        <img src="../image/fundo-tela-login.png" />
-        <ion-card-content>
-          <ion-card-title>
-            {{item.nome}}
-          </ion-card-title>
-          <p>
-            The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-          </p>
-        </ion-card-content>
-      </ion-card>
-    </li>
-  </ul>
-</ion-content>
+<ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="Propostas" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Solicitados" tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Aprovados" tabIcon="contacts"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="Reprovados" tabIcon="contacts"></ion-tab>
+</ion-tabs>

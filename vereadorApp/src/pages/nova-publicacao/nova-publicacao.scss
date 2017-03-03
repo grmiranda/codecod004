@@ -1,7 +1,7 @@
 page-nova-publicacao {
     ion-title{
         text-align: center;
-        margin-right: 10%;
+        margin-right: 15% !important;
     }
     ion-list{
         padding: 0 !important;
@@ -20,7 +20,7 @@ page-nova-publicacao {
         margin-left: 30%;
     }
     .blockbutton{
-        align-self: center;
+        text-align: center !important;
         margin-left: 20px;
         margin-right: 20px;
     }

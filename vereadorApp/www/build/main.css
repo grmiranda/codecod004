@@ -29284,7 +29284,7 @@ page-editar-publicacao .blockbutton {
 }
 
 page-home ion-header button {
-  width: 10%;
+  width: 10% !important;
 }
 
 page-home ion-title {
@@ -29406,9 +29406,50 @@ page-login button {
   background-color: rgba(255, 0, 0, 0.6) !important;
 }
 
+page-nova-proposta ion-title {
+  text-align: center;
+  margin-right: 15% !important;
+}
+
+page-nova-proposta ion-list {
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+  resize: vertical !important;
+}
+
+page-nova-proposta ion-item {
+  padding: 0 !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+page-nova-proposta ion-col {
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+page-nova-proposta ion-label {
+  margin-left: 10px !important;
+}
+
+page-nova-proposta .fabbuttons {
+  -webkit-align-self: center !important;
+  -ms-flex-item-align: center !important;
+  -ms-grid-row-align: center !important;
+  align-self: center !important;
+  margin-left: 30%;
+}
+
+page-nova-proposta .blockbutton {
+  text-align: center !important;
+  margin-right: 30px !important;
+}
+
 page-nova-publicacao ion-title {
   text-align: center;
-  margin-right: 10%;
+  margin-right: 15% !important;
 }
 
 page-nova-publicacao ion-list {
@@ -29437,12 +29478,45 @@ page-nova-publicacao .fabbuttons {
 }
 
 page-nova-publicacao .blockbutton {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  -ms-grid-row-align: center;
-  align-self: center;
+  text-align: center !important;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+page-solic-aprovados ion-header button {
+  width: 10% !important;
+}
+
+page-solic-aprovados ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-solic-propostas ion-header button {
+  width: 10% !important;
+}
+
+page-solic-propostas ion-title {
+  text-align: center;
+  margin-right: 15% !important;
+}
+
+page-solic-reprovados ion-header button {
+  width: 10% !important;
+}
+
+page-solic-reprovados ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-solic-solicitados ion-header button {
+  width: 10% !important;
+}
+
+page-solic-solicitados ion-title {
+  text-align: center;
+  margin-right: 10%;
 }
 
 page-solicitacoes ion-header button {

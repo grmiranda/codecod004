@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NovaPublicacaoPage } from '../nova-publicacao/nova-publicacao';
 import { EditarPublicacaoPage } from '../editar-publicacao/editar-publicacao';
 import { PublicacaoPage } from '../publicacao/publicacao';
-import { Platform, NavController, ActionSheetController } from 'ionic-angular';
+import { Platform, NavController, ActionSheetController, MenuController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 
@@ -14,11 +14,13 @@ export class HomePage {
 
   private publicacoes: Publicacao[] = [];
 
+
+    
   constructor(public platform: Platform,
     public navCtrl: NavController,
     private publicacaoService: PublicacaoService,
-    public actionSheetCtrl: ActionSheetController) {
-
+    public actionSheetCtrl: ActionSheetController, menu:MenuController) {
+      menu.enable(true);
   }
 
   ionViewWillEnter() {

@@ -29,24 +29,28 @@ export class LoginPage {
 
   logarFacebook() {
     this.facebookService.loginFacebook().then(resposta => {
-      if (resposta == "cadastro") {
-        this.navCtrl.setRoot(CadastroPage, { dados: this.facebookService.getDados() });
-      } else if (resposta == "banido") {
+      if (resposta[0] == "cadastro") {
+        let informacao;
+        this.facebookService.getDados(resposta[1]).then(res=>{
+          this.navCtrl.setRoot(CadastroPage, { dados: res });
+        });
+        
+      } else if (resposta[0] == "banido") {
         alert("Conta foi banida do sistema");
-      } else if (resposta.socialID != "" && resposta.socialID != undefined) {
+      } else if (resposta[0] == "existe") {
 
         this.navCtrl.setRoot(HomePage);
       }
-    })
+    });
   }
 
   logarGoogle() {
     this.gpService.loginGoogle().then(resposta => {
-      if (resposta == "cadastro") {
+      if (resposta[0] == "cadastro") {
         this.navCtrl.setRoot(CadastroPage, { dados: this.gpService.getDados() });
-      } else if (resposta == "banido") {
+      } else if (resposta[0] == "banido") {
         alert("Conta foi banida do sistema");
-      } else if (resposta.socialID != "" && resposta.socialID != undefined) {
+      } else if (resposta[0] == "existe") {
 
         this.navCtrl.setRoot(HomePage);
       }

@@ -21,7 +21,7 @@
 			$con->query($sql);
 			echo json_encode(true);
 		}else{
-			echo json_encode(true);
+			echo json_encode(false);
 		}
 	}
 	$con->close();

@@ -16,11 +16,13 @@
 		
 		$data = date('Y-m-d');
 		
-		$sql= "INSERT INTO publicacao (titulo, texto, data, fotoURL) VALUES ('$titulo', '$texto', '$data', '$fotoURL')";
-		$con->query($sql);
-		
-		echo json_encode(true);
+		if (isset($titulo)){
+			$sql= "INSERT INTO publicacao (titulo, texto, data, fotoURL) VALUES ('$titulo', '$texto', '$data', '$fotoURL')";
+			$con->query($sql);
+			echo json_encode(true);
+		}else{
+			echo json_encode(true);
+		}
 	}
-	
 	$con->close();
 ?>

@@ -6,8 +6,11 @@ import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
 import { NovaPublicacaoPage } from '../pages/nova-publicacao/nova-publicacao';
+import { PublicacaoPage } from '../pages/publicacao/publicacao';
+import { EditarPublicacaoPage } from '../pages/editar-publicacao/editar-publicacao';
 import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
+import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
 
 //login com o google e com o facebook
@@ -31,17 +34,6 @@ const cloudSettings: CloudSettings = {
   }
 };
 
-// Import the AF2 Module
-import { AngularFireModule } from 'angularfire2';
-
-// AF2 Settings
-export const firebaseConfig = {
-  apiKey: "AIzaSyCurTBSL6YJBOTu9axp7DJ28yudC56XiX0",
-  authDomain: "luizdafeira-fd906.firebaseapp.com",
-  databaseURL: "https://luizdafeira-fd906.firebaseio.com",
-  storageBucket: "luizdafeira-fd906.appspot.com",
-  messagingSenderId: "981479929697"
-};
 
 @NgModule({
   declarations: [
@@ -50,11 +42,12 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage,
     SolicitacoesPage,
-    NovaPublicacaoPage
+    NovaPublicacaoPage,
+    PublicacaoPage,
+    EditarPublicacaoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
     CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
@@ -64,8 +57,10 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage,
     SolicitacoesPage,
-    NovaPublicacaoPage
+    NovaPublicacaoPage,
+    PublicacaoPage,
+    EditarPublicacaoPage
   ],
-  providers: [Facebook, CadastroService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [Facebook, CadastroService, FotoService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 })
 export class AppModule {}

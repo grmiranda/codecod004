@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { NovaPublicacaoPage } from '../nova-publicacao/nova-publicacao';
+<<<<<<< HEAD
 import { NavController, MenuController } from 'ionic-angular';
+=======
+import { EditarPublicacaoPage } from '../editar-publicacao/editar-publicacao';
+import { PublicacaoPage } from '../publicacao/publicacao';
+import { Platform, NavController, ActionSheetController } from 'ionic-angular';
+>>>>>>> 13c1305002e8b3a2b62ffd13976bcdafc49dc6a6
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 
@@ -12,8 +18,19 @@ export class HomePage {
 
   private publicacoes: Publicacao[] = [];
 
+<<<<<<< HEAD
   constructor(public navCtrl: NavController, private publicacaoService: PublicacaoService, menu:MenuController) {
     menu.enable(true);
+=======
+  constructor(public platform: Platform,
+    public navCtrl: NavController,
+    private publicacaoService: PublicacaoService,
+    public actionSheetCtrl: ActionSheetController) {
+
+  }
+
+  ionViewWillEnter() {
+>>>>>>> 13c1305002e8b3a2b62ffd13976bcdafc49dc6a6
     this.carregarFeed();
   }
 
@@ -29,6 +46,61 @@ export class HomePage {
 
   private novaPublicacao() {
     this.navCtrl.push(NovaPublicacaoPage);
+  }
+
+  private abrirPublicacao(publicacao: any) {
+    this.navCtrl.push(PublicacaoPage, { publicacao: publicacao });
+  }
+
+  private deletarPublicacao(id: number) {
+    this.publicacaoService.deletePublicacao(id).then(res => {
+      if (!res.error) {
+        if(res.value){
+          //deletou
+          this.carregarFeed();
+        }
+      }
+    });
+  }
+
+  private doRefresh(refresher) {
+    this.carregarFeed();
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
+  }
+
+  private abrirOpcoes(publicacao: any) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Opções',
+      buttons: [
+        {
+          text: 'Excluir',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            this.deletarPublicacao(publicacao.IDPublicacao);
+          }
+        },
+        {
+          text: 'Editar',
+          icon: !this.platform.is('ios') ? 'create' : null,
+          handler: () => {
+            this.navCtrl.push(EditarPublicacaoPage, { publicacao: publicacao });
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: !this.platform.is('ios') ? 'close' : null,
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
   }
 
 }

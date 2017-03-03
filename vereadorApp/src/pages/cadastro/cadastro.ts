@@ -21,8 +21,7 @@ export class CadastroPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public cadastroService: CadastroService
-  ) {
+    public cadastroService: CadastroService) {
 
     this.usuario = this.navParams.get("dados");
 

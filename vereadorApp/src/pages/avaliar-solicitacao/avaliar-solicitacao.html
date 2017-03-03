@@ -12,7 +12,7 @@
 <ion-content>
   <ul [virtualScroll]="solicitacoes">
     <li *virtualItem="let solicitacao">
-      <ion-card (click)="abrirOpcoes(solicitacao)">
+      <ion-card (press)="abrirOpcoes(solicitacao)">
         <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
         <ion-card-content>
           <ion-card-title>

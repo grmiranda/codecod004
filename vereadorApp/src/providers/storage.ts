@@ -19,7 +19,6 @@ export class StorageService {
   }
 
   set(user: Usuario) {
-
     NativeStorage.setItem('usuarioAtual', user)
       .then(
       () => console.log('Stored item!'),
@@ -29,12 +28,12 @@ export class StorageService {
 
   get(): Promise<Usuario> {
 
-    return NativeStorage.getItem('usuarioAtual')
-  .then(
-    data => console.log(data),
+    return NativeStorage.getItem('usuarioAtual').then(
+    data => data,
     error => {
       return new Usuario();
-    });
+    }
+    );
 
   }
 

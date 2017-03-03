@@ -29421,6 +29421,14 @@ page-home ion-card-content {
   max-width: 100% !important;
 }
 
+page-home ion-card-title {
+  margin-left: 10px !important;
+}
+
+page-home p {
+  margin-left: 10px !important;
+}
+
 page-login h1.titulo {
   color: white;
   text-align: center;

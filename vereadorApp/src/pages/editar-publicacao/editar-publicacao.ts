@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Publicacao } from '../../model/publicacao';
-import { Camera } from 'ionic-native';
 import { PublicacaoService } from '../../providers/publicacao-service';
+import { FotoService } from '../../providers/foto-service';
 
-/*
-  Generated class for the EditarPublicacao page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-editar-publicacao',
   templateUrl: 'editar-publicacao.html'
@@ -19,8 +13,9 @@ export class EditarPublicacaoPage {
   public publicacao: Publicacao = new Publicacao();
 
   constructor(public navCtrl: NavController,
-  public navParams: NavParams,
-  public publicacaoService: PublicacaoService) {
+    public navParams: NavParams,
+    public fotoService: FotoService,
+    public publicacaoService: PublicacaoService) {
     this.publicacao = JSON.parse(JSON.stringify(this.navParams.get("publicacao")));;
   }
 
@@ -39,36 +34,18 @@ export class EditarPublicacaoPage {
   }
 
   private importarFoto() {
-    Camera.getPicture({
-      quality: 75,
-      destinationType: Camera.DestinationType.DATA_URL,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit: true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 500,
-      targetHeight: 500,
-      saveToPhotoAlbum: false
-    }).then(imageData => {
-      this.publicacao.fotoURL = "data:image/jpeg;base64," + imageData;
-    }, error => {
-      alert("ERROR -> " + JSON.stringify(error));
+    this.fotoService.importarFoto().then(url => {
+      if (url !== "false") {
+        this.publicacao.fotoURL = url;
+      }
     });
   }
 
   private tirarFoto() {
-    Camera.getPicture({
-      quality: 75, //Picture quality in range 0-100. Default is 50
-      destinationType: Camera.DestinationType.DATA_URL,
-      sourceType: Camera.PictureSourceType.CAMERA,
-      allowEdit: true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 500,
-      targetHeight: 500,
-      saveToPhotoAlbum: true
-    }).then(imageData => {
-      this.publicacao.fotoURL = "data:image/jpeg;base64," + imageData;
-    }, error => {
-      alert("ERROR -> " + JSON.stringify(error));
+    this.fotoService.tirarFoto().then(url => {
+      if (url !== "false") {
+        this.publicacao.fotoURL = url;
+      }
     });
   }
 

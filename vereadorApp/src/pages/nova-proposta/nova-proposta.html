@@ -19,7 +19,7 @@
       <ion-textarea rows="10" [(ngModel)]="solicitacao.descricao" name="texto"></ion-textarea>
     </ion-item>
     <ion-item>
-      <img *ngIf="solicitacao.fotoURL !== ''" [src]="publicacao.fotoURL" style="width: 100%;" />
+      <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" style="width: 100%;" />
       <ion-row>
         <ion-col width-50>
           <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>

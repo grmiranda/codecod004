@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar color="laranja">
+    <ion-title>
+      Requerimento
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item class="itemtextarea">
+      <ion-label floating>Andamento</ion-label>
+      <ion-textarea rows="10" [(ngModel)]="solicitacao.andamento" name="texto"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <img *ngIf="requerimento.fotoURL !== ''" [src]="requerimento.fotoURL" style="width: 100%;" />
+      <ion-row>
+        <ion-col width-50>
+          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+              <ion-icon name="image"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col width-50>
+          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+              <ion-icon name="camera"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Finalizar</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { NavController, NavParams, Platform, ActionSheetController  } from 'ionic-angular';
+=======
+import { SolicitacaoService } from '../../providers/solicitacao-service';
+>>>>>>> 6de24f86865ea27e76e7635a0dfa9aafb48d1c45
 import { Solicitacao } from '../../model/solicitacao';
 
 @Component({
@@ -9,14 +13,27 @@ import { Solicitacao } from '../../model/solicitacao';
 export class SolicReprovadosPage {
 
   private solicitacoes: Solicitacao[] = [];
+<<<<<<< HEAD
   
   constructor(public platform: Platform,
   public navCtrl: NavController, 
   public navParams: NavParams,
   public actionSheetCtrl: ActionSheetController) {}
+=======
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SolicReprovadosPage');
+  constructor(public solicitacaoService: SolicitacaoService) { }
+
+  ionViewWillEnter() {
+    this.carregarSolicitacoes();
+  }
+>>>>>>> 6de24f86865ea27e76e7635a0dfa9aafb48d1c45
+
+  private carregarSolicitacoes() {
+    this.solicitacaoService.getSolicitacoes('cn').then(res => {
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    })
   }
 
   private abrirOpcoes(solicitacao: any) {

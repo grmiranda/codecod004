@@ -17,8 +17,8 @@ export class AvaliarSolicitacaoPage {
   private solicitacoes: Solicitacao[] = [];
 
   constructor(public platform: Platform,
-  public navCtrl: NavController, 
-  public navParams: NavParams,
+    public navCtrl: NavController, 
+    public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController, 
     public menu:MenuController) {}
 

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { SolicAprovadosPage } from '../solic-aprovados/solic-aprovados';
+import { SolicPropostasPage } from '../solic-propostas/solic-propostas';
+import { SolicSolicitadosPage } from '../solic-solicitados/solic-solicitados';
+import { SolicReprovadosPage } from '../solic-reprovados/solic-reprovados';
 
 /*
   Generated class for the Solicitacoes page.
@@ -12,8 +16,10 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'solicitacoes.html'
 })
 export class SolicitacoesPage {
-
-  array = [{nome: "hahah"},{nome: "huehue"}];
+  tab1Root: any = SolicPropostasPage;
+  tab2Root: any = SolicSolicitadosPage;
+  tab3Root: any = SolicAprovadosPage;
+  tab4Root: any = SolicReprovadosPage
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

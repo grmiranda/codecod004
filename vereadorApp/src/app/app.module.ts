@@ -5,11 +5,17 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
+import { SolicAprovadosPage } from '../pages/solic-aprovados/solic-aprovados';
+import { SolicPropostasPage } from '../pages/solic-propostas/solic-propostas';
+import { SolicSolicitadosPage } from '../pages/solic-solicitados/solic-solicitados';
+import { SolicReprovadosPage } from '../pages/solic-reprovados/solic-reprovados';
+import { NovaPropostaPage } from '../pages/nova-proposta/nova-proposta';
 import { NovaPublicacaoPage } from '../pages/nova-publicacao/nova-publicacao';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
 import { EditarPublicacaoPage } from '../pages/editar-publicacao/editar-publicacao';
 import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
+import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
 
 //login com o google e com o facebook
@@ -46,7 +52,12 @@ const cloudSettings: CloudSettings = {
     SolicitacoesPage,
     NovaPublicacaoPage,
     PublicacaoPage,
-    EditarPublicacaoPage
+    EditarPublicacaoPage,
+    SolicAprovadosPage,
+    SolicPropostasPage,
+    SolicReprovadosPage,
+    SolicSolicitadosPage,
+    NovaPropostaPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -61,8 +72,13 @@ const cloudSettings: CloudSettings = {
     SolicitacoesPage,
     NovaPublicacaoPage,
     PublicacaoPage,
-    EditarPublicacaoPage
+    EditarPublicacaoPage,
+    SolicAprovadosPage,
+    SolicPropostasPage,
+    SolicReprovadosPage,
+    SolicSolicitadosPage,
+    NovaPropostaPage
   ],
-  providers: [Facebook, CadastroService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [Facebook, CadastroService, FotoService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 })
 export class AppModule {}

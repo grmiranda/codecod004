@@ -15,7 +15,7 @@ import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-sol
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage = LoginPage;
+  rootPage = HomePage;
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
 

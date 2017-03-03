@@ -34,9 +34,6 @@ const cloudSettings: CloudSettings = {
     'google': {
       'webClientId': '381691927831-4kh7e0baks3r21nejp4ob45gvmm9guf1.apps.googleusercontent.com',
       'scope': []
-    },
-    'facebook': {
-      'scope': ['email', 'public_profile']
     }
 
   }

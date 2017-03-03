@@ -29,6 +29,29 @@ export class AvaliarSolicitacaoPage {
     })
   }
 
+  private aprovar(solicitacao: Solicitacao){
+    solicitacao.estado = 'ap';
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
+      if(!res.error){
+        //editou
+        this.carregarSolicitacoes();
+      }else{
+        //rror
+      }
+    })
+  }
+
+  private reprovar(solicitacao: Solicitacao){
+    solicitacao.estado = 'rc';
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
+      if(!res.error){
+        //editou
+      }else{
+        //rror
+      }
+    })
+  }
+
   private abrirOpcoes(solicitacao: any) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',
@@ -38,14 +61,14 @@ export class AvaliarSolicitacaoPage {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-
+            this.reprovar(solicitacao);
           }
         },
         {
           text: 'Aprovar',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-
+            this.aprovar(solicitacao);
           }
         },
         {

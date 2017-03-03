@@ -19,7 +19,8 @@ export class HomePage {
   constructor(public platform: Platform,
     public navCtrl: NavController,
     private publicacaoService: PublicacaoService,
-    public actionSheetCtrl: ActionSheetController, menu:MenuController) {
+    public actionSheetCtrl: ActionSheetController, 
+    public menu:MenuController) {
       menu.enable(true);
   }
 

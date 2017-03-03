@@ -9,19 +9,21 @@ import { SolicAprovadosPage } from '../pages/solic-aprovados/solic-aprovados';
 import { SolicPropostasPage } from '../pages/solic-propostas/solic-propostas';
 import { SolicSolicitadosPage } from '../pages/solic-solicitados/solic-solicitados';
 import { SolicReprovadosPage } from '../pages/solic-reprovados/solic-reprovados';
+import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
 import { NovaPropostaPage } from '../pages/nova-proposta/nova-proposta';
 import { NovaPublicacaoPage } from '../pages/nova-publicacao/nova-publicacao';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
 import { EditarPublicacaoPage } from '../pages/editar-publicacao/editar-publicacao';
-import { Facebook } from 'ionic-native';
-import { FacebookService } from '../providers/facebook-service';
 import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
+import { SolicitacaoService } from '../providers/solicitacao-service';
 
 //login com o google e com o facebook
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { GooglePlusService } from '../providers/google-plus-service';
-
+import { Facebook } from 'ionic-native';
+import { FacebookService } from '../providers/facebook-service';
+import { StorageService } from '../providers/storage';
 
 import { CadastroService } from '../providers/cadastro-service';
 
@@ -54,7 +56,8 @@ const cloudSettings: CloudSettings = {
     SolicPropostasPage,
     SolicReprovadosPage,
     SolicSolicitadosPage,
-    NovaPropostaPage
+    NovaPropostaPage,
+    AvaliarSolicitacaoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -74,8 +77,11 @@ const cloudSettings: CloudSettings = {
     SolicPropostasPage,
     SolicReprovadosPage,
     SolicSolicitadosPage,
-    NovaPropostaPage
+    NovaPropostaPage,
+    AvaliarSolicitacaoPage
   ],
-  providers: [Facebook, CadastroService, FotoService, FacebookService, PublicacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+
+  providers: [Facebook, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+
 })
 export class AppModule {}

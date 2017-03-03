@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="laranja">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Avaliar Solicitação
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ul [virtualScroll]="solicitacoes">
+    <li *virtualItem="let solicitacao">
+      <ion-card (click)="abrirOpcoes(solicitacao)">
+        <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
+        <ion-card-content>
+          <ion-card-title>
+            {{ solicitacao.titulo }}
+          </ion-card-title>
+          <p>
+            {{ solicitacao.texto }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </li>
+  </ul>
+</ion-content>

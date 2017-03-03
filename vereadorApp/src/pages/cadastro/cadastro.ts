@@ -4,6 +4,7 @@ import { Usuario } from '../../model/user';
 import { HomePage } from '../home/home';
 import { CadastroService } from '../../providers/cadastro-service';
 import { LoginPage } from '../login/login';
+import { StorageService } from '../../providers/storage';
 
 /*
   Generated class for the Cadastro page.
@@ -19,9 +20,12 @@ export class CadastroPage {
 
   private usuario: Usuario = new Usuario();
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public cadastroService: CadastroService) {
+    public cadastroService: CadastroService,
+    private storage : StorageService
+    ) {
 
     this.usuario = this.navParams.get("dados");
 
@@ -69,6 +73,7 @@ export class CadastroPage {
         alert("Erro ao cadastrar Usuario");
       } else{ 
         alert(JSON.stringify(res));
+        this.storage.set(res);
         this.navCtrl.setRoot(HomePage);
       }
 

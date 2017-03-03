@@ -7,8 +7,8 @@ export class Solicitacao {
     public andamento: string = "";
     public dataEntrada: string = "";
     public dataRealizacao: string = "";
-    public IDUsuario: number;
     public estado: string;
+    public IDUsuario: number = 0;
 
     constructor(){
 

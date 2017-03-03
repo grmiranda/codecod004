@@ -13,14 +13,13 @@
 		$fotoURL = $request->fotoURL;
 		$titulo = $request->titulo;
 		$descricao = $request->descricao;
-		$andamento = $request->andamento;
 		
 		$dataEntrada = date('Y-m-d');
 		
 		$IDUsuario = $request->IDUsuario;
 		
 		if (isset($titulo)){
-			$sql= "INSERT INTO solicitacao (fotoURL, titulo, descricao, andamento, estado, dataEntrada, IDUsuario) VALUES ('$fotoURL', '$titulo', '$descricao', '$andamento', 'sa', '$dataEntrada', '$IDUsuario')";
+			$sql= "INSERT INTO solicitacao (fotoURL, titulo, descricao, estado, dataEntrada, IDUsuario) VALUES ('$fotoURL', '$titulo', '$descricao', 'sa', '$dataEntrada', '$IDUsuario')";
 			$con->query($sql);
 			echo json_encode(true);
 		}else{

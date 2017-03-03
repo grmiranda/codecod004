@@ -3,6 +3,7 @@ import { NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
+import { RequerimentoPage } from '../requerimento/requerimento';
 
 @Component({
   selector: 'page-solic-propostas',
@@ -49,7 +50,7 @@ export class SolicPropostasPage {
           text: 'Requerimento',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-
+            this.navCtrl.push(RequerimentoPage, {solicitacao: solicitacao});
           }
         },
         {

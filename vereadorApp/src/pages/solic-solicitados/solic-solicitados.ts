@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform } from 'ionic-angular';
+import { Solicitacao } from '../../model/solicitacao';
 
-/*
-  Generated class for the SolicSolicitados page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-solic-solicitados',
   templateUrl: 'solic-solicitados.html'
 })
 export class SolicSolicitadosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  private solicitacoes: Solicitacao[] = [];
+
+  constructor(public navCtrl: NavController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SolicSolicitadosPage');

@@ -29560,6 +29560,47 @@ page-nova-publicacao .blockbutton {
   margin-right: 20px;
 }
 
+page-requerimento ion-title {
+  text-align: center;
+  margin-right: 15% !important;
+}
+
+page-requerimento ion-list {
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+  resize: vertical !important;
+}
+
+page-requerimento ion-item {
+  padding: 0 !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+page-requerimento ion-col {
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+page-requerimento ion-label {
+  margin-left: 10px !important;
+}
+
+page-requerimento .fabbuttons {
+  -webkit-align-self: center !important;
+  -ms-flex-item-align: center !important;
+  -ms-grid-row-align: center !important;
+  align-self: center !important;
+  margin-left: 30%;
+}
+
+page-requerimento .blockbutton {
+  text-align: center !important;
+  margin-right: 30px !important;
+}
+
 page-solic-aprovados ion-header button {
   width: 10% !important;
 }

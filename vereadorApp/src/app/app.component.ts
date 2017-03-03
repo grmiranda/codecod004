@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+import { StorageService } from '../providers/storage';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -18,7 +19,9 @@ export class MyApp {
   pageAtual: string;
 
   constructor(platform: Platform,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController,
+    private storage : StorageService
+    ) {
     this.pages = [{ title: 'Notíticas', component: HomePage },
     { title: 'Solicitações', component: SolicitacoesPage }]
     this.pageAtual = 'Notícias';
@@ -41,7 +44,7 @@ export class MyApp {
   }
 
   public sair() {
-
+    this.storage.deslogar();
     this.menuCtrl.close();
     this.navCtrl.setRoot(LoginPage);
   }

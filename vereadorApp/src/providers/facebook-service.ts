@@ -46,7 +46,7 @@ export class FacebookService {
 
   }
 
-  public logoutGoogle() {
+  public logoutFb() {
     return Facebook.logout().then(response => alert("deslogado com Sucesso"));
   }
 

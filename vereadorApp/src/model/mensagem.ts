@@ -5,4 +5,9 @@ export class CorpoMensagem {
     public mensagem:string;
     public data:string;
     public lida:number;
+
+    constructor(){
+        this.mensagem = "";
+        this.lida = 0;
+    }
 }

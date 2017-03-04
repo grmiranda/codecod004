@@ -23,6 +23,7 @@ import { MensagensEnviadasPage } from '../pages/mensagens-enviadas/mensagens-env
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../providers/mensagem-service';
+import { ModalListaUsuariosPage } from '../pages/modal-lista-usuarios/modal-lista-usuarios';
 
 //login com o google e com o facebook
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -31,6 +32,7 @@ import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
 import { StorageService } from '../providers/storage';
 import { Storage } from '@ionic/storage';
+import { BuscaUsuariosService } from '../providers/busca-usuarios-service';
 
 import { CadastroService } from '../providers/cadastro-service';
 
@@ -69,7 +71,8 @@ const cloudSettings: CloudSettings = {
     MensagensRecebidasPage,
     MensagensEnviadasPage,
     TabMensagemPage,
-    EnviarMensagemPage
+    EnviarMensagemPage,
+    ModalListaUsuariosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -95,10 +98,11 @@ const cloudSettings: CloudSettings = {
     MensagensRecebidasPage,
     MensagensEnviadasPage,
     TabMensagemPage,
-    EnviarMensagemPage
+    EnviarMensagemPage,
+    ModalListaUsuariosPage
   ],
 
-  providers: [Facebook, MensagemService, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [Facebook, MensagemService, BuscaUsuariosService, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 
 })
 export class AppModule {}

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { ModalListaUsuariosPage } from '../modal-lista-usuarios/modal-lista-usuarios';
+import { Usuario } from '../../model/user';
+import { BuscaUsuariosService } from '../../providers/busca-usuarios-service';
 
 /*
   Generated class for the EnviarMensagem page.
@@ -13,10 +17,26 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class EnviarMensagemPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  private destinatario:string;
+  private usuarios : Usuario[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public buscarUsers : BuscaUsuariosService) {
+    this.destinatario = this.navParams.get('destinatario');
+    this.buscarUsers.getUserAll().then(res=>{
+      this.usuarios = res;});
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EnviarMensagemPage');
+  }
+
+  selecionarDestinatario(){
+    let modal = this.modalCtrl.create(ModalListaUsuariosPage, {listaUsuarios : this.usuarios});
+
+   modal.onDidDismiss(data => {
+     this.destinatario = data;
+   });
+    modal.present();
   }
 
 }

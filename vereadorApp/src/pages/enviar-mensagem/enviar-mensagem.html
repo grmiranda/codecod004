@@ -6,13 +6,27 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>EnviarMensagem</ion-title>
+  <ion-navbar color="laranja">
+    <ion-title >Enviar Mensagem</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-grid>
+  <ion-row>
+    <ion-col col-11 col-sm>
+      <h4 >Para: {{destinatario}} </h4>
+    </ion-col>
+    <ion-col col-1 col-sm>
+      <button ion-button style="margin-left: -10px" (click) = "selecionarDestinatario()"><ion-icon right name="contacts" ></ion-icon></button>
+      
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+  
 
 </ion-content>

@@ -9,6 +9,7 @@ import { CadastroPage } from '../pages/cadastro/cadastro';
 import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
 import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
+import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 
 
 
@@ -17,7 +18,7 @@ import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage = TabMensagemPage;
+  rootPage = EnviarMensagemPage;
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
 

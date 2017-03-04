@@ -29567,6 +29567,95 @@ page-nova-publicacao .blockbutton {
   margin-right: 20px;
 }
 
+page-pl-andamento .back {
+  background-color: rgba(132, 132, 132, 0.2);
+}
+
+page-pl-andamento ion-header button {
+  width: 10% !important;
+}
+
+page-pl-andamento ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-pl-andamento ion-content {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-andamento ul {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-andamento li {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-andamento ion-card {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-andamento img {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-andamento ion-card-content {
+  margin-top: 0px !important;
+  line-height: 28px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+page-pl-andamento ion-card-title {
+  font-size: 20px !important;
+  margin-left: 10px !important;
+}
+
+page-pl-andamento p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  margin-left: 10px !important;
+}
+
 page-requerimento ion-title {
   text-align: center;
   margin-right: 15% !important;

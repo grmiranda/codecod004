@@ -20,6 +20,9 @@ import { PlAndamentoPage } from '../pages/pl-andamento/pl-andamento';
 import { PlAprovadosPage } from '../pages/pl-aprovados/pl-aprovados';
 import { PlPropostasPage } from '../pages/pl-propostas/pl-propostas';
 import { PlRecusadosPage } from '../pages/pl-recusados/pl-recusados';
+import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
+import { NovaPropostaPlPage } from '../pages/nova-proposta-pl/nova-proposta-pl';
+import { NovaPlPage } from '../pages/nova-pl/nova-pl';
 import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
 import { SolicitacaoService } from '../providers/solicitacao-service';
@@ -88,7 +91,10 @@ const cloudSettings: CloudSettings = {
     PlAndamentoPage,
     PlAprovadosPage,
     PlPropostasPage,
-    PlRecusadosPage
+    PlRecusadosPage,
+    AvaliarPlPage,
+    NovaPropostaPlPage,
+    NovaPlPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -121,7 +127,10 @@ const cloudSettings: CloudSettings = {
     PlAndamentoPage,
     PlAprovadosPage,
     PlPropostasPage,
-    PlRecusadosPage
+    PlRecusadosPage,
+    AvaliarPlPage,
+    NovaPropostaPlPage,
+    NovaPlPage
   ],
 
   providers: [Facebook, MensagemService, BuscaUsuariosService, Storage, StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]

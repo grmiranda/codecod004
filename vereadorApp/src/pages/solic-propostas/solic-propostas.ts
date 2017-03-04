@@ -34,14 +34,14 @@ export class SolicPropostasPage {
     this.navCtrl.push(NovaPropostaPage);
   }
 
-  private remover(solicitacao: Solicitacao){
+  private remover(solicitacao: Solicitacao) {
     solicitacao.estado = 'rc';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
-      if(!res.error){
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+      if (!res.error) {
         //removeu
         this.carregarSolicitacoes();
 
-      }else{
+      } else {
         //rror
       }
     })
@@ -63,7 +63,7 @@ export class SolicPropostasPage {
           text: 'Requerimento',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-            this.navCtrl.push(RequerimentoPage, {solicitacao: solicitacao});
+            this.navCtrl.push(RequerimentoPage, { solicitacao: solicitacao });
           }
         },
         {
@@ -71,7 +71,6 @@ export class SolicPropostasPage {
           icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]

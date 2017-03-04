@@ -23,6 +23,7 @@ import { MensagensEnviadasPage } from '../pages/mensagens-enviadas/mensagens-env
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../providers/mensagem-service';
+import { RequerimentoService } from '../providers/requerimento-service';
 
 //login com o google e com o facebook
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -98,7 +99,7 @@ const cloudSettings: CloudSettings = {
     EnviarMensagemPage
   ],
 
-  providers: [Facebook, MensagemService, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [Facebook, MensagemService, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 
 })
 export class AppModule {}

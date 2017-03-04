@@ -25,10 +25,10 @@
         $dados = $result->fetch_assoc();
         $idM = $dados['IDMensagem'];
 
-        $sql = "INSERT INTO caixadesaida (IDMensagem, IDUsuario) VALUES ('$idM','$idD')";
+        $sql = "INSERT INTO caixadesaida (IDMensagem, IDUsuario) VALUES ('$idM','$idR')";
         $con->query($sql);
 
-        $sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM','$idR', '0')";
+        $sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM','$idD', '0')";
         $con->query($sql);
 
         echo json_encode(true);

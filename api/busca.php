@@ -46,7 +46,7 @@
                 $vetor[] = $temp;
             }
 
-            echo json_encode($vetor)
+            echo json_encode($vetor);
 		} else {
             $id = $_GET["id"];
             $sql = "SELECT * FROM usuario WHERE socialID = '$id'";

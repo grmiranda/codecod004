@@ -8,7 +8,7 @@
 	if (isset($_GET["id"])){
 		if ($_GET["id"] == ""){
 
-            $sql = "SELECT * FROM caixadesaida";
+            $sql = "SELECT * FROM caixadeentrada";
             $result = $con->query($sql);
 
             while($row=$result->fetch_assoc()){
@@ -25,7 +25,7 @@
 				$temp['destinatario'] = $msg['IDDestinatario'];
 				$temp['mensagem'] = $msg['Texto'];
 				$temp['data'] = $msg['data'];
-				$temp['lida'] = 0;
+				$temp['lida'] = $row['lido'];
 				$vetor[] = $temp;
             }
 			echo json_encode($vetor);

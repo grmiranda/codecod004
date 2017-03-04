@@ -1,4 +1,7 @@
 page-home {
+    .back{
+        background-color: rgba(132, 132, 132, 0.2);
+    }
     ion-header button{
         width: 10% !important;
     }
@@ -62,9 +65,12 @@ page-home {
         max-width: 100% !important;
     }
     ion-card-title{
+        font-size: 20px !important;
         margin-left: 10px !important;
     }
     p{
+        font-size: 14px !important;
+        line-height: 20px !important;
         margin-left: 10px !important;
     }
 }

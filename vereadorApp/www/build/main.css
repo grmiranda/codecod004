@@ -29352,6 +29352,10 @@ page-editar-publicacao .blockbutton {
   margin-right: 20px;
 }
 
+page-home .back {
+  background-color: rgba(132, 132, 132, 0.2);
+}
+
 page-home ion-header button {
   width: 10% !important;
 }
@@ -29422,10 +29426,13 @@ page-home ion-card-content {
 }
 
 page-home ion-card-title {
+  font-size: 20px !important;
   margin-left: 10px !important;
 }
 
 page-home p {
+  font-size: 14px !important;
+  line-height: 20px !important;
   margin-left: 10px !important;
 }
 
@@ -29723,8 +29730,6 @@ page-solic-propostas ul {
 }
 
 page-solic-propostas li {
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29736,7 +29741,6 @@ page-solic-propostas li {
 
 page-solic-propostas ion-card {
   margin-top: 0px !important;
-  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29747,6 +29751,7 @@ page-solic-propostas ion-card {
 }
 
 page-solic-propostas img {
+  margin-top: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29758,7 +29763,7 @@ page-solic-propostas img {
 
 page-solic-propostas ion-card-content {
   margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  line-height: 28px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29766,6 +29771,7 @@ page-solic-propostas ion-card-content {
   margin-left: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
+  height: 100% !important;
 }
 
 page-solic-propostas ion-card-title {
@@ -29774,6 +29780,8 @@ page-solic-propostas ion-card-title {
 }
 
 page-solic-propostas p {
+  font-size: 14px !important;
+  line-height: 20px !important;
   margin-left: 10px !important;
 }
 

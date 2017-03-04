@@ -10,7 +10,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="back">
   <ul [virtualScroll]="publicacoes">
     <li *virtualItem="let publicacao">
       <ion-card (press)="abrirOpcoes(publicacao)" (click)="abrirPublicacao(publicacao)">

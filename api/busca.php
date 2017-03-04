@@ -14,12 +14,12 @@
                 $userID = $row['IDUsuario'];
 
                 $sql = "SELECT * FROM telefone WHERE IDUsuario = '$userID'";
-                $result = $con->query($sql);
-                $telefone = $result->fetch_assoc();
+                $result1 = $con->query($sql);
+                $telefone = $result1->fetch_assoc();
 
                 $sql = "SELECT * FROM endereco WHERE IDUsuario = '$userID'";
-                $result = $con->query($sql);
-                $end = $result->fetch_assoc();
+                $result1 = $con->query($sql);
+                $end = $result1->fetch_assoc();
 
                 if ($row['genero'] == 'm'){
                     $row['genero'] = 'male';

@@ -4,7 +4,7 @@ import { Solicitacao } from '../../model/solicitacao';
 
 @Component({
   selector: 'page-solic-solicitados',
-  templateUrl: 'solic-solicitados.html'
+  templateUrl: 'solic-aprovados.html'
 })
 export class SolicAprovadosPage {
 

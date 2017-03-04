@@ -21,7 +21,7 @@ import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = HomePage;
+  rootPage = TabMensagemPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

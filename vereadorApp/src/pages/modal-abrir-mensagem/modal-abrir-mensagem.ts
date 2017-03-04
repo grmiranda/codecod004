@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { EnviarMensagemPage } from '../enviar-mensagem/enviar-mensagem';
 
 
 /*
@@ -28,6 +29,14 @@ export class ModalAbrirMensagemPage {
 
   cancel() {
     this.view.dismiss()
+  }
+
+  excluir(){
+
+  }
+  enviar(){
+    this.view.dismiss()
+    this.navCtrl.push(EnviarMensagemPage, {destinatario: this.mensagem.nome, idDestinatario: this.mensagem.destinatario});
   }
 
 }

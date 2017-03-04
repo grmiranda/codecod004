@@ -1,6 +1,6 @@
 export class Usuario {
 
-    public id: string;
+    public IDUsuario: string;
     public nome: string;
     public email: string;
     public genero: string;
@@ -15,7 +15,7 @@ export class Usuario {
     public UF: string;
 
     constructor() {
-        this.id ="0";
+        this.IDUsuario ="0";
         this.nome = "";
         this.email = "";
         this.genero = "";

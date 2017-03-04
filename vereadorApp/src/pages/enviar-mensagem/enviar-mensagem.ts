@@ -33,6 +33,7 @@ export class EnviarMensagemPage {
     private toastCtrl: ToastController
   ) {
     this.destinatario = this.navParams.get('destinatario');
+    this.mensagem.destinatario = this.navParams.get('idDestinatario');
     this.buscarUsers.getUserAll().then(res => {
       this.usuarios = res;
     });
@@ -58,22 +59,26 @@ export class EnviarMensagemPage {
   enviar() {
 
     this.storageService.get().then(res => {
-      this.mensagem.remetente = res.id;
-    });
-    if (this.mensagem.mensagem != "" && this.mensagem.destinatario != "") {
-      this.mensagemService.enviarMensagem(this.mensagem).then(res => {
-        if (res == true) {
-          let toast = this.toastCtrl.create({
-            message: 'Mensagem enviada com sucesso',
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
-          this.navCtrl.pop()
-        }
-      })
+      this.mensagem.remetente = res.IDUsuario;
+      if (this.mensagem.mensagem != "" && this.mensagem.destinatario != "") {
+        this.mensagemService.enviarMensagem(this.mensagem).then(res => {
+          if (res == true) {
+            let toast = this.toastCtrl.create({
+              message: 'Mensagem enviada com sucesso',
+              duration: 3000,
+              position: 'bottom'
+            });
+            toast.present();
+            this.navCtrl.pop()
+          }
+        })
 
-    }
+      }
+      alert(JSON.stringify(this.mensagem));
+
+    });
+
+
   }
 
 }

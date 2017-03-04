@@ -14,9 +14,12 @@
         $result = $con->query($sql);
 
         $num = $result->num_rows;
+        $vetor   = array();
 
         if ($num !== 1) {
-            echo json_encode("cadastro");
+            $vetor[]="cadastro";
+            $vetor[]=$socialID;
+            echo json_encode($vetor);
         } else {
             $dados  = $result->fetch_assoc();
             $banido = $dados['banido'];
@@ -41,7 +44,9 @@
             $dados['UF']       = $end['uf'];
 
             if ($banido == 1) {
-                echo json_encode("banido");
+                $vetor[]="banido";
+                $vetor[]=$socialID;
+                echo json_encode($vetor);
             } else {
 
                 if ($dados['genero'] == 'm'){
@@ -49,8 +54,10 @@
                 } else {
                     $dados['genero'] = 'female';
                 }
+                $vetor[]="existe";
+                $vetor[]=$dados;
 
-                echo json_encode($dados);
+                echo json_encode($vetor);
             }
         }      
 	}

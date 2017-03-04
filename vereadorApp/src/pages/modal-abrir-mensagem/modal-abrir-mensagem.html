@@ -20,7 +20,7 @@
 
 <ion-content padding>
 
-  <ion-item >
+  <ion-item>
     <ion-avatar item-left>
       <img [src]="mensagem.foto">
     </ion-avatar>
@@ -30,3 +30,16 @@
   {{ mensagem.mensagem }}
 
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button color="danger" large icon-right full (click)="excluir()">Excluir <ion-icon name="trash"></ion-icon></button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button color="secondary" icon-right large full (click)="enviar()">Mensagem <ion-icon name="send"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

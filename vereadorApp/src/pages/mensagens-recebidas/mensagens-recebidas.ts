@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { EnviarMensagemPage } from '../enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../../providers/mensagem-service';
 import { StorageService } from '../../providers/storage';
@@ -25,7 +25,8 @@ export class MensagensRecebidasPage {
     private mensagemService: MensagemService,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    private storageService: StorageService
+    private storageService: StorageService,
+    public actionSheetCtrl: ActionSheetController
   ) {
 
   }
@@ -40,7 +41,7 @@ export class MensagensRecebidasPage {
 
   carregar() {
     this.storageService.get().then(res => {
-      this.mensagemService.getMensagemRecebida(res.id).then(res => {
+      this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
         this.mensagens = res;
       });
     });
@@ -68,6 +69,37 @@ export class MensagensRecebidasPage {
     mensagemSelecionada.lida = 1;
     let modal = this.modalCtrl.create(ModalAbrirMensagemPage, { mensagem: mensagemSelecionada });
     modal.present();
+  }
+
+  opcoesMsg(mensagem: CorpoMensagem) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Mensagem',
+      buttons: [
+        {
+          text: 'Responder mensagem',
+
+          role: 'destructive',
+          icon: 'send',
+          handler: () => {
+            this.navCtrl.push(EnviarMensagemPage, {destinatario: mensagem.nome, idDestinatario:mensagem.destinatario});
+          }
+        }, {
+          text: 'Excluir',
+          icon:'trash',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        }, {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }

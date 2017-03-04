@@ -15,6 +15,11 @@ import { NovaPropostaPage } from '../pages/nova-proposta/nova-proposta';
 import { NovaPublicacaoPage } from '../pages/nova-publicacao/nova-publicacao';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
 import { EditarPublicacaoPage } from '../pages/editar-publicacao/editar-publicacao';
+import { TabProjetosDeLeiPage } from '../pages/tab-projetos-de-lei/tab-projetos-de-lei';
+import { PlAndamentoPage } from '../pages/pl-andamento/pl-andamento';
+import { PlAprovadosPage } from '../pages/pl-aprovados/pl-aprovados';
+import { PlPropostasPage } from '../pages/pl-propostas/pl-propostas';
+import { PlRecusadosPage } from '../pages/pl-recusados/pl-recusados';
 import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
 import { SolicitacaoService } from '../providers/solicitacao-service';
@@ -74,7 +79,12 @@ const cloudSettings: CloudSettings = {
     MensagensEnviadasPage,
     TabMensagemPage,
     EnviarMensagemPage,
-    ModalListaUsuariosPage
+    ModalListaUsuariosPage,
+    TabProjetosDeLeiPage,
+    PlAndamentoPage,
+    PlAprovadosPage,
+    PlPropostasPage,
+    PlRecusadosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -101,7 +111,12 @@ const cloudSettings: CloudSettings = {
     MensagensEnviadasPage,
     TabMensagemPage,
     EnviarMensagemPage,
-    ModalListaUsuariosPage
+    ModalListaUsuariosPage,
+    TabProjetosDeLeiPage,
+    PlAndamentoPage,
+    PlAprovadosPage,
+    PlPropostasPage,
+    PlRecusadosPage
   ],
 
   providers: [Facebook, MensagemService, BuscaUsuariosService, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]

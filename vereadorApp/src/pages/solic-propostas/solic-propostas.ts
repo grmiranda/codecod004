@@ -22,6 +22,14 @@ export class SolicPropostasPage {
     this.carregarSolicitacoes();
   }
 
+  private like(){
+
+  }
+
+  private dislike(){
+    
+  }
+
   private carregarSolicitacoes() {
     this.solicitacaoService.getSolicitacoes('ap').then(res => {
       if (!res.error) {

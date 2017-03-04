@@ -4,15 +4,31 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>MensagensRecebidas</ion-title>
+  <ion-navbar color="laranja">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Mensagens Recebidas
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+
+<ion-list [virtualScroll]="mensagens">
+  <ion-item *virtualItem="let mensagem">
+    <ion-avatar item-left>
+      <img [src]="img/avatar-finn.png">
+    </ion-avatar>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up day. If we just...</p>
+  </ion-item>
+</ion-list>
+
 
 </ion-content>

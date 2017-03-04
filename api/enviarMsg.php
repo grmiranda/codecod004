@@ -13,7 +13,7 @@
         $idR   = $request->remetente;
         $idD   = $request->destinatario;
         $texto = $request->mensagem;
-
+        
         $data = date('Y-m-d H:i:s');
 
         $sql = "INSERT INTO mensagem (Texto, data, IDRemetente, IDDestinatario) VALUES ('$texto', '$data', '$idR', '$idD')";

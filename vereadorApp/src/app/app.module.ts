@@ -25,6 +25,7 @@ import { GooglePlusService } from '../providers/google-plus-service';
 import { Facebook } from 'ionic-native';
 import { FacebookService } from '../providers/facebook-service';
 import { StorageService } from '../providers/storage';
+import { Storage } from '@ionic/storage';
 
 import { CadastroService } from '../providers/cadastro-service';
 
@@ -84,7 +85,7 @@ const cloudSettings: CloudSettings = {
     RequerimentoPage
   ],
 
-  providers: [Facebook, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [Facebook, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 
 })
 export class AppModule {}

@@ -4,6 +4,7 @@ import { NativeStorage } from 'ionic-native';
 import { Usuario } from '../model/user';
 import { FacebookService } from './facebook-service';
 import { GooglePlusService } from './google-plus-service';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the Storage provider.
@@ -14,12 +15,13 @@ import { GooglePlusService } from './google-plus-service';
 @Injectable()
 export class StorageService {
 
-  constructor(private fb : FacebookService, private gp : GooglePlusService) {
+  constructor(private fb : FacebookService, private gp : GooglePlusService, public storage: Storage) {
     console.log('Hello Storage Provider');
   }
 
   set(user: Usuario) {
-    NativeStorage.setItem('usuarioAtual', user)
+
+    this.storage.set('usuarioAtual', user)
       .then(
       () => console.log('Stored item!'),
       error => console.error('Error storing item', error));
@@ -28,12 +30,12 @@ export class StorageService {
 
   get(): Promise<Usuario> {
 
-    return NativeStorage.getItem('usuarioAtual').then(
+    return this.storage.get('usuarioAtual')
+  .then(
     data => data,
     error => {
       return new Usuario();
-    }
-    );
+    });
 
   }
 

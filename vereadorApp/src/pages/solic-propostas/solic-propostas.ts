@@ -25,6 +25,31 @@ export class SolicPropostasPage {
     this.carregarSolicitacoes();
   }
 
+  private carregarSolicitacoes() {
+    this.solicitacaoService.getSolicitacoes('ap').then(res => {
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    })
+  }
+
+  public novaProposta() {
+    this.navCtrl.push(NovaPropostaPage);
+  }
+
+  private remover(solicitacao: Solicitacao) {
+    solicitacao.estado = 'rc';
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+      if (!res.error) {
+        //removeu
+        this.carregarSolicitacoes();
+
+      } else {
+        //rror
+      }
+    })
+  }
+
   private like(solicitacao: Solicitacao) {
     this.likeService.addLike(new Like('s', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
       if (!res.error && res.value) {
@@ -51,30 +76,6 @@ export class SolicPropostasPage {
     });
   }
 
-  private carregarSolicitacoes() {
-    this.solicitacaoService.getSolicitacoes('ap').then(res => {
-      if (!res.error) {
-        this.solicitacoes = res.data;
-      }
-    })
-  }
-
-  public novaProposta() {
-    this.navCtrl.push(NovaPropostaPage);
-  }
-
-  private remover(solicitacao: Solicitacao) {
-    solicitacao.estado = 'rc';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
-      if (!res.error) {
-        //removeu
-        this.carregarSolicitacoes();
-
-      } else {
-        //rror
-      }
-    })
-  }
 
   private abrirOpcoes(solicitacao: any) {
     let actionSheet = this.actionSheetCtrl.create({
@@ -104,7 +105,6 @@ export class SolicPropostasPage {
         }
       ]
     });
-
     actionSheet.present();
   }
 

@@ -25,6 +25,8 @@
 				
 				if($row['tipo'] == $tipo){
 					//se já curtiu retorna false
+					$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao' AND IDUsuario = '$IDUsuario' AND tipo = '$tipo'";
+					$con->query($sql);
 					echo json_encode(false);
 				}else {
 					//se for diferente, atualiza

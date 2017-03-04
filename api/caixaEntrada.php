@@ -15,9 +15,9 @@
                 $id = $row['IDMensagem'];
 				
 				$sql = "SELECT * FROM mensagem WHERE IDMensagem = '$id'";
-				$result = $con->query($sql);
+				$result1 = $con->query($sql);
 
-				$msg = $result->fetch_assoc();
+				$msg = $result1->fetch_assoc();
 				
 				$temp = array();
 				$temp['id'] = $id;

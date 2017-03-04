@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
+import { LikeService } from '../../providers/like-service';
+import { Like } from '../../model/like';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { RequerimentoPage } from '../requerimento/requerimento';
@@ -16,18 +18,37 @@ export class SolicPropostasPage {
   constructor(public platform: Platform,
     public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
+    public likeService: LikeService,
     public actionSheetCtrl: ActionSheetController) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
   }
 
-  private like(){
-
+  private like(solicitacao: Solicitacao) {
+    this.likeService.addLike(new Like('s', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
+      if (!res.error && res.value) {
+        //works fine
+        console.log('works');
+      } else if (res.error) {
+        //error
+      } else {
+        console.log('ja curtiu');
+      }
+    });
   }
 
-  private dislike(){
-    
+  private dislike(solicitacao: Solicitacao) {
+    this.likeService.addLike(new Like('n', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
+      if (!res.error && res.value) {
+        //works fine
+        console.log('works');
+      } else if (res.error) {
+        //error
+      } else {
+        console.log('ja curtiu');
+      }
+    });
   }
 
   private carregarSolicitacoes() {

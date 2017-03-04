@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { NativeStorage } from 'ionic-native';
 import { Usuario } from '../model/user';
 import { FacebookService } from './facebook-service';
 import { GooglePlusService } from './google-plus-service';
@@ -35,14 +34,14 @@ export class StorageService {
     data => data,
     error => {
       return new Usuario();
-    });
+    }).catch(()=>new Usuario());
 
   }
 
   deslogar() {
     this.fb.logoutFb();
     this.gp.logoutGoogle();
-    return NativeStorage.remove('usuarioAtual').then(response => {alert("deslogado com sucesso")});
+    return this.storage.remove('usuarioAtual').then(response => {alert("deslogado com sucesso")});
   }
 
 

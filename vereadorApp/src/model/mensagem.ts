@@ -5,9 +5,14 @@ export class CorpoMensagem {
     public mensagem:string;
     public data:string;
     public lida:number;
+    public nome: string;
+    public foto: string;
 
     constructor(){
         this.mensagem = "";
         this.lida = 0;
+        this.destinatario = "";
+        this.nome = "";
+        this.foto = "";
     }
 }

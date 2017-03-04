@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Usuario } from '../model/user';
+import 'rxjs/add/operator/toPromise';
 
 /*
   Generated class for the BuscaUsuariosService provider.

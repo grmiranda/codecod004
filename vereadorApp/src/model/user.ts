@@ -1,21 +1,21 @@
 export class Usuario {
 
-    public id: String;
-    public nome: String;
-    public email: String;
-    public genero: String;
-    public fotoURL: String;
-    public socialID: String;
-    public cpf: String; //opcional
-    public nascimento: String;
-    public telefone: String; //obrigatório
-    public endereco: String;
-    public bairro: String;
-    public cidade: String;
-    public UF: String;
+    public id: string;
+    public nome: string;
+    public email: string;
+    public genero: string;
+    public fotoURL: string;
+    public socialID: string;
+    public cpf: string; //opcional
+    public nascimento: string;
+    public telefone: string; //obrigatório
+    public endereco: string;
+    public bairro: string;
+    public cidade: string;
+    public UF: string;
 
     constructor() {
-
+        this.id ="0";
         this.nome = "";
         this.email = "";
         this.genero = "";

@@ -19,16 +19,26 @@
 
 <ion-content padding>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles" refreshingText="Carregando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
 <ion-list [virtualScroll]="mensagens">
-  <ion-item *virtualItem="let mensagem">
+  <ion-item *virtualItem="let mensagem" [style.background-color]="lida(mensagem)?'#ed9e1e':'#ffffff'" (click)="abrirMensagem(mensagem)">
     <ion-avatar item-left>
-      <img [src]="img/avatar-finn.png">
+      <img [src]="mensagem.foto">
     </ion-avatar>
-    <h2>Finn</h2>
-    <h3>Don't Know What To Do!</h3>
-    <p>I've had a pretty messed up day. If we just...</p>
+    <h2>De: {{mensagem.nome}}</h2>
+    <h3>{{ mensagem.mensagem }}</h3>
+    <p>{{mensagem.data}}</p>
   </ion-item>
 </ion-list>
 
-
+<ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="enviarMensagem()">
+      <ion-icon name="add">
+    </ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

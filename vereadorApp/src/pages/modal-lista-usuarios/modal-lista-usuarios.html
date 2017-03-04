@@ -20,8 +20,8 @@
 
 
 <ion-content padding>
-
-  <ion-list [virtualScroll]="listaUsuarios">
+<ion-searchbar (ionInput)="getItems($event)" [(ngModel)]="searchQuery"></ion-searchbar>
+  <ion-list [virtualScroll]="useraux">
 
     <ion-item *virtualItem="let user" (click)="selecionar(user)">
       <ion-avatar item-left>

@@ -25,6 +25,7 @@ import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../providers/mensagem-service';
 import { ModalListaUsuariosPage } from '../pages/modal-lista-usuarios/modal-lista-usuarios';
 import { RequerimentoService } from '../providers/requerimento-service';
+import { ModalAbrirMensagemPage } from '../pages/modal-abrir-mensagem/modal-abrir-mensagem';
 
 
 //login com o google e com o facebook
@@ -74,7 +75,8 @@ const cloudSettings: CloudSettings = {
     MensagensEnviadasPage,
     TabMensagemPage,
     EnviarMensagemPage,
-    ModalListaUsuariosPage
+    ModalListaUsuariosPage,
+    ModalAbrirMensagemPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -101,7 +103,8 @@ const cloudSettings: CloudSettings = {
     MensagensEnviadasPage,
     TabMensagemPage,
     EnviarMensagemPage,
-    ModalListaUsuariosPage
+    ModalListaUsuariosPage,
+    ModalAbrirMensagemPage
   ],
 
   providers: [Facebook, MensagemService, BuscaUsuariosService, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]

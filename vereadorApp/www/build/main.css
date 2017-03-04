@@ -29244,6 +29244,95 @@ ion-navbar.toolbar {
   position: relative;
 }
 
+page-avaliar-pl .back {
+  background-color: rgba(132, 132, 132, 0.2);
+}
+
+page-avaliar-pl ion-header button {
+  width: 10% !important;
+}
+
+page-avaliar-pl ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-avaliar-pl ion-content {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-avaliar-pl ul {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-avaliar-pl li {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-avaliar-pl ion-card {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-avaliar-pl img {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-avaliar-pl ion-card-content {
+  margin-top: 0px !important;
+  line-height: 28px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+page-avaliar-pl ion-card-title {
+  font-size: 20px !important;
+  margin-left: 10px !important;
+}
+
+page-avaliar-pl p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  margin-left: 10px !important;
+}
+
 page-avaliar-solicitacao ion-header button {
   width: 10% !important;
 }
@@ -29490,6 +29579,47 @@ page-login button {
   background-color: rgba(255, 0, 0, 0.6) !important;
 }
 
+page-nova-pl ion-title {
+  text-align: center;
+  margin-right: 15% !important;
+}
+
+page-nova-pl ion-list {
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+  resize: vertical !important;
+}
+
+page-nova-pl ion-item {
+  padding: 0 !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+page-nova-pl ion-col {
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+page-nova-pl ion-label {
+  margin-left: 10px !important;
+}
+
+page-nova-pl .fabbuttons {
+  -webkit-align-self: center !important;
+  -ms-flex-item-align: center !important;
+  -ms-grid-row-align: center !important;
+  align-self: center !important;
+  margin-left: 30%;
+}
+
+page-nova-pl .blockbutton {
+  text-align: center !important;
+  margin-right: 30px !important;
+}
+
 page-nova-proposta ion-title {
   text-align: center;
   margin-right: 15% !important;
@@ -29527,6 +29657,39 @@ page-nova-proposta .fabbuttons {
 }
 
 page-nova-proposta .blockbutton {
+  text-align: center !important;
+  margin-right: 30px !important;
+}
+
+page-nova-proposta-pl ion-title {
+  text-align: center;
+  margin-right: 15% !important;
+}
+
+page-nova-proposta-pl ion-list {
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+  resize: vertical !important;
+}
+
+page-nova-proposta-pl ion-item {
+  padding: 0 !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+page-nova-proposta-pl ion-col {
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+page-nova-proposta-pl ion-label {
+  margin-left: 10px !important;
+}
+
+page-nova-proposta-pl .blockbutton {
   text-align: center !important;
   margin-right: 30px !important;
 }
@@ -29651,6 +29814,95 @@ page-pl-andamento ion-card-title {
 }
 
 page-pl-andamento p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  margin-left: 10px !important;
+}
+
+page-pl-propostas .back {
+  background-color: rgba(132, 132, 132, 0.2);
+}
+
+page-pl-propostas ion-header button {
+  width: 10% !important;
+}
+
+page-pl-propostas ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-pl-propostas ion-content {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-propostas ul {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-propostas li {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-propostas ion-card {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-propostas img {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-propostas ion-card-content {
+  margin-top: 0px !important;
+  line-height: 28px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+page-pl-propostas ion-card-title {
+  font-size: 20px !important;
+  margin-left: 10px !important;
+}
+
+page-pl-propostas p {
   font-size: 14px !important;
   line-height: 20px !important;
   margin-left: 10px !important;

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, Platform  } from 'ionic-angular';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
+import { NovaPlPage } from '../nova-pl/nova-pl';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { ProjetoDeLei } from '../../model/projeto-de-lei';
 })
 export class PlAndamentoPage {
 
-  public pls: ProjetoDeLei[] = [];
+  private pls: ProjetoDeLei[] = [];
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -23,7 +24,7 @@ export class PlAndamentoPage {
   }
 
   private novoPL(){
-
+    this.navCtrl.push(NovaPlPage);
   }
 
   private like(pl: ProjetoDeLei) {

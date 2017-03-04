@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
+import { NovaPropostaPlPage } from '../nova-proposta-pl/nova-proposta-pl';
+import { NovaPlPage } from '../nova-pl/nova-pl';
 
 
 @Component({
@@ -8,6 +10,8 @@ import { ProjetoDeLei } from '../../model/projeto-de-lei';
   templateUrl: 'pl-propostas.html'
 })
 export class PlPropostasPage {
+
+  public pls: ProjetoDeLei[] = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -21,7 +25,7 @@ export class PlPropostasPage {
   }
 
   private novaProposta(){
-    //vou dar um push pra tela de nova proposta aqui
+    this.navCtrl.push(NovaPropostaPlPage);
   }
 
   private like(pl: ProjetoDeLei) {
@@ -45,6 +49,7 @@ export class PlPropostasPage {
         {
           text: 'Adicionar Projeto de Lei',
           handler: () => {
+            this.navCtrl.push(NovaPlPage, {pl: pl});
           }
         },
         {

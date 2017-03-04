@@ -14,7 +14,7 @@
         $idR   = $request->IDRemetente;
         $idD   = $request->IDDestinatario;
 
-        $data = date('Y-m-d');
+        $data = date('Y-m-d H:i:s');
 
         $sql = "INSERT INTO mensagem (Texto, data, IDRemetente, IDDestinatario) VALUES ('$texto', '$data', '$idR', '$idD')";
         $con->query($sql);

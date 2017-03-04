@@ -48,8 +48,8 @@
 
             echo json_encode($vetor)
 		} else {
-            $userID = $_GET["id"];
-            $sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
+            $id = $_GET["id"];
+            $sql = "SELECT * FROM usuario WHERE socialID = '$id'";
             $result = $con->query($sql);
 
             $num = $result->num_rows;
@@ -58,6 +58,7 @@
                 echo json_encode(false);
             } else {
                 $dados = $result->fetch_assoc();
+                $userID = $dados['IDUsuario'];
                 $temp = array();
 
                 $sql = "SELECT * FROM telefone WHERE IDUsuario = '$userID'";

@@ -18,6 +18,9 @@ import { EditarPublicacaoPage } from '../pages/editar-publicacao/editar-publicac
 import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
 import { SolicitacaoService } from '../providers/solicitacao-service';
+import { MensagensRecebidasPage } from '../pages/mensagens-recebidas/mensagens-recebidas';
+import { MensagensEnviadasPage } from '../pages/mensagens-enviadas/mensagens-enviadas';
+import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 
 //login com o google e com o facebook
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -60,7 +63,10 @@ const cloudSettings: CloudSettings = {
     SolicSolicitadosPage,
     NovaPropostaPage,
     AvaliarSolicitacaoPage,
-    RequerimentoPage
+    RequerimentoPage,
+    MensagensRecebidasPage,
+    MensagensEnviadasPage,
+    TabMensagemPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -82,7 +88,10 @@ const cloudSettings: CloudSettings = {
     SolicSolicitadosPage,
     NovaPropostaPage,
     AvaliarSolicitacaoPage,
-    RequerimentoPage
+    RequerimentoPage,
+    MensagensRecebidasPage,
+    MensagensEnviadasPage,
+    TabMensagemPage
   ],
 
   providers: [Facebook, Storage, StorageService, CadastroService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]

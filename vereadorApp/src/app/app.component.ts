@@ -8,6 +8,8 @@ import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
 import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
+import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
+
 
 
 @Component({
@@ -15,7 +17,7 @@ import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-sol
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage = LoginPage;
+  rootPage = SolicitacoesPage;
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
 
@@ -23,9 +25,10 @@ export class MyApp {
     public menuCtrl: MenuController,
     private storage : StorageService
     ) {
-    this.pages = [{ title: 'Notíticas', component: HomePage },
+    this.pages = [{ title: 'Notícias', component: HomePage },
     { title: 'Solicitações', component: SolicitacoesPage },
-    { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage}]
+    { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage},
+    { title: 'Mensagem', component: TabMensagemPage}]
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {

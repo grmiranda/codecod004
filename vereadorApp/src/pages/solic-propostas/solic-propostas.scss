@@ -1,10 +1,10 @@
 page-solic-propostas {
-    ion-header button{
+        ion-header button{
         width: 10% !important;
     }
     ion-title{
         text-align: center;
-        margin-right: 15%;
+        margin-right: 10%;
     }
     ion-content{
         right: 0px !important;
@@ -60,6 +60,12 @@ page-solic-propostas {
         margin-left: 0 !important;
         width: 100% !important; 
         max-width: 100% !important;
+    }
+    ion-card-title{
+        margin-left: 10px !important;
+    }
+    p{
+        margin-left: 10px !important;
     }
 
 }

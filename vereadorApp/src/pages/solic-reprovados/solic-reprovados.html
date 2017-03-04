@@ -10,7 +10,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ul [virtualScroll]="solicitacoes">
     <li *virtualItem="let solicitacao">
       <ion-card (press)="abrirOpcoes(solicitacao)">

@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-
 import { NavController, NavParams, Platform, ActionSheetController  } from 'ionic-angular';
-
 import { SolicitacaoService } from '../../providers/solicitacao-service';
-
 import { Solicitacao } from '../../model/solicitacao';
 
 @Component({

@@ -14,10 +14,10 @@ export class SolicSolicitadosPage {
 
 
   constructor(public platform: Platform,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
-    public actionSheetCtrl: ActionSheetController) { 
-    
+    public actionSheetCtrl: ActionSheetController) {
+
   }
 
   ionViewWillEnter() {
@@ -33,7 +33,33 @@ export class SolicSolicitadosPage {
     })
   }
 
-  private abrirOpcoes(solicitacao: any) {
+  private aprovar(solicitacao: Solicitacao){
+    solicitacao.estado = 'cp';
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
+      if(!res.error){
+        //removeu
+        this.carregarSolicitacoes();
+
+      }else{
+        //rror
+      }
+    })
+  }
+
+  private reprovar(solicitacao: Solicitacao){
+    solicitacao.estado = 'cn';
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
+      if(!res.error){
+        //removeu
+        this.carregarSolicitacoes();
+
+      }else{
+        //rror
+      }
+    })
+  }
+
+  private abrirOpcoes(solicitacao: Solicitacao) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',
       buttons: [
@@ -42,14 +68,14 @@ export class SolicSolicitadosPage {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-
+            this.reprovar(solicitacao);
           }
         },
         {
           text: 'Aprovar',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-            
+            this.aprovar(solicitacao);
           }
         },
         {

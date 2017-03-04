@@ -10,9 +10,9 @@
 	if (isset($postdata)){
 		$request  = json_decode($postdata);
 
-        $texto = $request->texto;
-        $idR   = $request->IDRemetente;
-        $idD   = $request->IDDestinatario;
+        $idR   = $request->remetente;
+        $idD   = $request->destinatario;
+        $texto = $request->mensagem;
 
         $data = date('Y-m-d H:i:s');
 

@@ -6,9 +6,9 @@
 	$vetor   = array();
 	$the_request = &$_GET;
 	if (isset($_GET["id"])){
-		if ($_GET["id"] == ""){
-
-            $sql = "SELECT * FROM caixadesaida";
+		if ($_GET["id"] != ""){
+			$userID = $_GET["id"];
+            $sql = "SELECT * FROM caixadesaida WHERE IDUsuario = '$userID'";
             $result = $con->query($sql);
 
             while($row=$result->fetch_assoc()){
@@ -19,6 +19,12 @@
 
 				$msg = $result1->fetch_assoc();
 				
+				$userID = $msg['IDDestinatario'];
+				$sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
+				$result = $con->query($sql);
+
+				$des = $result->fetch_assoc();
+
 				$temp = array();
 				$temp['id'] = $id;
 				$temp['remetente'] = $msg['IDRemetente'];
@@ -26,7 +32,9 @@
 				$temp['mensagem'] = $msg['Texto'];
 				$temp['data'] = $msg['data'];
 				$temp['lida'] = 0;
-				$vetor[] = $temp;
+				$temp['nome'] = $des['nome'];
+				$temp['foto'] = $des['fotoURL'];
+ 				$vetor[] = $temp;
             }
 			echo json_encode($vetor);
         } 

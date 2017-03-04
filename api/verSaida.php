@@ -13,7 +13,22 @@
 
             while($row=$result->fetch_assoc()){
                 $id = $row['IDMensagem'];
+				
+				$sql = "SELECT * FROM mensagem WHERE IDMensagem = '$id'";
+				$result = $con->query($sql);
+
+				$msg = $result->fetch_assoc();
+				
+				$temp = array();
+				$temp['id'] = $id;
+				$temp['remetente'] = $msg['IDRemetente'];
+				$temp['destinatario'] = $msg['IDDestinatario'];
+				$temp['mensagem'] = $msg['Texto'];
+				$temp['data'] = $msg['data'];
+				$temp['lida'] = 0;
+				$vetor[] = $temp;
             }
+			echo json_encode($vetor);
         } 
 	} 	
 	$con->close();	

@@ -25,12 +25,12 @@ export class GooglePlusService {
     console.log('Hello GooglePlusService Provider');
   }
 
-  public loginGoogle(): Promise<any> {
-    return this.googleAuth.login().then(sucess => this.api(this.user.social.google.uid))
+  public loginGoogle(push): Promise<any> {
+    return this.googleAuth.login().then(sucess => this.api(this.user.social.google.uid, push))
     .catch(() => alert("Erro ao se conectar com o google plus"));
   }
-  private api(token):Promise<any>{
-    return this.http.post(this.link, JSON.stringify(token), { headers: this.headers }).toPromise().then(res => res = res.json()).
+  private api(token, push):Promise<any>{
+    return this.http.post(this.link, JSON.stringify({token , push: push}), { headers: this.headers }).toPromise().then(res => res = res.json()).
     catch(() => alert("Erro ao se conectar com o servidor"));
   }
 

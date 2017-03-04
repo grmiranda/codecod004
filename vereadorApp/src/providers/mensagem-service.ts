@@ -30,7 +30,7 @@ export class MensagemService {
     .catch(()=>alert("Erro ao tentar se conectar com o servidor"));
   }
 
-  public getMensagemRecebida(id):Promise<CorpoMensagem>{
+  public getMensagemRecebida(id):Promise<CorpoMensagem[]>{
     return this.http.get("http://dsoutlet.com.br/apiLuiz/caixaEntrada.php?id="+ id).toPromise().then(res=>res.json())
     .catch(()=>alert("Erro ao tentar se conectar com o servidor"));
   }

@@ -5,6 +5,8 @@ import { HomePage } from '../home/home';
 import { CadastroService } from '../../providers/cadastro-service';
 import { LoginPage } from '../login/login';
 import { StorageService } from '../../providers/storage';
+import { PushService } from '../../providers/push-service';
+
 
 /*
   Generated class for the Cadastro page.
@@ -24,8 +26,9 @@ export class CadastroPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public cadastroService: CadastroService,
-    private storage : StorageService
-    ) {
+    private storage: StorageService,
+    private pushService: PushService
+  ) {
 
     this.usuario = this.navParams.get("dados");
 
@@ -68,16 +71,18 @@ export class CadastroPage {
 
 
   cadastrar() {
-    this.cadastroService.cadastrar(this.usuario).then(res => {
-      if (res == false) {
-        alert("Erro ao cadastrar Usuario");
-      } else{ 
-        alert(JSON.stringify(res));
-        this.storage.set(res);
-        this.navCtrl.setRoot(HomePage);
-      }
+    this.pushService.getId().then(idPush => {
+      this.cadastroService.cadastrar(this.usuario, idPush).then(res => {
+        if (res == false) {
+          alert("Erro ao cadastrar Usuario");
+        } else {
+          alert(JSON.stringify(res));
+          this.storage.set(res);
+          this.navCtrl.setRoot(HomePage);
+        }
 
-    })
+      })
+    });
   }
 
   cancelar() {

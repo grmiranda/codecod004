@@ -18,7 +18,7 @@ import { ModalAbrirMensagemPage } from '../modal-abrir-mensagem/modal-abrir-mens
 })
 export class MensagensRecebidasPage {
 
-  private mensagens;
+  private mensagens:CorpoMensagem[];
 
   constructor(
     public navCtrl: NavController,

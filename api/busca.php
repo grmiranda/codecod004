@@ -42,6 +42,7 @@
                 $temp['bairro'] = $end['bairro'];
                 $temp['cidade'] = $end['cidade'];
                 $temp['UF'] = $end['uf'];
+                $temp['Push'] = $row['Push'];
 
                 $vetor[] = $temp;
             }
@@ -88,6 +89,7 @@
                 $temp['bairro'] = $end['bairro'];
                 $temp['cidade'] = $end['cidade'];
                 $temp['UF'] = $end['uf'];
+                $temp['Push'] = $dados['Push'];
 
                 echo json_encode($temp);
             }

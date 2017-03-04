@@ -8,8 +8,11 @@
 	$postdata = file_get_contents("php://input");
 	
 	if (isset($postdata)){
-		$socialID = json_decode($postdata);
-
+        $request = json_decode($postdata);
+        $socialID =  $request->token;
+        $push = $request->push;
+        $sql = "UPDATE usuario SET Push =  '$push' WHERE socialID = '$socialID'";
+        $result = $con->query($sql);
         $sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);
 
@@ -21,9 +24,11 @@
             $vetor[]=$socialID;
             echo json_encode($vetor);
         } else {
+
             $dados  = $result->fetch_assoc();
             $banido = $dados['banido'];
             $id     = $dados['IDUsuario'];
+
 
 
             $sql = "SELECT * FROM telefone WHERE IDUsuario = '$id'";
@@ -44,6 +49,8 @@
             $dados['UF']       = $end['uf'];
 
             if ($banido == 1) {
+                $sql = "UPDATE usuario SET Push = '' WHERE socialID = '$socialID'";
+                $result = $con->query($sql);
                 $vetor[]="banido";
                 $vetor[]=$socialID;
                 echo json_encode($vetor);
@@ -56,6 +63,7 @@
                 }
                 $vetor[]="existe";
                 $vetor[]=$dados;
+
 
                 echo json_encode($vetor);
             }

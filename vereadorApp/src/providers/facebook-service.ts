@@ -20,8 +20,8 @@ export class FacebookService {
     Facebook.browserInit(1865101920446266, "v2.8");
   }
 
-  loginFacebook(): Promise<any> {
-    return Facebook.login(["public_profile","email"]).then(res => this.http.post(this.link, JSON.stringify(res.authResponse.userID), { headers: this.headers })
+  loginFacebook(push: string): Promise<any> {
+    return Facebook.login(["public_profile","email"]).then(res => this.http.post(this.link, JSON.stringify({token: res.authResponse.userID, push: push}), { headers: this.headers })
     .toPromise().then(resposta=>resposta.json()).catch(()=>alert("erro ao tentar se conectar com servidor")))
     .catch(()=>alert("erro ao tentar se conectar com o face"));
   }

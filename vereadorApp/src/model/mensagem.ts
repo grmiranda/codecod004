@@ -7,6 +7,7 @@ export class CorpoMensagem {
     public lida:number;
     public nome: string;
     public foto: string;
+    public marcado: boolean;
 
     constructor(){
         this.mensagem = "";

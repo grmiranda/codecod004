@@ -36,6 +36,10 @@ import { RequerimentoService } from '../providers/requerimento-service';
 import { ModalAbrirMensagemPage } from '../pages/modal-abrir-mensagem/modal-abrir-mensagem';
 import { LikeService } from '../providers/like-service';
 
+//push
+import { OneSignal } from 'ionic-native';
+import { PushService } from '../providers/push-service';
+
 
 
 //login com o google e com o facebook
@@ -133,7 +137,7 @@ const cloudSettings: CloudSettings = {
     NovaPlPage
   ],
 
-  providers: [Facebook, MensagemService, BuscaUsuariosService, Storage, StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [Facebook, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage, StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 
 
 })

@@ -13,6 +13,8 @@ export class Usuario {
     public bairro: string;
     public cidade: string;
     public UF: string;
+    public permissao : number;
+    public Push : string;
 
     constructor() {
         this.IDUsuario ="0";

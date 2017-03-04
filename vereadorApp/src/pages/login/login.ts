@@ -5,6 +5,8 @@ import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
 import { GooglePlusService } from '../../providers/google-plus-service';
 import { StorageService } from '../../providers/storage';
+import { PushService } from '../../providers/push-service';
+import { Usuario } from '../../model/user';
 
 
 
@@ -20,7 +22,8 @@ export class LoginPage {
     private facebookService: FacebookService,
     private gpService: GooglePlusService,
     private menu: MenuController,
-    private storage: StorageService
+    private storage: StorageService,
+    private pushService: PushService
   ) {
     this.menu.enable(false);
     this.storage.get().then(response => {
@@ -35,34 +38,49 @@ export class LoginPage {
   }
 
   logarFacebook() {
-    this.facebookService.loginFacebook().then(resposta => {
-      if (resposta[0] == "cadastro") {
+    this.pushService.getId().then(idPush => {
+      this.facebookService.loginFacebook(idPush).then(resposta => {
+        if (resposta[0] == "cadastro") {
 
-        this.facebookService.getDados(resposta[1]).then(res => {
+          this.facebookService.getDados(resposta[1]).then(res => {
 
-          this.navCtrl.setRoot(CadastroPage, { dados: res });
-        });
+            this.navCtrl.setRoot(CadastroPage, { dados: res });
+          });
 
-      } else if (resposta[0] == "banido") {
-        alert("Conta foi banida do sistema");
-      } else if (resposta[0] == "existe") {
-        this.storage.set(resposta[1]);
-        this.navCtrl.setRoot(HomePage);
-      }
+        } else if (resposta[0] == "banido") {
+          alert("Conta foi banida do sistema");
+        } else if (resposta[0] == "existe") {
+          this.adm(resposta[1]);
+          this.storage.set(resposta[1]);
+          this.navCtrl.setRoot(HomePage);
+        }
+      });
+
     });
+
+  }
+
+  adm(user :Usuario){
+    if(user.permissao == 1){
+      this.pushService.addTag("adm");
+    }
   }
 
   logarGoogle() {
-    this.gpService.loginGoogle().then(resposta => {
-      if (resposta[0] == "cadastro") {
-        this.navCtrl.setRoot(CadastroPage, { dados: this.gpService.getDados() });
-      } else if (resposta[0] == "banido") {
-        alert("Conta foi banida do sistema");
-      } else if (resposta[0] == "existe") {
-        this.storage.set(resposta[1]);
-        this.navCtrl.setRoot(HomePage);
 
-      }
+    this.pushService.getId().then(idPush => {
+      this.gpService.loginGoogle(idPush).then(resposta => {
+        if (resposta[0] == "cadastro") {
+          this.navCtrl.setRoot(CadastroPage, { dados: this.gpService.getDados() });
+        } else if (resposta[0] == "banido") {
+          alert("Conta foi banida do sistema");
+        } else if (resposta[0] == "existe") {
+          this.adm(resposta[1]);
+          this.storage.set(resposta[1]);
+          this.navCtrl.setRoot(HomePage);
+
+        }
+      });
     });
   }
 

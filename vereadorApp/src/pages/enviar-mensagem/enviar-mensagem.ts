@@ -7,6 +7,7 @@ import { BuscaUsuariosService } from '../../providers/busca-usuarios-service';
 import { CorpoMensagem } from '../../model/mensagem';
 import { StorageService } from '../../providers/storage';
 import { MensagemService } from '../../providers/mensagem-service';
+import { PushService } from '../../providers/push-service';
 /*
   Generated class for the EnviarMensagem page.
 
@@ -20,6 +21,7 @@ import { MensagemService } from '../../providers/mensagem-service';
 export class EnviarMensagemPage {
 
   private destinatario: string;
+  private usuarioSelecionado:Usuario;
   private usuarios: Usuario[] = [];
   public mensagem: CorpoMensagem = new CorpoMensagem();
 
@@ -30,12 +32,17 @@ export class EnviarMensagemPage {
     public buscarUsers: BuscaUsuariosService,
     private storageService: StorageService,
     private mensagemService: MensagemService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private pushService : PushService
   ) {
     this.destinatario = this.navParams.get('destinatario');
     this.mensagem.destinatario = this.navParams.get('idDestinatario');
     this.buscarUsers.getUserAll().then(res => {
       this.usuarios = res;
+    });
+
+    this.pushService.getId().then(res=>{
+      alert(JSON.stringify(res));
     });
   }
 
@@ -48,6 +55,7 @@ export class EnviarMensagemPage {
 
     modal.onDidDismiss(data => {
       if (data != undefined) {
+        this.usuarioSelecionado = data;
         this.destinatario = data.nome;
         this.mensagem.destinatario = data.id;
       }
@@ -63,6 +71,7 @@ export class EnviarMensagemPage {
       if (this.mensagem.mensagem != "" && this.mensagem.destinatario != "") {
         this.mensagemService.enviarMensagem(this.mensagem).then(res => {
           if (res == true) {
+            this.pushService.pushUmaPessoa("Nova Mensagem", this.usuarioSelecionado);
             let toast = this.toastCtrl.create({
               message: 'Mensagem enviada com sucesso',
               duration: 3000,

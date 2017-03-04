@@ -29819,6 +29819,95 @@ page-pl-andamento p {
   margin-left: 10px !important;
 }
 
+page-pl-aprovados .back {
+  background-color: rgba(132, 132, 132, 0.2);
+}
+
+page-pl-aprovados ion-header button {
+  width: 10% !important;
+}
+
+page-pl-aprovados ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-pl-aprovados ion-content {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-aprovados ul {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-aprovados li {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-aprovados ion-card {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-aprovados img {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-aprovados ion-card-content {
+  margin-top: 0px !important;
+  line-height: 28px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+page-pl-aprovados ion-card-title {
+  font-size: 20px !important;
+  margin-left: 10px !important;
+}
+
+page-pl-aprovados p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  margin-left: 10px !important;
+}
+
 page-pl-propostas .back {
   background-color: rgba(132, 132, 132, 0.2);
 }
@@ -29903,6 +29992,95 @@ page-pl-propostas ion-card-title {
 }
 
 page-pl-propostas p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  margin-left: 10px !important;
+}
+
+page-pl-recusados .back {
+  background-color: rgba(132, 132, 132, 0.2);
+}
+
+page-pl-recusados ion-header button {
+  width: 10% !important;
+}
+
+page-pl-recusados ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
+page-pl-recusados ion-content {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-recusados ul {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-recusados li {
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-recusados ion-card {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-recusados img {
+  margin-top: 0px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+page-pl-recusados ion-card-content {
+  margin-top: 0px !important;
+  line-height: 28px !important;
+  right: 0px !important;
+  border: 0px !important;
+  padding: 0px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+page-pl-recusados ion-card-title {
+  font-size: 20px !important;
+  margin-left: 10px !important;
+}
+
+page-pl-recusados p {
   font-size: 14px !important;
   line-height: 20px !important;
   margin-left: 10px !important;

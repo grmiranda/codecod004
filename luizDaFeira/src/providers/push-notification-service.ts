@@ -26,6 +26,7 @@ export class PushNotificationService {
       "included_segments": ["All"],
       "headings": { "en": "Luiz da Feira" },
       "data": { "foo": "bar" },
+      "include_player_ids":["1dd608f2-c6a1-11e3-851d-000c2940e62c"],
       "contents": { "en": mensagem }
     }), { headers: this.headers }).toPromise().then(res => alert(res)).catch(error => alert("erro ao enviar notificações"));
   }

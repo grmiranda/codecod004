@@ -8,7 +8,7 @@
 	if (isset($_GET["id"])){
 		if ($_GET["id"] != ""){
 			$userID = $_GET["id"];
-            $sql = "SELECT * FROM caixadeentrada WHERE IDUsuario = '$userID'";
+            $sql = "SELECT * FROM caixadeentrada WHERE IDUsuario = '$userID' ORDER BY IDCaixaDeEntrada DESC";
             $result = $con->query($sql);
 
             while($row=$result->fetch_assoc()){

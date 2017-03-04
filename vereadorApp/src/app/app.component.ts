@@ -9,6 +9,7 @@ import { CadastroPage } from '../pages/cadastro/cadastro';
 import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
 import { TabProjetosDeLeiPage } from '../pages/tab-projetos-de-lei/tab-projetos-de-lei';
 import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
+import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 
@@ -34,6 +35,7 @@ export class MyApp {
     { title: 'Solicitações', component: SolicitacoesPage },
     { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage},
     { title: 'Projetos de Lei', component: TabProjetosDeLeiPage},
+    { title: 'Avaliar Proposta', component: AvaliarPlPage},
     { title: 'Mensagem', component: TabMensagemPage}]
     this.pageAtual = 'Notícias';
 

@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar color="laranja">
+    <ion-title>Novo Projeto de Lei</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="pl.titulo" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item class="itemtextarea">
+      <ion-label floating>Ementa</ion-label>
+      <ion-textarea rows="10" [(ngModel)]="pl.ementa" name="texto"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <img *ngIf="pl.fotoURL !== ''" [src]="pl.fotoURL" style="width: 100%;" />
+      <ion-row>
+        <ion-col width-50>
+          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+              <ion-icon name="image"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col width-50>
+          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+              <ion-icon name="camera"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Criar PL</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -10,6 +10,20 @@
 </ion-header>
 
 
-<ion-content>
-
+<ion-content class="back">
+  <ul [virtualScroll]="pls">
+    <li *virtualItem="let pl">
+      <ion-card>
+        <img *ngIf="pl.fotoURL !== ''" [src]="pl.fotoURL" />
+        <ion-card-content>
+          <ion-card-title>
+            {{ pl.titulo }}
+          </ion-card-title>
+          <p>
+            {{ pl.ementa }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </li>
+  </ul>
 </ion-content>

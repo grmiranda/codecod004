@@ -60,7 +60,8 @@
 
 			$vetor['id']         = $id;
 			$vetor['nome']       = $nome;
-			$vetor['genero']     = $genero;
+			$vetor['email']      = $email;
+ 			$vetor['genero']     = $genero;
 			$vetor['fotoURL']    = $fotoURL;
 			$vetor['socialID']   = $socialID;
 			$vetor['cpf']        = $cpf;

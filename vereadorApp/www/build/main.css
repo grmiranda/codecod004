@@ -29601,6 +29601,10 @@ page-requerimento .blockbutton {
   margin-right: 30px !important;
 }
 
+page-solic-aprovados .back {
+  background-color: rgba(132, 132, 132, 0.2);
+}
+
 page-solic-aprovados ion-header button {
   width: 10% !important;
 }
@@ -29631,6 +29635,8 @@ page-solic-aprovados ul {
 }
 
 page-solic-aprovados li {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29641,6 +29647,8 @@ page-solic-aprovados li {
 }
 
 page-solic-aprovados ion-card {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29661,6 +29669,8 @@ page-solic-aprovados img {
 }
 
 page-solic-aprovados ion-card-content {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29671,11 +29681,16 @@ page-solic-aprovados ion-card-content {
 }
 
 page-solic-aprovados ion-card-title {
+  font-size: 20px !important;
   margin-left: 10px !important;
 }
 
 page-solic-aprovados p {
   margin-left: 10px !important;
+}
+
+page-solic-propostas .back {
+  background-color: rgba(132, 132, 132, 0.2);
 }
 
 page-solic-propostas ion-header button {
@@ -29708,6 +29723,8 @@ page-solic-propostas ul {
 }
 
 page-solic-propostas li {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29718,6 +29735,8 @@ page-solic-propostas li {
 }
 
 page-solic-propostas ion-card {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29738,6 +29757,8 @@ page-solic-propostas img {
 }
 
 page-solic-propostas ion-card-content {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29748,11 +29769,16 @@ page-solic-propostas ion-card-content {
 }
 
 page-solic-propostas ion-card-title {
+  font-size: 20px !important;
   margin-left: 10px !important;
 }
 
 page-solic-propostas p {
   margin-left: 10px !important;
+}
+
+page-solic-reprovados .back {
+  background-color: rgba(132, 132, 132, 0.2);
 }
 
 page-solic-reprovados ion-header button {
@@ -29785,6 +29811,8 @@ page-solic-reprovados ul {
 }
 
 page-solic-reprovados li {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29795,6 +29823,8 @@ page-solic-reprovados li {
 }
 
 page-solic-reprovados ion-card {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29815,6 +29845,8 @@ page-solic-reprovados img {
 }
 
 page-solic-reprovados ion-card-content {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29825,11 +29857,16 @@ page-solic-reprovados ion-card-content {
 }
 
 page-solic-reprovados ion-card-title {
+  font-size: 20px !important;
   margin-left: 10px !important;
 }
 
 page-solic-reprovados p {
   margin-left: 10px !important;
+}
+
+page-solic-solicitados .back {
+  background-color: rgba(132, 132, 132, 0.2);
 }
 
 page-solic-solicitados ion-header button {
@@ -29862,6 +29899,8 @@ page-solic-solicitados ul {
 }
 
 page-solic-solicitados li {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29872,6 +29911,8 @@ page-solic-solicitados li {
 }
 
 page-solic-solicitados ion-card {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29892,6 +29933,8 @@ page-solic-solicitados img {
 }
 
 page-solic-solicitados ion-card-content {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   right: 0px !important;
   border: 0px !important;
   padding: 0px !important;
@@ -29902,6 +29945,7 @@ page-solic-solicitados ion-card-content {
 }
 
 page-solic-solicitados ion-card-title {
+  font-size: 20px !important;
   margin-left: 10px !important;
 }
 

@@ -7,9 +7,11 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { SolicitacoesPage } from '../pages/solicitacoes/solicitacoes';
+import { TabProjetosDeLeiPage } from '../pages/tab-projetos-de-lei/tab-projetos-de-lei';
 import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
+
 
 
 
@@ -19,7 +21,7 @@ import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = TabMensagemPage;
+  rootPage = HomePage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
@@ -31,6 +33,7 @@ export class MyApp {
     this.pages = [{ title: 'Notícias', component: HomePage },
     { title: 'Solicitações', component: SolicitacoesPage },
     { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage},
+    { title: 'Projetos de Lei', component: TabProjetosDeLeiPage},
     { title: 'Mensagem', component: TabMensagemPage}]
     this.pageAtual = 'Notícias';
 

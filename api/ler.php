@@ -9,7 +9,7 @@
 		if ($_GET["id"] != ""){
             $id = $_GET['id'];
             
-            $sql = "SELECT * FROM caixadeentrada WHERE IDCaixaDeEntrada = '$id'";
+            $sql = "SELECT * FROM caixadeentrada WHERE IDMensagem = '$id'";
             $result = $con->query($sql);
 
             $num = $result->num_rows;
@@ -17,7 +17,7 @@
             if ($num !== 1){
                 echo json_encode(false);
             } else {
-                $sql = "UPDATE caixadeentrada SET lido = '1' WHERE IDCaixaDeEntrada = '$id'";
+                $sql = "UPDATE caixadeentrada SET lido = '1' WHERE IDMensagem = '$id'";
                 $con->query($sql);
                 echo json_encode(true);
             }

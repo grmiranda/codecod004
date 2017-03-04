@@ -21,9 +21,9 @@
 				
 				$userID = $msg['IDRemetente'];
 				$sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
-				$result = $con->query($sql);
+				$result1 = $con->query($sql);
 
-				$rem = $result->fetch_assoc();
+				$rem = $result1->fetch_assoc();
 
 				$temp = array();
 				$temp['id'] = $id;

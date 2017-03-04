@@ -21,9 +21,9 @@
 				
 				$userID = $msg['IDDestinatario'];
 				$sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
-				$result = $con->query($sql);
+				$result1 = $con->query($sql);
 
-				$des = $result->fetch_assoc();
+				$des = $result1->fetch_assoc();
 
 				$temp = array();
 				$temp['id'] = $id;

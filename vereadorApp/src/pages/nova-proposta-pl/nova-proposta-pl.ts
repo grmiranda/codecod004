@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
+import { ProjetoDeLeiService } from '../../providers/pl-service';
 
-/*
-  Generated class for the NovaPropostaPl page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-nova-proposta-pl',
   templateUrl: 'nova-proposta-pl.html'
@@ -16,14 +11,18 @@ export class NovaPropostaPlPage {
 
   private pl: ProjetoDeLei = new ProjetoDeLei();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public projetoDeLeiService: ProjetoDeLeiService) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NovaPropostaPlPage');
-  }
-
-  private finalizar(){
-
+  private finalizar() {
+    this.pl.IDUsuario = 0;
+    this.projetoDeLeiService.addProjetoDeLei(this.pl).then(res => {
+      if (!res.error && res.value) {
+        //works fine
+        this.navCtrl.pop();
+      } else {
+        //error
+      }
+    });
   }
 
 }

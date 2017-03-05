@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
+import { ActionSheetController, Platform } from 'ionic-angular';
+import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 
-/*
-  Generated class for the AvaliarPl page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-avaliar-pl',
   templateUrl: 'avaliar-pl.html'
@@ -16,15 +11,44 @@ export class AvaliarPlPage {
 
   public pls: ProjetoDeLei[] = [];
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
+  constructor(public projetoDeLeiService: ProjetoDeLeiService,
     public actionSheetCtrl: ActionSheetController,
-    public platform: Platform) {
+    public platform: Platform) { }
 
-    }
+  ionViewWillEnter() {
+    this.carregarPropostas();
+  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AvaliarPlPage');
+  private carregarPropostas() {
+    this.projetoDeLeiService.getProjetosDeLei('sa').then(res => {
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    })
+  }
+
+  private aprovar(pl: ProjetoDeLei) {
+    pl.estado = 'ap';
+    this.projetoDeLeiService.editProjetoDeLei(pl).then(res => {
+      if (!res.error && res.value) {
+        //works fine
+        this.carregarPropostas();
+      } else {
+        //error
+      }
+    });
+  }
+
+  private reprovar(pl: ProjetoDeLei) {
+    pl.estado = 'pr';
+    this.projetoDeLeiService.editProjetoDeLei(pl).then(res => {
+      if (!res.error && res.value) {
+        //works fine
+        this.carregarPropostas();
+      } else {
+        //error
+      }
+    });
   }
 
   private abrirOpcoes(pl: ProjetoDeLei) {
@@ -35,11 +59,13 @@ export class AvaliarPlPage {
           text: 'Reprovar',
           role: 'destructive',
           handler: () => {
+            this.reprovar(pl);
           }
         },
         {
           text: 'Aprovar',
           handler: () => {
+            this.aprovar(pl);
           }
         },
         {

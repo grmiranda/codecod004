@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -35,6 +35,12 @@ import { ModalListaUsuariosPage } from '../pages/modal-lista-usuarios/modal-list
 import { RequerimentoService } from '../providers/requerimento-service';
 import { ModalAbrirMensagemPage } from '../pages/modal-abrir-mensagem/modal-abrir-mensagem';
 import { LikeService } from '../providers/like-service';
+import { AgendaPage } from '../pages/agenda/agenda';
+import { InformacaoPage } from '../pages/informacao/informacao';
+import { TelefonesPage } from '../pages/telefones/telefones';
+import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
+import { NgCalendarModule  } from 'ionic2-calendar';
+import { CategoriasPage } from '../pages/categorias/categorias';
 
 //push
 import { OneSignal } from 'ionic-native';
@@ -98,10 +104,16 @@ const cloudSettings: CloudSettings = {
     PlRecusadosPage,
     AvaliarPlPage,
     NovaPropostaPlPage,
-    NovaPlPage
+    NovaPlPage,
+    AgendaPage,
+    InformacaoPage,
+    TelefonesPage,
+    TrofeuCidadaniaPage,
+    CategoriasPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    NgCalendarModule,
     CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
@@ -134,10 +146,15 @@ const cloudSettings: CloudSettings = {
     PlRecusadosPage,
     AvaliarPlPage,
     NovaPropostaPlPage,
-    NovaPlPage
+    NovaPlPage,
+    AgendaPage,
+    InformacaoPage,
+    TelefonesPage,
+    TrofeuCidadaniaPage,
+    CategoriasPage
   ],
 
-  providers: [Facebook, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage, StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage, StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
 
 
 })

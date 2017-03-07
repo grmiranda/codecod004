@@ -42,8 +42,6 @@ export class MyApp {
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       var notificationOpenedCallback = function (jsonData) {
       };
 
@@ -55,8 +53,6 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
-
-    //window["plugins"].OneSignal
   }
 
   openPage(page) {

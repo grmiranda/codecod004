@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
-import { Like } from '../../model/like';
+import { LikeSolicitacao } from '../../model/like-solicitacao';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { RequerimentoPage } from '../requerimento/requerimento';
@@ -51,7 +51,7 @@ export class SolicPropostasPage {
   }
 
   private like(solicitacao: Solicitacao) {
-    this.likeService.addLike(new Like('s', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
+    this.likeService.addLikeSolicitacao(new LikeSolicitacao('s', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
       if (!res.error && res.value) {
         //works fine
         console.log('works');
@@ -64,7 +64,7 @@ export class SolicPropostasPage {
   }
 
   private dislike(solicitacao: Solicitacao) {
-    this.likeService.addLike(new Like('n', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
+    this.likeService.addLikeSolicitacao(new LikeSolicitacao('n', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
       if (!res.error && res.value) {
         //works fine
         console.log('works');

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import { Like } from '../model/like';
+import { LikeSolicitacao } from '../model/like-solicitacao';
+import { LikeProjetoDeLei } from '../model/like-projeto-de-lei';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -12,9 +13,9 @@ export class LikeService {
 
   }
 
-  public addLike(like: Like): Promise<any> {
+  public addLikeSolicitacao(like: LikeSolicitacao): Promise<any> {
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addLike.php', JSON.stringify(like), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/addLikeSolicitacao.php', JSON.stringify(like), { headers: this.headers })
       .toPromise()
       .then(res => this.extractAddData(res))
       .catch(this.handleErrorMessage);
@@ -29,23 +30,32 @@ export class LikeService {
     return retorno;
   }
 
-  public getLikes(): Promise<any> {
-    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getLikes.php?id')
+  public addLikeProjetoDeLei(like: LikeProjetoDeLei): Promise<any> {
+    return this.http
+      .post('http://www.dsoutlet.com.br/apiLuiz/addLikeProjetoDeLei.php', JSON.stringify(like), { headers: this.headers })
       .toPromise()
-      .then(response => this.extractGetData(response))
+      .then(res => this.extractAddData(res))
       .catch(this.handleErrorMessage);
   }
 
-  private extractGetData(res: Response) {
-    let retorno = { error: false, data: [] };
-    let data = res.json();
-    if (data == null) {
-      retorno.error = true;
-    } else {
-      retorno.data = data;
-    }
-    return retorno;
-  }
+  // php ainda nao foi elaborado
+  // public getLikeSolicitacao(): Promise<any> {
+  //   return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getLikeSolicitacao.php?id')
+  //     .toPromise()
+  //     .then(response => this.extractGetData(response))
+  //     .catch(this.handleErrorMessage);
+  // }
+  //
+  // private extractGetData(res: Response) {
+  //   let retorno = { error: false, data: [] };
+  //   let data = res.json();
+  //   if (data == null) {
+  //     retorno.error = true;
+  //   } else {
+  //     retorno.data = data;
+  //   }
+  //   return retorno;
+  // }
 
   private handleErrorMessage(error: any) {
     let retorno = { error: true };

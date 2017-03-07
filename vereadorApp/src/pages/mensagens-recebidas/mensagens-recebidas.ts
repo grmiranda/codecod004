@@ -91,18 +91,17 @@ export class MensagensRecebidasPage {
       let index = this.mensagensSelecionadas.indexOf(mensagemSelecionada);
       if (index == -1) {
         this.mensagensSelecionadas.push(mensagemSelecionada);
-      } else{
+      } else {
         this.mensagensSelecionadas.splice(index, 1);
+        if (this.mensagensSelecionadas.length == 0) {
+          this.selecao = false;
+        }
       }
-    }
-    if(this.mensagensSelecionadas.length==0){
-      this.selecao = false;
     }
   }
 
   opcoesMsg(mensagem: CorpoMensagem) {
     this.selecao = true;
-    this.mensagensSelecionadas.push(mensagem);
     /*
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Mensagem',

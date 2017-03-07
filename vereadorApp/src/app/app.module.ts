@@ -35,6 +35,7 @@ import { ModalListaUsuariosPage } from '../pages/modal-lista-usuarios/modal-list
 import { RequerimentoService } from '../providers/requerimento-service';
 import { LikeService } from '../providers/like-service';
 import { ProjetoDeLeiService } from '../providers/pl-service';
+import { ModalAbrirMensagemPage } from '../pages/modal-abrir-mensagem/modal-abrir-mensagem';
 
 //login com o google e com o facebook
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -91,7 +92,8 @@ const cloudSettings: CloudSettings = {
     PlAndamentoPage,
     PlAprovadosPage,
     PlPropostasPage,
-    PlRecusadosPage
+    PlRecusadosPage,
+    ModalAbrirMensagemPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -126,7 +128,8 @@ const cloudSettings: CloudSettings = {
     PlAndamentoPage,
     PlAprovadosPage,
     PlPropostasPage,
-    PlRecusadosPage
+    PlRecusadosPage,
+    ModalAbrirMensagemPage
   ],
 
   providers: [Facebook, MensagemService, BuscaUsuariosService, Storage, ProjetoDeLeiService, StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]

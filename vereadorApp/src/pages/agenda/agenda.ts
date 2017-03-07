@@ -25,7 +25,12 @@ export class AgendaPage {
   private mes: string = 'Dezembro'; //titulo
   data = new Date();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public calendarMd: NgCalendarModule) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public calendarMd: NgCalendarModule) {
+    this.calendar = {
+      mode: 'month',
+      currentDate: new Date()
+    };
+  }
 
 
 

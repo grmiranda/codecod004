@@ -28,7 +28,7 @@ import { CategoriasPage } from '../categorias/categorias';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = TabMensagemPage;
+  rootPage = SolicitacoesPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
@@ -56,16 +56,16 @@ export class MyApp {
       var notificationOpenedCallback = function (jsonData) {
       };
 
-      window["plugins"].OneSignal
-        .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
-        .handleNotificationOpened(notificationOpenedCallback)
-        .endInit();
+      // window["plugins"].OneSignal
+      //   .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
+      //   .handleNotificationOpened(notificationOpenedCallback)
+      //   .endInit();
 
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
 
-    window["plugins"].OneSignal
+    //window["plugins"].OneSignal
   }
 
   openPage(page) {

@@ -7,7 +7,11 @@ export class ProjetoDeLei{
     public IDUsuario: number;
     public estado: string = "";
     //sa - sob aprovação pr-proposto pelo publico
-    //tr - tramitando na camara cp - concluido positivo e cn - faça analogia
+    //ap - aprovada
+    //pr - proposta recusada
+    //tr - tramitando na camara
+    //cp - concluido positivo
+    //cn - faça analogia
     constructor(){
 
     }

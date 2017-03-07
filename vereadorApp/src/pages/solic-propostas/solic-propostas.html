@@ -13,6 +13,7 @@
 <ion-content class="back">
   <ul [virtualScroll]="solicitacoes">
     <li *virtualItem="let solicitacao">
+      <div>
       <ion-card (press)="abrirOpcoes(solicitacao)">
         <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
         <ion-card-content>
@@ -38,6 +39,7 @@
           </ion-col>
         </ion-row>
       </ion-card>
+      </div>
     </li>
   </ul>
   <ion-fab right bottom>

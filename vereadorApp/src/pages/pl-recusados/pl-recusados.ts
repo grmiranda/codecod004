@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
+import { ProjetoDeLeiService } from '../../providers/pl-service';
 
 
 @Component({
@@ -10,11 +10,19 @@ import { ProjetoDeLei } from '../../model/projeto-de-lei';
 export class PlRecusadosPage {
 
   private pls: ProjetoDeLei[] = [];
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PlRecusadosPage');
+  constructor(public projetoDeLeiService: ProjetoDeLeiService) {}
+
+  ionViewWillEnter() {
+    this.carregarPropostas();
+  }
+
+  private carregarPropostas() {
+    this.projetoDeLeiService.getProjetosDeLei('cn').then(res => {
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    })
   }
 
 }

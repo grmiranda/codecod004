@@ -13,6 +13,10 @@ import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-sol
 import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
+import { AgendaPage } from '../pages/agenda/agenda';
+import { InformacaoPage } from '../pages/informacao/informacao';
+import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
+import { CategoriasPage } from '../pages/categorias/categorias';
 
 
 
@@ -38,7 +42,12 @@ export class MyApp {
     { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },
     { title: 'Projetos de Lei', component: TabProjetosDeLeiPage },
     { title: 'Avaliar Proposta', component: AvaliarPlPage },
-    { title: 'Mensagem', component: TabMensagemPage }]
+    { title: 'Mensagem', component: TabMensagemPage },
+    { title: 'Agenda', component: AgendaPage },
+    { title: 'Informações úteis', component: InformacaoPage },
+    { title: 'Telefones Úteis', component: CategoriasPage },
+    { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage }]
+
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {

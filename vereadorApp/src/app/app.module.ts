@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -34,6 +34,16 @@ import { MensagemService } from '../providers/mensagem-service';
 import { ModalListaUsuariosPage } from '../pages/modal-lista-usuarios/modal-lista-usuarios';
 import { RequerimentoService } from '../providers/requerimento-service';
 import { LikeService } from '../providers/like-service';
+import { AgendaPage } from '../pages/agenda/agenda';
+import { InformacaoPage } from '../pages/informacao/informacao';
+import { TelefonesPage } from '../pages/telefones/telefones';
+import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
+import { NgCalendarModule  } from 'ionic2-calendar';
+import { CategoriasPage } from '../pages/categorias/categorias';
+
+//push
+import { OneSignal } from 'ionic-native';
+import { PushService } from '../providers/push-service';
 import { ProjetoDeLeiService } from '../providers/pl-service';
 import { ModalAbrirMensagemPage } from '../pages/modal-abrir-mensagem/modal-abrir-mensagem';
 
@@ -93,10 +103,17 @@ const cloudSettings: CloudSettings = {
     PlAprovadosPage,
     PlPropostasPage,
     PlRecusadosPage,
-    ModalAbrirMensagemPage
+    ModalAbrirMensagemPage,
+    AgendaPage,
+    InformacaoPage,
+    TelefonesPage,
+    TrofeuCidadaniaPage,
+    CategoriasPage,
+    PlRecusadosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    NgCalendarModule,
     CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
@@ -107,7 +124,6 @@ const cloudSettings: CloudSettings = {
     CadastroPage,
     SolicitacoesPage,
     NovaPublicacaoPage,
-    NovaPlPage,
     PublicacaoPage,
     EditarPublicacaoPage,
     SolicAprovadosPage,
@@ -115,24 +131,33 @@ const cloudSettings: CloudSettings = {
     SolicReprovadosPage,
     SolicSolicitadosPage,
     NovaPropostaPage,
-    NovaPropostaPlPage,
     AvaliarSolicitacaoPage,
     RequerimentoPage,
     MensagensRecebidasPage,
     MensagensEnviadasPage,
-    AvaliarPlPage,
+    NovaPlPage,
     TabMensagemPage,
+    AvaliarPlPage,
     EnviarMensagemPage,
+    NovaPropostaPlPage,
     ModalListaUsuariosPage,
     TabProjetosDeLeiPage,
     PlAndamentoPage,
     PlAprovadosPage,
     PlPropostasPage,
     PlRecusadosPage,
-    ModalAbrirMensagemPage
+    ModalAbrirMensagemPage,
+    AgendaPage,
+    InformacaoPage,
+    TelefonesPage,
+    TrofeuCidadaniaPage,
+    CategoriasPage,
+    PlRecusadosPage
   ],
 
-  providers: [Facebook, MensagemService, BuscaUsuariosService, Storage, ProjetoDeLeiService, StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService]
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage, 
+  StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, 
+  {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService, ProjetoDeLeiService]
 
 
 })

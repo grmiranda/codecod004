@@ -29244,6 +29244,12 @@ ion-navbar.toolbar {
   position: relative;
 }
 
+.calendarToolbar ion-title {
+  text-align: center;
+  font-style: roboto;
+  text-transform: capitalize;
+}
+
 page-avaliar-pl .back {
   background-color: rgba(132, 132, 132, 0.2);
 }

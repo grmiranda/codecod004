@@ -13,6 +13,11 @@
     <ion-title>
       Mensagens Recebidas
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -24,19 +29,20 @@
     </ion-refresher-content>
   </ion-refresher>
 
-<ion-list [virtualScroll]="mensagens">
-  <ion-item *virtualItem="let mensagem" [style.background-color]="lida(mensagem)?'#ed9e1e':'#ffffff'" (click)="abrirMensagem(mensagem)" (press)="opcoesMsg(mensagem)">
-    <ion-avatar item-left>
-      <img [src]="mensagem.foto">
-    </ion-avatar>
-    <h2>De: {{mensagem.nome}}</h2>
-    <h3>{{ mensagem.mensagem }}</h3>
-    <p>{{mensagem.data}}</p>
-  </ion-item>
-  
-</ion-list>
+  <ion-list [virtualScroll]="mensagens">
+    <ion-item *virtualItem="let mensagem" [style.background-color]="lida(mensagem)" (click)="abrirMensagem(mensagem)"
+      (press)="opcoesMsg(mensagem)">
+      <ion-avatar item-left>
+        <img [src]="mensagem.foto">
+      </ion-avatar>
+      <h2>De: {{mensagem.nome}}</h2>
+      <h3>{{ mensagem.mensagem }}</h3>
+      <p>{{mensagem.data}}</p>
+    </ion-item>
 
-<ion-fab right bottom>
+  </ion-list>
+
+  <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="enviarMensagem()">
       <ion-icon name="add">
     </ion-icon>

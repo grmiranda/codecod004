@@ -29585,6 +29585,17 @@ page-login button {
   background-color: rgba(255, 0, 0, 0.6) !important;
 }
 
+@media (min-width: 680px) {
+  ion-modal-view.modal {
+    top: 10%;
+    right: 0% !important;
+    bottom: 0% !important;
+    left: 0% !important;
+    min-height: 20px !important;
+    width: 50% !important;
+  }
+}
+
 page-nova-pl ion-title {
   text-align: center;
   margin-right: 15% !important;

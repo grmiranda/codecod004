@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, PopoverController } from 'ionic-angular';
 import { EnviarMensagemPage } from '../enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../../providers/mensagem-service';
 import { StorageService } from '../../providers/storage';
 import { CorpoMensagem } from '../../model/mensagem';
 import { ModalController } from 'ionic-angular';
 import { ModalAbrirMensagemPage } from '../modal-abrir-mensagem/modal-abrir-mensagem';
+import { ModalOpcoesPage } from '../modal-opcoes/modal-opcoes';
 import { Usuario } from '../../model/user';
 /*
   Generated class for the MensagensRecebidas page.
@@ -29,7 +30,8 @@ export class MensagensRecebidasPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private storageService: StorageService,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public popoverCtrl: PopoverController
   ) {
 
   }
@@ -134,4 +136,17 @@ export class MensagensRecebidasPage {
     */
   }
 
+  openOptions(event: any) {
+    let popover = this.popoverCtrl.create(ModalOpcoesPage, { opcoes: ['Opção 1', 'Opção 2', 'Opção 3'] });
+    let ev = {
+      target: {
+        getBoundingClientRect: () => {
+          return {
+            top: '10'
+          };
+        }
+      }
+    };
+    popover.present({ev: event});
+  }
 }

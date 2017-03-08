@@ -31,14 +31,8 @@
         $sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM','$idD', '0')";
         $con->query($sql);
 
-        $sql = "SELECT * FROM usuario WHERE IDUsuario = '$idD'";
-        $result = $con->query($sql);
 
-        $dados = $result->fetch_assoc();
-
-        $push = $dados['Push'];
-
-        echo json_encode($push);
+        echo json_encode(true);
 	}
 	$con->close();
 ?>

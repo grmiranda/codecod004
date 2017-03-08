@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, PopoverController, ToastController } from 'ionic-angular';
 import { EnviarMensagemPage } from '../enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../../providers/mensagem-service';
 import { StorageService } from '../../providers/storage';
@@ -22,6 +22,7 @@ export class MensagensRecebidasPage {
 
   private mensagens: CorpoMensagem[];
   private selecao: boolean = false;
+  private primeiro: boolean = false;
   private mensagensSelecionadas: CorpoMensagem[] = [];
 
   constructor(
@@ -32,6 +33,7 @@ export class MensagensRecebidasPage {
     private storageService: StorageService,
     public actionSheetCtrl: ActionSheetController,
     public popoverCtrl: PopoverController
+    private toastCtrl: ToastController
   ) {
 
   }
@@ -46,16 +48,11 @@ export class MensagensRecebidasPage {
 
   carregar() {
 
-    /* this.storageService.get().then(res => {
+     this.storageService.get().then(res => {
        this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
          this.mensagens = res;
        });
      });
-     */
-
-    this.mensagemService.getMensagemRecebida("1").then(res => {
-      this.mensagens = res;
-    });
 
   }
 
@@ -66,7 +63,7 @@ export class MensagensRecebidasPage {
     }, 2000);
   }
 
-  lida(mensagem: CorpoMensagem) {
+  corBackground(mensagem: CorpoMensagem) {
     if (!this.selecao) {
       if (mensagem.lida == 0) {
         return '#ed9e1e';
@@ -88,52 +85,47 @@ export class MensagensRecebidasPage {
       }
       mensagemSelecionada.lida = 1;
       let modal = this.modalCtrl.create(ModalAbrirMensagemPage, { mensagem: mensagemSelecionada });
-      modal.present();
-    } else {
-      let index = this.mensagensSelecionadas.indexOf(mensagemSelecionada);
-      if (index == -1) {
-        this.mensagensSelecionadas.push(mensagemSelecionada);
-      } else {
-        this.mensagensSelecionadas.splice(index, 1);
-        if (this.mensagensSelecionadas.length == 0) {
-          this.selecao = false;
+      modal.onDidDismiss(data => {
+        if (data == "excluir") {
+          this.mensagemService.deletar("1", mensagemSelecionada.id).then(res => {
+            if (res == true) {
+              this.carregar();
+              let toast = this.toastCtrl.create({
+                message: 'Mensagem apagada com sucesso',
+                duration: 3000,
+                position: 'bottom'
+              });
+
+              toast.present();
+            }
+          })
+        } else if (data == "enviar") {
+          console.log(data);
         }
+      });
+      modal.present();
+
+    } else {
+      if (!this.primeiro) {
+        let index = this.mensagensSelecionadas.indexOf(mensagemSelecionada);
+        if (index == -1) {
+          this.mensagensSelecionadas.push(mensagemSelecionada);
+        } else {
+          this.mensagensSelecionadas.splice(index, 1);
+          if (this.mensagensSelecionadas.length == 0) {
+            this.selecao = false;
+          }
+        }
+      } else {
+        this.primeiro = false;
       }
     }
   }
 
   opcoesMsg(mensagem: CorpoMensagem) {
     this.selecao = true;
-    /*
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Mensagem',
-      buttons: [
-        {
-          text: 'Responder mensagem',
-  
-          role: 'destructive',
-          icon: 'send',
-          handler: () => {
-            this.navCtrl.push(EnviarMensagemPage, {destinatario: mensagem.nome, idDestinatario:mensagem.destinatario});
-          }
-        }, {
-          text: 'Excluir',
-          icon:'trash',
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        }, {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-    */
+    this.mensagensSelecionadas.push(mensagem);
+    this.primeiro = true;
   }
 
   openOptions(event: any) {

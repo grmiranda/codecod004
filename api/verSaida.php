@@ -34,6 +34,7 @@
 				$temp['lida'] = 0;
 				$temp['nome'] = $des['nome'];
 				$temp['foto'] = $des['fotoURL'];
+				$temp['Push'] = $des['Push'];
  				$vetor[] = $temp;
             }
 			echo json_encode($vetor);

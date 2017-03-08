@@ -31,12 +31,12 @@ export class ModalAbrirMensagemPage {
     this.view.dismiss()
   }
 
-  excluir(){
-
+  excluir() {
+    this.view.dismiss("excluir")
   }
-  enviar(){
-    this.view.dismiss()
-    this.navCtrl.push(EnviarMensagemPage, {destinatario: this.mensagem.nome, idDestinatario: this.mensagem.destinatario});
+  enviar() {
+    this.view.dismiss("enviar")
+    this.navCtrl.push(EnviarMensagemPage, { destinatario: this.mensagem.nome, idDestinatario: this.mensagem.destinatario });
   }
 
 }

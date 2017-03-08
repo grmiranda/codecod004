@@ -21,7 +21,7 @@ import { PushService } from '../../providers/push-service';
 export class EnviarMensagemPage {
 
   private destinatario: string;
-  private usuarioSelecionado:Usuario;
+  private usuarioSelecionado: Usuario;
   private usuarios: Usuario[] = [];
   public mensagem: CorpoMensagem = new CorpoMensagem();
 
@@ -33,17 +33,23 @@ export class EnviarMensagemPage {
     private storageService: StorageService,
     private mensagemService: MensagemService,
     private toastCtrl: ToastController,
-    private pushService : PushService
+    private pushService: PushService
   ) {
     this.destinatario = this.navParams.get('destinatario');
     this.mensagem.destinatario = this.navParams.get('idDestinatario');
+
     this.buscarUsers.getUserAll().then(res => {
       this.usuarios = res;
+      if (this.mensagem.destinatario != undefined){
+        for(let i = 0; i< this.usuarios.length; i ++){
+        }
+      }
     });
+    
 
-    this.pushService.getId().then(res=>{
-      alert(JSON.stringify(res));
-    });
+      this.pushService.getId().then(res => {
+        alert(JSON.stringify(res));
+      });
   }
 
   ionViewDidLoad() {
@@ -55,13 +61,17 @@ export class EnviarMensagemPage {
 
     modal.onDidDismiss(data => {
       if (data != undefined) {
-        this.usuarioSelecionado = data;
-        this.destinatario = data.nome;
-        this.mensagem.destinatario = data.id;
+        this.atribuindoValores(data);
       }
 
     });
     modal.present();
+  }
+
+  private atribuindoValores(data) {
+    this.usuarioSelecionado = data;
+    this.destinatario = data.nome;
+    this.mensagem.destinatario = data.id;
   }
 
   enviar() {

@@ -10,8 +10,11 @@
     <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
     </button>
-    <ion-title>
+    <ion-title *ngIf="!selecao">
       Mensagens Recebidas
+    </ion-title>
+    <ion-title *ngIf="selecao">
+      {{mensagensSelecionadas.length}} Selecionadas
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openModal()">
@@ -30,7 +33,7 @@
   </ion-refresher>
 
   <ion-list [virtualScroll]="mensagens">
-    <ion-item *virtualItem="let mensagem" [style.background-color]="lida(mensagem)" (click)="abrirMensagem(mensagem)"
+    <ion-item *virtualItem="let mensagem" [style.background-color]="corBackground(mensagem)" (click)="abrirMensagem(mensagem)"
       (press)="opcoesMsg(mensagem)">
       <ion-avatar item-left>
         <img [src]="mensagem.foto">

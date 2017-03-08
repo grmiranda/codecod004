@@ -17,6 +17,7 @@ import { AgendaPage } from '../pages/agenda/agenda';
 import { InformacaoPage } from '../pages/informacao/informacao';
 import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
 import { CategoriasPage } from '../pages/categorias/categorias';
+import { Usuario } from '../model/user';
 
 
 

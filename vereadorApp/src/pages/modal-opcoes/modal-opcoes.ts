@@ -25,4 +25,8 @@ export class ModalOpcoesPage {
   cancel() {
     this.view.dismiss()
   }
+
+  acao(opcao){
+    this.view.dismiss(opcao);
+  }
 }

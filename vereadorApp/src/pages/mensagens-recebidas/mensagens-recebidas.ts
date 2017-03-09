@@ -32,7 +32,7 @@ export class MensagensRecebidasPage {
     public modalCtrl: ModalController,
     private storageService: StorageService,
     public actionSheetCtrl: ActionSheetController,
-    public popoverCtrl: PopoverController
+    public popoverCtrl: PopoverController,
     private toastCtrl: ToastController
   ) {
 
@@ -46,13 +46,16 @@ export class MensagensRecebidasPage {
     this.navCtrl.push(EnviarMensagemPage);
   }
 
+
+
   carregar() {
 
-     this.storageService.get().then(res => {
-       this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
-         this.mensagens = res;
-       });
-     });
+    this.storageService.get().then(res => {
+      this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
+        this.mensagens = res;
+        this.mensagensSelecionadas = [];
+      });
+    });
 
   }
 
@@ -87,20 +90,9 @@ export class MensagensRecebidasPage {
       let modal = this.modalCtrl.create(ModalAbrirMensagemPage, { mensagem: mensagemSelecionada });
       modal.onDidDismiss(data => {
         if (data == "excluir") {
-          this.mensagemService.deletar("1", mensagemSelecionada.id).then(res => {
-            if (res == true) {
-              this.carregar();
-              let toast = this.toastCtrl.create({
-                message: 'Mensagem apagada com sucesso',
-                duration: 3000,
-                position: 'bottom'
-              });
-
-              toast.present();
-            }
-          })
+          this.excluirMsg(mensagemSelecionada.id);
         } else if (data == "enviar") {
-          console.log(data);
+          
         }
       });
       modal.present();
@@ -122,6 +114,22 @@ export class MensagensRecebidasPage {
     }
   }
 
+  private excluirMsg(id) {
+    this.storageService.get().then(res => {
+      this.mensagemService.deletar(res.IDUsuario, id).then(res => {
+        if (res == true) {
+          this.carregar();
+          let toast = this.toastCtrl.create({
+            message: 'Mensagem apagada com sucesso',
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+        }
+      });
+    });
+  }
+
   opcoesMsg(mensagem: CorpoMensagem) {
     this.selecao = true;
     this.mensagensSelecionadas.push(mensagem);
@@ -129,7 +137,7 @@ export class MensagensRecebidasPage {
   }
 
   openOptions(event: any) {
-    let popover = this.popoverCtrl.create(ModalOpcoesPage, { opcoes: ['Opção 1', 'Opção 2', 'Opção 3'] });
+    let popover = this.popoverCtrl.create(ModalOpcoesPage, { opcoes: ['Responder', 'Excluir'] });
     let ev = {
       target: {
         getBoundingClientRect: () => {
@@ -139,6 +147,23 @@ export class MensagensRecebidasPage {
         }
       }
     };
-    popover.present({ev: event});
+
+    popover.onDidDismiss(data => {
+      if (data != null) {
+        if (data == "Excluir") {
+          for (let i = 0; i < this.mensagensSelecionadas.length; i++) {
+            this.excluirMsg(this.mensagensSelecionadas[i].id);
+          }
+          this.carregar();
+        } else if ("Responder"){
+          let usuariosMensagens = [];
+          for (let i =0; i < this.mensagensSelecionadas.length; i ++){
+            usuariosMensagens.push(this.mensagensSelecionadas[i].IDOutro);
+          }
+          this.navCtrl.push(EnviarMensagemPage, { usuariosSelecionado:  usuariosMensagens});
+        }
+      }
+    });
+    popover.present({ ev: event });
   }
 }

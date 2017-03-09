@@ -20,10 +20,10 @@ import { PushService } from '../../providers/push-service';
 })
 export class EnviarMensagemPage {
 
-  private destinatario: string;
-  private usuarioSelecionado: Usuario;
+  private destinatarios: string;
+  private usuarioSelecionado: Usuario[];
   private usuarios: Usuario[] = [];
-  public mensagem: CorpoMensagem = new CorpoMensagem();
+  public textoMensagem: string = "";
 
   constructor(
     public navCtrl: NavController,
@@ -35,21 +35,36 @@ export class EnviarMensagemPage {
     private toastCtrl: ToastController,
     private pushService: PushService
   ) {
-    this.destinatario = this.navParams.get('destinatario');
-    this.mensagem.destinatario = this.navParams.get('idDestinatario');
 
+    let destinatariosTelaAnterior = this.navParams.get('usuariosSelecionado');
     this.buscarUsers.getUserAll().then(res => {
       this.usuarios = res;
-      if (this.mensagem.destinatario != undefined){
-        for(let i = 0; i< this.usuarios.length; i ++){
+      if (destinatariosTelaAnterior != undefined) {
+        this.inserirDestinatarios(destinatariosTelaAnterior);
+      }
+
+    });
+
+
+    this.pushService.getId().then(res => {
+      alert(JSON.stringify(res));
+    });
+  }
+
+  private inserirDestinatarios(ids: string[]) {
+    this.destinatarios = "";
+    this.usuarioSelecionado = [];
+    for (let i = 0; i < this.destinatarios.length; i++) {
+      for (let l = 0; l < this.usuarios.length; l++) {
+        if (this.usuarios[l].IDUsuario == this.destinatarios[i]) {
+          alert(JSON.stringify(this.usuarios[l]));
+          this.usuarioSelecionado.push(this.usuarios[l]);
+          this.destinatarios = this.destinatarios + this.usuarios[l].nome + "; ";
         }
       }
-    });
-    
+    }
 
-      this.pushService.getId().then(res => {
-        alert(JSON.stringify(res));
-      });
+    alert(JSON.stringify(this.usuarioSelecionado));
   }
 
   ionViewDidLoad() {
@@ -69,33 +84,12 @@ export class EnviarMensagemPage {
   }
 
   private atribuindoValores(data) {
-    this.usuarioSelecionado = data;
-    this.destinatario = data.nome;
-    this.mensagem.destinatario = data.id;
+
   }
 
   enviar() {
 
-    this.storageService.get().then(res => {
-      this.mensagem.remetente = res.IDUsuario;
-      if (this.mensagem.mensagem != "" && this.mensagem.destinatario != "") {
-        this.mensagemService.enviarMensagem(this.mensagem).then(res => {
-          if (res == true) {
-            this.pushService.pushUmaPessoa("Nova Mensagem", this.usuarioSelecionado);
-            let toast = this.toastCtrl.create({
-              message: 'Mensagem enviada com sucesso',
-              duration: 3000,
-              position: 'bottom'
-            });
-            toast.present();
-            this.navCtrl.pop()
-          }
-        })
-
-      }
-      alert(JSON.stringify(this.mensagem));
-
-    });
+    
 
 
   }

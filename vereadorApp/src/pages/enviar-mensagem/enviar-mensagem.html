@@ -30,14 +30,10 @@
     <ion-label floating>Mensagem</ion-label>
     <ion-textarea rows="10" name="mensagem" [(ngModel)]= "textoMensagem"></ion-textarea>
   </ion-item>
-
-  
-
-
 </ion-content>
 
 <ion-footer>
   <ion-item class="itemtextarea">
-    <button ion-button full  color="secondary" large (click) = "enviar()">Enviar</button>
+    <button ion-button full  color="secondary" large [disabled]= "enviando" (click) = "enviar()">Enviar</button>
   </ion-item>
 </ion-footer>

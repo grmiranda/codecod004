@@ -7,8 +7,12 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title *ngIf="usuariosSelecionados.length == 0">
       Selecione o usuario
+    </ion-title>
+
+    <ion-title *ngIf="usuariosSelecionados.length != 0">
+      {{usuariosSelecionados.length}} Selecionadas
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
@@ -20,10 +24,10 @@
 
 
 <ion-content padding>
-<ion-searchbar (ionInput)="getItems($event)" [(ngModel)]="searchQuery"></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)" [(ngModel)]="searchQuery"></ion-searchbar>
   <ion-list [virtualScroll]="useraux">
 
-    <ion-item *virtualItem="let user" (click)="selecionar(user)">
+    <ion-item *virtualItem="let user" (click)="selecionarUser(user)" (press)="iniciarSelecao(user)" [style.background-color]="corBackground(user)">
       <ion-avatar item-left>
         <img [src]="user.fotoURL">
       </ion-avatar>
@@ -34,3 +38,16 @@
   </ion-list>
 
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="secondary" large full (click) = "limparSelecao()">Limpar</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="secondary" large full (click)= "confirmarSelecoes()">OK</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

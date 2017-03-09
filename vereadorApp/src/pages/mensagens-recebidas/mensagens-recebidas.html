@@ -7,7 +7,12 @@
 
 <ion-header>
   <ion-navbar color="laranja">
-    <button ion-button menuToggle icon-only>
+    <ion-buttons start *ngIf="mensagensSelecionadas.length != 0">
+      <button ion-button icon-only (click)="cancelarSelecoes()">
+      <ion-icon name='close-circle'></ion-icon>
+    </button>
+    </ion-buttons>
+    <button ion-button menuToggle icon-only *ngIf="mensagensSelecionadas.length == 0">
       <ion-icon name='menu'></ion-icon>
     </button>
     <ion-title *ngIf="mensagensSelecionadas.length == 0">

@@ -36,7 +36,6 @@ export class ModalAbrirMensagemPage {
   }
   enviar() {
     this.view.dismiss("enviar")
-    this.navCtrl.push(EnviarMensagemPage, { destinatario: this.mensagem.nome, idDestinatario: this.mensagem.destinatario });
   }
 
 }

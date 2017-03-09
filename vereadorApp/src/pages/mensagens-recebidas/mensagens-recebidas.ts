@@ -22,7 +22,6 @@ export class MensagensRecebidasPage {
 
   private mensagens: CorpoMensagem[];
   private selecao: boolean = false;
-  private primeiro: boolean = false;
   private mensagensSelecionadas: CorpoMensagem[] = [];
 
   constructor(
@@ -49,7 +48,7 @@ export class MensagensRecebidasPage {
 
 
   carregar() {
-
+    this.selecao = false;
     this.storageService.get().then(res => {
       this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
         this.mensagens = res;
@@ -92,25 +91,25 @@ export class MensagensRecebidasPage {
         if (data == "excluir") {
           this.excluirMsg(mensagemSelecionada.id);
         } else if (data == "enviar") {
-          
+          let usuariosMensagens = [];
+          usuariosMensagens.push(mensagemSelecionada.IDOutro);
+          this.navCtrl.push(EnviarMensagemPage, { usuariosSelecionado: usuariosMensagens });
         }
       });
       modal.present();
 
     } else {
-      if (!this.primeiro) {
-        let index = this.mensagensSelecionadas.indexOf(mensagemSelecionada);
-        if (index == -1) {
-          this.mensagensSelecionadas.push(mensagemSelecionada);
-        } else {
-          this.mensagensSelecionadas.splice(index, 1);
-          if (this.mensagensSelecionadas.length == 0) {
-            this.selecao = false;
-          }
-        }
+
+      let index = this.mensagensSelecionadas.indexOf(mensagemSelecionada);
+      if (index == -1) {
+        this.mensagensSelecionadas.push(mensagemSelecionada);
       } else {
-        this.primeiro = false;
+        this.mensagensSelecionadas.splice(index, 1);
+        if (this.mensagensSelecionadas.length == 0) {
+          this.selecao = false;
+        }
       }
+
     }
   }
 
@@ -133,7 +132,6 @@ export class MensagensRecebidasPage {
   opcoesMsg(mensagem: CorpoMensagem) {
     this.selecao = true;
     this.mensagensSelecionadas.push(mensagem);
-    this.primeiro = true;
   }
 
   openOptions(event: any) {
@@ -155,15 +153,20 @@ export class MensagensRecebidasPage {
             this.excluirMsg(this.mensagensSelecionadas[i].id);
           }
           this.carregar();
-        } else if ("Responder"){
+        } else if ("Responder") {
           let usuariosMensagens = [];
-          for (let i =0; i < this.mensagensSelecionadas.length; i ++){
+          for (let i = 0; i < this.mensagensSelecionadas.length; i++) {
             usuariosMensagens.push(this.mensagensSelecionadas[i].IDOutro);
           }
-          this.navCtrl.push(EnviarMensagemPage, { usuariosSelecionado:  usuariosMensagens});
+          this.navCtrl.push(EnviarMensagemPage, { usuariosSelecionado: usuariosMensagens });
         }
       }
     });
     popover.present({ ev: event });
+  }
+
+  cancelarSelecoes() {
+    this.selecao = false;
+    this.mensagensSelecionadas = [];
   }
 }

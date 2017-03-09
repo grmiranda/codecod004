@@ -59,7 +59,7 @@
 				$genero = 'female';
 			}
 
-			$vetor['id']         = $id;
+			$vetor['IDUsuario']         = $id;
 			$vetor['nome']       = $nome;
 			$vetor['email']      = $email;
  			$vetor['genero']     = $genero;

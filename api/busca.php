@@ -29,7 +29,7 @@
 
                 $temp = array();
 
-                $temp['id'] = $row['IDUsuario'];
+                $temp['IDUsuario'] = $row['IDUsuario'];
                 $temp['nome'] = $row['nome'];
                 $temp['email'] = $row['email'];
                 $temp['genero'] = $row['genero'];
@@ -76,7 +76,7 @@
                     $dados['genero'] = 'female';
                 }
 
-                $temp['id'] = $dados['IDUsuario'];
+                $temp['IDUsuario'] = $dados['IDUsuario'];
                 $temp['nome'] = $dados['nome'];
                 $temp['email'] = $dados['email'];
                 $temp['genero'] = $dados['genero'];

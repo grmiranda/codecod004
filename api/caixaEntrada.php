@@ -35,6 +35,7 @@
 				$temp['nome'] = $rem['nome'];
 				$temp['foto'] = $rem['fotoURL'];
 				$temp['Push'] = $rem['Push'];
+				$temp['IDOutro'] = $userID;
 				$vetor[] = $temp;
             }
 			echo json_encode($vetor);

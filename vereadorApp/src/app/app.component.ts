@@ -55,10 +55,10 @@ export class MyApp {
       var notificationOpenedCallback = function (jsonData) {
       };
 
-      // window["plugins"].OneSignal
-      //   .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
-      //   .handleNotificationOpened(notificationOpenedCallback)
-      //   .endInit();
+      window["plugins"].OneSignal
+        .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
 
       StatusBar.styleDefault();
       Splashscreen.hide();

@@ -29250,6 +29250,10 @@ ion-navbar.toolbar {
   text-transform: capitalize;
 }
 
+.title {
+  font-size: 12px;
+}
+
 ion-header button {
   width: 10% !important;
 }

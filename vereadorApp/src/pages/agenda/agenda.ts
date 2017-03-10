@@ -5,6 +5,7 @@ import { MonthViewComponent } from 'ionic2-calendar/monthview';
 import { WeekViewComponent } from 'ionic2-calendar/weekview';
 import { DayViewComponent } from 'ionic2-calendar/dayview';
 import { NgCalendarModule  } from 'ionic2-calendar';
+import { AdicionarEventoPage } from '../adicionar-evento/adicionar-evento';
 
 /*
   Generated class for the Agenda page.
@@ -53,5 +54,10 @@ export class AgendaPage {
 
   onTimeSelected(ev) {
     //console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' + (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
+  }
+
+  
+  adicionar(){
+    this.navCtrl.push(AdicionarEventoPage);
   }
 }

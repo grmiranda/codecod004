@@ -18,8 +18,8 @@
 
 <ion-content padding>
 <!--Barra superior do calendário-->
-  <ion-toolbar class="calendarToolbar" color="secondary">
-      <ion-title>{{mes}}</ion-title>
+  <ion-toolbar class="calendarToolbar" color="laranja">
+      <ion-title class="title">{{mes}}</ion-title>
   </ion-toolbar>
 
 
@@ -35,4 +35,8 @@
         (onTimeSelected)="onTimeSelected($event)"
         step="30">
   </calendar>
+
+      <ion-fab right bottom>
+        <button ion-fab (click)="adicionar()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
 </ion-content>

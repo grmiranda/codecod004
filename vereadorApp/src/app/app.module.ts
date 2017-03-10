@@ -41,6 +41,7 @@ import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania'
 import { NgCalendarModule  } from 'ionic2-calendar';
 import { CategoriasPage } from '../pages/categorias/categorias';
 import { ModalOpcoesPage } from '../pages/modal-opcoes/modal-opcoes';
+import { AdicionarEventoPage } from '../pages/adicionar-evento/adicionar-evento';
 
 //push
 import { OneSignal } from 'ionic-native';
@@ -111,7 +112,8 @@ const cloudSettings: CloudSettings = {
     TrofeuCidadaniaPage,
     CategoriasPage,
     PlRecusadosPage,
-    ModalOpcoesPage
+    ModalOpcoesPage,
+    AdicionarEventoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -155,7 +157,8 @@ const cloudSettings: CloudSettings = {
     TrofeuCidadaniaPage,
     CategoriasPage,
     PlRecusadosPage,
-    ModalOpcoesPage
+    ModalOpcoesPage,
+    AdicionarEventoPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage, 

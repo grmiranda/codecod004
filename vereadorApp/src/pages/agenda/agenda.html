@@ -6,7 +6,10 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="laranja" >
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
     <ion-title>Agenda</ion-title>
   </ion-navbar>
 
@@ -15,7 +18,7 @@
 
 <ion-content padding>
 <!--Barra superior do calendário-->
-  <ion-toolbar class="calendarToolbar" color="laranja">
+  <ion-toolbar class="calendarToolbar" color="secondary">
       <ion-title>{{mes}}</ion-title>
   </ion-toolbar>
 

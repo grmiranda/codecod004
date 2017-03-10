@@ -48,14 +48,19 @@ export class MensagensRecebidasPage {
 
 
   carregar() {
-    this.selecao = false;
-    this.storageService.get().then(res => {
-      this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
-        this.mensagens = res;
-        this.mensagensSelecionadas = [];
-      });
+    this.mensagemService.getMensagemRecebida("1").then(res => {
+      this.mensagens = res;
+      this.mensagensSelecionadas = [];
     });
-
+    /*
+  this.selecao = false;
+  this.storageService.get().then(res => {
+    this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
+      this.mensagens = res;
+      this.mensagensSelecionadas = [];
+    });
+  });
+*/
   }
 
   private doRefresh(refresher) {

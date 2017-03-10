@@ -20,10 +20,11 @@ import { PushService } from '../../providers/push-service';
 })
 export class EnviarMensagemPage {
 
-  private destinatario: string;
-  private usuarioSelecionado:Usuario;
+  private destinatarios: string;
+  private usuarioSelecionado: Usuario[];
   private usuarios: Usuario[] = [];
-  public mensagem: CorpoMensagem = new CorpoMensagem();
+  public textoMensagem: string = "";
+  private enviando: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -33,17 +34,31 @@ export class EnviarMensagemPage {
     private storageService: StorageService,
     private mensagemService: MensagemService,
     private toastCtrl: ToastController,
-    private pushService : PushService
+    private pushService: PushService
   ) {
-    this.destinatario = this.navParams.get('destinatario');
-    this.mensagem.destinatario = this.navParams.get('idDestinatario');
+
+    let destinatariosTelaAnterior = this.navParams.get('usuariosSelecionado');
     this.buscarUsers.getUserAll().then(res => {
       this.usuarios = res;
-    });
+      if (destinatariosTelaAnterior != undefined) {
+        this.inserirDestinatarios(destinatariosTelaAnterior);
+      }
 
-    this.pushService.getId().then(res=>{
-      alert(JSON.stringify(res));
     });
+  }
+
+  private inserirDestinatarios(ids: string[]) {
+    this.destinatarios = "";
+    this.usuarioSelecionado = [];
+    for (let i = 0; i < ids.length; i++) {
+      for (let l = 0; l < this.usuarios.length; l++) {
+        if (this.usuarios[l].IDUsuario == ids[i] && this.usuarioSelecionado.indexOf(this.usuarios[l]) == -1) {
+          this.usuarioSelecionado.push(this.usuarios[l]);
+          this.destinatarios = this.destinatarios + this.usuarios[l].nome + "; ";
+        }
+      }
+    }
+
   }
 
   ionViewDidLoad() {
@@ -51,13 +66,11 @@ export class EnviarMensagemPage {
   }
 
   selecionarDestinatario() {
-    let modal = this.modalCtrl.create(ModalListaUsuariosPage, { listaUsuarios: this.usuarios });
+    let modal = this.modalCtrl.create(ModalListaUsuariosPage, { listaUsuarios: this.usuarios, usuariosSelecionados: this.usuarioSelecionado });
 
     modal.onDidDismiss(data => {
       if (data != undefined) {
-        this.usuarioSelecionado = data;
-        this.destinatario = data.nome;
-        this.mensagem.destinatario = data.id;
+        this.inserirDestinatarios(data);
       }
 
     });
@@ -66,28 +79,36 @@ export class EnviarMensagemPage {
 
   enviar() {
 
+    this.enviando = true;
+    let tudoEnviado = true;
     this.storageService.get().then(res => {
-      this.mensagem.remetente = res.IDUsuario;
-      if (this.mensagem.mensagem != "" && this.mensagem.destinatario != "") {
-        this.mensagemService.enviarMensagem(this.mensagem).then(res => {
+      for (let i = 0; i < this.usuarioSelecionado.length; i++) {
+        let mensagemEnviar = new CorpoMensagem();
+        mensagemEnviar.destinatario = this.usuarioSelecionado[i].IDUsuario;
+        mensagemEnviar.remetente = res.IDUsuario;
+        mensagemEnviar.mensagem = this.textoMensagem;
+        this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
           if (res == true) {
-            this.pushService.pushUmaPessoa("Nova Mensagem", this.usuarioSelecionado);
             let toast = this.toastCtrl.create({
               message: 'Mensagem enviada com sucesso',
               duration: 3000,
               position: 'bottom'
             });
             toast.present();
-            this.navCtrl.pop()
-          }
-        })
-
+            this.pushService.pushUmaPessoa("Nova mensagem", this.usuarioSelecionado[i]);
+          } else {
+            tudoEnviado = false;
+            alert("Erro ao enviar mensagem para " + this.usuarioSelecionado[i].nome);
+          } 
+        });
       }
-      alert(JSON.stringify(this.mensagem));
-
     });
 
-
+    if(tudoEnviado){
+      this.navCtrl.popAll();
+    } else{
+      this.enviando = false;
+    }
   }
 
 }

@@ -25,7 +25,7 @@ export class MensagemService {
       .catch(()=>alert("Erro ao conectar com o servidor"));
   }
 
-  public getMensagemEnviada(id):Promise<CorpoMensagem>{
+  public getMensagemEnviada(id):Promise<CorpoMensagem[]>{
     return this.http.get("http://dsoutlet.com.br/apiLuiz/verSaida.php?id="+ id).toPromise().then(res=>res.json())
     .catch(()=>alert("Erro ao tentar se conectar com o servidor"));
   }
@@ -37,6 +37,11 @@ export class MensagemService {
 
   public ler(id){
     this.http.get("http://dsoutlet.com.br/apiLuiz/ler.php?id="+ id).toPromise().then(res=>res.json());
+  }
+
+  public deletar(IDUsuario, IDMensagem):Promise<boolean>{
+    return this.http.post("http://dsoutlet.com.br/apiLuiz/delMsg.php", JSON.stringify({IDUsuario,IDMensagem} ), { headers: this.headers })
+    .toPromise().then(res=>res.json()).catch(()=>alert("Erro ao tentar se conectar com o servidor"));
   }
 
 }

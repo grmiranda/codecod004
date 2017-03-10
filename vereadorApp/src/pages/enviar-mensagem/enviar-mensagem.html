@@ -18,7 +18,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-11 col-sm>
-        <h4>Para: {{destinatario}} </h4>
+        <h4>Para: {{destinatarios}} </h4>
       </ion-col>
       <ion-col col-1 col-sm>
         <button ion-button style="margin-left: -10px" color="secondary" (click)="selecionarDestinatario()"><ion-icon right name="contacts" ></ion-icon></button>
@@ -28,16 +28,12 @@
 
   <ion-item class="itemtextarea">
     <ion-label floating>Mensagem</ion-label>
-    <ion-textarea rows="10" name="mensagem" [(ngModel)]= "mensagem.mensagem"></ion-textarea>
+    <ion-textarea rows="10" name="mensagem" [(ngModel)]= "textoMensagem"></ion-textarea>
   </ion-item>
-
-  
-
-
 </ion-content>
 
 <ion-footer>
   <ion-item class="itemtextarea">
-    <button ion-button full  color="secondary" large (click) = "enviar()">Enviar</button>
+    <button ion-button full  color="secondary" large [disabled]= "enviando" (click) = "enviar()">Enviar</button>
   </ion-item>
 </ion-footer>

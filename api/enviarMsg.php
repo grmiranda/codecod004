@@ -31,6 +31,8 @@
         $sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM','$idD', '0')";
         $con->query($sql);
 
+
+
         echo json_encode(true);
 	}
 	$con->close();

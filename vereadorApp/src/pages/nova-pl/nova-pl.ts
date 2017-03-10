@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { FotoService } from '../../providers/foto-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 
@@ -12,23 +13,39 @@ export class NovaPlPage {
 
   private pl: ProjetoDeLei;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
+    public projetoDeLeiService: ProjetoDeLeiService,
     public navParams: NavParams,
     private fotoService: FotoService) {
-      this.pl = this.navParams.get("pl");
-      if(this.pl == undefined){
-        this.pl = new ProjetoDeLei();
-      }
+    this.pl = this.navParams.get("pl");
+    if (this.pl == undefined) {
+      this.pl = new ProjetoDeLei();
+    }
+  }
+
+  private finalizar() {
+    if (this.pl.IDUsuario) {
+      this.pl.estado = 'tr';
+      this.projetoDeLeiService.editProjetoDeLei(this.pl).then(res => {
+        if (!res.error && res.value) {
+          //works fine
+          this.navCtrl.pop();
+        } else {
+          //error
+        }
+      });
+    } else {
+      this.projetoDeLeiService.addProjetoDeLei(this.pl).then(res => {
+        if (!res.error && res.value) {
+          //works fine
+          this.navCtrl.pop();
+        } else {
+          //error
+        }
+      });
     }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NovaPlPage');
   }
-
-  private finalizar(){
-
-  }
-
 
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {

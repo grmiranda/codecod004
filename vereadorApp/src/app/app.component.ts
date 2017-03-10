@@ -13,6 +13,11 @@ import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-sol
 import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
+import { AgendaPage } from '../pages/agenda/agenda';
+import { InformacaoPage } from '../pages/informacao/informacao';
+import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
+import { CategoriasPage } from '../pages/categorias/categorias';
+import { Usuario } from '../model/user';
 
 
 
@@ -38,25 +43,26 @@ export class MyApp {
     { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },
     { title: 'Projetos de Lei', component: TabProjetosDeLeiPage },
     { title: 'Avaliar Proposta', component: AvaliarPlPage },
-    { title: 'Mensagem', component: TabMensagemPage }]
+    { title: 'Mensagem', component: TabMensagemPage },
+    { title: 'Agenda', component: AgendaPage },
+    { title: 'Informações úteis', component: InformacaoPage },
+    { title: 'Telefones Úteis', component: CategoriasPage },
+    { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage }]
+
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       var notificationOpenedCallback = function (jsonData) {
       };
 
-      window["plugins"].OneSignal
-        .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
-        .handleNotificationOpened(notificationOpenedCallback)
-        .endInit();
+      // window["plugins"].OneSignal
+      //   .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
+      //   .handleNotificationOpened(notificationOpenedCallback)
+      //   .endInit();
 
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
-
-    window["plugins"].OneSignal
   }
 
   openPage(page) {

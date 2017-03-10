@@ -18,6 +18,7 @@
 		$genero    = $request->genero;
 		$socialID  = $request->socialID;
 		$permissao = 0;
+		$push      = $request->Push;
 		$banido    = 0;
 
 		$telefone = $request->telefone;
@@ -42,7 +43,7 @@
 				$genero = 'f';
 			}
 
-			$sql = "INSERT INTO usuario (nome, email, nascimento, cpf, fotoURL, genero, socialID, permissao, banido) VALUES ('$nome', '$email', '$nasc', '$cpf', '$fotoURL', '$genero', '$socialID', '$permissao', '$banido')";
+			$sql = "INSERT INTO usuario (nome, email, nascimento, cpf, fotoURL, genero, socialID, permissao, banido, Push) VALUES ('$nome', '$email', '$nasc', '$cpf', '$fotoURL', '$genero', '$socialID', '$permissao', '$banido', '$push')";
 			$con->query($sql);
 			
 			$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
@@ -58,7 +59,7 @@
 				$genero = 'female';
 			}
 
-			$vetor['id']         = $id;
+			$vetor['IDUsuario']         = $id;
 			$vetor['nome']       = $nome;
 			$vetor['email']      = $email;
  			$vetor['genero']     = $genero;
@@ -66,11 +67,13 @@
 			$vetor['socialID']   = $socialID;
 			$vetor['cpf']        = $cpf;
 			$vetor['nascimento'] = $nasc;
-			$vetor['telefone'] = $telefone;
-			$vetor['endereco'] = $endereco;
-			$vetor['bairro']   = $bairro;
-			$vetor['cidade']   = $cidade;
-			$vetor['UF']       = $UF;
+			$vetor['telefone']   = $telefone;
+			$vetor['endereco']   = $endereco;
+			$vetor['bairro']     = $bairro;
+			$vetor['cidade']     = $cidade;
+			$vetor['UF']         = $UF;
+			$vetor['permissao']  = $permissao;
+			$vetor['Push']       = $push;
 
 			$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
 			$con->query($sql);

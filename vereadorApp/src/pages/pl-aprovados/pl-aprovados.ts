@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
-
+import { ProjetoDeLeiService } from '../../providers/pl-service';
 
 @Component({
   selector: 'page-pl-aprovados',
@@ -11,10 +10,17 @@ export class PlAprovadosPage {
 
   private pls: ProjetoDeLei[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public projetoDeLeiService: ProjetoDeLeiService) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PlAprovadosPage');
+  ionViewWillEnter() {
+    this.carregarPropostas();
   }
 
+  private carregarPropostas() {
+    this.projetoDeLeiService.getProjetosDeLei('cp').then(res => {
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    })
+  }
 }

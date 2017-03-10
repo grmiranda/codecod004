@@ -12,17 +12,20 @@
 	if (isset($postdata)){
 		$request = json_decode($postdata);
 		
-		$IDSolicitacao	= $request->IDPublicacao;
-		$estado 		= $request->estado;		
-
-		$sql = "SELECT * FROM solicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
+		$IDPL	 = $request->IDPL;
+		$titulo  = $request->titulo;
+		$ementa	 = $request->ementa;
+		$fotoURL = $request->fotoURL;
+		$estado	 = $request->estado;
+		
+		$sql = "SELECT * FROM pl WHERE IDPL = '$IDPL'";
 		$result = $con->query($sql);
 		$numrow = $result->num_rows;		
 		
 		if($numrow !== 1){
 			echo json_encode(false);
 		}else{
-			$sql = "UPDATE solicitacao SET estado = '$estado' WHERE IDPublicacao = '$IDPublicacao'";
+			$sql = "UPDATE pl SET fotoURL = '$fotoURL', titulo = '$titulo', ementa = '$ementa', estado = '$estado' WHERE IDPL = '$IDPL'";
 			$con->query($sql);
 			echo json_encode(true);
 		}

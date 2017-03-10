@@ -11,8 +11,7 @@
         $request = json_decode($postdata);
         $socialID =  $request->token;
         $push = $request->push;
-        $sql = "UPDATE usuario SET Push =  '$push' WHERE socialID = '$socialID'";
-        $result = $con->query($sql);
+        
         $sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);
 
@@ -30,6 +29,11 @@
             $id     = $dados['IDUsuario'];
 
 
+            $sql = "UPDATE usuario SET Push = '' WHERE Push = '$push'";
+            $con->query($sql);
+
+            $sql = "UPDATE usuario SET Push =  '$push' WHERE socialID = '$socialID'";
+            $result = $con->query($sql);            
 
             $sql = "SELECT * FROM telefone WHERE IDUsuario = '$id'";
             $result = $con->query($sql);

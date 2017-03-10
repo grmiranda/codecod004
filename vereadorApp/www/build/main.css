@@ -29244,6 +29244,12 @@ ion-navbar.toolbar {
   position: relative;
 }
 
+.calendarToolbar ion-title {
+  text-align: center;
+  font-style: roboto;
+  text-transform: capitalize;
+}
+
 page-avaliar-pl .back {
   background-color: rgba(132, 132, 132, 0.2);
 }
@@ -29577,6 +29583,17 @@ page-login button:first-of-type {
 
 page-login button {
   background-color: rgba(255, 0, 0, 0.6) !important;
+}
+
+@media (min-width: 680px) {
+  ion-modal-view.modal {
+    top: 10%;
+    right: 0% !important;
+    bottom: 0% !important;
+    left: 0% !important;
+    min-height: 20px !important;
+    width: 50% !important;
+  }
 }
 
 page-nova-pl ion-title {

@@ -29544,11 +29544,11 @@ page-home p {
   margin-left: 10px !important;
 }
 
-ion-header button {
+page-informacao ion-header button {
   width: 10% !important;
 }
 
-ion-title {
+page-informacao ion-title {
   text-align: center;
   margin-right: 10%;
 }

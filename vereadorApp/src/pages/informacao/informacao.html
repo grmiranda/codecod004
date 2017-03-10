@@ -5,19 +5,22 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color="laranja" >
     <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
     </button>
     <ion-title>Informações</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+<ion-list [virtualScroll]="questoes">
+  <ion-item *virtualItem="let questao" (click)="escolherPergunta(questao)">
+    <h3>{{questao.pergunta}}</h3>
+    <p *ngIf="questao == questaoEscolhida">{{questao.resposta}}</p>
+  </ion-item>
+</ion-list>
   
 
 </ion-content>

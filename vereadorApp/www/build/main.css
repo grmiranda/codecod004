@@ -29250,6 +29250,15 @@ ion-navbar.toolbar {
   text-transform: capitalize;
 }
 
+ion-header button {
+  width: 10% !important;
+}
+
+ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
 page-avaliar-pl .back {
   background-color: rgba(132, 132, 132, 0.2);
 }
@@ -29529,6 +29538,15 @@ page-home p {
   font-size: 14px !important;
   line-height: 20px !important;
   margin-left: 10px !important;
+}
+
+ion-header button {
+  width: 10% !important;
+}
+
+ion-title {
+  text-align: center;
+  margin-right: 10%;
 }
 
 page-login h1.titulo {

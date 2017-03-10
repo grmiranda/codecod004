@@ -14,10 +14,10 @@ import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { TabMensagemPage } from '../pages/tab-mensagem/tab-mensagem';
 import { EnviarMensagemPage } from '../pages/enviar-mensagem/enviar-mensagem';
 import { AgendaPage } from '../pages/agenda/agenda';
-import { InformacaoPage } from '../pages/informacao/informacao';
 import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
 import { CategoriasPage } from '../pages/categorias/categorias';
 import { Usuario } from '../model/user';
+import { InformacaoPage } from '../pages/informacao/informacao';
 
 
 
@@ -29,7 +29,7 @@ import { Usuario } from '../model/user';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = LoginPage;
+  rootPage = InformacaoPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

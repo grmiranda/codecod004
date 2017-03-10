@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Questoes } from '../../model/Questoes';
-
+import 'rxjs/add/operator/toPromise';
 /*
   Generated class for the Informacao page.
 
@@ -25,9 +25,7 @@ export class InformacaoPage {
     private http: Http
     ) {
       
-      this.http.get(this.link).toPromise().then(res=>{
-        this.questoes = res.json();
-      }).catch(()=>alert("Erro ao se comunicar com o servidor"));
+      this.http.get(this.link).toPromise().then(res=>this.questoes = res.json()).catch(()=>alert("Erro ao se comunicar com o servidor"));
       
     }
 

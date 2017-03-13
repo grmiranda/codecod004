@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="laranja" >
+  <ion-navbar color="laranja">
     <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
     </button>
@@ -17,9 +17,72 @@
 <ion-content padding>
   <div class="perfil">
     <!-- Imagem de perfil do usuáio-->
-    <img class="imagem-perfil" src="../../image/anonimo.jpg">
+    <img class="imagem-perfil" src="../image/anonimo.jpg">
+
     <!-- Imagem da coroa de louros que varia conforma a posição do usuario (1, 2, 3, default)-->
-    <img class="imagem-coroa" src="../../image/coroa-ouro.png">
+
+    <img class="imagem-coroa" src="../image/coroa-1.png">
+    <!--img class="imagem-coroa" src="../image/coroa-2.png"-->
+    <!--img class="imagem-coroa" src="../image/coroa-3.png"-->
+    <!--img class="imagem-coroa" src="../image/coroa-default.png"-->
+
+    <!-- Selecionar com o ngIf uma das imagens acima conforme a posição do usuário -->
+
   </div>
-  
+
+  <!-- Informações do usuário -->
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-67>Nome do Usuário</ion-col>
+        <ion-col width-33>Pos: X</ion-col> <!-- O "X" deve ser substituido pelo número referente a posição do usuário  -->
+      </ion-row>
+      <ion-row>
+        <ion-col>Pontuação acumulada: X</ion-col> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <h2 class="titulo-rank">TOP 3</h2>
+
+  <!-- Primeiro colocado -->
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img class="primeiro" src="../image/anonimo.jpg">
+      </ion-avatar>
+      <h2>Nome do Usuário</h2>
+    </ion-item>
+    <ion-card-content>
+      <p> Porntuação: X </p> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Segundo colocado -->
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img class="segundo" src="../image/anonimo.jpg">
+      </ion-avatar>
+      <h2>Nome do Usuário</h2>
+    </ion-item>
+    <ion-card-content>
+      <p> Porntuação: X </p> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Terceiro colocado -->
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img class="terceiro" src="../image/anonimo.jpg">
+      </ion-avatar>
+      <h2>Nome do Usuário</h2>
+    </ion-item>
+    <ion-card-content>
+      <p> Porntuação: X </p> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>

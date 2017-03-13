@@ -30563,3 +30563,27 @@ page-solicitacoes ion-card {
   margin-left: 0 !important;
   width: 100% !important;
 }
+
+.perfil {
+  position: relative;
+}
+
+.imagem-perfil {
+  padding-top: 10%;
+  padding-left: 20%;
+  padding-right: 20%;
+  width: 100%;
+  border-radius: 50%;
+  height: 200px;
+  margin-bottom: 50px;
+}
+
+.imagem-coroa {
+  position: absolute;
+  top: 0px;
+  padding-top: 5%;
+  padding-left: 12%;
+  padding-right: 12%;
+  width: 100%;
+  height: 250px;
+}

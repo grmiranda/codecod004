@@ -5,14 +5,21 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>trofeu-cidadania</ion-title>
+  <ion-navbar color="laranja" >
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Troféu Cidadania</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+  <div class="perfil">
+    <!-- Imagem de perfil do usuáio-->
+    <img class="imagem-perfil" src="../../image/anonimo.jpg">
+    <!-- Imagem da coroa de louros que varia conforma a posição do usuario (1, 2, 3, default)-->
+    <img class="imagem-coroa" src="../../image/coroa-ouro.png">
+  </div>
+  
 </ion-content>

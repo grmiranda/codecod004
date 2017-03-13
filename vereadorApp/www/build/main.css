@@ -29553,6 +29553,14 @@ page-informacao ion-title {
   margin-right: 10%;
 }
 
+page-informacao .margemLimitada {
+  white-space: pre-line;
+  margin-bottom: 0px;
+  padding-left: 5px;
+  font-variant: small-caps;
+  font-size: 16px;
+}
+
 page-login h1.titulo {
   color: white;
   text-align: center;

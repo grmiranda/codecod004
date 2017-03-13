@@ -15,12 +15,11 @@
 
 
 <ion-content>
-<ion-list [virtualScroll]="questoes">
-  <ion-item *virtualItem="let questao" (click)="escolherPergunta(questao)">
-    <h3>{{questao.pergunta}}</h3>
-    <p *ngIf="questao == questaoEscolhida">{{questao.resposta}}</p>
+
+  <ion-item *ngFor="let questao of questoes" (click)="escolherPergunta(questao)">
+    <h3 class="margemLimitada">{{questao.pergunta}}</h3>
+    <p *ngIf="questao == questaoEscolhida" class="margemLimitada">{{questao.resposta}}</p>
   </ion-item>
-</ion-list>
   
 
 </ion-content>

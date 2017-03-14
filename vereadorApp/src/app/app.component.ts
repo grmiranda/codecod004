@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { StorageService } from '../providers/storage';
-
-
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
@@ -19,17 +17,13 @@ import { CategoriasPage } from '../pages/categorias/categorias';
 import { Usuario } from '../model/user';
 import { InformacaoPage } from '../pages/informacao/informacao';
 
-
-
-
-
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = InformacaoPage;
+  rootPage = SolicitacoesPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

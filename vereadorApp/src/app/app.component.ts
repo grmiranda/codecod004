@@ -23,7 +23,7 @@ import { InformacaoPage } from '../pages/informacao/informacao';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = SolicitacoesPage;
+  rootPage = TrofeuCidadaniaPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

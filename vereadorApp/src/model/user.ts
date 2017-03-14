@@ -15,6 +15,7 @@ export class Usuario {
     public UF: string;
     public permissao : number;
     public Push : string;
+    public pontos : number;
 
     constructor() {
         this.IDUsuario ="0";

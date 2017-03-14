@@ -7,7 +7,6 @@ page-trofeu-cidadania {
 
 //imagens
 .imagem-perfil{
-    padding-top: 10%; 
     padding-left: 20%;
     padding-right: 20%;
     width: 100%;
@@ -17,8 +16,8 @@ page-trofeu-cidadania {
 }
 .imagem-coroa{
     position: absolute;
-    top: 0px;
-    padding-top: 5%; 
+    top: -20px;
+    padding-top: 5%;
     padding-left: 12%;
     padding-right: 12%;
     width: 100%;
@@ -46,4 +45,3 @@ page-trofeu-cidadania {
     border-width: 3px;
     border-color: #cd7f32;
 }
-

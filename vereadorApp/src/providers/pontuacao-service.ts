@@ -12,9 +12,9 @@ export class PontuacaoService {
 
   }
 
-  public pontuarUsuario(IDUsuario: number, tipo: number): Promise<any>{
+  public pontuarUsuario(IDUsuario: number, tipo: number): Promise<any> {
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addPontuacao.php', JSON.stringify({IDUsuario: IDUsuario, tipo: tipo}), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/addPontuacao.php', JSON.stringify({ IDUsuario: IDUsuario, tipo: tipo }), { headers: this.headers })
       .toPromise()
       .then(res => this.extractData(res))
       .catch(this.handleErrorMessage);
@@ -32,8 +32,17 @@ export class PontuacaoService {
     return retorno;
   }
 
-  public getRank(): Promise<any> {
+  /*Retorna lista com todos os usuarios listados em ordem de pontuacao*/
+  public rankGeral(): Promise<any> {
     return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getPontuacao.php?rank')
+      .toPromise()
+      .then(response => this.extractRankData(response))
+      .catch(this.handleErrorMessage);
+  }
+
+  /*Retorna lista com todos os 'X' primeiros usuarios listados em ordem de pontuacao*/
+  public rankMelhores(top: number): Promise<any> {
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/listaPontuacao.php?rank=' + top)
       .toPromise()
       .then(response => this.extractRankData(response))
       .catch(this.handleErrorMessage);
@@ -50,18 +59,19 @@ export class PontuacaoService {
     return retorno;
   }
 
-  public getPontuacao(id: number): Promise<any> {
-    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getPontuacao.php?id='+id)
+  public getPontuacaoPorID(id: number): Promise<any> {
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/listaPontuacao.php?id=' + id)
       .toPromise()
       .then(response => this.extractGetData(response))
       .catch(this.handleErrorMessage);
   }
 
   private extractGetData(res: Response) {
-    let retorno = { error: false, data: 0 };
+    let retorno = { error: false, data: {} };
     let data = res.json();
-    if (data == null) {
+    if (data == false) {
       retorno.error = true;
+      //id nao encontrado
     } else {
       retorno.data = data;
     }

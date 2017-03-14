@@ -15,11 +15,11 @@ public $telefone;
 }
 
 class Telefone {
-    public $categoria;
+    public $nome;
     public $instituicao;
 
-    function __construct($categoria,$instituicao){
-        $this->categoria = $categoria;
+    function __construct($nome,$instituicao){
+        $this->nome = $nome;
         $this->instituicao = $instituicao;
     }
 }
@@ -58,26 +58,30 @@ $instituicoes[] = new Instituicao("DEPT. Recursos Humanos", "(75) 3602-8305");
 $instituicoes[] = new Instituicao("DEPT. Recursos Humanos", "(75) 3602-8343");
 $instituicoes[] = new Instituicao("DEPT. Licitação e Contratos", "(75) 3602-8376");
 $instituicoes[] = new Instituicao("DEPT. Licitação e Contratos", "(75) 3602-8345");
-$instituicoes[] = new Instituicao("DEPT. Administração Geral", "3602-8312 / 8350");
+$instituicoes[] = new Instituicao("DEPT. Administração Geral", "(75) 3602-8312");
+$instituicoes[] = new Instituicao("DEPT. Administração Geral", "(75) 3602-8350");
 $instituicoes[] = new Instituicao("DEPT. Modernização e Informática", "(75)	3602-8340");
 $instituicoes[] = new Instituicao("DEPT. Modernização e Informática", "(75)	3602-8341");
 $instituicoes[] = new Instituicao("DEPT. Veículos", "(75) 3623-6932");
-$instituicoes[] = new Instituicao("DEPT. Veículos", "(75) 3223 - 8005");
+$instituicoes[] = new Instituicao("DEPT. Veículos", "(75) 3223-8005");
 $instituicoes[] = new Instituicao("DEPT. Patrimônio", "(75) 3602-8331");
 $telefones[] = new Telefone("Departamento", $instituicoes);
 
 //Gabinete
+$instituicoes = array();
 $instituicoes[] = new Instituicao("Gabinete do Prefeito", "(75) 3602-4510");
 $instituicoes[] = new Instituicao("Gabinete do Secretário", "(75) 3602-8315");
 $instituicoes[] = new Instituicao("Gabinete do Secretário", "(75) 3602-8338");
 $telefones[] = new Telefone("Gabinete", $instituicoes);
 
 //procuradorias
+$instituicoes = array();
 $instituicoes[] = new Instituicao("Procuradoria Geral do Município", "(75) 3226-1404");
 $instituicoes[] = new Instituicao("Procuradoria Geral do Município", "(75) 3623-7222");
 $telefones[] = new Telefone("Procuradoria", $instituicoes);
 
 //fundações e institutos
+$instituicoes = array();
 $instituicoes[] = new Instituicao("Fundação Cultural Egberto Tavares Costa", "(75) 2101-8602");
 $instituicoes[] = new Instituicao("Instituto de Previdência de Feira de Santana", "(75) 3623-5991");
 $instituicoes[] = new Instituicao("Fundação Hospitalar de Feira de Santana", "(75) 3602-7100");
@@ -85,15 +89,18 @@ $instituicoes[] = new Instituicao("Instituto de Previdência", "(75) 3623-5991")
 $telefones[] = new Telefone("Fundação e Instituto", $instituicoes);
 
 //Clinicas municipais
+$instituicoes = array();
 $instituicoes[] = new Instituicao("Centro Municipal de Diagnóstico por Imagem", "(75) 3602-7335");
 $instituicoes[] = new Instituicao("Clínica Municipal de Prevenção do Câncer", "(75) 3602-7338");
-$telefones[] = new Telefone("Fundação e Instituto", $instituicoes);
+$telefones[] = new Telefone("Clinicas municipais", $instituicoes);
 
 //junta de Serviço militar
+$instituicoes = array();
 $instituicoes[] = new Instituicao("Junta do Serviço Militar", "(75) 3623-8885");
 $telefones[] = new Telefone("Junta do Serviço Militar", $instituicoes);
 
 //forum filinto bastos
+$instituicoes = array();
 $instituicoes[] = new Instituicao("Fórum - Telefone Geral", "(75) 3602-5900");
 $instituicoes[] = new Instituicao("Fórum - Recepção", "(75) 3602-5977");
 $instituicoes[] = new Instituicao("Fórum - Supervisão", "(75) 3602-5990");
@@ -106,6 +113,7 @@ $telefones[] = new Telefone("Fórum Desembargador Filinto Bastos", $instituicoes
 
 
 //Vara dos Feitos às Relações de Consumo. Cíveis e Comerciais
+$instituicoes = array();
 $instituicoes[] = new Instituicao("1ª Vara dos Feitos às Relações de Consumo. Cíveis e Comerciais - cartório", "(75) 3602-5945");
 $instituicoes[] = new Instituicao("1ª Vara dos Feitos às Relações de Consumo. Cíveis e Comerciais - Gabinete", "(75) 3602-5946");
 $instituicoes[] = new Instituicao("2ª Vara dos Feitos às Relações de Consumo. Cíveis e Comerciais - cartório", "(75) 3602-5929");

@@ -29421,6 +29421,15 @@ page-avaliar-solicitacao ion-card-content {
   max-width: 100% !important;
 }
 
+page-categorias ion-header button {
+  width: 10% !important;
+}
+
+page-categorias ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
 page-editar-publicacao ion-title {
   text-align: center;
   margin-right: 10%;

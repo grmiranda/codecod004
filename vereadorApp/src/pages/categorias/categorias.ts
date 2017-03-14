@@ -38,6 +38,7 @@ export class CategoriasPage {
         this.quicksort(this.categorias[i].instituicao, 0, this.categorias[i].instituicao.length - 1);
         this.todosTelefones = this.todosTelefones.concat(this.categorias[i].instituicao);
       }
+      this.quicksort(this.todosTelefones, 0, this.todosTelefones.length - 1);      
       this.auxTelefones = this.todosTelefones;
     }).catch(() => alert("Erro ao se comunicar com o servidor"));
 

@@ -30586,7 +30586,6 @@ page-solicitacoes ion-card {
 }
 
 .imagem-perfil {
-  padding-top: 10%;
   padding-left: 20%;
   padding-right: 20%;
   width: 100%;
@@ -30597,7 +30596,7 @@ page-solicitacoes ion-card {
 
 .imagem-coroa {
   position: absolute;
-  top: 0px;
+  top: -20px;
   padding-top: 5%;
   padding-left: 12%;
   padding-right: 12%;

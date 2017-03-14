@@ -34,6 +34,7 @@ import { MensagemService } from '../providers/mensagem-service';
 import { ModalListaUsuariosPage } from '../pages/modal-lista-usuarios/modal-lista-usuarios';
 import { RequerimentoService } from '../providers/requerimento-service';
 import { LikeService } from '../providers/like-service';
+import { PontuacaoService } from '../providers/pontuacao-service';
 import { AgendaPage } from '../pages/agenda/agenda';
 import { InformacaoPage } from '../pages/informacao/informacao';
 import { TelefonesPage } from '../pages/telefones/telefones';
@@ -162,9 +163,10 @@ const cloudSettings: CloudSettings = {
     AdicionarEventoPage
   ],
 
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage, 
-  StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, 
-  {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService, ProjetoDeLeiService]
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
+  StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService,
+  PontuacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService, ProjetoDeLeiService]
+
 
 
 })

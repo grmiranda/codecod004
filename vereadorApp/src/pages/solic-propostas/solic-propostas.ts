@@ -3,6 +3,7 @@ import { NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
 import { LikeSolicitacao } from '../../model/like-solicitacao';
+import { PontuacaoService } from '../../providers/pontuacao-service';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { RequerimentoPage } from '../requerimento/requerimento';
@@ -16,6 +17,7 @@ export class SolicPropostasPage {
   private solicitacoes: Solicitacao[] = [];
 
   constructor(public platform: Platform,
+    public pontuacaoService: PontuacaoService,
     public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
     public likeService: LikeService,

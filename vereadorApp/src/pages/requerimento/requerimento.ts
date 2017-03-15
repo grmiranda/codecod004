@@ -18,11 +18,14 @@ export class RequerimentoPage {
     public navParams: NavParams,
     private fotoService: FotoService,
     private requerimentoService: RequerimentoService) {
+
     this.solicitacao = this.navParams.get("solicitacao");
+
   }
 
   private finalizar() {
     this.requerimento.IDSolicitacao = this.solicitacao.IDSolicitacao;
+    this.requerimento.idUsuarioSolicitacao = this.solicitacao.IDUsuario;
     this.requerimentoService.addRequerimento(this.requerimento).then(res => {
       if (!res.error && res.value) {
         //works fine

@@ -4,10 +4,12 @@ export class LikeSolicitacao {
   public tipo: string;
   public IDSolicitacao: number;
   public IDUsuario: number;
+  public IDUsuarioSolicitacao: number = 8;
 
-  constructor(tipo, idU, idS) {
-    this.tipo = tipo;
-    this.IDUsuario = idU;
-    this.IDSolicitacao = idS;
+  constructor(tipo, idU, idS, idUS) {
+    this.tipo = tipo; //tipo de curtida like/dislike
+    this.IDUsuario = idU; //id do usuario que curtiu
+    this.IDSolicitacao = idS; //id da Publicacao
+    this.IDUsuarioSolicitacao = idUS; //id do usuario dono da Publicacao
   }
 }

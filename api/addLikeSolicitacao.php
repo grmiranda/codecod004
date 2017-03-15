@@ -1,4 +1,5 @@
-<?php 
+<?php
+    include 'addPontuacao.php';
     include 'mySQL.php';
     require 'mySQL.php';     
 ?>
@@ -13,6 +14,7 @@
 		$tipo = $request->tipo;
 		$IDSolicitacao = $request->IDSolicitacao;
 		$IDUsuario = $request->IDUsuario;
+        $IDUsuarioSolicitacao = $request->IDUsuarioSolicitacao;
 		
 		if (isset($tipo)){
 			//busca se o usuario ja curtiu aquela solicitacao
@@ -24,8 +26,8 @@
 				$row = $result->fetch_assoc();
 				
 				if($row['tipo'] == $tipo){
-					//se já curtiu retorna false
-					$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao' AND IDUsuario = '$IDUsuario' AND tipo = '$tipo'";
+					//se ja curtiu retorna false
+					$sql = "UPDATE apoiosolicitacao SET tipo = 'u' WHERE IDSolicitacao = '$IDSolicitacao' AND IDUsuario = '$IDUsuario'";
 					$con->query($sql);
 					echo json_encode(false);
 				}else {
@@ -38,8 +40,13 @@
 				//da um like/dislike na solicitacao
 				$sql= "INSERT INTO apoiosolicitacao (tipo, IDSolicitacao, IDUsuario) VALUES ('$tipo', '$IDSolicitacao', '$IDUsuario')";
 				$con->query($sql);
-				echo json_encode(true);
-			}			
+
+                echo json_encode(true);
+
+				if($tipo == 's'){
+                    pontuarUsuario($IDUsuarioSolicitacao, 4, $con);
+                }
+			}
 		}
 	}
 	$con->close();

@@ -54,7 +54,7 @@ export class PlPropostasPage {
   }
 
   private like(pl: ProjetoDeLei) {
-    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei('s', pl.IDPL, pl.IDUsuario)).then(res => {
+    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei('s', 1, pl.IDPL, pl.IDUsuario)).then(res => {
       if (!res.error && res.value) {
         //works fine
         console.log('works');
@@ -67,7 +67,7 @@ export class PlPropostasPage {
   }
 
   private dislike(pl: ProjetoDeLei) {
-    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei('n', pl.IDPL, pl.IDUsuario)).then(res => {
+    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei('n', 1, pl.IDPL, pl.IDUsuario)).then(res => {
       if (!res.error && res.value) {
         //works fine
         console.log('works');

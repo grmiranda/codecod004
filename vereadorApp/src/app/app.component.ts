@@ -16,6 +16,7 @@ import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania'
 import { CategoriasPage } from '../pages/categorias/categorias';
 import { Usuario } from '../model/user';
 import { InformacaoPage } from '../pages/informacao/informacao';
+import { PerfilPage } from '../pages/perfil/perfil';
 
 @Component({
   templateUrl: 'app.html'
@@ -57,6 +58,11 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  openPerfil(){
+     this.menuCtrl.close();
+     this.navCtrl.setRoot(PerfilPage);
   }
 
   openPage(page) {

@@ -1,0 +1,46 @@
+page-perfil {
+
+}
+.center-content{
+  align-items: center;
+  align-content: center;
+}
+.perfil-pic{
+  width: 100%;
+  height: 50%;
+  align-items: center;
+  align-content: center;
+}
+.perfil-pic div{
+  position: relative;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  background-color: rgb(147, 147, 147);
+  text-align: center;
+}
+.login-button-div{
+  margin-bottom: 20px;
+}
+.login-button-div button{
+  padding: 20px;
+}
+.google-button{
+  background-color: #EA4335;
+  font-family: 'Roboto';
+  margin-top: 10px;
+}
+.facebook-button{
+  background-color: #3B5998;
+  font-family: 'Roboto';
+  margin-bottom: 10px;
+}
+
+.item-input::after {
+  border-bottom-color: transparent !important;
+}
+
+.item-input.ng-valid.input-has-value::after{
+  border-bottom-color: transparent;
+}

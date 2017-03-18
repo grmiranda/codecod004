@@ -59,7 +59,9 @@ import { FacebookService } from '../providers/facebook-service';
 import { StorageService } from '../providers/storage';
 import { Storage } from '@ionic/storage';
 import { BuscaUsuariosService } from '../providers/busca-usuarios-service';
-
+import { ShareService } from '../providers/share-service';
+import { SocialSharing } from 'ionic-native';
+import { CompartilharPage } from '../pages/compartilhar/compartilhar';
 import { CadastroService } from '../providers/cadastro-service';
 
 
@@ -115,7 +117,8 @@ const cloudSettings: CloudSettings = {
     CategoriasPage,
     PlRecusadosPage,
     ModalOpcoesPage,
-    AdicionarEventoPage
+    AdicionarEventoPage,
+    CompartilharPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -160,10 +163,11 @@ const cloudSettings: CloudSettings = {
     CategoriasPage,
     PlRecusadosPage,
     ModalOpcoesPage,
-    AdicionarEventoPage
+    AdicionarEventoPage,
+    CompartilharPage
   ],
 
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
   StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService,
   PontuacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService, ProjetoDeLeiService]
 

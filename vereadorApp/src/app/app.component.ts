@@ -16,6 +16,7 @@ import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania'
 import { CategoriasPage } from '../pages/categorias/categorias';
 import { Usuario } from '../model/user';
 import { InformacaoPage } from '../pages/informacao/informacao';
+import { Http, Headers } from '@angular/http';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,13 +25,16 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
 
-  rootPage = CategoriasPage;
+  rootPage = HomePage;
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+
 
   constructor(platform: Platform,
     public menuCtrl: MenuController,
-    private storage: StorageService
+    private storage: StorageService,
+    private http: Http
   ) {
     this.pages = [{ title: 'Notícias', component: HomePage },
     { title: 'Solicitações', component: SolicitacoesPage },
@@ -69,11 +73,15 @@ export class MyApp {
   }
 
   public sair() {
-    this.storage.deslogar();
-    this.menuCtrl.close();
-    this.navCtrl.setRoot(LoginPage);
+    this.storage.get().then(res => {
+      this.http.post("http://dsoutlet.com.br/apiLuiz/logout.php", JSON.stringify(res.socialID), { headers: this.headers }).toPromise().then(res => {
+        if (res.json() == true) {
+          this.storage.deslogar();
+          this.menuCtrl.close();
+          this.navCtrl.setRoot(LoginPage);
+        }
+      }).catch(() => alert("Erro ao se conectar com o servidor"));
+    }).catch(() => alert("Erro ao deslogar"));
   }
-
-
 
 }

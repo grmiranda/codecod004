@@ -39,9 +39,8 @@ export class SolicSolicitadosPage {
       if(!res.error){
         //removeu
         this.carregarSolicitacoes();
-
       }else{
-        //rror
+        //error
       }
     })
   }

@@ -1,0 +1,10 @@
+id|		    descrição			| Pontuação
+1 |solicitação aceita				|   50 ok
+2 |solicitacao solicitada			|  100 ok
+3 |solicitacao concluida			|  500 ok
+4 |receber curtida em solicitacao		|   10 ok  
+5 |sugestão de projeto de lei aceita		|  200 ok
+6 |projeto de lei aceito na camara		|  800 ok
+7 |projeto de lei efetivado			| 7000 ok
+8 |receber curtida em projeto de lei		|   15 ok		      
+9 |depoimento aceito				|   30

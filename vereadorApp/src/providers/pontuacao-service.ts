@@ -12,25 +12,6 @@ export class PontuacaoService {
 
   }
 
-  public pontuarUsuario(IDUsuario: number, tipo: number): Promise<any> {
-    return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addPontuacao.php', JSON.stringify({ IDUsuario: IDUsuario, tipo: tipo }), { headers: this.headers })
-      .toPromise()
-      .then(res => this.extractData(res))
-      .catch(this.handleErrorMessage);
-  }
-
-  private extractData(res: Response) {
-    let retorno = { error: false, message: '' };
-    let data = res.json();
-    if (data === true) {
-      retorno.message = 'Pontuação efetuada!';
-    } else {
-      retorno.error = true;
-      retorno.message = 'Ocorreu um erro!';
-    }
-    return retorno;
-  }
 
   /*Retorna lista com todos os usuarios listados em ordem de pontuacao*/
   public rankGeral(): Promise<any> {

@@ -3,7 +3,6 @@ import { NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
 import { LikeSolicitacao } from '../../model/like-solicitacao';
-import { PontuacaoService } from '../../providers/pontuacao-service';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { RequerimentoPage } from '../requerimento/requerimento';
@@ -17,7 +16,6 @@ export class SolicPropostasPage {
   private solicitacoes: Solicitacao[] = [];
 
   constructor(public platform: Platform,
-    public pontuacaoService: PontuacaoService,
     public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
     public likeService: LikeService,
@@ -45,18 +43,17 @@ export class SolicPropostasPage {
       if (!res.error) {
         //removeu
         this.carregarSolicitacoes();
-
       } else {
-        //rror
+        //error
       }
     })
   }
 
   private like(solicitacao: Solicitacao) {
-    this.likeService.addLikeSolicitacao(new LikeSolicitacao('s', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
+    this.likeService.addLikeSolicitacao(new LikeSolicitacao('s', 1, solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
       if (!res.error && res.value) {
         //works fine
-        console.log('works');
+        console.log('curtiu');
       } else if (res.error) {
         //error
       } else {
@@ -66,10 +63,10 @@ export class SolicPropostasPage {
   }
 
   private dislike(solicitacao: Solicitacao) {
-    this.likeService.addLikeSolicitacao(new LikeSolicitacao('n', solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
+    this.likeService.addLikeSolicitacao(new LikeSolicitacao('n', 1, solicitacao.IDUsuario, solicitacao.IDUsuario)).then(res => {
       if (!res.error && res.value) {
         //works fine
-        console.log('works');
+        console.log('curtiu');
       } else if (res.error) {
         //error
       } else {

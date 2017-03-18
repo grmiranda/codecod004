@@ -17,6 +17,7 @@ import { CategoriasPage } from '../pages/categorias/categorias';
 import { Usuario } from '../model/user';
 import { InformacaoPage } from '../pages/informacao/informacao';
 import { Http, Headers } from '@angular/http';
+import { PerfilPage } from '../pages/perfil/perfil';
 
 @Component({
   templateUrl: 'app.html'
@@ -61,6 +62,11 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  openPerfil(){
+     this.menuCtrl.close();
+     this.navCtrl.setRoot(PerfilPage);
   }
 
   openPage(page) {

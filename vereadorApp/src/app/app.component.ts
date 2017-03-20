@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { StorageService } from '../providers/storage';
 import { HomePage } from '../pages/home/home';
@@ -26,16 +26,18 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
 
-  rootPage = PerfilPage;
+  rootPage = AgendaPage;
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
   private headers = new Headers({ 'Content-Type': 'application/json' });
-
+  private nome: string = "";
+  private foto: string = "";
 
   constructor(platform: Platform,
     public menuCtrl: MenuController,
     private storage: StorageService,
-    private http: Http
+    private http: Http,
+    public events: Events
   ) {
     this.pages = [{ title: 'Notícias', component: HomePage },
     { title: 'Solicitações', component: SolicitacoesPage },
@@ -61,12 +63,19 @@ export class MyApp {
 
       StatusBar.styleDefault();
       Splashscreen.hide();
+
+      events.subscribe('user:changed', user => {
+        if (user !== undefined && user !== null) {
+          this.nome = user.nome;
+          this.foto = user.fotoURL;
+        }
+      });
     });
   }
 
-  openPerfil(){
-     this.menuCtrl.close();
-     this.navCtrl.setRoot(PerfilPage);
+  openPerfil() {
+    this.menuCtrl.close();
+    this.navCtrl.setRoot(PerfilPage);
   }
 
   openPage(page) {

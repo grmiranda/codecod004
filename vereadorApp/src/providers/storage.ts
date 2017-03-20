@@ -4,6 +4,7 @@ import { Usuario } from '../model/user';
 import { FacebookService } from './facebook-service';
 import { GooglePlusService } from './google-plus-service';
 import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
 
 /*
   Generated class for the Storage provider.
@@ -14,16 +15,20 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class StorageService {
 
-  constructor(private fb : FacebookService, private gp : GooglePlusService, public storage: Storage) {
+  constructor( public events: Events, private fb : FacebookService, private gp : GooglePlusService, public storage: Storage) {
     console.log('Hello Storage Provider');
   }
 
   set(user: Usuario) {
 
+    this.events.publish('user:changed', user);
     this.storage.set('usuarioAtual', user)
       .then(
-      () => console.log('Stored item!'),
-      error => console.error('Error storing item', error));
+      () => {
+        this.events.publish('user:changed', user);
+      },
+      error => alert('Erro ao carregar dados')
+      );
 
   }
 

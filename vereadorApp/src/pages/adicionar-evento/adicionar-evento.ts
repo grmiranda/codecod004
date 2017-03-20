@@ -24,7 +24,10 @@ export class AdicionarEventoPage {
 
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.evento.DataInicio = this.navParams.get("dataAtual");
+    this.evento.DataFim = this.navParams.get("dataAtual");
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdicionarEventoPage');

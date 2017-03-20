@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, NavParams, AlertController, Platform, ToastController } from 'ionic-angular';
-import { Events } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { Usuario } from '../../model/user';
 import { StorageService } from '../../providers/storage';
@@ -29,17 +28,18 @@ export class PerfilPage {
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     private storageService: StorageService,
-    public http: Http,
-    public events: Events
-    ) {
-      this.storageService.get().then(res=>{
-        this.usuarioAtual = res;
-        alert(JSON.stringify(this.usuarioAtual));
-      })
+    public http: Http
+  ) {
+    this.carregarConta();
 
-    }
+  }
 
 
+  private carregarConta() {
+    this.storageService.get().then(res => {
+      this.usuarioAtual = res;
+    });
+  }
   //exibe toast
   private presentToast(text) {
     let toast = this.toastCtrl.create({
@@ -51,11 +51,11 @@ export class PerfilPage {
   }
 
 
-   private editarAction() {
+  private editarAction() {
     if (this.editar == false) {
       this.editar = true;
     } else if (this.editar == true) {
-      this.editar = false;      
+      this.editar = false;
       //verificação se dejesa cancelar ou salvar
       let confirm = this.alertCtrl.create({
         title: 'Salvar',
@@ -64,12 +64,23 @@ export class PerfilPage {
           {
             text: 'Descartar',
             handler: () => {
+              this.carregarConta();
             }
           },
           {
             text: 'Salvar',
             handler: () => {
-              this.storageService.set(this.usuarioAtual);
+              if (this.validacao()) {
+                this.mudarPhp().then(res => {
+                  alert(JSON.stringify(res));
+                  if (res.nome != "") {
+                    this.storageService.set(res);
+                    this.presentToast("Alterado com sucesso");
+                  } else {
+                    this.presentToast("Não foi possivel alterar");
+                  }
+                }).catch(() => this.presentToast("Não foi possivel se conectar com o servidor"));
+              }
             }
           }]
       });
@@ -77,9 +88,16 @@ export class PerfilPage {
     }
   }
 
-  mudarFotoPhp():Promise<Usuario>{
-    return this.http.post("http://dsoutlet.com.br/apiLuiz/alterarPerfil.php", JSON.stringify(this.usuarioAtual), {headers: this.headers}).toPromise()
-    .then(res=>res.json()).catch(()=>alert("Erro ao tentar se conectar com servidor"));
+  validacao(): boolean {
+    if (this.usuarioAtual.nome == "" || this.usuarioAtual.telefone == "") {
+      return false;
+    }
+    return true;
+  }
+
+  private mudarPhp(): Promise<Usuario> {
+    return this.http.post("http://dsoutlet.com.br/apiLuiz/alterarPerfil.php", JSON.stringify(this.usuarioAtual), { headers: this.headers }).toPromise()
+      .then(res => res.json()).catch(() => alert("Erro ao tentar se conectar com servidor"));
   }
 
   private alterarFoto() {
@@ -90,13 +108,13 @@ export class PerfilPage {
           {
             text: 'Galeria',
             handler: () => {
-              //this.importarFoto();
+              this.importarFoto();
             }
           },
           {
             text: 'Câmera',
             handler: () => {
-             // this.tirarFoto();
+              this.tirarFoto();
             }
           }
         ]
@@ -105,4 +123,37 @@ export class PerfilPage {
     }
   }
 
+  private importarFoto() {
+    Camera.getPicture({
+      quality: 75,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      saveToPhotoAlbum: false
+    }).then(imageData => {
+      this.usuarioAtual.fotoURL = "data:image/jpeg;base64," + imageData;
+    }, error => {
+      alert("ERROR -> " + JSON.stringify(error));
+    });
+  }
+
+  private tirarFoto() {
+    Camera.getPicture({
+      quality: 75, //Picture quality in range 0-100. Default is 50
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      saveToPhotoAlbum: true
+    }).then(imageData => {
+      this.usuarioAtual.fotoURL = "data:image/jpeg;base64," + imageData;
+    }, error => {
+      alert("ERROR -> " + JSON.stringify(error));
+    });
+  }
 }

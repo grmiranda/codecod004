@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="laranja" >
+  <ion-navbar color="laranja">
     <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
     </button>
@@ -33,45 +33,83 @@
 
     <!--Campos de dados do usuário -->
     <form>
-
       <ion-list no-lines>
-
         <ion-item *ngIf="!editar">
           <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Nome Completo</div>
           <h2 style="color: gray"> {{usuarioAtual.nome}}</h2>
         </ion-item>
-
         <ion-item *ngIf="editar">
           <ion-label floating>Nome Completo</ion-label>
-          <ion-input type="text" name="nome" [(ngModel)] = "usuarioAtual.nome">Nome do Usuário</ion-input>
+          <ion-input type="text" name="nome" [(ngModel)]="usuarioAtual.nome">Nome do Usuário</ion-input>
         </ion-item>
-
         <ion-item>
           <ion-label floating>Data de Nascimento</ion-label>
-          <ion-datetime displayFormat="DD/MMM/YYYY" [disabled]="!editar" name="nascimento" ></ion-datetime>
+          <ion-datetime displayFormat="DD/MMM/YYYY" [disabled]="!editar" name="nascimento" [(ngModel)]="usuarioAtual.nascimento"></ion-datetime>
         </ion-item>
-
         <ion-item>
           <ion-label floating>Gênero</ion-label>
           <ion-select [disabled]="!editar" name="genero" [(ngModel)]="usuarioAtual.genero">
             <ion-option value="male">Masculino</ion-option>
-            <ion-option value="female" >Feminino</ion-option>
+            <ion-option value="female">Feminino</ion-option>
           </ion-select>
         </ion-item>
-
         <ion-item *ngIf="!editar">
           <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Email</div>
           <h2 style="color: gray"> {{usuarioAtual.email}} </h2>
         </ion-item>
-
         <ion-item *ngIf="editar">
           <ion-label floating>Email</ion-label>
           <ion-input type="email" name="email" [(ngModel)]="usuarioAtual.email"></ion-input>
         </ion-item>
-
+        <ion-item *ngIf="!editar">
+          <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">CPF</div>
+          <h2 style="color: gray"> {{usuarioAtual.cpf}} </h2>
+        </ion-item>
+        <ion-item *ngIf="editar">
+          <ion-label floating>cpf</ion-label>
+          <ion-input type="text" name="cpf" [(ngModel)]="usuarioAtual.cpf"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editar">
+          <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Telefone</div>
+          <h2 style="color: gray"> {{usuarioAtual.telefone}} </h2>
+        </ion-item>
+        <ion-item *ngIf="editar">
+          <ion-label floating>Telefone</ion-label>
+          <ion-input type="text" name="telefone" [(ngModel)]="usuarioAtual.telefone"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editar">
+          <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">UF</div>
+          <h2 style="color: gray"> {{usuarioAtual.UF}} </h2>
+        </ion-item>
+        <ion-item *ngIf="editar">
+          <ion-label floating>UF</ion-label>
+          <ion-input type="text" name="UF" [(ngModel)]="usuarioAtual.UF"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editar">
+          <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Cidade</div>
+          <h2 style="color: gray"> {{usuarioAtual.cidade}} </h2>
+        </ion-item>
+        <ion-item *ngIf="editar">
+          <ion-label floating>Cidade</ion-label>
+          <ion-input type="text" name="cidade" [(ngModel)]="usuarioAtual.cidade"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editar">
+          <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Bairro</div>
+          <h2 style="color: gray"> {{usuarioAtual.bairro}} </h2>
+        </ion-item>
+        <ion-item *ngIf="editar">
+          <ion-label floating>Bairro</ion-label>
+          <ion-input type="text" name="bairro" [(ngModel)]="usuarioAtual.bairro"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!editar">
+          <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Endereço</div>
+          <h2 style="color: gray"> {{usuarioAtual.endereco}} </h2>
+        </ion-item>
+        <ion-item *ngIf="editar">
+          <ion-label floating>Endereço</ion-label>
+          <ion-input type="text" name="endereco" [(ngModel)]="usuarioAtual.endereco"></ion-input>
+        </ion-item>
       </ion-list>
-
     </form>
   </div>
-
 </ion-content>

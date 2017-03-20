@@ -9,9 +9,9 @@
 
       <button ion-item (click)="openPerfil()">
         <ion-avatar item-left>
-          <img src="../../image/anonimo.jpg">
+          <img [src] ="foto">
         </ion-avatar>
-        <h2>Nome Do Usuario</h2>
+        <h2>{{nome}}</h2>
         <p>Meu Perfil</p>
       </button>
 

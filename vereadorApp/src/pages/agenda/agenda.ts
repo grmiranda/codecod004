@@ -4,7 +4,7 @@ import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { MonthViewComponent } from 'ionic2-calendar/monthview';
 import { WeekViewComponent } from 'ionic2-calendar/weekview';
 import { DayViewComponent } from 'ionic2-calendar/dayview';
-import { NgCalendarModule  } from 'ionic2-calendar';
+import { NgCalendarModule } from 'ionic2-calendar';
 import { AdicionarEventoPage } from '../adicionar-evento/adicionar-evento';
 
 /*
@@ -23,6 +23,7 @@ export class AgendaPage {
   private eventSource = [];
   private isToday: boolean;
   private permissao = "c";
+  private dataAtual: string = "";
   private mes: string = 'Dezembro'; //titulo
   data = new Date();
 
@@ -38,6 +39,7 @@ export class AgendaPage {
   // funções do calendario
   onCurrentDateChanged(event: Date) {
     this.calendar.currentDate = event;
+
   }
 
   reloadSource(startTime, endTime) {
@@ -48,16 +50,50 @@ export class AgendaPage {
   }
 
   onViewTitleChanged = (title: string) => { // atualiza o título
-    let data = title.split(' '); 
+    let data = title.split(' ');
     this.mes = data[0] + ' - ' + data[1];
   };
 
-  onTimeSelected(ev) {
+  onTimeSelected(event) {
+    let dataAtual = event.selectedTime.toISOString();
+    this.dataAtual = dataAtual.substring(0, 10);
+    console.log(this.dataAtual);
     //console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' + (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
   }
 
-  
-  adicionar(){
-    this.navCtrl.push(AdicionarEventoPage);
+  private getEventos() {
+    this.eventoService.getEventos().then(res => {
+
+      if (res.type == true) {
+        this.eventos = res.data;
+
+        let events = [];
+
+        for (let evento of this.eventos) {
+
+          events.push({
+            id: evento.IDEvento,
+            title: evento.Titulo,
+            startTime: new Date(evento.DataInicio),
+            endTime: new Date(evento.DataTermino),
+            allDay: evento.EventoDiario
+          });
+        }
+
+        this.eventSource = events;
+
+      }
+      else {
+        console.log("error");
+      }
+      this.loader.dismiss();
+
+    });
+
+  }
+
+
+  adicionar() {
+    this.navCtrl.push(AdicionarEventoPage, { dataAtual: this.dataAtual });
   }
 }

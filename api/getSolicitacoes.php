@@ -8,7 +8,7 @@
 	if (isset($_GET["estado"])){
 		if ($_GET["estado"] !== ""){
 			$estado = $_GET["estado"];
-			$sql = "SELECT * FROM solicitacao WHERE estado = '$estado' ORDER BY IDSolicitacao DESC";
+			$sql = "SELECT * FROM IDSolicitacao WHERE estado = '$estado' ORDER BY IDSolicitacao DESC";
 			$result = $con->query($sql);
 			while($row=$result->fetch_assoc()){
 				$vetor[] = $row;

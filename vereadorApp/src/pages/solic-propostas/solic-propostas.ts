@@ -13,7 +13,7 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 })
 export class SolicPropostasPage {
 
-  private solicitacoes: Solicitacao[] = [];
+  private solicitacoes:any = [];
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
@@ -33,7 +33,7 @@ export class SolicPropostasPage {
     })
   }
 
-  public novaProposta() {
+  private novaProposta() {
     this.navCtrl.push(NovaPropostaPage);
   }
 
@@ -49,29 +49,11 @@ export class SolicPropostasPage {
     })
   }
 
-  private like(solicitacao: Solicitacao) {
-    this.likeService.addLikeSolicitacao(new LikeSolicitacao('s', 1, solicitacao.IDSolicitacao, solicitacao.IDUsuario)).then(res => {
-      if (!res.error && res.value) {
-        //works fine
-        console.log('curtiu');
-      } else if (res.error) {
-        //error
-      } else {
-        console.log('ja curtiu');
-      }
-    });
-  }
-
-  private dislike(solicitacao: Solicitacao) {
-    this.likeService.addLikeSolicitacao(new LikeSolicitacao('n', 1, solicitacao.IDUsuario, solicitacao.IDUsuario)).then(res => {
-      if (!res.error && res.value) {
-        //works fine
-        console.log('curtiu');
-      } else if (res.error) {
-        //error
-      } else {
-        console.log('ja curtiu');
-      }
+  private like(solicitacao, tipo: string) {
+    this.likeService.addLikeSolicitacao(new LikeSolicitacao(tipo, 18, solicitacao.solicitacao.IDSolicitacao, solicitacao.solicitacao.IDUsuario)).then(res => {
+      solicitacao.t = res.value.t;
+      solicitacao.p = res.value.p;
+      solicitacao.n = res.value.n;
     });
   }
 

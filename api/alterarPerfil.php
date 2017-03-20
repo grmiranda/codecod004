@@ -50,8 +50,13 @@
 			} else {
 				$genero = 'female';
 			}
+			$idU = $dados['IDUsuario'];
 
-			
+			$sql = "UPDATE telefone SET numero = '$telefone' WHERE IDUsuario = '$idU'";
+			$con->query($sql);
+
+			$sql = "UPDATE endereco SET endereco = '$endereco', bairro = '$bairro', cidade = '$cidade', uf = '$UF' WHERE IDUsuario = '$idU'";
+			$con->query($sql);
 
 			$vetor['IDUsuario']  = $dados['IDUsuario'];
 			$vetor['nome']       = $nome;

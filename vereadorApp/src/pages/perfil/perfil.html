@@ -28,7 +28,7 @@
   <div>
     <!--Imagem do usuario-->
     <div (click)="alterarFoto()" class="center-content">
-      <img src="../../image/anonimo.jpg" alt="foto perfil" width="100%" style="padding-left: 25px; padding-right: 25px; border-radius: 50%;">
+      <img [src]="usuarioAtual.fotoURL" alt="foto perfil" width="100%" style="padding-left: 25px; padding-right: 25px; border-radius: 50%;">
     </div>
 
     <!--Campos de dados do usuário -->
@@ -38,12 +38,12 @@
 
         <ion-item *ngIf="!editar">
           <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Nome Completo</div>
-          <h2 style="color: gray"> Nome do Usuário</h2>
+          <h2 style="color: gray"> {{usuarioAtual.nome}}</h2>
         </ion-item>
 
         <ion-item *ngIf="editar">
           <ion-label floating>Nome Completo</ion-label>
-          <ion-input type="text" name="nome">Nome do Usuário</ion-input>
+          <ion-input type="text" name="nome" [(ngModel)] = "usuarioAtual.nome">Nome do Usuário</ion-input>
         </ion-item>
 
         <ion-item>
@@ -53,47 +53,25 @@
 
         <ion-item>
           <ion-label floating>Gênero</ion-label>
-          <ion-select [disabled]="!editar" name="genero" >
-            <ion-option value="m">Masculino</ion-option>
-            <ion-option value="f">Feminino</ion-option>
+          <ion-select [disabled]="!editar" name="genero" [(ngModel)]="usuarioAtual.genero">
+            <ion-option value="male">Masculino</ion-option>
+            <ion-option value="female" >Feminino</ion-option>
           </ion-select>
         </ion-item>
 
         <ion-item *ngIf="!editar">
           <div style="font-size: 13px; color: LightGray; padding-top: 1px; padding-bottom: 9px">Email</div>
-          <h2 style="color: gray"> Nome do Usuário </h2>
+          <h2 style="color: gray"> {{usuarioAtual.email}} </h2>
         </ion-item>
 
         <ion-item *ngIf="editar">
           <ion-label floating>Email</ion-label>
-          <ion-input type="email" name="email"> Nome do Usuário</ion-input>
-        </ion-item>
-
-        <ion-item *ngIf="editar">
-          <ion-label floating>Senha Atual</ion-label>
-          <ion-input type="password" name="senha" [(ngModel)]="senhaAtual"></ion-input>
-        </ion-item>
-
-        <ion-item *ngIf="editar">
-          <ion-label floating>Nova Senha</ion-label>
-          <ion-input type="password" name="senha1" [(ngModel)]="confSenha1"></ion-input>
-        </ion-item>
-
-        <ion-item *ngIf="editar" style="border-bottom-color: transparent">
-          <ion-label floating>Repetir Senha</ion-label>
-          <ion-input type="password" name="senha2" [(ngModel)]="confSenha2"></ion-input>
+          <ion-input type="email" name="email" [(ngModel)]="usuarioAtual.email"></ion-input>
         </ion-item>
 
       </ion-list>
 
     </form>
-
-    <div class="login-button-div">
-      <!--Botão para login com Facebook-->
-      <button ion-button icon-left full text-capitalize class="facebook-button" (click)="conectarFace()">
-        <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon> Entre com Facebook
-      </button>
-    </div>
   </div>
 
 </ion-content>

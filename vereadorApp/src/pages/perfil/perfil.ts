@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, NavParams, AlertController, Platform, ToastController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, ActionSheetController, NavParams, AlertController, Platform, ToastController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { Camera } from 'ionic-native';
+import { Usuario } from '../../model/user';
+import { StorageService } from '../../providers/storage';
+import { Http, Headers } from '@angular/http';
 
 /*
   Generated class for the Perfil page.
@@ -16,20 +19,25 @@ import { Camera } from 'ionic-native';
 export class PerfilPage {
 
   private editar: boolean = false;
-  private loading: Loading;
-  private loaded: boolean = false;
-  private senhaAtual: string = '';
-  private confSenha1: string = '';
-  private confSenha2: string = '';
+  private usuarioAtual: Usuario = new Usuario();
+  private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private toastCtrl: ToastController,
     public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
     public actionSheetCtrl: ActionSheetController,
-    public events: Events) {}
+    private storageService: StorageService,
+    public http: Http,
+    public events: Events
+    ) {
+      this.storageService.get().then(res=>{
+        this.usuarioAtual = res;
+        alert(JSON.stringify(this.usuarioAtual));
+      })
+
+    }
 
 
   //exibe toast
@@ -42,10 +50,12 @@ export class PerfilPage {
     toast.present();
   }
 
+
    private editarAction() {
     if (this.editar == false) {
       this.editar = true;
     } else if (this.editar == true) {
+      this.editar = false;      
       //verificação se dejesa cancelar ou salvar
       let confirm = this.alertCtrl.create({
         title: 'Salvar',
@@ -54,18 +64,22 @@ export class PerfilPage {
           {
             text: 'Descartar',
             handler: () => {
-              //this.descartar();
             }
           },
           {
             text: 'Salvar',
             handler: () => {
-              //this.salvar();
+              this.storageService.set(this.usuarioAtual);
             }
           }]
       });
       confirm.present();
     }
+  }
+
+  mudarFotoPhp():Promise<Usuario>{
+    return this.http.post("http://dsoutlet.com.br/apiLuiz/alterarPerfil.php", JSON.stringify(this.usuarioAtual), {headers: this.headers}).toPromise()
+    .then(res=>res.json()).catch(()=>alert("Erro ao tentar se conectar com servidor"));
   }
 
   private alterarFoto() {

@@ -30,7 +30,11 @@
 
 		if ($num !== 1){
 
+			echo json_encode(false);
+
+		} else {
 			$vetor = array();
+			$dados = $result->fetch_assoc();
 
 			if ($genero == 'male'){
 				$genero = 'm';
@@ -38,15 +42,8 @@
 				$genero = 'f';
 			}
 
-			$sql = "UPDATE usuario SET nome = '$nome', email = '$email', nascimento = '$nasc', cpf = '$cpf', fotoURL = '$fotoURL', genero = '$genero'";
+			$sql = "UPDATE usuario SET nome = '$nome', email = '$email', nascimento = '$nasc', cpf = '$cpf', fotoURL = '$fotoURL', genero = '$genero' WHERE socialID = '$socialID'";
 			$con->query($sql);
-			
-			$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
-			$result = $con->query($sql);
-
-			$dados = $result->fetch_assoc();
-
-			$id = $dados['IDUsuario'];
 
 			if ($genero == 'm'){
 				$genero == 'male';
@@ -54,7 +51,9 @@
 				$genero = 'female';
 			}
 
-			$vetor['IDUsuario']         = $id;
+			
+
+			$vetor['IDUsuario']  = $dados['IDUsuario'];
 			$vetor['nome']       = $nome;
 			$vetor['email']      = $email;
  			$vetor['genero']     = $genero;
@@ -67,19 +66,12 @@
 			$vetor['bairro']     = $bairro;
 			$vetor['cidade']     = $cidade;
 			$vetor['UF']         = $UF;
-			$vetor['permissao']  = $permissao;
-			$vetor['Push']       = $push;
+			$vetor['permissao']  = $dados['permissao'];
+			$vetor['Push']       = $dados['Push'];
+			$vetor['pontos']     = $dados['pontos'];
 
-			$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
-			$con->query($sql);
-			
-			$sql = "INSERT INTO endereco (endereco, bairro, cidade, uf, IDUsuario) VALUES ('$endereco', '$bairro', '$cidade', '$UF', '$id')";
-			$con->query($sql);
-			
 			echo json_encode($vetor);
 
-		} else {
-			echo json_encode(false);
 		}
 	}
 	$con->close();

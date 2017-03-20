@@ -2,19 +2,19 @@
 	
 	function getLike($idSolicitacao, $idUsuario, $con){
 	
-		$vetor = array();
+		$info = new stdClass();;
 		
 		$sql = "SELECT IDApoioSolicitacao FROM apoiosolicitacao where tipo = 's' and IDSolicitacao = '$idSolicitacao'";
 		$result = $con->query($sql);
 		$numrow = $result->num_rows;
 		
-		$vetor[] = $numrow; //curtidas positivas
+		$info->p = $numrow; //curtidas positivas
 		
 		$sql = "SELECT IDApoioSolicitacao FROM apoiosolicitacao where tipo = 'n' and IDSolicitacao = '$idSolicitacao'";
 		$result = $con->query($sql);
 		$numrow = $result->num_rows;
 		
-		$vetor[] = $numrow; //curtidas negativas
+		$info->n = $numrow; //curtidas negativas
 		
 		$sql = "SELECT tipo FROM apoiosolicitacao where IDSolicitacao = '$idSolicitacao' and IDUsuario = '$idUsuario'";
 		$result = $con->query($sql);
@@ -22,12 +22,32 @@
 		
 		if ($numrow > 0){
 			$row=$result->fetch_assoc();
-			$vetor[] = $row['tipo']; //curtida do usuario
+			$info->t = $row['tipo']; //tipo da curtida do usuario
 		}else{
-			$vetor[] = false;
+			$info->t = false;
 		}
 		
-		return($vetor);
+		return($info);
+		
+	}
+	
+		function getQuantidadeLike($idSolicitacao, $con){
+	
+		$info = new stdClass();;
+		
+		$sql = "SELECT IDApoioSolicitacao FROM apoiosolicitacao where tipo = 's' and IDSolicitacao = '$idSolicitacao'";
+		$result = $con->query($sql);
+		$numrow = $result->num_rows;
+		
+		$info->p = $numrow; //quantidade de curtidas positivas
+		
+		$sql = "SELECT IDApoioSolicitacao FROM apoiosolicitacao where tipo = 'n' and IDSolicitacao = '$idSolicitacao'";
+		$result = $con->query($sql);
+		$numrow = $result->num_rows;
+		
+		$info->n = $numrow; //quantidade de curtidas negativas
+
+		return($info);
 		
 	}
 

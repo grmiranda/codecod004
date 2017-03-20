@@ -14,7 +14,7 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 })
 export class SolicPropostasPage {
 
-  private solicitacoes: any = [];
+  private solicitacoes: any[] = [];
   private myID;
 
   constructor(public platform: Platform,

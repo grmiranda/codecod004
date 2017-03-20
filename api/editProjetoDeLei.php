@@ -34,11 +34,18 @@ if (isset($postdata)) {
 
         if ($estado == 'ap') { //se a solicitacao for aceita o usuario criador recebe pontuacao
             pontuarUsuario($IDUsuario, 5, $con);
-        } else if ($estado == 'tr') { //se a solicitacao for realizada o usuario criador recebe pontuacao
+        } else if ($estado == 'tr') { //se a solicitacao for tramitada o usuario criador recebe pontuacao
             pontuarUsuario($IDUsuario, 6, $con);
-        } else if ($estado == 'cp') { //se a solicitacao for realizada o usuario criador recebe pontuacao
+        } else if ($estado == 'cp') { //se a solicitacao for concluida o usuario criador recebe pontuacao
             pontuarUsuario($IDUsuario, 7, $con);
-        }
+			//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+			$sql = "DELETE FROM avaliapl WHERE IDPL = '$IDPL'";
+			$con->query($sql);
+		}else{
+			//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+			$sql = "DELETE FROM avaliapl WHERE IDPL = '$IDPL'";
+			$con->query($sql);
+		}
     }
 }
 

@@ -2,7 +2,7 @@
 	
 	function getLike($idSolicitacao, $idUsuario, $con){
 	
-		$info = new stdClass();;
+		$info = new stdClass();
 		
 		$sql = "SELECT IDApoioSolicitacao FROM apoiosolicitacao where tipo = 's' and IDSolicitacao = '$idSolicitacao'";
 		$result = $con->query($sql);
@@ -31,9 +31,9 @@
 		
 	}
 	
-		function getQuantidadeLike($idSolicitacao, $con){
+	function getQuantidadeLike($idSolicitacao, $con){
 	
-		$info = new stdClass();;
+		$info = new stdClass();
 		
 		$sql = "SELECT IDApoioSolicitacao FROM apoiosolicitacao where tipo = 's' and IDSolicitacao = '$idSolicitacao'";
 		$result = $con->query($sql);

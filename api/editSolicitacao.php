@@ -42,8 +42,18 @@ if (isset($postdata)) {
             pontuarUsuario($IDUsuario, 1, $con);
         }else if($estado == 'cp'){ //se a solicitacao for realizada o usuario criador recebe pontuacao
             pontuarUsuario($IDUsuario, 3, $con);
-        }
+			//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+			$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
+			$con->query($sql);
+			
+        }else{
+			//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+			$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
+			$con->query($sql);
+		}
     }
 }
+
 $con->close();
+
 ?>

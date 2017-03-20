@@ -26,8 +26,12 @@ if (isset($postdata)) {
         $sql = "INSERT INTO requerimento (fotoURL, data, IDSolicitacao) VALUES ('$fotoURL', '$data', '$IDSolicitacao')";
         $con->query($sql);
         echo json_encode(true);
+		
+		//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+        $sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
+        $con->query($sql);
 
-        pontuarUsuario($idUsuarioSolicitacao, 2, $con);
+        pontuarUsuario($idUsuarioSolicitacao, 2, $con); //pontua o usuario de acordo com a acao efetuada
 
     } else {
         echo json_encode(false);

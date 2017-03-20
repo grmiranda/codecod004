@@ -11,9 +11,9 @@ export class SolicReprovadosPage {
 
   private solicitacoes: Solicitacao[] = [];
 
-  
+
   constructor(public platform: Platform,
-  public navCtrl: NavController, 
+  public navCtrl: NavController,
   public navParams: NavParams,
   public actionSheetCtrl: ActionSheetController,
   public solicitacaoService: SolicitacaoService) {}

@@ -45,8 +45,7 @@
                 }
 			}
 			
-			$info = getLike($IDSolicitacao, 18, $con);
-			echo json_encode($info);
+			echo json_encode(getQuantidadeLike($IDSolicitacao, $con));
 			
 		}
 	}

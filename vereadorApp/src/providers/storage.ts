@@ -5,20 +5,15 @@ import { FacebookService } from './facebook-service';
 import { GooglePlusService } from './google-plus-service';
 import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the Storage provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class StorageService {
 
-  constructor(private fb : FacebookService, private gp : GooglePlusService, public storage: Storage) {
-    console.log('Hello Storage Provider');
+  constructor(private fb: FacebookService, private gp: GooglePlusService, public storage: Storage) {
+    //console.log('Hello Storage Provider');
   }
 
-  set(user: Usuario) {
+  public set(user: Usuario) {
 
     this.storage.set('usuarioAtual', user)
       .then(
@@ -27,24 +22,21 @@ export class StorageService {
 
   }
 
-  get(): Promise<Usuario> {
+  public get(): Promise<Usuario> {
 
     return this.storage.get('usuarioAtual')
-  .then(
-    data => data,
-    error => {
-      return new Usuario();
-    }).catch(()=>new Usuario());
+      .then(
+      data => data,
+      error => {
+        return new Usuario();
+      }).catch(() => new Usuario());
 
   }
 
-  deslogar() {
+  public deslogar() {
     this.fb.logoutFb();
     this.gp.logoutGoogle();
-    return this.storage.remove('usuarioAtual').then(response => {alert("deslogado com sucesso")});
+    return this.storage.remove('usuarioAtual').then(response => { alert("deslogado com sucesso") });
   }
-
-
-
 
 }

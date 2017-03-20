@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
+import { StorageService } from '../../providers/storage';
 import { LikeSolicitacao } from '../../model/like-solicitacao';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
@@ -13,20 +14,25 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 })
 export class SolicPropostasPage {
 
-  private solicitacoes:any = [];
+  private solicitacoes: any = [];
+  private myID;
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
+    public storage: StorageService,
     public likeService: LikeService,
     public actionSheetCtrl: ActionSheetController) { }
 
   ionViewWillEnter() {
-    this.carregarSolicitacoes();
+    this.storage.get().then(res => {
+      this.myID = res.IDUsuario;
+      this.carregarSolicitacoes();
+    });
   }
 
   private carregarSolicitacoes() {
-    this.solicitacaoService.getSolicitacoes('ap').then(res => {
+    this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
       if (!res.error) {
         this.solicitacoes = res.data;
       }
@@ -50,8 +56,8 @@ export class SolicPropostasPage {
   }
 
   private like(solicitacao, tipo: string) {
-    this.likeService.addLikeSolicitacao(new LikeSolicitacao(tipo, 18, solicitacao.solicitacao.IDSolicitacao, solicitacao.solicitacao.IDUsuario)).then(res => {
-      solicitacao.t = res.value.t;
+    solicitacao.t = solicitacao.t == tipo ? 'u' : tipo;
+    this.likeService.addLikeSolicitacao(new LikeSolicitacao(tipo, this.myID, solicitacao.solicitacao.IDSolicitacao, solicitacao.solicitacao.IDUsuario)).then(res => {
       solicitacao.p = res.value.p;
       solicitacao.n = res.value.n;
     });

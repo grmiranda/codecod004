@@ -27,7 +27,7 @@ export class RequerimentoPage {
 
   private finalizar() {
 
-    if(this.solicitacao.andamento.trim() == '' || this.solicitacao.andamento == null){
+    if(this.solicitacao.andamento == null || this.solicitacao.andamento.trim() == ''){
       this.displayToast('Descreva o andamento da Solicitação');
     }else{
       this.requerimento.IDSolicitacao = this.solicitacao.IDSolicitacao;

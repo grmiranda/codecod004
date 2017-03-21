@@ -15,7 +15,7 @@ import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 export class PlAndamentoPage {
 
   private pls: any[] = [];
-  private myID;
+  private myID = 8;
 
   constructor(public navCtrl: NavController,
     public likeService: LikeService,
@@ -25,25 +25,24 @@ export class PlAndamentoPage {
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform) {
 
-    }
+  }
 
-    ionViewWillEnter() {
-      this.storage.get().then(res => {
-        this.myID = res.IDUsuario;
-        this.carregarPropostas();
-      });
-    }
+  ionViewWillEnter() {
+    // this.storage.get().then(res => {
+    //   this.myID = res.IDUsuario;
+    this.carregarPropostas();
+    // });
+  }
 
-    private carregarPropostas() {
-      this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
-        console.log(res);
-        if (!res.error) {
-          this.pls = res.data;
-        }
-      })
-    }
+  private carregarPropostas() {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    })
+  }
 
-  private novoPL(){
+  private novoPL() {
     this.navCtrl.push(NovaPlPage);
   }
 
@@ -71,7 +70,7 @@ export class PlAndamentoPage {
     });
   }
 
-  private like(projetodelei, tipo:string) {
+  private like(projetodelei, tipo: string) {
     projetodelei.t = projetodelei.t == tipo ? 'u' : tipo;
     this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.myID, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
       projetodelei.p = res.value.p;

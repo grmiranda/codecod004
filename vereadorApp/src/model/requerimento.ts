@@ -4,7 +4,8 @@ export class Requerimento{
     public fotoURL: string = "";
     public data: string = "";
     public IDSolicitacao: number;
-    
+    public idUsuarioSolicitacao: number;
+
     constructor(){
 
     }

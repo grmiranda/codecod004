@@ -13,9 +13,7 @@ export class AvaliarSolicitacaoPage {
 
   constructor(public platform: Platform,
     public solicitacaoService: SolicitacaoService,
-    public actionSheetCtrl: ActionSheetController) {
-
-  }
+    public actionSheetCtrl: ActionSheetController) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
@@ -33,10 +31,9 @@ export class AvaliarSolicitacaoPage {
     solicitacao.estado = 'ap';
     this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
       if(!res.error){
-        //editou
         this.carregarSolicitacoes();
       }else{
-        //rror
+        //error
       }
     })
   }
@@ -47,7 +44,7 @@ export class AvaliarSolicitacaoPage {
       if(!res.error){
         //editou
       }else{
-        //rror
+        //error
       }
     })
   }

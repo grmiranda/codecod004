@@ -6,6 +6,15 @@
   </ion-header>
   <ion-content>
     <ion-list>
+
+      <button ion-item (click)="openPerfil()">
+        <ion-avatar item-left>
+          <img src="../../image/anonimo.jpg">
+        </ion-avatar>
+        <h2>Nome Do Usuario</h2>
+        <p>Meu Perfil</p>
+      </button>
+
       <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>

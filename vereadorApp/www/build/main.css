@@ -29421,6 +29421,15 @@ page-avaliar-solicitacao ion-card-content {
   max-width: 100% !important;
 }
 
+page-categorias ion-header button {
+  width: 10% !important;
+}
+
+page-categorias ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
 page-editar-publicacao ion-title {
   text-align: center;
   margin-right: 10%;
@@ -29775,6 +29784,64 @@ page-nova-publicacao .blockbutton {
   text-align: center !important;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.center-content {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+}
+
+.perfil-pic {
+  width: 100%;
+  height: 50%;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+}
+
+.perfil-pic div {
+  position: relative;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  background-color: #939393;
+  text-align: center;
+}
+
+.login-button-div {
+  margin-bottom: 20px;
+}
+
+.login-button-div button {
+  padding: 20px;
+}
+
+.google-button {
+  background-color: #EA4335;
+  font-family: 'Roboto';
+  margin-top: 10px;
+}
+
+.facebook-button {
+  background-color: #3B5998;
+  font-family: 'Roboto';
+  margin-bottom: 10px;
+}
+
+.item-input::after {
+  border-bottom-color: transparent !important;
+}
+
+.item-input.ng-valid.input-has-value::after {
+  border-bottom-color: transparent;
 }
 
 page-pl-andamento .back {
@@ -30577,7 +30644,6 @@ page-solicitacoes ion-card {
 }
 
 .imagem-perfil {
-  padding-top: 10%;
   padding-left: 20%;
   padding-right: 20%;
   width: 100%;
@@ -30588,7 +30654,7 @@ page-solicitacoes ion-card {
 
 .imagem-coroa {
   position: absolute;
-  top: 0px;
+  top: -20px;
   padding-top: 5%;
   padding-left: 12%;
   padding-right: 12%;

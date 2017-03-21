@@ -48,11 +48,7 @@ export class MensagensRecebidasPage {
 
 
   carregar() {
-    this.mensagemService.getMensagemRecebida("1").then(res => {
-      this.mensagens = res;
-      this.mensagensSelecionadas = [];
-    });
-    /*
+    
   this.selecao = false;
   this.storageService.get().then(res => {
     this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
@@ -60,7 +56,7 @@ export class MensagensRecebidasPage {
       this.mensagensSelecionadas = [];
     });
   });
-*/
+
   }
 
   private doRefresh(refresher) {

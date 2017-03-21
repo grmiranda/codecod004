@@ -14,7 +14,6 @@ export class NovaPropostaPlPage {
   constructor(public navCtrl: NavController, public projetoDeLeiService: ProjetoDeLeiService) { }
 
   private finalizar() {
-    this.pl.IDUsuario = 0;
     this.projetoDeLeiService.addProjetoDeLei(this.pl).then(res => {
       if (!res.error && res.value) {
         //works fine

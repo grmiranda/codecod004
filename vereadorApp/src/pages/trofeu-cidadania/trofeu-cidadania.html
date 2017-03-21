@@ -17,7 +17,7 @@
 <ion-content padding>
   <div class="perfil">
     <!-- Imagem de perfil do usuáio-->
-    <img class="imagem-perfil" src="../image/anonimo.jpg">
+    <img class="imagem-perfil" src="{{ myRank.fotoURL }}">
 
     <!-- Imagem da coroa de louros que varia conforma a posição do usuario (1, 2, 3, default)-->
 
@@ -34,11 +34,13 @@
   <div>
     <ion-grid>
       <ion-row>
-        <ion-col width-67>Nome do Usuário</ion-col>
-        <ion-col width-33>Pos: X</ion-col> <!-- O "X" deve ser substituido pelo número referente a posição do usuário  -->
+        <ion-col width-67>{{ myRank.nome }}</ion-col>
+        <ion-col width-33>Posição: {{ myRank.pos }}º</ion-col>
+        <!-- O "X" deve ser substituido pelo número referente a posição do usuário  -->
       </ion-row>
       <ion-row>
-        <ion-col>Pontuação acumulada: X</ion-col> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+        <ion-col>Pontuação acumulada: {{ myRank.pontos }}</ion-col>
+        <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
       </ion-row>
     </ion-grid>
   </div>
@@ -49,12 +51,13 @@
   <ion-card>
     <ion-item>
       <ion-avatar item-left>
-        <img class="primeiro" src="../image/anonimo.jpg">
+        <img class="primeiro"  src="{{ rank[0].fotoURL }}">
       </ion-avatar>
-      <h2>Nome do Usuário</h2>
+      <h2>{{ rank[0].nome }}</h2>
     </ion-item>
     <ion-card-content>
-      <p> Porntuação: X </p> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+      <p> Pontuação: {{ rank[0].pontos }} </p>
+      <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
     </ion-card-content>
   </ion-card>
 
@@ -62,12 +65,13 @@
   <ion-card>
     <ion-item>
       <ion-avatar item-left>
-        <img class="segundo" src="../image/anonimo.jpg">
+        <img class="segundo" src="{{ rank[1].fotoURL }}">
       </ion-avatar>
-      <h2>Nome do Usuário</h2>
+      <h2>{{ rank[1].nome }}</h2>
     </ion-item>
     <ion-card-content>
-      <p> Porntuação: X </p> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+      <p> Pontuação: {{ rank[1].pontos }} </p>
+      <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
     </ion-card-content>
   </ion-card>
 
@@ -75,12 +79,13 @@
   <ion-card>
     <ion-item>
       <ion-avatar item-left>
-        <img class="terceiro" src="../image/anonimo.jpg">
+        <img class="terceiro"  src="{{ rank[2].fotoURL }}">
       </ion-avatar>
-      <h2>Nome do Usuário</h2>
+      <h2>{{ rank[2].nome }}</h2>
     </ion-item>
     <ion-card-content>
-      <p> Porntuação: X </p> <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
+      <p> Pontuação: {{ rank[2].pontos }} </p>
+      <!-- O "X" deve ser substituido pelo número referente a pontuação do usuário  -->
     </ion-card-content>
   </ion-card>
 

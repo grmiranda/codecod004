@@ -15,7 +15,7 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 export class SolicPropostasPage {
 
   private solicitacoes: any[] = [];
-  private myID;
+  private myID = 8;
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
@@ -25,10 +25,10 @@ export class SolicPropostasPage {
     public actionSheetCtrl: ActionSheetController) { }
 
   ionViewWillEnter() {
-    this.storage.get().then(res => {
-      this.myID = res.IDUsuario;
+    //this.storage.get().then(res => {
+      //this.myID = res.IDUsuario;
       this.carregarSolicitacoes();
-    });
+    //});
   }
 
   private carregarSolicitacoes() {

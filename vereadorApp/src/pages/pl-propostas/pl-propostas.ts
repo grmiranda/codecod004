@@ -74,12 +74,14 @@ export class PlPropostasPage {
         {
           text: 'Reprovar',
           role: 'destructive',
+          icon: 'trash',
           handler: () => {
             this.reprovar(pl);
           }
         },
         {
           text: 'Adicionar Projeto de Lei',
+          icon: 'logo-buffer',
           handler: () => {
             this.navCtrl.push(NovaPlPage, {pl: pl});
           }

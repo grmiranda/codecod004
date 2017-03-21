@@ -3,6 +3,7 @@ import { NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { NovaPropostaPlPage } from '../nova-proposta-pl/nova-proposta-pl';
 import { NovaPlPage } from '../nova-pl/nova-pl';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
+import { StorageService } from '../../providers/storage';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { LikeService } from '../../providers/like-service';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
@@ -14,10 +15,12 @@ import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 })
 export class PlPropostasPage {
 
-  public pls: ProjetoDeLei[] = [];
+  private pls: any[] = [];
+  private myID = 8;
 
   constructor(public projetoDeLeiService: ProjetoDeLeiService,
     public likeService: LikeService,
+    public storage: StorageService,
     public navCtrl: NavController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform) {
@@ -25,11 +28,14 @@ export class PlPropostasPage {
     }
 
     ionViewWillEnter() {
-      this.carregarPropostas();
+      // this.storage.get().then(res => {
+      //   this.myID = res.IDUsuario;
+        this.carregarPropostas();
+      // });
     }
 
     private carregarPropostas() {
-      this.projetoDeLeiService.getProjetosDeLei('ap').then(res => {
+      this.projetoDeLeiService.getProjetosDeLeiLikes('ap', this.myID).then(res => {
         if (!res.error) {
           this.pls = res.data;
         }
@@ -48,34 +54,16 @@ export class PlPropostasPage {
         this.carregarPropostas();
 
       } else {
-        //rror
+        //error
       }
     })
   }
 
-  private like(pl: ProjetoDeLei) {
-    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei('s', 1, pl.IDPL, pl.IDUsuario)).then(res => {
-      if (!res.error && res.value) {
-        //works fine
-        console.log('works');
-      } else if (res.error) {
-        //error
-      } else {
-        console.log('ja curtiu');
-      }
-    });
-  }
-
-  private dislike(pl: ProjetoDeLei) {
-    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei('n', 1, pl.IDPL, pl.IDUsuario)).then(res => {
-      if (!res.error && res.value) {
-        //works fine
-        console.log('works');
-      } else if (res.error) {
-        //error
-      } else {
-        console.log('ja curtiu');
-      }
+  private like(projetodelei, tipo:string) {
+    projetodelei.t = projetodelei.t == tipo ? 'u' : tipo;
+    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.myID, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
+      projetodelei.p = res.value.p;
+      projetodelei.n = res.value.n;
     });
   }
 
@@ -86,12 +74,14 @@ export class PlPropostasPage {
         {
           text: 'Reprovar',
           role: 'destructive',
+          icon: 'trash',
           handler: () => {
             this.reprovar(pl);
           }
         },
         {
           text: 'Adicionar Projeto de Lei',
+          icon: 'logo-buffer',
           handler: () => {
             this.navCtrl.push(NovaPlPage, {pl: pl});
           }

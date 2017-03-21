@@ -4,7 +4,7 @@ export class LikeProjetoDeLei {
   public apoio: string;
   public IDUsuario: number;
   public IDPL: number;
-  public IDUsuarioPL: number = 8;
+  public IDUsuarioPL: number;
 
   constructor(apoio, idU, idPL, idUPL) {
     this.apoio = apoio; //tipo de apoio s/n

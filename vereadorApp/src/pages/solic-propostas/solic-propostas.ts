@@ -14,8 +14,8 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 })
 export class SolicPropostasPage {
 
-  private solicitacoes: any = [];
-  private myID;
+  private solicitacoes: any[] = [];
+  private myID = 8;
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
@@ -25,10 +25,10 @@ export class SolicPropostasPage {
     public actionSheetCtrl: ActionSheetController) { }
 
   ionViewWillEnter() {
-    this.storage.get().then(res => {
-      this.myID = res.IDUsuario;
+    //this.storage.get().then(res => {
+      //this.myID = res.IDUsuario;
       this.carregarSolicitacoes();
-    });
+    //});
   }
 
   private carregarSolicitacoes() {
@@ -71,21 +71,21 @@ export class SolicPropostasPage {
         {
           text: 'Remover',
           role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
+          icon: 'trash',
           handler: () => {
             this.remover(solicitacao);
           }
         },
         {
           text: 'Requerimento',
-          icon: !this.platform.is('ios') ? 'create' : null,
+          icon: 'archive',
           handler: () => {
             this.navCtrl.push(RequerimentoPage, { solicitacao: solicitacao });
           }
         },
         {
           text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
+          icon: 'close',
           role: 'cancel',
           handler: () => {
           }

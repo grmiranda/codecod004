@@ -14,8 +14,8 @@
 		$ementa = $request->ementa;
 		$fotoURL = $request->fotoURL;
 		$IDUsuario = $request->IDUsuario;
-		$estado = 'sa';
-		
+		$estado = $request->estado;
+
 		if (isset($titulo)){
 			$sql= "INSERT INTO pl (titulo, ementa, fotoURL, IDUsuario, estado) VALUES ('$titulo', '$ementa', '$fotoURL', '$IDUsuario', '$estado')";
 			$con->query($sql);

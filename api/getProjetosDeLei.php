@@ -1,4 +1,5 @@
 <?php
+	include 'getLikeProjetoDeLei.php';
 	include 'mySQL.php';
 	require 'mySQL.php';
 ?>
@@ -8,22 +9,25 @@
 	if (isset($_GET["estado"])){
 		if ($_GET["estado"] !== ""){
 			$estado = $_GET["estado"];
+			$id = $_GET["id"];
 			$sql = "SELECT * FROM pl WHERE estado = '$estado' ORDER BY IDPL DESC";
 			$result = $con->query($sql);
-			while($row=$result->fetch_assoc()){
-				$vetor[] = $row;
+			
+			if($estado == 'ap' || $estado == 'tr'){
+				while($row=$result->fetch_assoc()){
+					$info = getLike($row['IDPL'], $id, $con);
+					$info->pl = $row;
+					$vetor[] = $info;
+				}
+			}else{
+				while($row=$result->fetch_assoc()){
+					$vetor[] = $row;
+				}
 			}
+			
 			echo json_encode($vetor);
 		}
-	}else if (isset($_GET["id"])){
-		if ($_GET["id"] == ""){
-			$sql = "SELECT * FROM solicitacao ORDER BY IDPL DESC";
-			$result = $con->query($sql);
-			while($row=$result->fetch_assoc()){
-				$vetor[] = $row;
-			}
-			echo json_encode($vetor);
-		}
-	} 
+	}
+	
 	$con->close();	
 ?>

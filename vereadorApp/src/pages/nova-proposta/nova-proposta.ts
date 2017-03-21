@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Solicitacao } from '../../model/solicitacao';
@@ -13,26 +13,33 @@ export class NovaPropostaPage {
   private solicitacao: Solicitacao = new Solicitacao();
 
   constructor(private navCtrl: NavController,
-    private navParams: NavParams,
     private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
     private solicitacaoService: SolicitacaoService,
     private fotoService: FotoService) {
 
   }
 
   private requisitar() {
-    console.log(this.solicitacao);
-    this.solicitacaoService.addSolicitacao(this.solicitacao).then(res => {
-      if (!res.error) {
-        if (res.value) {
-          //works fine
-          this.displayToast('Requisição enviada!');
-          this.navCtrl.pop();
+    if (this.solicitacao.titulo.trim() == '') {
+      this.displayToast('Adicione um título');
+    } else if (this.solicitacao.descricao.trim() == '') {
+      this.displayToast('Adicione uma descrição');
+    } else {
+      this.solicitacaoService.addSolicitacao(this.solicitacao).then(res => {
+        if (!res.error) {
+          if (res.value) {
+            //works fine
+            this.displayToast('Requisição enviada!');
+            this.navCtrl.pop();
+          }
+        } else {
+          //error - maioria das vezes de conexão
+          //pede confirmacao, se sim : tenta salvar denovo
+          this.showConfirm();
         }
-      } else {
-        //error
-      }
-    });
+      });
+    }
   }
 
   private importarFoto() {
@@ -61,5 +68,22 @@ export class NovaPropostaPage {
     toast.present();
   }
 
-
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.requisitar();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 }

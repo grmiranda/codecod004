@@ -29,15 +29,16 @@ export class ProjetoDeLeiService {
     return retorno;
   }
 
-  public getProjetosDeLeiByID(): Promise<any> {
-    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getProjetosDeLei.php?id')
+  public getProjetosDeLei(estado: string): Promise<any> {
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getProjetosDeLei.php?estado=' + estado)
       .toPromise()
       .then(response => this.extractGetData(response))
       .catch(this.handleErrorMessage);
   }
 
-  public getProjetosDeLei(estado: string): Promise<any> {
-    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getProjetosDeLei.php?estado=' + estado)
+
+  public getProjetosDeLeiLikes(estado: string, idUsuario: number): Promise<any> {
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getProjetosDeLei.php?estado=' + estado + '&id=' + idUsuario)
       .toPromise()
       .then(response => this.extractGetData(response))
       .catch(this.handleErrorMessage);
@@ -50,23 +51,6 @@ export class ProjetoDeLeiService {
       retorno.error = true;
     } else {
       retorno.data = data;
-    }
-    return retorno;
-  }
-
-  public deleteProjetoDeLei(id: number): Promise<any> {
-    return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/delProjetoDeLei.php', JSON.stringify(id), { headers: this.headers })
-      .toPromise()
-      .then(res => this.extractDelData(res))
-      .catch(this.handleErrorMessage);
-  }
-
-  private extractDelData(res: Response) {
-    let retorno = { error: false, value: false };
-    let data = res.json();
-    if (data === true) {
-      retorno.value = true;
     }
     return retorno;
   }

@@ -16,7 +16,7 @@ import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 export class PlPropostasPage {
 
   private pls: any[] = [];
-  private myID;
+  private myID = 8;
 
   constructor(public projetoDeLeiService: ProjetoDeLeiService,
     public likeService: LikeService,
@@ -28,10 +28,10 @@ export class PlPropostasPage {
     }
 
     ionViewWillEnter() {
-      this.storage.get().then(res => {
-        this.myID = res.IDUsuario;
+      // this.storage.get().then(res => {
+      //   this.myID = res.IDUsuario;
         this.carregarPropostas();
-      });
+      // });
     }
 
     private carregarPropostas() {
@@ -74,12 +74,14 @@ export class PlPropostasPage {
         {
           text: 'Reprovar',
           role: 'destructive',
+          icon: 'trash',
           handler: () => {
             this.reprovar(pl);
           }
         },
         {
           text: 'Adicionar Projeto de Lei',
+          icon: 'logo-buffer',
           handler: () => {
             this.navCtrl.push(NovaPlPage, {pl: pl});
           }

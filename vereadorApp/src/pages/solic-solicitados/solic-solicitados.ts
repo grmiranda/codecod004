@@ -65,14 +65,14 @@ export class SolicSolicitadosPage {
         {
           text: 'Reprovar',
           role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
+          icon: 'close-circle',
           handler: () => {
             this.reprovar(solicitacao);
           }
         },
         {
           text: 'Aprovar',
-          icon: !this.platform.is('ios') ? 'create' : null,
+          icon: 'checkmark-circle',
           handler: () => {
             this.aprovar(solicitacao);
           }

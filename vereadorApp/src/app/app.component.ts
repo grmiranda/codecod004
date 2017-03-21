@@ -26,7 +26,7 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
 
-  rootPage = TabProjetosDeLeiPage;
+  rootPage = SolicitacoesPage;
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
   private headers = new Headers({ 'Content-Type': 'application/json' });

@@ -39,11 +39,11 @@ import { AgendaPage } from '../pages/agenda/agenda';
 import { InformacaoPage } from '../pages/informacao/informacao';
 import { TelefonesPage } from '../pages/telefones/telefones';
 import { TrofeuCidadaniaPage } from '../pages/trofeu-cidadania/trofeu-cidadania';
-import { NgCalendarModule  } from 'ionic2-calendar';
+import { NgCalendarModule } from 'ionic2-calendar';
 import { CategoriasPage } from '../pages/categorias/categorias';
 import { ModalOpcoesPage } from '../pages/modal-opcoes/modal-opcoes';
 import { AdicionarEventoPage } from '../pages/adicionar-evento/adicionar-evento';
-import {CallNumber} from 'ionic-native';
+import { CallNumber } from 'ionic-native';
 import { PerfilPage } from '../pages/perfil/perfil';
 
 //push
@@ -64,6 +64,8 @@ import { ShareService } from '../providers/share-service';
 import { SocialSharing } from 'ionic-native';
 import { CompartilharPage } from '../pages/compartilhar/compartilhar';
 import { CadastroService } from '../providers/cadastro-service';
+
+import { EventoService } from '../providers/evento-service';
 
 
 const cloudSettings: CloudSettings = {
@@ -171,10 +173,10 @@ const cloudSettings: CloudSettings = {
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
-  StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService,
-  PontuacaoService, {provide: ErrorHandler, useClass: IonicErrorHandler}, GooglePlusService, ProjetoDeLeiService]
+    StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
+    PontuacaoService, { provide: ErrorHandler, useClass: IonicErrorHandler }, GooglePlusService, ProjetoDeLeiService]
 
 
 
 })
-export class AppModule {}
+export class AppModule { }

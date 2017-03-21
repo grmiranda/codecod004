@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, ToastController, ModalController } from 'ionic-angular';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { MonthViewComponent } from 'ionic2-calendar/monthview';
 import { WeekViewComponent } from 'ionic2-calendar/weekview';
 import { DayViewComponent } from 'ionic2-calendar/dayview';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { AdicionarEventoPage } from '../adicionar-evento/adicionar-evento';
+import { EventoService } from '../../providers/evento-service';
 
 /*
   Generated class for the Agenda page.
@@ -26,20 +27,29 @@ export class AgendaPage {
   private dataAtual: string = "";
   private mes: string = 'Dezembro'; //titulo
   data = new Date();
+  loader = this.loadingController.create({
+    content: "Carregando eventos"
+  });
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public calendarMd: NgCalendarModule) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public calendarMd: NgCalendarModule,
+    public loadingController: LoadingController,
+    private eventoService: EventoService,
+    private toastCtrl: ToastController
+  ) {
     this.calendar = {
       mode: 'month',
       currentDate: new Date()
     };
+    this.getEventos();
   }
-
-
 
   // funções do calendario
   onCurrentDateChanged(event: Date) {
     this.calendar.currentDate = event;
-
   }
 
   reloadSource(startTime, endTime) {
@@ -47,6 +57,7 @@ export class AgendaPage {
   }
 
   onEventSelected(event) { // evento diparado quando um evendo é selecionado na lista
+    
   }
 
   onViewTitleChanged = (title: string) => { // atualiza o título
@@ -57,31 +68,28 @@ export class AgendaPage {
   onTimeSelected(event) {
     let dataAtual = event.selectedTime.toISOString();
     this.dataAtual = dataAtual.substring(0, 10);
-    console.log(this.dataAtual);
     //console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' + (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
   }
 
   private getEventos() {
     this.eventoService.getEventos().then(res => {
 
-      if (res.type == true) {
-        this.eventos = res.data;
+      if (res != false) {
+        this.eventos = res;
 
-        let events = [];
+        this.eventSource = [];
 
-        for (let evento of this.eventos) {
+        for (let i = 0; i < this.eventos.length; i++) {
 
-          events.push({
-            id: evento.IDEvento,
-            title: evento.Titulo,
-            startTime: new Date(evento.DataInicio),
-            endTime: new Date(evento.DataTermino),
-            allDay: evento.EventoDiario
+          this.eventSource.push({
+            id: this.eventos[i].IDEvento,
+            title: this.eventos[i].Titulo,
+            startTime: new Date(this.eventos[i].DataInicio),
+            endTime: new Date(this.eventos[i].DataTermino),
+            allDay: this.eventos[i].EventoDiario
           });
         }
-
-        this.eventSource = events;
-
+        console.log(this.eventSource);
       }
       else {
         console.log("error");
@@ -94,6 +102,13 @@ export class AgendaPage {
 
 
   adicionar() {
-    this.navCtrl.push(AdicionarEventoPage, { dataAtual: this.dataAtual });
+    let modal = this.modalCtrl.create(AdicionarEventoPage, { dataAtual: this.dataAtual });
+    modal.onDidDismiss(data => {
+        console.log("teste");
+      if (data != null && data != undefined) {
+        this.getEventos();
+      }
+    });
+    modal.present();
   }
 }

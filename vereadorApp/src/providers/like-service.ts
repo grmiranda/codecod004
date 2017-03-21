@@ -24,8 +24,8 @@ export class LikeService {
   private extractAddData(res: Response) {
     let retorno = { error: false, value: false };
     let data = res.json();
-    if (data === true) {
-      retorno.value = true;
+    if (data) {
+      retorno.value = data;
     }
     return retorno;
   }

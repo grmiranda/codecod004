@@ -14,27 +14,27 @@
   <ul [virtualScroll]="solicitacoes">
     <li *virtualItem="let solicitacao">
       <div>
-      <ion-card (press)="abrirOpcoes(solicitacao)">
-        <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
+      <ion-card (press)="abrirOpcoes(solicitacao.solicitacao)">
+        <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.solicitacao.fotoURL" />
         <ion-card-content>
           <ion-card-title>
-            {{ solicitacao.titulo }}
+            {{ solicitacao.solicitacao.titulo }}
           </ion-card-title>
           <p>
-            {{ solicitacao.descricao }}
+            {{ solicitacao.solicitacao.descricao }}
           </p>
         </ion-card-content>
         <ion-row no-padding>
           <ion-col whidth-50>
-            <button ion-button clear small color="secondary" icon-left (click)="like(solicitacao)">
-              <ion-icon name='thumbs-up'></ion-icon>
-              quantidade
+            <button ion-button clear small color="secondary" icon-left (click)="like(solicitacao, 's')">
+              <ion-icon [name]="solicitacao.t == 's' ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'"></ion-icon>
+              {{solicitacao.p}}
             </button>
           </ion-col>
           <ion-col whidth-50>
-            <button ion-button clear small color="danger" icon-left (click)="dislike(solicitacao)">
-              <ion-icon name='thumbs-down'></ion-icon>
-              quantidade
+            <button ion-button clear small color="danger" icon-left (click)="like(solicitacao, 'n')">
+              <ion-icon [name]="solicitacao.t == 'n' ? 'ios-thumbs-down' : 'ios-thumbs-down-outline'"></ion-icon>
+              {{solicitacao.n}}
             </button>
           </ion-col>
         </ion-row>

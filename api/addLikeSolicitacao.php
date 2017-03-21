@@ -1,5 +1,6 @@
 <?php
     include 'addPontuacao.php';
+	include 'getLikeSolicitacao.php';
     include 'mySQL.php';
     require 'mySQL.php';     
 ?>
@@ -29,24 +30,23 @@
 					//se ja curtiu retorna false
 					$sql = "UPDATE apoiosolicitacao SET tipo = 'u' WHERE IDSolicitacao = '$IDSolicitacao' AND IDUsuario = '$IDUsuario'";
 					$con->query($sql);
-					echo json_encode(false);
 				}else {
 					//se for diferente, atualiza
 					$sql = "UPDATE apoiosolicitacao SET tipo = '$tipo' WHERE IDSolicitacao = '$IDSolicitacao' AND IDUsuario = '$IDUsuario'";
 					$con->query($sql);
-					echo json_encode(true);
 				}
 			}else{
 				//da um like/dislike na solicitacao
 				$sql= "INSERT INTO apoiosolicitacao (tipo, IDSolicitacao, IDUsuario) VALUES ('$tipo', '$IDSolicitacao', '$IDUsuario')";
 				$con->query($sql);
 
-                echo json_encode(true);
-
 				if($tipo == 's'){
                     pontuarUsuario($IDUsuarioSolicitacao, 4, $con);
                 }
 			}
+			
+			echo json_encode(getQuantidadeLike($IDSolicitacao, $con));
+			
 		}
 	}
 	$con->close();

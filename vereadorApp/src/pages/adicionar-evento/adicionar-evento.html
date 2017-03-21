@@ -4,14 +4,19 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar color="laranja" >
-    <ion-title>Adicionar Evento</ion-title>
-  </ion-navbar>
-
+<ion-header >
+  <ion-toolbar color="laranja">
+    <ion-title>
+      Adicionar Evento
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
-
 
 <ion-content padding>
   <ion-list>
@@ -33,7 +38,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating >Término</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="evento.DataTermino"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="evento.DataFim"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Dia Inteiro</ion-label>
@@ -42,11 +47,11 @@
     <!--Caso não seja dia inteiro, escolher horários-->
     <ion-item *ngIf="!evento.EventoDiario">
       <ion-label floating >Horário de início</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(ngModel)]="evento.HoraInicio"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaInicio"></ion-datetime>
     </ion-item>
     <ion-item *ngIf="!evento.EventoDiario">
       <ion-label floating >Horário de término</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(ngModel)]="evento.HoraTermino"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaTermino"></ion-datetime>
     </ion-item>
   </ion-list>
   <!--Botão para adicionar evento-->

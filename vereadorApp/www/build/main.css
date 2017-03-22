@@ -29244,21 +29244,22 @@ ion-navbar.toolbar {
   position: relative;
 }
 
-.calendarToolbar ion-title {
+page-agenda .calendarToolbar ion-title {
   text-align: center;
   font-style: roboto;
   text-transform: capitalize;
+  margin-left: 10%;
 }
 
-.title {
+page-agenda .title {
   font-size: 12px;
 }
 
-ion-header button {
+page-agenda ion-header button {
   width: 10% !important;
 }
 
-ion-title {
+page-agenda ion-title {
   text-align: center;
   margin-right: 10%;
 }
@@ -29761,6 +29762,10 @@ page-nova-proposta-pl ion-label {
 page-nova-proposta-pl .blockbutton {
   text-align: center !important;
   margin-right: 30px !important;
+}
+
+page-nova-proposta-pl .compartilhar {
+  margin-right: 10px !important;
 }
 
 page-nova-publicacao ion-title {
@@ -30362,7 +30367,7 @@ page-solic-propostas ion-header button {
 
 page-solic-propostas ion-title {
   text-align: center;
-  margin-right: 10%;
+  margin-right: 20%;
 }
 
 page-solic-propostas ion-content {

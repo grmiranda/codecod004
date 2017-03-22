@@ -3,16 +3,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TelefonesPage } from '../telefones/telefones';
 import { Http } from '@angular/http';
 import { Categorias } from '../../model/categoriasTelefone';
-import 'rxjs/add/operator/toPromise';
 import { CallNumber } from 'ionic-native';
+import 'rxjs/add/operator/toPromise';
 
-
-/*
-  Generated class for the Categorias page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-categorias',
   templateUrl: 'categorias.html'
@@ -24,32 +17,30 @@ export class CategoriasPage {
   private auxTelefones = [];
   private search: string = "";
 
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private http: Http
-  ) {
+    private http: Http) {
+
     this.http.get(this.link).toPromise().then(res => {
       this.categorias = res.json();
       this.quicksort(this.categorias, 0, this.categorias.length - 1);
-      console.log(this.categorias);
       for (let i = 0; i < this.categorias.length; i++) {
         this.quicksort(this.categorias[i].instituicao, 0, this.categorias[i].instituicao.length - 1);
         this.todosTelefones = this.todosTelefones.concat(this.categorias[i].instituicao);
       }
-      this.quicksort(this.todosTelefones, 0, this.todosTelefones.length - 1);      
+      this.quicksort(this.todosTelefones, 0, this.todosTelefones.length - 1);
       this.auxTelefones = this.todosTelefones;
     }).catch(() => alert("Erro ao se comunicar com o servidor"));
 
     this.initializeItems();
   }
 
-  initializeItems() {
+  private initializeItems() {
     this.todosTelefones = this.auxTelefones;
   }
 
-  getItems(ev: any) {
+  private getItems(ev: any) {
     // Reset items back to all of the items
     this.initializeItems();
 
@@ -64,15 +55,14 @@ export class CategoriasPage {
     }
   }
 
-  selecionar(categoria: Categorias) {
-    console.log(categoria);
+  private selecionar(categoria: Categorias) {
     this.navCtrl.push(TelefonesPage, { categoria: categoria });
   }
 
   private quicksort(elements, inicio, fim) {
     //Verifica se o inteiro inicio é menor que o inteiro fim
     if (inicio < fim) {
-      //Ocorre a chamada do método particiona e a chamada 
+      //Ocorre a chamada do método particiona e a chamada
       //recursiva do método quickSort, recebendo diferentes parâmetros
       let pivo = this.particiona(elements, inicio, fim);
       this.quicksort(elements, inicio, pivo - 1);
@@ -104,15 +94,11 @@ export class CategoriasPage {
     return i;
   }
 
-    ligar(telefoneInstituicao: string) {
-    console.log(telefoneInstituicao);
+  private ligar(telefoneInstituicao: string) {
     let numero = telefoneInstituicao.replace("(", "");
     numero = numero.replace(")", "");
     numero = numero.replace(" ", "");
     numero = numero.replace("-", "");
-    CallNumber.callNumber(numero, true)
-      .then(() => console.log('Launched dialer!'))
-      .catch(() => console.log('Error launching dialer'));
-
+    CallNumber.callNumber(numero, true);
   }
 }

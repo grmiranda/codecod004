@@ -8,12 +8,7 @@ import { CorpoMensagem } from '../../model/mensagem';
 import { StorageService } from '../../providers/storage';
 import { MensagemService } from '../../providers/mensagem-service';
 import { PushService } from '../../providers/push-service';
-/*
-  Generated class for the EnviarMensagem page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-enviar-mensagem',
   templateUrl: 'enviar-mensagem.html'
@@ -43,7 +38,6 @@ export class EnviarMensagemPage {
       if (destinatariosTelaAnterior != undefined) {
         this.inserirDestinatarios(destinatariosTelaAnterior);
       }
-
     });
   }
 
@@ -58,14 +52,9 @@ export class EnviarMensagemPage {
         }
       }
     }
-
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EnviarMensagemPage');
-  }
-
-  selecionarDestinatario() {
+  private selecionarDestinatario() {
     let modal = this.modalCtrl.create(ModalListaUsuariosPage, { listaUsuarios: this.usuarios, usuariosSelecionados: this.usuarioSelecionado });
 
     modal.onDidDismiss(data => {
@@ -77,8 +66,7 @@ export class EnviarMensagemPage {
     modal.present();
   }
 
-  enviar() {
-
+  private enviar() {
     this.enviando = true;
     let tudoEnviado = true;
     this.storageService.get().then(res => {
@@ -99,14 +87,14 @@ export class EnviarMensagemPage {
           } else {
             tudoEnviado = false;
             alert("Erro ao enviar mensagem para " + this.usuarioSelecionado[i].nome);
-          } 
+          }
         });
       }
     });
 
-    if(tudoEnviado){
+    if (tudoEnviado) {
       this.navCtrl.popAll();
-    } else{
+    } else {
       this.enviando = false;
     }
   }

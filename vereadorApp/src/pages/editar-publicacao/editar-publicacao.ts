@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { Publicacao } from '../../model/publicacao';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
@@ -14,6 +14,7 @@ export class EditarPublicacaoPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    private alertCtrl: AlertController,
     public fotoService: FotoService,
     public publicacaoService: PublicacaoService) {
     this.publicacao = JSON.parse(JSON.stringify(this.navParams.get("publicacao")));;
@@ -24,11 +25,9 @@ export class EditarPublicacaoPage {
       if (!res.error) {
         if (res.value) {
           this.navCtrl.pop();
-        } else {
-          //retornou false
         }
       } else {
-        //error de conexao
+        this.showConfirm();
       }
     });
   }
@@ -47,6 +46,25 @@ export class EditarPublicacaoPage {
         this.publicacao.fotoURL = url;
       }
     });
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.editar();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

@@ -52,6 +52,9 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { NovoDepoimentoPage } from '../pages/novo-depoimento/novo-depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 
+//diretivas
+import { Autoresize } from '../components/autoresize/autoresize';
+
 //push
 import { OneSignal } from 'ionic-native';
 import { PushService } from '../providers/push-service';
@@ -72,6 +75,7 @@ import { CompartilharPage } from '../pages/compartilhar/compartilhar';
 import { CadastroService } from '../providers/cadastro-service';
 
 import { EventoService } from '../providers/evento-service';
+import { DepoimentoService } from '../providers/depoimento-service';
 
 
 const cloudSettings: CloudSettings = {
@@ -190,7 +194,7 @@ const cloudSettings: CloudSettings = {
     AvaliarDepoimentoPage
   ],
 
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
     StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
     PontuacaoService, { provide: ErrorHandler, useClass: IonicErrorHandler }, GooglePlusService, ProjetoDeLeiService]
 

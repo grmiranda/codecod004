@@ -20,8 +20,8 @@ export class TrofeuCidadaniaPage {
   ionViewWillEnter() {
     // this.storage.get().then(res => {
     //  this.myID = res.IDUsuario;
-    //   this.getMyRank();
-    //   this.getTop3();
+      this.getMyRank();
+      this.getTop3();
     // });
   }
 

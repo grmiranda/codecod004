@@ -39,7 +39,7 @@ export class PlAndamentoPage {
       if (!res.error) {
         this.pls = res.data;
       }
-    })
+    });
   }
 
   private novoPL() {
@@ -106,6 +106,15 @@ export class PlAndamentoPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private doRefresh(refresher) {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    });
   }
 
 }

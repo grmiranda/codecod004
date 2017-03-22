@@ -13,10 +13,10 @@ export class SolicReprovadosPage {
 
 
   constructor(public platform: Platform,
-  public navCtrl: NavController,
-  public navParams: NavParams,
-  public actionSheetCtrl: ActionSheetController,
-  public solicitacaoService: SolicitacaoService) {}
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public actionSheetCtrl: ActionSheetController,
+    public solicitacaoService: SolicitacaoService) { }
 
 
   ionViewWillEnter() {
@@ -29,7 +29,7 @@ export class SolicReprovadosPage {
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    })
+    });
   }
 
   private abrirOpcoes(solicitacao: any) {
@@ -65,5 +65,12 @@ export class SolicReprovadosPage {
     actionSheet.present();
   }
 
-
+  private doRefresh(refresher) {
+    this.solicitacaoService.getSolicitacoes('cn').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    });
+  }
 }

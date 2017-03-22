@@ -11,6 +11,11 @@
 
 
 <ion-content class="back">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ul [virtualScroll]="pls">
     <li *virtualItem="let pl">
       <ion-card>

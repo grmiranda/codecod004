@@ -25,24 +25,24 @@ export class PlPropostasPage {
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform) {
 
-    }
+  }
 
-    ionViewWillEnter() {
-      // this.storage.get().then(res => {
-      //   this.myID = res.IDUsuario;
-        this.carregarPropostas();
-      // });
-    }
+  ionViewWillEnter() {
+    // this.storage.get().then(res => {
+    //   this.myID = res.IDUsuario;
+    this.carregarPropostas();
+    // });
+  }
 
-    private carregarPropostas() {
-      this.projetoDeLeiService.getProjetosDeLeiLikes('ap', this.myID).then(res => {
-        if (!res.error) {
-          this.pls = res.data;
-        }
-      })
-    }
+  private carregarPropostas() {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('ap', this.myID).then(res => {
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    });
+  }
 
-  private novaProposta(){
+  private novaProposta() {
     this.navCtrl.push(NovaPropostaPlPage);
   }
 
@@ -59,7 +59,7 @@ export class PlPropostasPage {
     })
   }
 
-  private like(projetodelei, tipo:string) {
+  private like(projetodelei, tipo: string) {
     projetodelei.t = projetodelei.t == tipo ? 'u' : tipo;
     this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.myID, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
       projetodelei.p = res.value.p;
@@ -67,7 +67,7 @@ export class PlPropostasPage {
     });
   }
 
-   private abrirOpcoes(pl: ProjetoDeLei) {
+  private abrirOpcoes(pl: ProjetoDeLei) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',
       buttons: [
@@ -83,7 +83,7 @@ export class PlPropostasPage {
           text: 'Adicionar Projeto de Lei',
           icon: 'logo-buffer',
           handler: () => {
-            this.navCtrl.push(NovaPlPage, {pl: pl});
+            this.navCtrl.push(NovaPlPage, { pl: pl });
           }
         },
         {
@@ -97,4 +97,14 @@ export class PlPropostasPage {
     });
     actionSheet.present();
   }
+
+  private doRefresh(refresher) {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('ap', this.myID).then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    });
+  }
+
 }

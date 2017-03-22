@@ -84,19 +84,21 @@ export class PlAndamentoPage {
         {
           text: 'Reprovar',
           role: 'destructive',
+          icon: 'close-circle',
           handler: () => {
             this.reprovar(pl);
           }
         },
         {
           text: 'Aprovar',
+          icon: 'checkmark-circle',
           handler: () => {
             this.aprovar(pl);
           }
         },
         {
           text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
+          icon: 'close',
           role: 'cancel',
           handler: () => {
           }

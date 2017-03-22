@@ -58,19 +58,21 @@ export class AvaliarPlPage {
         {
           text: 'Reprovar',
           role: 'destructive',
+          icon: 'trash',
           handler: () => {
             this.reprovar(pl);
           }
         },
         {
           text: 'Aprovar',
+          icon: 'document',
           handler: () => {
             this.aprovar(pl);
           }
         },
         {
           text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
+          icon: 'close',
           role: 'cancel',
           handler: () => {
           }

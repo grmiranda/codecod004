@@ -24,8 +24,7 @@ export class AdicionarEventoPage {
   ) {
     this.evento.DataInicio = this.navParams.get("dataAtual");
     this.evento.DataFim = this.navParams.get("dataAtual");
-    //this.storageService.get().then(res => this.evento.Usuario_IDUsuario = res.IDUsuario);
-    this.evento.IDUsuario = "1";
+    this.storageService.get().then(res => this.evento.IDUsuario = res.IDUsuario);
 
   }
 

@@ -29264,6 +29264,15 @@ page-agenda ion-title {
   margin-right: 10%;
 }
 
+page-avaliar-depoimento ion-header button {
+  width: 10% !important;
+}
+
+page-avaliar-depoimento ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
 page-avaliar-pl .back {
   background-color: rgba(132, 132, 132, 0.2);
 }

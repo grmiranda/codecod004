@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, Platform, AlertController, ToastController } from 'ionic-angular';
+import { ActionSheetController, Platform, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 
@@ -11,22 +11,31 @@ export class AvaliarSolicitacaoPage {
 
   private solicitacoes: Solicitacao[] = [];
 
-  constructor(public platform: Platform,
+  constructor(private platform: Platform,
     private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    public solicitacaoService: SolicitacaoService,
-    public actionSheetCtrl: ActionSheetController) { }
+    private solicitacaoService: SolicitacaoService,
+    private actionSheetCtrl: ActionSheetController) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
   }
 
   private carregarSolicitacoes() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.solicitacaoService.getSolicitacoes('sa').then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    })
+    });
   }
 
   private aprovar(solicitacao: Solicitacao) {
@@ -115,6 +124,15 @@ export class AvaliarSolicitacaoPage {
       ]
     });
     confirm.present();
+  }
+
+  private doRefresh(refresher) {
+    this.solicitacaoService.getSolicitacoes('sa').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    });
   }
 
 }

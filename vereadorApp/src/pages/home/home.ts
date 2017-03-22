@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NovaPublicacaoPage } from '../nova-publicacao/nova-publicacao';
 import { EditarPublicacaoPage } from '../editar-publicacao/editar-publicacao';
 import { PublicacaoPage } from '../publicacao/publicacao';
-import { Platform, NavController, ActionSheetController, MenuController } from 'ionic-angular';
+import { Platform, NavController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 
@@ -14,14 +14,13 @@ export class HomePage {
 
   private publicacoes: Publicacao[] = [];
 
-
-    
-  constructor(public platform: Platform,
-    public navCtrl: NavController,
+  constructor(private platform: Platform,
+    private navCtrl: NavController,
+    private loadingCtrl: LoadingController,
     private publicacaoService: PublicacaoService,
-    public actionSheetCtrl: ActionSheetController, 
-    public menu:MenuController) {
-      menu.enable(true);
+    private actionSheetCtrl: ActionSheetController,
+    private menu: MenuController) {
+    menu.enable(true);
   }
 
   ionViewWillEnter() {
@@ -29,7 +28,15 @@ export class HomePage {
   }
 
   private carregarFeed() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.publicacaoService.getPublicacoes().then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.publicacoes = res.data;
       } else {
@@ -49,19 +56,12 @@ export class HomePage {
   private deletarPublicacao(id: number) {
     this.publicacaoService.deletePublicacao(id).then(res => {
       if (!res.error) {
-        if(res.value){
+        if (res.value) {
           //deletou
           this.carregarFeed();
         }
       }
     });
-  }
-
-  private doRefresh(refresher) {
-    this.carregarFeed();
-    setTimeout(() => {
-      refresher.complete();
-    }, 2000);
   }
 
   private abrirOpcoes(publicacao: any) {
@@ -88,13 +88,20 @@ export class HomePage {
           icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
     });
-
     actionSheet.present();
+  }
+
+  private doRefresh(refresher) {
+    this.publicacaoService.getPublicacoes().then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.publicacoes = res.data;
+      }
+    });
   }
 
 }

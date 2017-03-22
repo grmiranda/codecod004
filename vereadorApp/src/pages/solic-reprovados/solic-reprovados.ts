@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ActionSheetController  } from 'ionic-angular';
+import { NavController, NavParams, Platform, ActionSheetController, LoadingController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 
@@ -14,6 +14,7 @@ export class SolicReprovadosPage {
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public solicitacaoService: SolicitacaoService) { }
@@ -25,7 +26,15 @@ export class SolicReprovadosPage {
 
 
   private carregarSolicitacoes() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.solicitacaoService.getSolicitacoes('cn').then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
       }

@@ -29483,6 +29483,15 @@ page-evento .fabbuttons {
   margin-left: 30%;
 }
 
+page-historia ion-header button {
+  width: 10% !important;
+}
+
+page-historia ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
 page-home .back {
   background-color: rgba(132, 132, 132, 0.2);
 }

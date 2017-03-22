@@ -43,6 +43,18 @@ export class NovaPropostaPlPage {
     }
   }
 
+  private help() {
+    let toast = this.toastCtrl.create({
+      message: 'Ementa: consiste em breve apresentação do conteúdo previsto em determinada lei, por isso, deve ser feita de forma clara e concisa.',
+      showCloseButton: true,
+      closeButtonText: 'Ok',
+      cssClass: 'toastHelp',
+      position: 'top'
+    });
+
+    toast.present();
+  }
+
   private displayToast(mensagem: string) {
     let toast = this.toastCtrl.create({
       message: mensagem,

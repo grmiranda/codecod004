@@ -30,7 +30,7 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = NovaPropostaPlPage;
+  rootPage = DepoimentoPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

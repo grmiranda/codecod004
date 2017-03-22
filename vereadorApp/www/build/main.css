@@ -29822,6 +29822,11 @@ page-nova-publicacao .blockbutton {
   margin-right: 20px;
 }
 
+page-novo-depoimento ion-title {
+  text-align: center;
+  margin-right: 15% !important;
+}
+
 .center-content {
   -webkit-align-items: center;
   -ms-flex-align: center;

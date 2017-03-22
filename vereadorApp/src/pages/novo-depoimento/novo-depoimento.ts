@@ -19,4 +19,7 @@ export class NovoDepoimentoPage {
     console.log('ionViewDidLoad NovoDepoimentoPage');
   }
 
+  public enviar(){
+    
+  }
 }

@@ -9,10 +9,10 @@
   <ion-list>
     <ion-item class="itemtextarea">
       <ion-label floating>Depoimento</ion-label>
-      <ion-textarea rows="20" name="texto" ></ion-textarea>
+      <ion-textarea rows="20" name="textoDepoimento" [(ngModel)]="textoDepoimento"></ion-textarea>
     </ion-item>
     <ion-item>
-      <button class="blockbutton" (click)="enviar()" color="secondary" ion-button block large [(ngModel)] = "texto">Publicar</button>
+      <button class="blockbutton" (click)="enviar()" color="secondary" ion-button block large>Publicar</button>
     </ion-item>
   </ion-list>
 </ion-content>

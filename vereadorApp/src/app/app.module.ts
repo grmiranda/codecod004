@@ -50,6 +50,7 @@ import { CallNumber } from 'ionic-native';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { NovoDepoimentoPage } from '../pages/novo-depoimento/novo-depoimento';
+import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 
 //push
 import { OneSignal } from 'ionic-native';
@@ -132,7 +133,8 @@ const cloudSettings: CloudSettings = {
     EditarEventoPage,
     HistoriaPage,
     DepoimentoPage,
-    NovoDepoimentoPage
+    NovoDepoimentoPage,
+    AvaliarDepoimentoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -184,7 +186,8 @@ const cloudSettings: CloudSettings = {
     EditarEventoPage,
     HistoriaPage,
     DepoimentoPage,
-    NovoDepoimentoPage
+    NovoDepoimentoPage,
+    AvaliarDepoimentoPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,

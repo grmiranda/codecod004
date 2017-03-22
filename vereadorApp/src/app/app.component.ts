@@ -21,6 +21,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { NovaPropostaPlPage } from '../pages/nova-proposta-pl/nova-proposta-pl';
 import { HistoriaPage } from '../pages/historia/historia';
 import { DepoimentoPage } from '../pages/depoimento/depoimento';
+import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 
 
 @Component({
@@ -55,6 +56,7 @@ export class MyApp {
     { title: 'Telefones Úteis', component: CategoriasPage },
     { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
     { title: 'Depoimentos', component: DepoimentoPage},
+    { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage},
     { title: 'História do Vereador', component: HistoriaPage}]
 
     this.pageAtual = 'Notícias';

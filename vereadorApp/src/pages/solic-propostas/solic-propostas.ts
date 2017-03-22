@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform, LoadingController, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
 import { StorageService } from '../../providers/storage';
@@ -22,7 +22,10 @@ export class SolicPropostasPage {
     public solicitacaoService: SolicitacaoService,
     public storage: StorageService,
     public likeService: LikeService,
-    public actionSheetCtrl: ActionSheetController) { }
+    private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public actionSheetCtrl: ActionSheetController) {
+    }
 
   ionViewWillEnter() {
     //this.storage.get().then(res => {
@@ -32,9 +35,19 @@ export class SolicPropostasPage {
   }
 
   private carregarSolicitacoes() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
+      }else{
+        this.showConfirm();
       }
     });
   }
@@ -93,6 +106,25 @@ export class SolicPropostasPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarSolicitacoes();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   private doRefresh(refresher) {

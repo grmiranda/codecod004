@@ -26,8 +26,8 @@ export class SolicPropostasPage {
 
   ionViewWillEnter() {
     //this.storage.get().then(res => {
-      //this.myID = res.IDUsuario;
-      this.carregarSolicitacoes();
+    //this.myID = res.IDUsuario;
+    this.carregarSolicitacoes();
     //});
   }
 
@@ -36,7 +36,7 @@ export class SolicPropostasPage {
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    })
+    });
   }
 
   private novaProposta() {
@@ -93,6 +93,15 @@ export class SolicPropostasPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private doRefresh(refresher) {
+    this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    });
   }
 
 }

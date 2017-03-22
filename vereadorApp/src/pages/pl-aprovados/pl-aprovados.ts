@@ -10,7 +10,7 @@ export class PlAprovadosPage {
 
   private pls: ProjetoDeLei[] = [];
 
-  constructor(public projetoDeLeiService: ProjetoDeLeiService) {}
+  constructor(public projetoDeLeiService: ProjetoDeLeiService) { }
 
   ionViewWillEnter() {
     this.carregarPropostas();
@@ -21,6 +21,15 @@ export class PlAprovadosPage {
       if (!res.error) {
         this.pls = res.data;
       }
-    })
+    });
+  }
+
+  private doRefresh(refresher) {
+    this.projetoDeLeiService.getProjetosDeLei('cp').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    });
   }
 }

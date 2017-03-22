@@ -7,7 +7,6 @@ import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { NovaPlPage } from '../nova-pl/nova-pl';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 
-
 @Component({
   selector: 'page-pl-andamento',
   templateUrl: 'pl-andamento.html'
@@ -39,7 +38,7 @@ export class PlAndamentoPage {
       if (!res.error) {
         this.pls = res.data;
       }
-    })
+    });
   }
 
   private novoPL() {
@@ -84,19 +83,21 @@ export class PlAndamentoPage {
         {
           text: 'Reprovar',
           role: 'destructive',
+          icon: 'close-circle',
           handler: () => {
             this.reprovar(pl);
           }
         },
         {
           text: 'Aprovar',
+          icon: 'checkmark-circle',
           handler: () => {
             this.aprovar(pl);
           }
         },
         {
           text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
+          icon: 'close',
           role: 'cancel',
           handler: () => {
           }
@@ -104,6 +105,15 @@ export class PlAndamentoPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private doRefresh(refresher) {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    });
   }
 
 }

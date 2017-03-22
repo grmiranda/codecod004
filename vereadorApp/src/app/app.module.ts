@@ -25,6 +25,7 @@ import { PlRecusadosPage } from '../pages/pl-recusados/pl-recusados';
 import { EventoPage } from '../pages/evento/evento';
 import { EditarEventoPage } from '../pages/editar-evento/editar-evento';
 import { FotoService } from '../providers/foto-service';
+import { HistoriaPage } from '../pages/historia/historia';
 import { PublicacaoService } from '../providers/publicacao-service';
 import { SolicitacaoService } from '../providers/solicitacao-service';
 import { MensagensRecebidasPage } from '../pages/mensagens-recebidas/mensagens-recebidas';
@@ -47,6 +48,9 @@ import { ModalOpcoesPage } from '../pages/modal-opcoes/modal-opcoes';
 import { AdicionarEventoPage } from '../pages/adicionar-evento/adicionar-evento';
 import { CallNumber } from 'ionic-native';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { DepoimentoPage } from '../pages/depoimento/depoimento';
+import { NovoDepoimentoPage } from '../pages/novo-depoimento/novo-depoimento';
+import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 
 //push
 import { OneSignal } from 'ionic-native';
@@ -126,7 +130,11 @@ const cloudSettings: CloudSettings = {
     CompartilharPage,
     PerfilPage,
     EventoPage,
-    EditarEventoPage
+    EditarEventoPage,
+    HistoriaPage,
+    DepoimentoPage,
+    NovoDepoimentoPage,
+    AvaliarDepoimentoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -175,7 +183,11 @@ const cloudSettings: CloudSettings = {
     CompartilharPage,
     PerfilPage,
     EventoPage,
-    EditarEventoPage
+    EditarEventoPage,
+    HistoriaPage,
+    DepoimentoPage,
+    NovoDepoimentoPage,
+    AvaliarDepoimentoPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,

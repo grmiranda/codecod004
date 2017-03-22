@@ -41,11 +41,6 @@ export class EditarEventoPage {
     this.dataFim = this.navParams.get("dataFim");
     this.horaInicio = this.navParams.get("horaInicio");
     this.horaTermino = this.navParams.get("horaFim");
-    console.log(this.allDay);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditarEventoPage');
   }
 
   public finalizar() {

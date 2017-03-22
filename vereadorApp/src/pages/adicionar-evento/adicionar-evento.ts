@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { NavParams, AlertController, ViewController, ToastController } from 'ionic-angular';
 import { Evento } from '../../model/evento';
 import { EventoService } from '../../providers/evento-service';
 import { StorageService } from '../../providers/storage';
 
-/*
-  Generated class for the AdicionarEvento page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-adicionar-evento',
   templateUrl: 'adicionar-evento.html'
@@ -22,8 +16,8 @@ export class AdicionarEventoPage {
 
   constructor(
     private toastCtrl: ToastController,
-    public navCtrl: NavController,
     public navParams: NavParams,
+    private alertCtrl: AlertController,
     public view: ViewController,
     private eventoService: EventoService,
     private storageService: StorageService
@@ -35,24 +29,20 @@ export class AdicionarEventoPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdicionarEventoPage');
-  }
-
-  adicionar() {
+  private adicionar() {
     if (this.validate()) {
       this.eventoService.addEvento(this.evento).then(res => {
         if (res.Titulo != undefined && res.Titulo != null) {
           this.presentToast("Evento adicionado com sucesso");
           this.view.dismiss(this.evento);
-        } else{
-          this.presentToast("Erro ao adicionar evento");
+        } else {
+          this.showConfirm();
         }
       });
     }
   }
 
-  validate(): boolean {
+  private validate(): boolean {
     if (this.evento.Titulo == "") {
       this.presentToast("Coloque o titulo do evento");
       return false;
@@ -82,8 +72,8 @@ export class AdicionarEventoPage {
     return true;
   }
 
-  cancel() {
-    this.view.dismiss()
+  private cancel() {
+    this.view.dismiss();
   }
 
   private presentToast(text) {
@@ -93,6 +83,25 @@ export class AdicionarEventoPage {
       position: 'top'
     });
     toast.present();
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.adicionar();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

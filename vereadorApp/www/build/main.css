@@ -29244,21 +29244,22 @@ ion-navbar.toolbar {
   position: relative;
 }
 
-.calendarToolbar ion-title {
+page-agenda .calendarToolbar ion-title {
   text-align: center;
   font-style: roboto;
   text-transform: capitalize;
+  margin-left: 10%;
 }
 
-.title {
+page-agenda .title {
   font-size: 12px;
 }
 
-ion-header button {
+page-agenda ion-header button {
   width: 10% !important;
 }
 
-ion-title {
+page-agenda ion-title {
   text-align: center;
   margin-right: 10%;
 }
@@ -29430,6 +29431,15 @@ page-categorias ion-title {
   margin-right: 10%;
 }
 
+page-depoimento ion-header button {
+  width: 10% !important;
+}
+
+page-depoimento ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
 page-editar-evento .blockbutton {
   text-align: center !important;
   margin-right: 30px !important;
@@ -29480,6 +29490,15 @@ page-evento .fabbuttons {
   -ms-grid-row-align: center !important;
   align-self: center !important;
   margin-left: 30%;
+}
+
+page-historia ion-header button {
+  width: 10% !important;
+}
+
+page-historia ion-title {
+  text-align: center;
+  margin-right: 10%;
 }
 
 page-home .back {
@@ -29580,7 +29599,7 @@ page-informacao .margemLimitada {
   margin-bottom: 0px;
   padding-left: 5px;
   font-variant: small-caps;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 page-login h1.titulo {
@@ -29763,6 +29782,10 @@ page-nova-proposta-pl .blockbutton {
   margin-right: 30px !important;
 }
 
+page-nova-proposta-pl .compartilhar {
+  margin-right: 10px !important;
+}
+
 page-nova-publicacao ion-title {
   text-align: center;
   margin-right: 15% !important;
@@ -29797,6 +29820,11 @@ page-nova-publicacao .blockbutton {
   text-align: center !important;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+page-novo-depoimento ion-title {
+  text-align: center;
+  margin-right: 15% !important;
 }
 
 .center-content {
@@ -30213,6 +30241,20 @@ page-pl-recusados p {
   margin-left: 10px !important;
 }
 
+page-publicacao .compartilhar {
+  margin-right: 10px !important;
+}
+
+page-publicacao ion-title {
+  text-align: center;
+}
+
+page-publicacao p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  margin-left: 10px !important;
+}
+
 page-requerimento ion-title {
   text-align: center;
   margin-right: 15% !important;
@@ -30352,7 +30394,7 @@ page-solic-propostas ion-header button {
 
 page-solic-propostas ion-title {
   text-align: center;
-  margin-right: 10%;
+  margin-right: 20%;
 }
 
 page-solic-propostas ion-content {

@@ -11,7 +11,7 @@ export class PlRecusadosPage {
 
   private pls: ProjetoDeLei[] = [];
 
-  constructor(public projetoDeLeiService: ProjetoDeLeiService) {}
+  constructor(public projetoDeLeiService: ProjetoDeLeiService) { }
 
   ionViewWillEnter() {
     this.carregarPropostas();
@@ -22,7 +22,15 @@ export class PlRecusadosPage {
       if (!res.error) {
         this.pls = res.data;
       }
-    })
+    });
   }
 
+  private doRefresh(refresher) {
+    this.projetoDeLeiService.getProjetosDeLei('cn').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.pls = res.data;
+      }
+    });
+  }
 }

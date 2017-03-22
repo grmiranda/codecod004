@@ -1,18 +1,21 @@
-<!--
-  Generated template for the AvaliarDepoimento page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>avaliar-depoimento</ion-title>
+  <ion-navbar color="laranja">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>Avaliar Depoimento</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list [virtualScroll]="depoimentos">
+    <ion-item *virtualItem="let depoimento" (press)="abrirOpcoes(depoimento)">
+      <ion-avatar item-left>
+        <img [src]="depoimento.fotoURL">
+      </ion-avatar>
+      <h2>{{depoimento.nome}}</h2>
+      <p>{{depoimento.Texto}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -18,8 +18,11 @@
 				if ($num !== 1) {
 					echo json_encode(true);
 				} else {
-					$dados = $result->fetch_assoc();
-					echo json_encode($dados);
+					while($row=$result->fetch_assoc()){
+						$vetor[] = $row;
+					}
+					
+					echo json_encode($vetor);
 				}
 			}		
 		}

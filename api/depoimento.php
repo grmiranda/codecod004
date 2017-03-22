@@ -12,9 +12,11 @@
 		
 		$Texto         = $request->Texto;
 		$IDUsuario = $request->IDUsuario;
-		$estado       = $request->estado;
-		$nome         = $request->nome;
-		$fotoURL    = $request->fotoURL;
+		
+		$sql = "INSERT INTO depoimento (Texto, IDUsuario, estado) VALUES ('$Texto', '$IDUsuario', 'sa') ";
+		$con->query($sql);
+		echo json_encode(true);
+
 	}
 	$con->close();
 ?>

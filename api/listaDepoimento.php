@@ -24,7 +24,7 @@
 					
 					echo json_encode($vetor);
 				}
-			} else if ($tipo == "sp"){
+			} else if ($tipo == "sa"){
 				$sql = "SELECT d.IDDepoimento, d.Texto, u.nome, u.fotoURL FROM depoimento d LEFT JOIN usuario u ON (d.IDUsuario = u.IDUsuario) WHERE estado = 'sp' ";
 				$result = $con->query($sql);
 				

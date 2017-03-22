@@ -59,21 +59,21 @@ export class AvaliarSolicitacaoPage {
         {
           text: 'Negar',
           role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
+          icon: 'trash',
           handler: () => {
             this.reprovar(solicitacao);
           }
         },
         {
           text: 'Aprovar',
-          icon: !this.platform.is('ios') ? 'create' : null,
+          icon: 'document',
           handler: () => {
             this.aprovar(solicitacao);
           }
         },
         {
           text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
+          icon: 'close',
           role: 'cancel',
           handler: () => {
           }

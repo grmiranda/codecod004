@@ -21,6 +21,16 @@ export class SolicAprovadosPage {
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    })
+    });
   }
+
+  private doRefresh(refresher) {
+    this.solicitacaoService.getSolicitacoes('cp').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    });
+  }
+
 }

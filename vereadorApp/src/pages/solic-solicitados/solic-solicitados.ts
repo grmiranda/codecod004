@@ -30,29 +30,29 @@ export class SolicSolicitadosPage {
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    })
+    });
   }
 
-  private aprovar(solicitacao: Solicitacao){
+  private aprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'cp';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
-      if(!res.error){
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+      if (!res.error) {
         //removeu
         this.carregarSolicitacoes();
-      }else{
+      } else {
         //error
       }
     })
   }
 
-  private reprovar(solicitacao: Solicitacao){
+  private reprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'cn';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
-      if(!res.error){
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+      if (!res.error) {
         //removeu
         this.carregarSolicitacoes();
 
-      }else{
+      } else {
         //rror
       }
     })
@@ -82,13 +82,21 @@ export class SolicSolicitadosPage {
           icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
     });
 
     actionSheet.present();
+  }
+
+  private doRefresh(refresher) {
+    this.solicitacaoService.getSolicitacoes('sl').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    });
   }
 
 }

@@ -25,7 +25,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = SolicitacoesPage;
+  rootPage = TabProjetosDeLeiPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

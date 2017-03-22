@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, Platform } from 'ionic-angular';
+import { ActionSheetController, AlertController, Platform } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 
@@ -12,6 +12,7 @@ export class AvaliarPlPage {
   public pls: ProjetoDeLei[] = [];
 
   constructor(public projetoDeLeiService: ProjetoDeLeiService,
+    private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform) { }
 
@@ -23,6 +24,8 @@ export class AvaliarPlPage {
     this.projetoDeLeiService.getProjetosDeLei('sa').then(res => {
       if (!res.error) {
         this.pls = res.data;
+      } else {
+        this.tentarNovamente();
       }
     })
   }
@@ -35,6 +38,7 @@ export class AvaliarPlPage {
         this.carregarPropostas();
       } else {
         //error
+        this.showConfirm(1, pl);
       }
     });
   }
@@ -47,6 +51,7 @@ export class AvaliarPlPage {
         this.carregarPropostas();
       } else {
         //error
+        this.showConfirm(2, pl);
       }
     });
   }
@@ -80,6 +85,48 @@ export class AvaliarPlPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarPropostas();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  private showConfirm(tipo: number, pl: ProjetoDeLei) {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            if (tipo == 1) {
+              this.aprovar(pl);
+            } else if (tipo == 2) {
+              this.reprovar(pl);
+            }
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

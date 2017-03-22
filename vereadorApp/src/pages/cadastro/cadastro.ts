@@ -7,13 +7,6 @@ import { LoginPage } from '../login/login';
 import { StorageService } from '../../providers/storage';
 import { PushService } from '../../providers/push-service';
 
-
-/*
-  Generated class for the Cadastro page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-cadastro',
   templateUrl: 'cadastro.html'
@@ -27,17 +20,8 @@ export class CadastroPage {
     public navParams: NavParams,
     public cadastroService: CadastroService,
     private storage: StorageService,
-    private pushService: PushService
-  ) {
-
+    private pushService: PushService) {
     this.usuario = this.navParams.get("dados");
-
-  }
-
-
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroPage');
   }
 
   private valido(): boolean {
@@ -69,8 +53,7 @@ export class CadastroPage {
     return true;
   }
 
-
-  cadastrar() {
+  private cadastrar() {
     this.pushService.getId().then(idPush => {
       this.cadastroService.cadastrar(this.usuario, idPush).then(res => {
         if (res == false) {
@@ -80,15 +63,11 @@ export class CadastroPage {
           this.storage.set(res);
           this.navCtrl.setRoot(HomePage);
         }
-
       })
     });
   }
 
-  cancelar() {
+  private cancelar() {
     this.navCtrl.setRoot(LoginPage);
   }
-
-
-
 }

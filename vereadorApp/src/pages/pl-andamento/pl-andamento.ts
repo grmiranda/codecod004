@@ -7,7 +7,6 @@ import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { NovaPlPage } from '../nova-pl/nova-pl';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 
-
 @Component({
   selector: 'page-pl-andamento',
   templateUrl: 'pl-andamento.html'

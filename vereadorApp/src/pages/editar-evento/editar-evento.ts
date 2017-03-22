@@ -24,7 +24,7 @@ export class EditarEventoPage {
   }
 
   public finalizar(){
-    
+
   }
 
 }

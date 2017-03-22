@@ -45,6 +45,9 @@ export class AgendaPage {
       mode: 'month',
       currentDate: new Date()
     };
+  }
+
+  ionViewWillEnter() {
     this.getEventos();
   }
 
@@ -54,7 +57,7 @@ export class AgendaPage {
   }
 
   reloadSource(startTime, endTime) {
-
+    
   }
 
   onEventSelected(event) { // evento diparado quando um evendo é selecionado na lista
@@ -81,7 +84,6 @@ export class AgendaPage {
         this.eventSource = [];
 
         for (let i = 0; i < this.eventos.length; i++) {
-
           this.eventSource.push({
             id: this.eventos[i].IDEvento,
             title: this.eventos[i].Titulo,
@@ -89,7 +91,8 @@ export class AgendaPage {
             endTime: new Date(this.eventos[i].DataTermino),
             allDay: this.eventos[i].EventoDiario,
             descricao: this.eventos[i].Descricao,
-            local: this.eventos[i].Local
+            local: this.eventos[i].Local,
+            IDUsuario: this.eventos[i].IDUsuario
           });
         }
         console.log(this.eventSource);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, Platform } from 'ionic-angular';
+import { ActionSheetController, Platform, AlertController, ToastController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 
@@ -12,6 +12,8 @@ export class AvaliarSolicitacaoPage {
   private solicitacoes: Solicitacao[] = [];
 
   constructor(public platform: Platform,
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
     public solicitacaoService: SolicitacaoService,
     public actionSheetCtrl: ActionSheetController) { }
 
@@ -27,24 +29,25 @@ export class AvaliarSolicitacaoPage {
     })
   }
 
-  private aprovar(solicitacao: Solicitacao){
+  private aprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'ap';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
-      if(!res.error){
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+      if (!res.error) {
+        this.displayToast('Solicitação Aprovada');
         this.carregarSolicitacoes();
-      }else{
-        //error
+      } else {
+        this.showConfirm(1, solicitacao);
       }
     })
   }
 
-  private reprovar(solicitacao: Solicitacao){
+  private reprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'rc';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res=>{
-      if(!res.error){
-        //editou
-      }else{
-        //error
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+      if (!res.error) {
+        this.displayToast('Solicitação Reprovada');
+      } else {
+        this.showConfirm(2, solicitacao);
       }
     })
   }
@@ -73,7 +76,6 @@ export class AvaliarSolicitacaoPage {
           icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
@@ -81,4 +83,38 @@ export class AvaliarSolicitacaoPage {
 
     actionSheet.present();
   }
+
+  private displayToast(mensagem: string) {
+    let toast = this.toastCtrl.create({
+      message: mensagem,
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.present();
+  }
+
+  private showConfirm(tipo: number, solicitacao: Solicitacao) {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            if (tipo == 1) {
+              this.aprovar(solicitacao);
+            } else if (tipo == 2) {
+              this.reprovar(solicitacao);
+            }
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 }

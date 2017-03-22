@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { EventoService } from '../../providers/evento-service';
 import { Evento } from '../../model/evento';
 
@@ -18,15 +18,30 @@ export class EditarEventoPage {
   private evento: any;
   private dataInicio;
   private dataFim;
+  private title;
+  private local;
+  private descricao;
   private horaInicio;
   private horaTermino;
+  private allDay: boolean = false;
 
-  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private eventoService: EventoService) {
+  constructor(
+    private toastCtrl: ToastController,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private eventoService: EventoService,
+    public view: ViewController
+  ) {
     this.evento = this.navParams.get("evento");
     this.dataInicio = this.navParams.get("dataInicio");
+    this.title = this.evento.title;
+    this.descricao = this.evento.descricao;
+    this.local = this.evento.local;
+    this.allDay = this.evento.allDay;
     this.dataFim = this.navParams.get("dataFim");
     this.horaInicio = this.navParams.get("horaInicio");
     this.horaTermino = this.navParams.get("horaFim");
+    console.log(this.allDay);
   }
 
   ionViewDidLoad() {
@@ -35,17 +50,29 @@ export class EditarEventoPage {
 
   public finalizar() {
     let evento = new Evento();
-    evento.DataInicio = this.evento.DataInicio + " " + this.horaInicio + ":00";
-    evento.DataFim = this.evento.DataFim + " " + this.horaTermino + ":00";
-    evento.Titulo = this.evento.title;
-    evento.Descricao = this.evento.descricao;
-    evento.Local = this.evento.Local;
-    this.validate(evento);
-    this.eventoService.editEvento(evento).then(res=>{
-      if(res==true){
-        this.navCtrl.pop();
-      }
-    })
+    evento.Allday = this.allDay;
+    evento.IDEvento = this.evento.id;
+    evento.DataInicio = this.dataInicio + " " + this.horaInicio + ":00";
+    evento.DataFim = this.dataFim + " " + this.horaTermino + ":00";
+    evento.Titulo = this.title;
+    evento.Descricao = this.descricao;
+    evento.Local = this.local;
+    evento.IDUsuario = this.evento.IDUsuario;
+    if (this.validate(evento)) {
+      console.log(evento);
+      this.eventoService.editEvento(evento).then(res => {
+        if (res == true) {
+          this.evento.title = evento.Titulo;
+          this.evento.descricao = evento.Descricao;
+          this.evento.local = evento.Local;
+          this.evento.allDay = evento.Allday;
+          this.view.dismiss({evento: this.evento, dataInicio: this.dataInicio, dataFim: this.dataFim, horaInicio: this.horaInicio, horaFim: this.horaTermino, allDay: this.allDay});
+          this.presentToast("Alterado com sucesso");
+        }
+      });
+    }
+
+
   }
 
   validate(evento): boolean {
@@ -69,12 +96,12 @@ export class EditarEventoPage {
         this.presentToast("Hora de término está errada evento");
         return false;
       }
-    } else if (this.evento.Allday) {
+    } else if (evento.Allday) {
       this.horaInicio = "00:00";
       this.horaTermino = "23:59";
     }
-    this.evento.DataInicio = this.evento.DataInicio + " " + this.horaInicio + ":00";
-    this.evento.DataFim = this.evento.DataFim + " " + this.horaTermino + ":00";
+    evento.DataInicio = this.dataInicio + " " + this.horaInicio + ":00";
+    evento.DataFim = this.dataFim + " " + this.horaTermino + ":00";
     return true;
   }
 
@@ -85,6 +112,10 @@ export class EditarEventoPage {
       position: 'top'
     });
     toast.present();
+  }
+
+  cancel() {
+    this.view.dismiss()
   }
 
 }

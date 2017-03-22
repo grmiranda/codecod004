@@ -1,45 +1,50 @@
-<ion-header>
-
-  <ion-navbar color="laranja">
-    <ion-title>Editar Evento</ion-title>
-  </ion-navbar>
-
+<ion-header >
+  <ion-toolbar color="laranja">
+    <ion-title>
+      Editar Evento
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <ion-list>
 
     <ion-item>
       <ion-label floating>Título</ion-label>
-      <ion-input type="text" [(ngModel)]="evento.title" readonly="true" name="titulo"></ion-input>
+      <ion-input type="text" [(ngModel)]="title" name="titulo"></ion-input>
     </ion-item>
     <ion-item class="itemtextarea">
       <ion-label floating>Descrição</ion-label>
-      <ion-textarea rows="5" [(ngModel)]="evento.descricao" readonly="true" name="texto"></ion-textarea>
+      <ion-textarea rows="5" [(ngModel)]="descricao" name="texto"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating >Local</ion-label>
-      <ion-input type="text" [(ngModel)]="evento.Local"></ion-input>
+      <ion-input type="text" [(ngModel)]="local"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Início</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="dataInicio"></ion-datetime>
+      <ion-input type="date" [(ngModel)]="dataInicio" name="dataInicio"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Término</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="dataFim"></ion-datetime>
+      <ion-input type="date" [(ngModel)]="dataFim" name="dataFim"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Dia Inteiro</ion-label>
-      <ion-toggle [(ngModel)]="evento.allDay"></ion-toggle>
+      <ion-toggle [(ngModel)]="allDay"></ion-toggle>
     </ion-item>
     <!--Caso não seja dia inteiro, escolher horários-->
-    <ion-item *ngIf="!evento.allDay">
+    <ion-item *ngIf="!allDay">
       <ion-label floating>Horário de início</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaInicio"></ion-datetime>
+      <ion-input type="time" [(ngModel)]="horaInicio" name="horaInicio"></ion-input>
     </ion-item>
-    <ion-item *ngIf="!evento.allDay">
+    <ion-item *ngIf="!allDay">
       <ion-label floating>Horário de término</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaTermino"></ion-datetime>
+      <ion-input type="time" [(ngModel)]="horaTermino" name="horaTermino"></ion-input>
     </ion-item>
     <ion-item>
       <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Finalizar</button>

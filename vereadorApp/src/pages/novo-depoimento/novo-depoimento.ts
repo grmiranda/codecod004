@@ -13,6 +13,8 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class NovoDepoimentoPage {
 
+  private texto: string = "";
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {

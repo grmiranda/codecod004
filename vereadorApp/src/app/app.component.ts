@@ -18,6 +18,7 @@ import { Usuario } from '../model/user';
 import { InformacaoPage } from '../pages/informacao/informacao';
 import { Http, Headers } from '@angular/http';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { HistoriaPage } from '../pages/historia/historia';
 
 @Component({
   templateUrl: 'app.html'
@@ -48,7 +49,8 @@ export class MyApp {
     { title: 'Agenda', component: AgendaPage },
     { title: 'Informações úteis', component: InformacaoPage },
     { title: 'Telefones Úteis', component: CategoriasPage },
-    { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage }]
+    { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
+    { title: 'História do Vereador', component: HistoriaPage}]
 
     this.pageAtual = 'Notícias';
 

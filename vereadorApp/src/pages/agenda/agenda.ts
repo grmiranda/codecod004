@@ -7,6 +7,7 @@ import { DayViewComponent } from 'ionic2-calendar/dayview';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { AdicionarEventoPage } from '../adicionar-evento/adicionar-evento';
 import { EventoService } from '../../providers/evento-service';
+import { EventoPage } from '../evento/evento';
 
 /*
   Generated class for the Agenda page.
@@ -57,7 +58,7 @@ export class AgendaPage {
   }
 
   onEventSelected(event) { // evento diparado quando um evendo é selecionado na lista
-    
+    this.navCtrl.push(EventoPage, {evento: event});
   }
 
   onViewTitleChanged = (title: string) => { // atualiza o título
@@ -86,7 +87,9 @@ export class AgendaPage {
             title: this.eventos[i].Titulo,
             startTime: new Date(this.eventos[i].DataInicio),
             endTime: new Date(this.eventos[i].DataTermino),
-            allDay: this.eventos[i].EventoDiario
+            allDay: this.eventos[i].EventoDiario,
+            descricao: this.eventos[i].Descricao,
+            local: this.eventos[i].Local
           });
         }
         console.log(this.eventSource);

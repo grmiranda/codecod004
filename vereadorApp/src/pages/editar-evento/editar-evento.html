@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar color="laranja" >
+    <ion-title>Editar Evento</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="evento.title" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item class="itemtextarea">
+      <ion-label floating>Descrição</ion-label>
+      <ion-textarea rows="5" [(ngModel)]="evento.descricao" name="texto"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label floating >Início</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="evento.startTime"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating >Término</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="evento.endTime"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Finalizar</button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+

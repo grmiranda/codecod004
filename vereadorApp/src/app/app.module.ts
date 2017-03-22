@@ -22,6 +22,8 @@ import { NovaPlPage } from '../pages/nova-pl/nova-pl';
 import { PlPropostasPage } from '../pages/pl-propostas/pl-propostas';
 import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { PlRecusadosPage } from '../pages/pl-recusados/pl-recusados';
+import { EventoPage } from '../pages/evento/evento';
+import { EditarEventoPage } from '../pages/editar-evento/editar-evento';
 import { FotoService } from '../providers/foto-service';
 import { PublicacaoService } from '../providers/publicacao-service';
 import { SolicitacaoService } from '../providers/solicitacao-service';
@@ -122,7 +124,9 @@ const cloudSettings: CloudSettings = {
     ModalOpcoesPage,
     AdicionarEventoPage,
     CompartilharPage,
-    PerfilPage
+    PerfilPage,
+    EventoPage,
+    EditarEventoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -169,7 +173,9 @@ const cloudSettings: CloudSettings = {
     ModalOpcoesPage,
     AdicionarEventoPage,
     CompartilharPage,
-    PerfilPage
+    PerfilPage,
+    EventoPage,
+    EditarEventoPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,

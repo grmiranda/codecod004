@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar color="laranja" >
+    <ion-title>Evento</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="evento.title" readonly="true" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item class="itemtextarea">
+      <ion-label floating>Descrição</ion-label>
+      <ion-textarea rows="5" [(ngModel)]="evento.descricao" readonly="true" name="texto"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="evento.allDay == false">
+      <ion-label floating>Inicio</ion-label>
+      <ion-input type="text" [(ngModel)]="evento.startTime" readonly="true" name="startTime"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="evento.allDay == false">
+      <ion-label floating>Termino</ion-label>
+      <ion-input type="text" [(ngModel)]="evento.endTime" readonly="true" name="endTime"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col width-50>
+          <button class="fabbuttons" (click)="editar()" color="secondary" ion-fab large>
+              <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col width-50>
+          <button class="fabbuttons" color="secondary" ion-fab large>
+              <ion-icon name="trash"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
+

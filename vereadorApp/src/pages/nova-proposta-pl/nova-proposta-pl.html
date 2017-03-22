@@ -3,18 +3,15 @@
   <ion-navbar color="laranja">
     <ion-title>Nova Proposta</ion-title>
     <ion-buttons end>
-      <button class="compartilhar" ion-button icon-only>
+      <button class="compartilhar" ion-button icon-only (click)="help()">
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content>
   <ion-list>
-
     <ion-item>
       <ion-label floating>Título</ion-label>
       <ion-input placeholder='' type="text" [(ngModel)]="pl.titulo" name="titulo"></ion-input>

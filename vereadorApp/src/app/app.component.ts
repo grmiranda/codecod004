@@ -18,16 +18,19 @@ import { Usuario } from '../model/user';
 import { InformacaoPage } from '../pages/informacao/informacao';
 import { Http, Headers } from '@angular/http';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { NovaPropostaPlPage } from '../pages/nova-proposta-pl/nova-proposta-pl';
 import { HistoriaPage } from '../pages/historia/historia';
 import { DepoimentoPage } from '../pages/depoimento/depoimento';
+
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = TabProjetosDeLeiPage;
+  rootPage = NovaPropostaPlPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

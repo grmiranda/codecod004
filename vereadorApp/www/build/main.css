@@ -29431,6 +29431,15 @@ page-categorias ion-title {
   margin-right: 10%;
 }
 
+page-depoimento ion-header button {
+  width: 10% !important;
+}
+
+page-depoimento ion-title {
+  text-align: center;
+  margin-right: 10%;
+}
+
 page-editar-evento .blockbutton {
   text-align: center !important;
   margin-right: 30px !important;

@@ -48,6 +48,7 @@ import { ModalOpcoesPage } from '../pages/modal-opcoes/modal-opcoes';
 import { AdicionarEventoPage } from '../pages/adicionar-evento/adicionar-evento';
 import { CallNumber } from 'ionic-native';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { DepoimentoPage } from '../pages/depoimento/depoimento';
 
 //push
 import { OneSignal } from 'ionic-native';
@@ -128,7 +129,8 @@ const cloudSettings: CloudSettings = {
     PerfilPage,
     EventoPage,
     EditarEventoPage,
-    HistoriaPage
+    HistoriaPage,
+    DepoimentoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -178,7 +180,8 @@ const cloudSettings: CloudSettings = {
     PerfilPage,
     EventoPage,
     EditarEventoPage,
-    HistoriaPage
+    HistoriaPage,
+    DepoimentoPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,

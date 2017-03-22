@@ -19,6 +19,7 @@ import { InformacaoPage } from '../pages/informacao/informacao';
 import { Http, Headers } from '@angular/http';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { HistoriaPage } from '../pages/historia/historia';
+import { DepoimentoPage } from '../pages/depoimento/depoimento';
 
 @Component({
   templateUrl: 'app.html'
@@ -50,6 +51,7 @@ export class MyApp {
     { title: 'Informações úteis', component: InformacaoPage },
     { title: 'Telefones Úteis', component: CategoriasPage },
     { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
+    { title: 'Depoimentos', component: DepoimentoPage},
     { title: 'História do Vereador', component: HistoriaPage}]
 
     this.pageAtual = 'Notícias';

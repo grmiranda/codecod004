@@ -34,21 +34,20 @@
         $DataInicio   = $request->DataInicio;
         $DataFim   = $request->DataFim;
         $Allday   = $request->Allday;
-        $EventoDiario   = $request->EventoDiario;
         $IDUsuario   = $request->IDUsuario;
         $Local   = $request->Local;
 
         if($Allday == true){
-            $EventoDiario = "1";
+            $Allday = "1";
         } else{
-            $EventoDiario = "0";
+            $Allday = "0";
         }
 
         $sql = "INSERT INTO evento (DataInicio, DataTermino, Titulo, Descricao, Local, IDUsuario, EventoDiario) 
-                VALUES ('$DataInicio', '$DataFim', '$Titulo', '$Descricao', '$Local', '$IDUsuario', '$EventoDiario')";
+                VALUES ('$DataInicio', '$DataFim', '$Titulo', '$Descricao', '$Local', '$IDUsuario', '$Allday')";
         $con->query($sql);
 
-        $sql = "SELECT * FROM evento WHERE DataInicio = '$DataInicio' AND DataTermino = '$DataFim' AND Titulo = '$Titulo' AND Descricao = '$Descricao' AND Local = '$Local' AND IDUsuario = '$IDUsuario' AND EventoDiario ='$EventoDiario'";
+        $sql = "SELECT * FROM evento WHERE DataInicio = '$DataInicio' AND DataTermino = '$DataFim' AND Titulo = '$Titulo' AND Descricao = '$Descricao' AND Local = '$Local' AND IDUsuario = '$IDUsuario' AND EventoDiario ='$Allday'";
         $result = $con->query($sql);
         while ($row=$result->fetch_assoc()){
             if($row['EventoDiario'] == '0'){

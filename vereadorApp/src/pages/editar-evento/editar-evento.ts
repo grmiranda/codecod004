@@ -54,7 +54,6 @@ export class EditarEventoPage {
     evento.Local = this.local;
     evento.IDUsuario = this.evento.IDUsuario;
     if (this.validate(evento)) {
-      console.log(evento);
       this.eventoService.editEvento(evento).then(res => {
         if (res == true) {
           this.evento.title = evento.Titulo;

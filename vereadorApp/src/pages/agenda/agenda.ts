@@ -48,6 +48,7 @@ export class AgendaPage {
   }
 
   ionViewWillEnter() {
+    console.log("teste");
     this.getEventos();
   }
 

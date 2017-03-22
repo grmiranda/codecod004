@@ -29445,6 +29445,11 @@ page-editar-evento .blockbutton {
   margin-right: 30px !important;
 }
 
+page-editar-evento ion-title {
+  text-align: center;
+  margin-left: 10% !important;
+}
+
 page-editar-publicacao ion-title {
   text-align: center;
   margin-right: 10%;
@@ -29490,6 +29495,11 @@ page-evento .fabbuttons {
   -ms-grid-row-align: center !important;
   align-self: center !important;
   margin-left: 30%;
+}
+
+page-evento ion-title {
+  text-align: center;
+  margin-right: 15% !important;
 }
 
 page-historia ion-header button {

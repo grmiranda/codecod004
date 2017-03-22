@@ -16,7 +16,7 @@
 				$num = $result->num_rows;
 				
 				if ($num !== 1) {
-					echo json_encode(true);
+					echo json_encode($vetor);
 				} else {
 					while($row=$result->fetch_assoc()){
 						$vetor[] = $row;
@@ -31,7 +31,7 @@
 				$num = $result->num_rows;
 				
 				if ($num !== 1){
-					echo json_encode(false);
+					echo json_encode($vetor);
 				} else {
 					while($row=$result->fetch_assoc()){
 						$vetor[] = $row;

@@ -28,4 +28,14 @@ export class EventoService {
     .catch(()=>alert("Erro ao tentar se conectar com o servidor"));
   }
 
+  public removeEvento(idEvento): Promise<boolean>{
+    return this.http.post("http://dsoutlet.com.br/apiLuiz/delEvento.php", JSON.stringify(idEvento), { headers: this.headers }).toPromise().then(res=>res.json())
+    .catch(()=>alert("Erro ao tentar se conectar com o servidor"));    
+  }
+
+  public editEvento(evento): Promise<boolean>{
+    return this.http.post("http://dsoutlet.com.br/apiLuiz/editEvento.php", JSON.stringify(evento), { headers: this.headers }).toPromise().then(res=>res.json())
+    .catch(()=>alert("Erro ao tentar se conectar com o servidor"));    
+  }
+
 }

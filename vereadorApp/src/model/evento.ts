@@ -6,7 +6,6 @@ export class Evento {
     public DataInicio: string;
     public DataFim: string;
     public Allday: boolean;
-    public EventoDiario: boolean
     public IDUsuario: string;
     public Local: string;
 
@@ -18,7 +17,6 @@ export class Evento {
         this.Allday = false;
         this.DataInicio = "";
         this.DataFim = "";
-        this.EventoDiario = false;
         this.Local = "";
 
     }

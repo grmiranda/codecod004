@@ -62,7 +62,7 @@ export class AdicionarEventoPage {
     } else if (this.evento.DataInicio > this.evento.DataFim) {
       this.presentToast("Data de termino está errada");
       return false;
-    } else if (!this.evento.EventoDiario) {
+    } else if (!this.evento.Allday) {
       if (this.horaInicio == "") {
         this.presentToast("Coloque a hora de inicio do evento");
         return false;
@@ -73,7 +73,7 @@ export class AdicionarEventoPage {
         this.presentToast("Hora de término está errada evento");
         return false;
       }
-    } else if (this.evento.EventoDiario) {
+    } else if (this.evento.Allday) {
       this.horaInicio = "00:00";
       this.horaTermino = "23:59";
     }

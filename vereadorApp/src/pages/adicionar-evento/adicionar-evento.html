@@ -42,14 +42,14 @@
     </ion-item>
     <ion-item>
       <ion-label>Dia Inteiro</ion-label>
-      <ion-toggle [(ngModel)]="evento.EventoDiario"></ion-toggle>
+      <ion-toggle [(ngModel)]="evento.Allday"></ion-toggle>
     </ion-item>
     <!--Caso não seja dia inteiro, escolher horários-->
-    <ion-item *ngIf="!evento.EventoDiario">
+    <ion-item *ngIf="!evento.Allday">
       <ion-label floating >Horário de início</ion-label>
       <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaInicio"></ion-datetime>
     </ion-item>
-    <ion-item *ngIf="!evento.EventoDiario">
+    <ion-item *ngIf="!evento.Allday">
       <ion-label floating >Horário de término</ion-label>
       <ion-datetime displayFormat="HH:mm" [(ngModel)]="horaTermino"></ion-datetime>
     </ion-item>

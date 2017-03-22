@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ActionSheetController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ActionSheetController, LoadingController, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 
@@ -14,16 +14,15 @@ export class SolicReprovadosPage {
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
+    private alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public solicitacaoService: SolicitacaoService) { }
 
-
   ionViewWillEnter() {
     this.carregarSolicitacoes();
   }
-
 
   private carregarSolicitacoes() {
 
@@ -37,6 +36,8 @@ export class SolicReprovadosPage {
       loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
+      } else {
+        this.showConfirm();
       }
     });
   }
@@ -65,13 +66,30 @@ export class SolicReprovadosPage {
           icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
     });
-
     actionSheet.present();
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarSolicitacoes();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   private doRefresh(refresher) {

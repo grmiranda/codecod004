@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 
@@ -12,7 +12,9 @@ export class SolicAprovadosPage {
   private solicitacoes: Solicitacao[] = [];
 
 
-  constructor(private loadingCtrl: LoadingController, private solicitacaoService: SolicitacaoService) { }
+  constructor(private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private solicitacaoService: SolicitacaoService) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
@@ -30,8 +32,29 @@ export class SolicAprovadosPage {
       loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
+      } else {
+        this.showConfirm();
       }
     });
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarSolicitacoes();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   private doRefresh(refresher) {

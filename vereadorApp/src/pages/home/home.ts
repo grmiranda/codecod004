@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NovaPublicacaoPage } from '../nova-publicacao/nova-publicacao';
 import { EditarPublicacaoPage } from '../editar-publicacao/editar-publicacao';
 import { PublicacaoPage } from '../publicacao/publicacao';
-import { Platform, NavController, ActionSheetController, MenuController, LoadingController } from 'ionic-angular';
+import { Platform, NavController, ActionSheetController, MenuController, AlertController, LoadingController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 
@@ -15,6 +15,7 @@ export class HomePage {
   private publicacoes: Publicacao[] = [];
 
   constructor(private platform: Platform,
+    private alertCtrl: AlertController,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private publicacaoService: PublicacaoService,
@@ -41,6 +42,7 @@ export class HomePage {
         this.publicacoes = res.data;
       } else {
         //ocorreu um error
+        this.tentarNovamente();
       }
     });
   }
@@ -93,6 +95,25 @@ export class HomePage {
       ]
     });
     actionSheet.present();
+  }
+
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarFeed();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   private doRefresh(refresher) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform, LoadingController } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform, LoadingController, AlertController } from 'ionic-angular';
 import { Solicitacao } from '../../model/solicitacao';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 
@@ -15,6 +15,7 @@ export class SolicSolicitadosPage {
 
   constructor(public platform: Platform,
     public loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
     public actionSheetCtrl: ActionSheetController) {
@@ -23,7 +24,6 @@ export class SolicSolicitadosPage {
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
-
   }
 
   private carregarSolicitacoes() {
@@ -38,6 +38,9 @@ export class SolicSolicitadosPage {
       loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
+      } else {
+        //error de conexao
+        this.tentarNovamente();
       }
     });
   }
@@ -50,6 +53,7 @@ export class SolicSolicitadosPage {
         this.carregarSolicitacoes();
       } else {
         //error
+        this.showConfirm(1, solicitacao);
       }
     })
   }
@@ -60,9 +64,9 @@ export class SolicSolicitadosPage {
       if (!res.error) {
         //removeu
         this.carregarSolicitacoes();
-
       } else {
-        //rror
+        //error
+        this.showConfirm(2, solicitacao);
       }
     })
   }
@@ -99,6 +103,48 @@ export class SolicSolicitadosPage {
     actionSheet.present();
   }
 
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarSolicitacoes();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  private showConfirm(tipo: number, solicitacao: Solicitacao) {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            if (tipo == 1) {
+              this.aprovar(solicitacao);
+            } else if (tipo == 2) {
+              this.reprovar(solicitacao);
+            }
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
   private doRefresh(refresher) {
     this.solicitacaoService.getSolicitacoes('sl').then(res => {
       refresher.complete();
@@ -107,5 +153,4 @@ export class SolicSolicitadosPage {
       }
     });
   }
-
 }

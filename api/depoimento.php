@@ -10,11 +10,13 @@
 	if (isset($postdata)){
 		$request  = json_decode($postdata);
 		
-		$Texto         = $request->Texto;
-		$IDUsuario = $request->IDUsuario;
-		$estado       = $request->estado;
-		$nome         = $request->nome;
-		$fotoURL    = $request->fotoURL;
+		$Texto         = $request->texto;
+		$IDUsuario = $request->idUser;
+		
+		$sql = "INSERT INTO depoimento (Texto, IDUsuario, estado) VALUES ('$Texto', '$IDUsuario', 'sa') ";
+		$con->query($sql);
+		echo json_encode(true);
+
 	}
 	$con->close();
 ?>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, NavController, NavParams } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
+import { DepoimentoService } from '../../providers/depoimento-service';
 
 
 @Component({
@@ -13,8 +14,13 @@ export class AvaliarDepoimentoPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public actionSheetCtrl: ActionSheetController) {
-
+    private depoimentoService: DepoimentoService,
+    public actionSheetCtrl: ActionSheetController
+    ) {
+      this.depoimentoService.getDepoimentoAvaliar().then(depoi=>{
+        console.log(depoi);
+        this.depoimentos = depoi;
+      });
     }
 
   ionViewDidLoad() {

@@ -29449,6 +29449,10 @@ page-depoimento ion-title {
   margin-right: 10%;
 }
 
+page-depoimento ion-item {
+  resize: both;
+}
+
 page-editar-evento .blockbutton {
   text-align: center !important;
   margin-right: 30px !important;

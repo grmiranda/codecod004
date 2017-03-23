@@ -15,12 +15,23 @@
 			
 			if($estado == 'ap'){
 				while($row=$result->fetch_assoc()){
+					$idU = $row['IDUsuario'];
+					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
+					$resultado = $con->query($sql);
+					$dado = $resultado->fetch_assoc();
+					$row['Push'] = $dado['Push'];
 					$info = getLike($row['IDSolicitacao'], $id, $con);
 					$info->solicitacao = $row;
 					$vetor[] = $info;
 				}
-			}else{
+			}
+			else{
 				while($row=$result->fetch_assoc()){
+					$idU = $row['IDUsuario'];
+					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
+					$resultado = $con->query($sql);
+					$dado = $resultado->fetch_assoc();
+					$row['Push'] = $dado['Push'];
 					$vetor[] = $row;
 				}
 			}

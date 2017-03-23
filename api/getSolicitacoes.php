@@ -20,6 +20,17 @@
 					$resultado = $con->query($sql);
 					$dado = $resultado->fetch_assoc();
 					$row['Push'] = $dado['Push'];
+					
+					$idS = $row['IDSolicitacao'];
+					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
+					$resultado = $con->query($sql);
+					
+					$ids = array();
+					while($l=$resultado->fetch_assoc()){
+						$ids[] = $l['IDUsuario'];
+					}
+					$row['ids'] = $ids;
+					
 					$info = getLike($row['IDSolicitacao'], $id, $con);
 					$info->solicitacao = $row;
 					$vetor[] = $info;
@@ -32,6 +43,16 @@
 					$resultado = $con->query($sql);
 					$dado = $resultado->fetch_assoc();
 					$row['Push'] = $dado['Push'];
+
+					$idS = $row['IDSolicitacao'];
+					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
+					$resultado = $con->query($sql);
+					
+					$ids = array();
+					while($l=$resultado->fetch_assoc()){
+						$ids[] = $l['IDUsuario'];
+					}
+					$row['ids'] = $ids;
 					$vetor[] = $row;
 				}
 			}

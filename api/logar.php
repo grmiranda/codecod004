@@ -29,7 +29,7 @@
             $id     = $dados['IDUsuario'];
 
 
-            $sql = "UPDATE usuario SET Push = '' WHERE Push = '$push'";
+            $sql = "UPDATE usuario SET Push = '' WHERE socialID = '$push'";
             $con->query($sql);
 
             $sql = "UPDATE usuario SET Push =  '$push' WHERE socialID = '$socialID'";

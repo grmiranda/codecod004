@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform, AlertController, LoadingController } from 'ionic-angular';
 import { NovaPropostaPlPage } from '../nova-proposta-pl/nova-proposta-pl';
 import { NovaPlPage } from '../nova-pl/nova-pl';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
@@ -22,6 +22,8 @@ export class PlPropostasPage {
     public likeService: LikeService,
     public storage: StorageService,
     public navCtrl: NavController,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform) {
 
@@ -35,9 +37,19 @@ export class PlPropostasPage {
   }
 
   private carregarPropostas() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.projetoDeLeiService.getProjetosDeLeiLikes('ap', this.myID).then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
+      }else{
+        this.showConfirm(this.carregarPropostas());
       }
     });
   }
@@ -52,9 +64,9 @@ export class PlPropostasPage {
       if (!res.error) {
         //removeu
         this.carregarPropostas();
-
       } else {
         //error
+        this.showConfirm(this.reprovar(pl));
       }
     })
   }
@@ -96,6 +108,25 @@ export class PlPropostasPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private showConfirm(callBack) {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            callBack();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   private doRefresh(refresher) {

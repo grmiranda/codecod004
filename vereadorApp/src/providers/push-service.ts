@@ -31,8 +31,7 @@ export class PushService {
     OneSignal.deleteTag("permissao");
   }
 
-  pushUmaPessoa(mensagem, pessoa: Usuario) {
-    alert(JSON.stringify(pessoa));
+  pushUmaPessoa(mensagem, pessoa) {
     this.http.post('https://onesignal.com/api/v1/notifications', JSON.stringify({
       "app_id": "04946cb2-d0f6-485b-a390-fea608737a42",
       "headings": { "en": "Luiz da Feira" },

@@ -51,6 +51,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { NovoDepoimentoPage } from '../pages/novo-depoimento/novo-depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
+import { FeedBackService } from '../providers/feed-back-service';
 
 //diretivas
 import { Autoresize } from '../components/autoresize/autoresize';
@@ -194,7 +195,7 @@ const cloudSettings: CloudSettings = {
     AvaliarDepoimentoPage
   ],
 
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
     StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
     PontuacaoService, { provide: ErrorHandler, useClass: IonicErrorHandler }, GooglePlusService, ProjetoDeLeiService]
 

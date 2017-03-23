@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, Platform, AlertController, ToastController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
+import { MensagemService } from '../../providers/mensagem-service';
+import { StorageService } from '../../providers/storage';
 import { Solicitacao } from '../../model/solicitacao';
+import { CorpoMensagem } from '../../model/mensagem';
+import { PushService } from '../../providers/push-service';
+import { FeedBackService } from '../../providers/feed-back-service';
+
 
 @Component({
   selector: 'page-avaliar-solicitacao',
@@ -15,7 +21,12 @@ export class AvaliarSolicitacaoPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     public solicitacaoService: SolicitacaoService,
-    public actionSheetCtrl: ActionSheetController) { }
+    private mensagemService: MensagemService,
+    private storageService: StorageService,
+    public actionSheetCtrl: ActionSheetController,
+    private pushService: PushService,
+    private feedService : FeedBackService 
+    ) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
@@ -29,6 +40,7 @@ export class AvaliarSolicitacaoPage {
     })
   }
 
+
   private aprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'ap';
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
@@ -38,7 +50,7 @@ export class AvaliarSolicitacaoPage {
       } else {
         this.showConfirm(1, solicitacao);
       }
-    })
+    });
   }
 
   private reprovar(solicitacao: Solicitacao) {
@@ -52,7 +64,7 @@ export class AvaliarSolicitacaoPage {
     })
   }
 
-  private abrirOpcoes(solicitacao: any) {
+  private abrirOpcoes(solicitacao: Solicitacao) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',
       buttons: [
@@ -68,7 +80,8 @@ export class AvaliarSolicitacaoPage {
           text: 'Aprovar',
           icon: 'document',
           handler: () => {
-            this.aprovar(solicitacao);
+            this.feedService.showPrompt(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);            
+            //this.showPrompt(solicitacao);
           }
         },
         {
@@ -116,5 +129,46 @@ export class AvaliarSolicitacaoPage {
     });
     confirm.present();
   }
+
+  private showPrompt(solicitacao: Solicitacao) {
+    return this.alertCtrl.create({
+      title: 'Mensagem para usuario',
+      message: "Digite uma mensagem para o usuario",
+      inputs: [
+        {
+          name: 'mensagem',
+          placeholder: 'Digite aqui'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            this.displayToast("Avaliação cancelada");
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            /*
+            let mensagemEnviar = new CorpoMensagem();
+            mensagemEnviar.mensagem = data.mensagem;
+            mensagemEnviar.destinatario = solicitacao.IDUsuario.toString();
+            //this.storageService.get().then(res=>mensagemEnviar.remetente = res.IDUsuario);
+            mensagemEnviar.remetente = "1";
+            this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+              if (res == true) {
+                this.aprovar(solicitacao);
+                this.pushService.pushUmaPessoa("Nova mensagem", solicitacao.push);
+              }
+            });
+            */
+          }
+        }
+      ]
+    }).present();
+  }
+
+  
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, Platform  } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, AlertController, Platform, LoadingController } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { StorageService } from '../../providers/storage';
 import { LikeService } from '../../providers/like-service';
@@ -19,7 +19,9 @@ export class PlAndamentoPage {
   constructor(public navCtrl: NavController,
     public likeService: LikeService,
     public projetoDeLeiService: ProjetoDeLeiService,
+    private loadingCtrl: LoadingController,
     public storage: StorageService,
+    private alertCtrl: AlertController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform) {
@@ -34,9 +36,19 @@ export class PlAndamentoPage {
   }
 
   private carregarPropostas() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
+      }else{
+        this.tentarNovamente();
       }
     });
   }
@@ -53,6 +65,7 @@ export class PlAndamentoPage {
         this.carregarPropostas();
       } else {
         //error
+        this.showConfirm(1, pl);
       }
     });
   }
@@ -64,7 +77,7 @@ export class PlAndamentoPage {
         //works fine
         this.carregarPropostas();
       } else {
-        //error
+        this.showConfirm(2, pl);
       }
     });
   }
@@ -76,6 +89,7 @@ export class PlAndamentoPage {
       projetodelei.n = res.value.n;
     });
   }
+
   private abrirOpcoes(pl: ProjetoDeLei) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',
@@ -107,11 +121,55 @@ export class PlAndamentoPage {
     actionSheet.present();
   }
 
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarPropostas();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  private showConfirm(tipo: number, pl: ProjetoDeLei) {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            if (tipo == 1) {
+              this.aprovar(pl);
+            } else if (tipo == 2) {
+              this.reprovar(pl);
+            }
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
   private doRefresh(refresher) {
     this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;
+      }else{
+        this.tentarNovamente();
       }
     });
   }

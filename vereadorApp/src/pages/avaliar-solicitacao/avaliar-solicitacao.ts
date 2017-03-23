@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, Platform, AlertController, ToastController } from 'ionic-angular';
+import { ActionSheetController, Platform, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { MensagemService } from '../../providers/mensagem-service';
 import { StorageService } from '../../providers/storage';
@@ -17,8 +17,9 @@ export class AvaliarSolicitacaoPage {
 
   private solicitacoes: Solicitacao[] = [];
 
-  constructor(public platform: Platform,
+  constructor(private platform: Platform,
     private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public solicitacaoService: SolicitacaoService,
     private mensagemService: MensagemService,
@@ -33,11 +34,19 @@ export class AvaliarSolicitacaoPage {
   }
 
   private carregarSolicitacoes() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.solicitacaoService.getSolicitacoes('sa').then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    })
+    });
   }
 
 
@@ -130,6 +139,7 @@ export class AvaliarSolicitacaoPage {
     confirm.present();
   }
 
+<<<<<<< HEAD
   private showPrompt(solicitacao: Solicitacao) {
     return this.alertCtrl.create({
       title: 'Mensagem para usuario',
@@ -171,4 +181,15 @@ export class AvaliarSolicitacaoPage {
 
   
 
+=======
+  private doRefresh(refresher) {
+    this.solicitacaoService.getSolicitacoes('sa').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.solicitacoes = res.data;
+      }
+    });
+  }
+
+>>>>>>> e0ca1ce49b05f4830d5b3e5f85a57d5297aa3660
 }

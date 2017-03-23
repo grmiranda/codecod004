@@ -10,8 +10,13 @@
 </ion-header>
 
 <ion-content class="back">
-  <ul [virtualScroll]="pls">
-    <li *virtualItem="let pl">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ul>
+    <li *ngFor="let pl of pls">
       <ion-card (press)="abrirOpcoes(pl)">
         <ion-card-content>
           <ion-card-title>

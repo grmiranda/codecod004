@@ -7,9 +7,9 @@
 	
 	$dia = date('j');
 	
-	$hora = date('H:i:s');
+	$hora = date('H:i');
 	
-	if ($dia == 1 && $hora == "00:00:00") {
+	if ($dia == 1 && $hora == "00:00") {
 		$sql = " UPDATE usuario SET pontos = '0' ";
 		$con->query($sql);
 		

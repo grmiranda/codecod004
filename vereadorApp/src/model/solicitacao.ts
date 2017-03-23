@@ -10,6 +10,8 @@ export class Solicitacao {
   public estado: string;
   public IDUsuario: number = 8;
   public Push;
+  public pushs = [];
+  public ids = [];
 
   constructor() {
 

@@ -4,6 +4,8 @@ import { Requerimento } from '../../model/requerimento';
 import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
 import { RequerimentoService } from '../../providers/requerimento-service';
+import { FeedBackService } from '../../providers/feed-back-service';
+
 
 @Component({
   selector: 'page-requerimento',
@@ -19,7 +21,9 @@ export class RequerimentoPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private fotoService: FotoService,
-    private requerimentoService: RequerimentoService) {
+    private requerimentoService: RequerimentoService,
+    private feedService: FeedBackService
+  ) {
 
     this.solicitacao = this.navParams.get("solicitacao");
 
@@ -27,22 +31,26 @@ export class RequerimentoPage {
 
   private finalizar() {
 
-    if(this.solicitacao.andamento == null || this.solicitacao.andamento.trim() == ''){
+    if (this.solicitacao.andamento == null || this.solicitacao.andamento.trim() == '') {
       this.displayToast('Descreva o andamento da Solicitação');
-    }else{
-      this.requerimento.IDSolicitacao = this.solicitacao.IDSolicitacao;
-      this.requerimento.idUsuarioSolicitacao = this.solicitacao.IDUsuario;
-      this.requerimentoService.addRequerimento(this.requerimento).then(res => {
-        if (!res.error && res.value) {
-          //works fine
-          this.displayToast('Concluído');
-          this.navCtrl.pop();
-        } else {
-          this.showConfirm();
-        }
-      });
+    } else {
+      this.feedService.showPromptConfirmarVarios(this.solicitacao.ids, this.solicitacao.pushs, this, this.solicitacao);
     }
 
+  }
+
+  private confirmado(solicitacaoAtual) {
+    this.requerimento.IDSolicitacao = solicitacaoAtual.IDSolicitacao;
+    this.requerimento.idUsuarioSolicitacao = solicitacaoAtual.IDUsuario;
+    this.requerimentoService.addRequerimento(this.requerimento).then(res => {
+      if (!res.error && res.value) {
+        //works fine
+        this.displayToast('Concluído');
+        this.navCtrl.pop();
+      } else {
+        this.showConfirm();
+      }
+    });
   }
 
   private importarFoto() {

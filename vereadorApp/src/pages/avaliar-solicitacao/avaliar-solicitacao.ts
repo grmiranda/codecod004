@@ -26,8 +26,8 @@ export class AvaliarSolicitacaoPage {
     private storageService: StorageService,
     public actionSheetCtrl: ActionSheetController,
     private pushService: PushService,
-    private feedService : FeedBackService 
-    ) { }
+    private feedService: FeedBackService
+  ) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
@@ -67,6 +67,7 @@ export class AvaliarSolicitacaoPage {
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
         this.displayToast('Solicitação Reprovada');
+        this.carregarSolicitacoes();
       } else {
         this.showConfirm(2, solicitacao);
       }
@@ -82,15 +83,14 @@ export class AvaliarSolicitacaoPage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.reprovar(solicitacao);
+            this.feedService.showPromptReprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);            
           }
         },
         {
           text: 'Aprovar',
           icon: 'document',
           handler: () => {
-            this.feedService.showPrompt(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);            
-            //this.showPrompt(solicitacao);
+            this.feedService.showPromptAprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);
           }
         },
         {

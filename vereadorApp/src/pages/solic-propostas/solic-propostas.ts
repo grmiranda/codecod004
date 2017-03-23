@@ -7,6 +7,7 @@ import { LikeSolicitacao } from '../../model/like-solicitacao';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { RequerimentoPage } from '../requerimento/requerimento';
+import { FeedBackService } from '../../providers/feed-back-service';
 
 @Component({
   selector: 'page-solic-propostas',
@@ -15,7 +16,7 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 export class SolicPropostasPage {
 
   private solicitacoes: any[] = [];
-  private myID = 8;
+  private myID;
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
@@ -24,14 +25,16 @@ export class SolicPropostasPage {
     public likeService: LikeService,
     private alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public actionSheetCtrl: ActionSheetController) {
-    }
+    public actionSheetCtrl: ActionSheetController,
+    private feedService: FeedBackService
+    ) {
+  }
 
   ionViewWillEnter() {
-    //this.storage.get().then(res => {
-    //this.myID = res.IDUsuario;
-    this.carregarSolicitacoes();
-    //});
+    this.storage.get().then(res => {
+      this.myID = res.IDUsuario;
+      this.carregarSolicitacoes();
+    });
   }
 
   private carregarSolicitacoes() {
@@ -46,7 +49,7 @@ export class SolicPropostasPage {
       loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
-      }else{
+      } else {
         this.showConfirm();
       }
     });
@@ -56,16 +59,16 @@ export class SolicPropostasPage {
     this.navCtrl.push(NovaPropostaPage);
   }
 
-  private remover(solicitacao: Solicitacao) {
+  private reprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'rc';
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
-        //removeu
         this.carregarSolicitacoes();
       } else {
+
         //error
       }
-    })
+    });
   }
 
   private like(solicitacao, tipo: string) {
@@ -77,7 +80,7 @@ export class SolicPropostasPage {
   }
 
 
-  private abrirOpcoes(solicitacao: any) {
+  private abrirOpcoes(solicitacao: Solicitacao) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',
       buttons: [
@@ -86,7 +89,7 @@ export class SolicPropostasPage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.remover(solicitacao);
+            this.feedService.showPromptReprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao);
           }
         },
         {
@@ -132,7 +135,7 @@ export class SolicPropostasPage {
       refresher.complete();
       if (!res.error) {
         this.solicitacoes = res.data;
-      }else{
+      } else {
         this.showConfirm();
       }
     });

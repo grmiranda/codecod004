@@ -168,6 +168,8 @@ export class PlAndamentoPage {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;
+      }else{
+        this.tentarNovamente();
       }
     });
   }

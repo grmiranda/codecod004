@@ -15,11 +15,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ul [virtualScroll]="solicitacoes">
-    <li *virtualItem="let solicitacao">
+  <ul >
+    <li *ngFor="let solicitacao of solicitacoes">
       <div>
         <ion-card (press)="abrirOpcoes(solicitacao.solicitacao)">
-          <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.solicitacao.fotoURL" />
+          <img *ngIf="solicitacao.solicitacao.fotoURL" [src]="solicitacao.solicitacao.fotoURL" />
           <ion-card-content>
             <ion-card-title>
               {{ solicitacao.solicitacao.titulo }}

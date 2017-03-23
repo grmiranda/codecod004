@@ -48,8 +48,8 @@ export class PlPropostasPage {
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
-      }else{
-        this.showConfirm(this.carregarPropostas());
+      } else {
+        this.tentarNovamente();
       }
     });
   }
@@ -66,7 +66,7 @@ export class PlPropostasPage {
         this.carregarPropostas();
       } else {
         //error
-        this.showConfirm(this.reprovar(pl));
+        this.showConfirm(pl);
       }
     })
   }
@@ -110,7 +110,7 @@ export class PlPropostasPage {
     actionSheet.present();
   }
 
-  private showConfirm(callBack) {
+  private showConfirm(pl: ProjetoDeLei) {
     let confirm = this.alertCtrl.create({
       title: 'Falha na conexão',
       message: 'Tentar Novamente ?',
@@ -121,10 +121,27 @@ export class PlPropostasPage {
         {
           text: 'Ok',
           handler: () => {
-            callBack();
+            this.reprovar(pl);
           }
-        }
-      ]
+        }]
+    });
+    confirm.present();
+  }
+
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarPropostas();
+          }
+        }]
     });
     confirm.present();
   }
@@ -134,6 +151,8 @@ export class PlPropostasPage {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;
+      }else{
+        this.tentarNovamente();
       }
     });
   }

@@ -132,6 +132,8 @@ export class SolicPropostasPage {
       refresher.complete();
       if (!res.error) {
         this.solicitacoes = res.data;
+      }else{
+        this.showConfirm();
       }
     });
   }

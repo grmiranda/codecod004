@@ -23,7 +23,6 @@ export class AvaliarDepoimentoPage {
 
   carregarDepoimentos() {
     this.depoimentoService.getDepoimentoAvaliar().then(depoi => {
-      console.log(depoi);
       this.depoimentos = depoi;
     });
   }

@@ -62,6 +62,8 @@ export class PlRecusadosPage {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;
+      }else{
+        this.showConfirm();
       }
     });
   }

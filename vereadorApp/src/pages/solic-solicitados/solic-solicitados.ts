@@ -150,6 +150,8 @@ export class SolicSolicitadosPage {
       refresher.complete();
       if (!res.error) {
         this.solicitacoes = res.data;
+      }else{
+        this.tentarNovamente();
       }
     });
   }

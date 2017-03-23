@@ -139,49 +139,6 @@ export class AvaliarSolicitacaoPage {
     confirm.present();
   }
 
-<<<<<<< HEAD
-  private showPrompt(solicitacao: Solicitacao) {
-    return this.alertCtrl.create({
-      title: 'Mensagem para usuario',
-      message: "Digite uma mensagem para o usuario",
-      inputs: [
-        {
-          name: 'mensagem',
-          placeholder: 'Digite aqui'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            this.displayToast("Avaliação cancelada");
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            /*
-            let mensagemEnviar = new CorpoMensagem();
-            mensagemEnviar.mensagem = data.mensagem;
-            mensagemEnviar.destinatario = solicitacao.IDUsuario.toString();
-            //this.storageService.get().then(res=>mensagemEnviar.remetente = res.IDUsuario);
-            mensagemEnviar.remetente = "1";
-            this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
-              if (res == true) {
-                this.aprovar(solicitacao);
-                this.pushService.pushUmaPessoa("Nova mensagem", solicitacao.push);
-              }
-            });
-            */
-          }
-        }
-      ]
-    }).present();
-  }
-
-  
-
-=======
   private doRefresh(refresher) {
     this.solicitacaoService.getSolicitacoes('sa').then(res => {
       refresher.complete();
@@ -191,5 +148,4 @@ export class AvaliarSolicitacaoPage {
     });
   }
 
->>>>>>> e0ca1ce49b05f4830d5b3e5f85a57d5297aa3660
 }

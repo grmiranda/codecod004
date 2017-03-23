@@ -23,7 +23,9 @@
 		}else{
 			$sql = "DELETE FROM solicitacao WHERE IDSolicitacao = '$id'";
 			$con->query($sql);
-			
+			$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$id'";
+			$con->query($sql);
+
 			echo json_encode(true);
 		}
 	}

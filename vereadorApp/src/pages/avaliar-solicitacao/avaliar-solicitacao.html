@@ -15,8 +15,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ul [virtualScroll]="solicitacoes">
-    <li *virtualItem="let solicitacao">
+  <ul>
+    <li *ngFor="let solicitacao of solicitacoes">
       <ion-card (press)="abrirOpcoes(solicitacao)">
         <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
         <ion-card-content>

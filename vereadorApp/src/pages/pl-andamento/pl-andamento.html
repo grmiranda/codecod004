@@ -16,8 +16,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ul [virtualScroll]="pls">
-    <li *virtualItem="let projeto">
+  <ul>
+    <li *ngFor="let projeto of pls">
       <ion-card (press)="abrirOpcoes(projeto.pl)">
         <img *ngIf="projeto.pl.fotoURL !== ''" [src]="projeto.pl.fotoURL" />
         <ion-card-content>

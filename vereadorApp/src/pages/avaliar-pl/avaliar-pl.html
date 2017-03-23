@@ -15,8 +15,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ul [virtualScroll]="pls">
-    <li *virtualItem="let pl">
+  <ul>
+    <li *ngFor="let pl of pls">
       <ion-card (press)="abrirOpcoes(pl)">
         <ion-card-content>
           <ion-card-title>

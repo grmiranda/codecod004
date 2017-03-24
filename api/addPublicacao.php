@@ -13,11 +13,12 @@
 		$titulo = $request->titulo;
 		$texto = $request->texto;
 		$fotoURL = $request->fotoURL;
-		
+		$video = $request->video;
+
 		$data = date('Y-m-d');
 		
 		if (isset($titulo)){
-			$sql= "INSERT INTO publicacao (titulo, texto, data, fotoURL) VALUES ('$titulo', '$texto', '$data', '$fotoURL')";
+			$sql= "INSERT INTO publicacao (titulo, texto, data, fotoURL, video) VALUES ('$titulo', '$texto', '$data', '$fotoURL', '$video')";
 			$con->query($sql);
 			echo json_encode(true);
 		}else{

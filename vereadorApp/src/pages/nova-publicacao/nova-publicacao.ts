@@ -30,10 +30,8 @@ export class NovaPublicacaoPage {
       this.publicacaoService.addPublicacao(this.publicacao).then(res => {
         if (!res.error) {
           if (res.value) {
-            this.displayToast('Publicou com sucesso!');
-            this.navCtrl.pop();
-          } else {
-            //retornou false
+            //this.displayToast('Publicou com sucesso!');
+            //this.navCtrl.pop();
           }
         } else {
           //error de conexao
@@ -59,7 +57,12 @@ export class NovaPublicacaoPage {
         {
           text: 'Save',
           handler: data => {
-            this.publicacao.video = data.link;
+            if (data.link.includes('https://youtu.be/')) {
+              this.publicacao.video = data.link.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+            }
+            else if (data.link.includes('watch?v=')) {
+              this.publicacao.video = data.link.replace("watch?v=", "embed/");
+            }
           }
         }
       ]

@@ -1,5 +1,5 @@
 page-solic-propostas {
-    .back{
+     .back{
         background-color: rgba(132, 132, 132, 0.2);
     }
     ion-header button{
@@ -7,7 +7,7 @@ page-solic-propostas {
     }
     ion-title{
         text-align: center;
-        margin-right: 20%;
+        margin-right: 10%;
     }
     ion-content{
         right: 0px !important;
@@ -38,7 +38,6 @@ page-solic-propostas {
     }
 
     ion-card{
-        margin-top: 0px !important;
         right: 0px !important;
         border: 0px !important;
         padding: 0px !important;
@@ -48,7 +47,6 @@ page-solic-propostas {
         max-width: 100% !important;
     }
     img{
-        margin-top: 0px !important;
         right: 0px !important;
         border: 0px !important;
         padding: 0px !important;
@@ -58,8 +56,6 @@ page-solic-propostas {
         max-width: 100% !important;
     }
     ion-card-content{
-        margin-top: 0px !important;
-        line-height: 28px !important;
         right: 0px !important;
         border: 0px !important;
         padding: 0px !important;
@@ -67,7 +63,6 @@ page-solic-propostas {
         margin-left: 0 !important;
         width: 100% !important; 
         max-width: 100% !important;
-        height: 100% !important;
     }
     ion-card-title{
         font-size: 20px !important;

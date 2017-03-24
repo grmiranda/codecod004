@@ -43,32 +43,29 @@ export class NovaPublicacaoPage {
   }
 
   private addLink() {
-  let prompt = this.alertCtrl.create({
-    title: 'YouTube',
-    message: "Insira a url do vídeo do YouTube",
-    inputs: [
-      {
-        name: 'link',
-        placeholder: 'Link'
-      },
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        handler: data => {
-          console.log('Cancel clicked');
+    let prompt = this.alertCtrl.create({
+      title: 'YouTube',
+      message: "Insira a url do vídeo do YouTube",
+      inputs: [
+        {
+          name: 'link',
+          placeholder: 'Link'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.publicacao.video = data.link;
+          }
         }
-      },
-      {
-        text: 'Save',
-        handler: data => {
-          console.log(data);
-        }
-      }
-    ]
-  });
-  prompt.present();
-}
+      ]
+    });
+    prompt.present();
+  }
 
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {

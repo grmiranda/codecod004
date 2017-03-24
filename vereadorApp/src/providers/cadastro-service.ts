@@ -14,9 +14,9 @@ export class CadastroService {
     console.log('Hello CadastroService Provider');
   }
 
-  public cadastrar(usuario : Usuario, push):Promise <any>{
-    return this.http.post(this.link, JSON.stringify(usuario), { headers: this.headers }).toPromise().then(res=>res.json())
-    .catch(()=>alert("Erro ao tentar se conectar com servidor"));
+  public cadastrar(usuario: Usuario, push): Promise<any> {
+    return this.http.post(this.link, JSON.stringify(usuario), { headers: this.headers }).toPromise().then(res => res.json())
+      .catch(() => alert("Erro ao tentar se conectar com servidor"));
   }
   l
 

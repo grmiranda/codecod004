@@ -28,11 +28,21 @@ export class DepoimentoService {
       .catch(() => alert("Erro ao tentar se conectar com o servidor"));
   }
 
-  public enviarDepoimento(texto:string, idUser) : Promise<boolean>{
-    return this.http.post("http://dsoutlet.com.br/apiLuiz/novoDepoimento.php", JSON.stringify({texto, idUser}), {headers: this.headers}).toPromise().then(res=>res.json())
-    .catch(() => alert("Erro ao tentar se conectar com o servidor"));
+  public enviarDepoimento(texto: string, idUser): Promise<boolean> {
+    return this.http.post("http://dsoutlet.com.br/apiLuiz/depoimento.php", JSON.stringify({ texto, idUser }), { headers: this.headers }).toPromise().then(res => res.json())
+      .catch(() => alert("Erro ao tentar se conectar com o servidor"));
   }
-  
+
+  public aprovar(id): Promise<boolean> {
+    return this.http.get("http://dsoutlet.com.br/apiLuiz/aprovarDepoimento.php?id=" + id).toPromise().then(res => res.json())
+      .catch(() => alert("Erro ao tentar se conectar com o servidor"));
+  }
+
+  public negar(id): Promise<boolean> {
+    return this.http.get("http://dsoutlet.com.br/apiLuiz/negarDepoimento.php?id=" + id).toPromise().then(res => res.json())
+      .catch(() => alert("Erro ao tentar se conectar com o servidor"));
+  }
+
 }
 
 

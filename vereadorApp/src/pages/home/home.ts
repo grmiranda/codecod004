@@ -5,6 +5,8 @@ import { PublicacaoPage } from '../publicacao/publicacao';
 import { Platform, NavController, ActionSheetController, MenuController, AlertController, LoadingController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
+import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+
 
 @Component({
   selector: 'page-home',
@@ -14,13 +16,18 @@ export class HomePage {
 
   private publicacoes: Publicacao[] = [];
 
+  videoUrl: SafeResourceUrl;
+
   constructor(private platform: Platform,
     private alertCtrl: AlertController,
+    private domSanitizer: DomSanitizer,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private publicacaoService: PublicacaoService,
     private actionSheetCtrl: ActionSheetController,
     private menu: MenuController) {
+
+    this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/aw5pMBeOWM0');
     menu.enable(true);
   }
 
@@ -39,7 +46,13 @@ export class HomePage {
     this.publicacaoService.getPublicacoes().then(res => {
       loading.dismiss();
       if (!res.error) {
-        this.publicacoes = res.data;
+        let teste = res.data;
+        for(let p of teste){
+          if(p.video !== ''){
+            p.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(p.video);
+          }
+        }
+        this.publicacoes = teste;
       } else {
         //ocorreu um error
         this.tentarNovamente();

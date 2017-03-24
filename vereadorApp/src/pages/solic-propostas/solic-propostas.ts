@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform, LoadingController, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
 import { StorageService } from '../../providers/storage';
@@ -7,6 +7,7 @@ import { LikeSolicitacao } from '../../model/like-solicitacao';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { RequerimentoPage } from '../requerimento/requerimento';
+import { FeedBackService } from '../../providers/feed-back-service';
 
 @Component({
   selector: 'page-solic-propostas',
@@ -15,26 +16,41 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 export class SolicPropostasPage {
 
   private solicitacoes: any[] = [];
-  private myID = 8;
+  private myID;
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
     public storage: StorageService,
     public likeService: LikeService,
-    public actionSheetCtrl: ActionSheetController) { }
+    private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public actionSheetCtrl: ActionSheetController,
+    private feedService: FeedBackService
+    ) {
+  }
 
   ionViewWillEnter() {
-    //this.storage.get().then(res => {
-    //this.myID = res.IDUsuario;
-    this.carregarSolicitacoes();
-    //});
+    this.storage.get().then(res => {
+      this.myID = res.IDUsuario;
+      this.carregarSolicitacoes();
+    });
   }
 
   private carregarSolicitacoes() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
+      } else {
+        this.showConfirm();
       }
     });
   }
@@ -43,16 +59,16 @@ export class SolicPropostasPage {
     this.navCtrl.push(NovaPropostaPage);
   }
 
-  private remover(solicitacao: Solicitacao) {
+  private reprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'rc';
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
-        //removeu
         this.carregarSolicitacoes();
       } else {
+
         //error
       }
-    })
+    });
   }
 
   private like(solicitacao, tipo: string) {
@@ -64,7 +80,7 @@ export class SolicPropostasPage {
   }
 
 
-  private abrirOpcoes(solicitacao: any) {
+  private abrirOpcoes(solicitacao: Solicitacao) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Opções',
       buttons: [
@@ -73,7 +89,7 @@ export class SolicPropostasPage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.remover(solicitacao);
+            this.feedService.showPromptReprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao);
           }
         },
         {
@@ -95,11 +111,32 @@ export class SolicPropostasPage {
     actionSheet.present();
   }
 
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarSolicitacoes();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
   private doRefresh(refresher) {
     this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
       refresher.complete();
       if (!res.error) {
         this.solicitacoes = res.data;
+      } else {
+        this.showConfirm();
       }
     });
   }

@@ -31,7 +31,6 @@ export class AdicionarEventoPage {
   private adicionar() {
     if (this.validate()) {
       this.eventoService.addEvento(this.evento).then(res => {
-        console.log(res);
         if (res.Titulo != undefined && res.Titulo != null) {
           this.presentToast("Evento adicionado com sucesso");
           this.view.dismiss(this.evento);

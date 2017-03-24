@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController  } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Publicacao } from '../../model/publicacao';
@@ -15,6 +15,7 @@ export class NovaPublicacaoPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
+    public alertCtrl: AlertController,
     public publicacaoService: PublicacaoService,
     public fotoService: FotoService) {
 
@@ -40,6 +41,34 @@ export class NovaPublicacaoPage {
       });
     }
   }
+
+  private addLink() {
+  let prompt = this.alertCtrl.create({
+    title: 'YouTube',
+    message: "Insira a url do vídeo do YouTube",
+    inputs: [
+      {
+        name: 'link',
+        placeholder: 'Link'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          console.log(data);
+        }
+      }
+    ]
+  });
+  prompt.present();
+}
 
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {

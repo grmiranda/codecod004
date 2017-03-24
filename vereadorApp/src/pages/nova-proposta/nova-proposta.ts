@@ -3,6 +3,7 @@ import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Solicitacao } from '../../model/solicitacao';
+import { StorageService } from '../../providers/storage';
 
 @Component({
   selector: 'page-nova-proposta',
@@ -16,7 +17,9 @@ export class NovaPropostaPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private solicitacaoService: SolicitacaoService,
-    private fotoService: FotoService) {
+    private fotoService: FotoService,
+    private storageService: StorageService
+  ) {
 
   }
 
@@ -26,19 +29,23 @@ export class NovaPropostaPage {
     } else if (this.solicitacao.descricao.trim() == '') {
       this.displayToast('Adicione uma descrição');
     } else {
-      this.solicitacaoService.addSolicitacao(this.solicitacao).then(res => {
-        if (!res.error) {
-          if (res.value) {
-            //works fine
-            this.displayToast('Requisição enviada!');
-            this.navCtrl.pop();
+      this.storageService.get().then(user => {
+        this.solicitacao.IDUsuario = (+user.IDUsuario);
+        this.solicitacaoService.addSolicitacao(this.solicitacao).then(res => {
+          if (!res.error) {
+            if (res.value) {
+              //works fine
+              this.displayToast('Requisição enviada!');
+              this.navCtrl.pop();
+            }
+          } else {
+            //error - maioria das vezes de conexão
+            //pede confirmacao, se sim : tenta salvar denovo
+            this.showConfirm();
           }
-        } else {
-          //error - maioria das vezes de conexão
-          //pede confirmacao, se sim : tenta salvar denovo
-          this.showConfirm();
-        }
+        });
       });
+
     }
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, Platform } from 'ionic-angular';
+import { ActionSheetController, AlertController, Platform, LoadingController } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 
@@ -12,6 +12,7 @@ export class AvaliarPlPage {
   public pls: ProjetoDeLei[] = [];
 
   constructor(public projetoDeLeiService: ProjetoDeLeiService,
+    private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform) { }
@@ -21,13 +22,21 @@ export class AvaliarPlPage {
   }
 
   private carregarPropostas() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.projetoDeLeiService.getProjetosDeLei('sa').then(res => {
+      loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
       } else {
         this.tentarNovamente();
       }
-    })
+    });
   }
 
   private aprovar(pl: ProjetoDeLei) {
@@ -85,6 +94,18 @@ export class AvaliarPlPage {
       ]
     });
     actionSheet.present();
+  }
+
+
+  private doRefresh(refresher) {
+    this.projetoDeLeiService.getProjetosDeLei('sa').then(res => {
+      refresher.complete();
+      if (!res.error) {
+        this.pls = res.data;
+      } else {
+        this.tentarNovamente();
+      }
+    });
   }
 
   private tentarNovamente() {

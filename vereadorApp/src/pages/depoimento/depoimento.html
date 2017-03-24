@@ -7,16 +7,19 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list [virtualScroll]="depoimentos">
-  <ion-item *virtualItem="let depoimento">
-    <ion-avatar item-left>
-      <img [src]="depoimento.fotoURL">
-    </ion-avatar>
-    <h2>{{depoimento.nome}}</h2>
-    <p>{{depoimento.Texto}}</p>
-  </ion-item>
-</ion-list>
+<ion-content>
+  <ion-card *ngFor="let depoimento of depoimentos">
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="depoimento.fotoURL">
+      </ion-avatar>
+      <h2>{{depoimento.nome}}</h2>
+    </ion-item>
+    <ion-card-content>
+      <p>{{depoimento.Texto}}</p>
+    </ion-card-content>
+  </ion-card>
+
 <ion-fab right bottom>
   <button ion-fab color="secondary" (click)="novoDepoimento()">
      <ion-icon name="add">

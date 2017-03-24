@@ -15,12 +15,70 @@
 			
 			if($estado == 'ap'){
 				while($row=$result->fetch_assoc()){
+					$idU = $row['IDUsuario'];
+					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
+					$resultado = $con->query($sql);
+					$dado = $resultado->fetch_assoc();
+					$row['Push'] = $dado['Push'];
+					
+					$idS = $row['IDSolicitacao'];
+					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
+					$resultado = $con->query($sql);
+					
+					$ids = array();
+					$pushs = array();
+					while($l=$resultado->fetch_assoc()){
+						$userID = $l['IDUsuario'];
+						$ids[] = $userID;
+						
+						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
+						$tes = $con->query($sql);
+						$dado = $tes->fetch_assoc();
+						
+						$pushs[] = $dado['Push'];
+						
+					}
+
+					
+					
+					$row['ids'] = $ids;
+					$row['pushs'] = $pushs;
+					
 					$info = getLike($row['IDSolicitacao'], $id, $con);
 					$info->solicitacao = $row;
 					$vetor[] = $info;
 				}
-			}else{
+			}
+			else{
 				while($row=$result->fetch_assoc()){
+					$idU = $row['IDUsuario'];
+					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
+					$resultado = $con->query($sql);
+					$dado = $resultado->fetch_assoc();
+					$row['Push'] = $dado['Push'];
+
+					$idS = $row['IDSolicitacao'];
+					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
+					$resultado = $con->query($sql);
+					
+					$ids = array();
+					$pushs = array();
+					while($l=$resultado->fetch_assoc()){
+						$userID = $l['IDUsuario'];
+						$ids[] = $userID;
+						
+						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
+						$tes = $con->query($sql);
+						$dado = $tes->fetch_assoc();
+						
+						$pushs[] = $dado['Push'];
+						
+					}
+
+					
+					
+					$row['ids'] = $ids;
+					$row['pushs'] = $pushs;
 					$vetor[] = $row;
 				}
 			}

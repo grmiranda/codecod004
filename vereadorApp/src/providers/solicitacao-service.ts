@@ -36,7 +36,7 @@ export class SolicitacaoService {
       .catch(this.handleErrorMessage);
   }
 
-  public getSolicitacoesPropostas(estado: string, idUsuario: number): Promise<any> {
+  public getSolicitacoesPropostas(estado: string, idUsuario): Promise<any> {
     return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getSolicitacoes.php?estado=' + estado + '&id=' + idUsuario)
       .toPromise()
       .then(response => this.extractGetData(response))

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
 import { StorageService } from '../../providers/storage';
@@ -20,6 +20,7 @@ export class SolicPropostasPage {
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
+    private modalCtrl: ModalController,
     public solicitacaoService: SolicitacaoService,
     public storage: StorageService,
     public likeService: LikeService,
@@ -27,7 +28,7 @@ export class SolicPropostasPage {
     public loadingCtrl: LoadingController,
     public actionSheetCtrl: ActionSheetController,
     private feedService: FeedBackService
-    ) {
+  ) {
   }
 
   ionViewWillEnter() {
@@ -96,7 +97,15 @@ export class SolicPropostasPage {
           text: 'Requerimento',
           icon: 'archive',
           handler: () => {
-            this.navCtrl.push(RequerimentoPage, { solicitacao: solicitacao });
+            let modal = this.modalCtrl.create(RequerimentoPage, { solicitacao: solicitacao });
+            modal.onDidDismiss(data => {
+              console.log("teste");
+              if (data != null && data != undefined) {
+                alert(JSON.stringify(data));
+              }
+            });
+            modal.present();
+            //this.navCtrl.push(RequerimentoPage, { solicitacao: solicitacao });
           }
         },
         {

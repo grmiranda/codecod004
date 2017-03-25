@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, ToastController, NavParams, ViewController } from 'ionic-angular';
 import { Requerimento } from '../../model/requerimento';
 import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
@@ -18,6 +18,7 @@ export class RequerimentoPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public view: ViewController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private fotoService: FotoService,
@@ -34,9 +35,9 @@ export class RequerimentoPage {
     if (this.solicitacao.andamento == null || this.solicitacao.andamento.trim() == '') {
       this.displayToast('Descreva o andamento da Solicitação');
     } else {
-      this.feedService.showPromptConfirmarVarios(this.solicitacao.ids, this.solicitacao.pushs, this, this.solicitacao);
+      this.view.dismiss(this.requerimento);
+      //this.feedService.showPromptConfirmarVarios(this.solicitacao.ids, this.solicitacao.pushs, this, this.solicitacao);
     }
-
   }
 
   private confirmado(solicitacaoAtual) {
@@ -98,4 +99,7 @@ export class RequerimentoPage {
     confirm.present();
   }
 
+  private cancel() {
+    this.view.dismiss();
+  }
 }

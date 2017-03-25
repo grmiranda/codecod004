@@ -31,7 +31,7 @@ import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoi
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
-  rootPage = SolicitacoesPage;
+  rootPage = LoginPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

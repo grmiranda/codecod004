@@ -1,5 +1,7 @@
 plugin do facebook
 ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1865101920446266" --variable APP_NAME="Luiz da Feira"
+ionic plugin add onesignal-cordova-plugin
+npm install @ionic/cloud-angular --save
 
 Plugin do calendário (obrigatorio ter o typings instalado)
 npm install ionic2-calendar --save

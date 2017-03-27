@@ -13,15 +13,19 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class BuscaUsuariosService {
 
-  private link : string = 'http://dsoutlet.com.br/apiLuiz/busca.php?id';
+  private link: string = 'http://dsoutlet.com.br/apiLuiz/busca.php?id';
 
 
   constructor(public http: Http) {
     console.log('Hello BuscaUsuariosService Provider');
   }
 
-  getUserAll():Promise<Usuario[]>{
-    return this.http.get(this.link).toPromise().then(res=>res.json()).catch(()=>alert("Erro ao se conectar com o servidor"));
+  getUserAll(): Promise<Usuario[]> {
+    return this.http.get(this.link).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
+  }
+
+  getUserList(id) {
+    return this.http.get('http://dsoutlet.com.br/apiLuiz/users.php?id=' + id).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
   }
 
 }

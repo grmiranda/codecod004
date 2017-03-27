@@ -104,7 +104,6 @@ export class SolicPropostasPage {
               }
             });
             modal.present();
-            //this.navCtrl.push(RequerimentoPage, { solicitacao: solicitacao });
           }
         },
         {

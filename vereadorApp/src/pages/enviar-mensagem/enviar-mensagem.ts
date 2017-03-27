@@ -20,6 +20,7 @@ export class EnviarMensagemPage {
   private usuarios: Usuario[] = [];
   public textoMensagem: string = "";
   private enviando: boolean = false;
+  private meuUsuario: Usuario;
 
   constructor(
     public navCtrl: NavController,
@@ -31,14 +32,18 @@ export class EnviarMensagemPage {
     private toastCtrl: ToastController,
     private pushService: PushService
   ) {
+    this.storageService.get().then(usuarioAtual => {
+      this.meuUsuario = usuarioAtual;
+      this.buscarUsers.getUserList(usuarioAtual.IDUsuario).then(res => {
+        this.usuarios = res;
+        if (destinatariosTelaAnterior != undefined) {
+          this.inserirDestinatarios(destinatariosTelaAnterior);
+        }
+      });
+    });
 
     let destinatariosTelaAnterior = this.navParams.get('usuariosSelecionado');
-    this.buscarUsers.getUserAll().then(res => {
-      this.usuarios = res;
-      if (destinatariosTelaAnterior != undefined) {
-        this.inserirDestinatarios(destinatariosTelaAnterior);
-      }
-    });
+
   }
 
   private inserirDestinatarios(ids: string[]) {
@@ -69,28 +74,26 @@ export class EnviarMensagemPage {
   private enviar() {
     this.enviando = true;
     let tudoEnviado = true;
-    this.storageService.get().then(res => {
-      for (let i = 0; i < this.usuarioSelecionado.length; i++) {
-        let mensagemEnviar = new CorpoMensagem();
-        mensagemEnviar.destinatario = this.usuarioSelecionado[i].IDUsuario;
-        mensagemEnviar.remetente = res.IDUsuario;
-        mensagemEnviar.mensagem = this.textoMensagem;
-        this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
-          if (res == true) {
-            let toast = this.toastCtrl.create({
-              message: 'Mensagem enviada com sucesso',
-              duration: 3000,
-              position: 'bottom'
-            });
-            toast.present();
-            this.pushService.pushUmaPessoa("Nova mensagem", this.usuarioSelecionado[i]);
-          } else {
-            tudoEnviado = false;
-            alert("Erro ao enviar mensagem para " + this.usuarioSelecionado[i].nome);
-          }
-        });
-      }
-    });
+    for (let i = 0; i < this.usuarioSelecionado.length; i++) {
+      let mensagemEnviar = new CorpoMensagem();
+      mensagemEnviar.destinatario = this.usuarioSelecionado[i].IDUsuario;
+      mensagemEnviar.remetente = this.meuUsuario.IDUsuario;
+      mensagemEnviar.mensagem = this.textoMensagem;
+      this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+        if (res == true) {
+          let toast = this.toastCtrl.create({
+            message: 'Mensagem enviada com sucesso',
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+          this.pushService.pushUmaPessoa("Nova mensagem", this.usuarioSelecionado[i]);
+        } else {
+          tudoEnviado = false;
+          alert("Erro ao enviar mensagem para " + this.usuarioSelecionado[i].nome);
+        }
+      });
+    }
 
     if (tudoEnviado) {
       this.navCtrl.popAll();

@@ -15,6 +15,10 @@
   </ion-refresher>
 
   <ion-card *ngFor="let solicitacao of solicitacoes">
+    <ion-avatar item-left>
+      <img [src]="solicitacao.fotoUsuario">
+    </ion-avatar>
+    <h2>{{solicitacao.nomeUsuario}}</h2>
     <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
     <ion-card-content>
       <ion-card-title>

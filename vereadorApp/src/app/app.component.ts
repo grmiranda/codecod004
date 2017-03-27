@@ -54,7 +54,7 @@ export class MyApp {
     { title: 'Mensagem', component: TabMensagemPage },
     { title: 'Agenda', component: AgendaPage },
     { title: 'Informações úteis', component: InformacaoPage },
-    { title: 'Telefones Úteis', component: CategoriasPage },
+    { title: 'Perguntas Frequentes', component: CategoriasPage },
     { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
     { title: 'Depoimentos', component: DepoimentoPage},
     { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage},

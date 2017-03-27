@@ -14,23 +14,23 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ul>
-    <li *ngFor="let solicitacao of solicitacoes">
-      <ion-card (press)="abrirOpcoes(solicitacao)">
-        <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
-        <ion-card-content>
-          <ion-card-title>
-            {{ solicitacao.titulo }}
-          </ion-card-title>
-          <p>
-            {{ solicitacao.descricao }}
-          </p>
-          <button ion-button clear color="secondary" icon-left>
+  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao)">
+    <ion-avatar item-left>
+      <img [src]="solicitacao.fotoUsuario">
+    </ion-avatar>
+    <h2>{{solicitacao.nomeUsuario}}</h2>
+    <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" />
+    <ion-card-content>
+      <ion-card-title>
+        {{ solicitacao.titulo }}
+      </ion-card-title>
+      <p>
+        {{ solicitacao.descricao }}
+      </p>
+      <button ion-button clear color="secondary" icon-left>
             <ion-icon name="browsers"></ion-icon>
             Requerimento
           </button>
-        </ion-card-content>
-      </ion-card>
-    </li>
-  </ul>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

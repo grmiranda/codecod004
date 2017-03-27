@@ -18,30 +18,7 @@ page-solic-reprovados {
         width: 100% !important;
         max-width: 100% !important;
     }
-    ul{
-        right: 0px !important;
-        border: 0px !important;
-        padding: 0px !important;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        width: 100% !important; 
-        max-width: 100% !important;
-    }
-    li{
-        margin-top: 0px !important;
-        margin-bottom: 0px !important;
-        right: 0px !important;
-        border: 0px !important;
-        padding: 0px !important;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-
     ion-card{
-        margin-top: 0px !important;
-        margin-bottom: 0px !important;
         right: 0px !important;
         border: 0px !important;
         padding: 0px !important;
@@ -60,8 +37,6 @@ page-solic-reprovados {
         max-width: 100% !important;
     }
     ion-card-content{
-        margin-top: 0px !important;
-        margin-bottom: 0px !important;
         right: 0px !important;
         border: 0px !important;
         padding: 0px !important;
@@ -75,7 +50,8 @@ page-solic-reprovados {
         margin-left: 10px !important;
     }
     p{
+        font-size: 14px !important;
+        line-height: 20px !important;
         margin-left: 10px !important;
     }
-
 }

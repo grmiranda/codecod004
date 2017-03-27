@@ -14,7 +14,7 @@
 		$texto = $request->texto;
 		$fotoURL = $request->fotoURL;
 		$video = $request->video;
-
+		
 		$data = date('Y-m-d');
 		
 		if (isset($titulo)){

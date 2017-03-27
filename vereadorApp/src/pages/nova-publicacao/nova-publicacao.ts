@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController  } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Publicacao } from '../../model/publicacao';
@@ -15,6 +15,7 @@ export class NovaPublicacaoPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
+    public alertCtrl: AlertController,
     public publicacaoService: PublicacaoService,
     public fotoService: FotoService) {
 
@@ -29,16 +30,44 @@ export class NovaPublicacaoPage {
       this.publicacaoService.addPublicacao(this.publicacao).then(res => {
         if (!res.error) {
           if (res.value) {
-            this.displayToast('Publicou com sucesso!');
-            this.navCtrl.pop();
-          } else {
-            //retornou false
+            //this.displayToast('Publicou com sucesso!');
+            //this.navCtrl.pop();
           }
         } else {
           //error de conexao
         }
       });
     }
+  }
+
+  private addLink() {
+    let prompt = this.alertCtrl.create({
+      title: 'YouTube',
+      message: "Insira a url do vídeo do YouTube",
+      inputs: [
+        {
+          name: 'link',
+          placeholder: 'Link'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            if (data.link.includes('https://youtu.be/')) {
+              this.publicacao.video = data.link.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+            }
+            else if (data.link.includes('watch?v=')) {
+              this.publicacao.video = data.link.replace("watch?v=", "embed/");
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   private importarFoto() {

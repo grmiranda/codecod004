@@ -15,37 +15,34 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ul >
-    <li *ngFor="let solicitacao of solicitacoes">
-      <div>
-        <ion-card (press)="abrirOpcoes(solicitacao.solicitacao)">
-          <img *ngIf="solicitacao.solicitacao.fotoURL" [src]="solicitacao.solicitacao.fotoURL" />
-          <ion-card-content>
-            <ion-card-title>
-              {{ solicitacao.solicitacao.titulo }}
-            </ion-card-title>
-            <p>
-              {{ solicitacao.solicitacao.descricao }}
-            </p>
-          </ion-card-content>
-          <ion-row no-padding>
-            <ion-col width-50>
-              <button ion-button clear small color="secondary" icon-left (click)="like(solicitacao, 's')">
+
+
+  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)">
+    <img *ngIf="solicitacao.solicitacao.fotoURL" [src]="solicitacao.solicitacao.fotoURL" />
+    <ion-card-content>
+      <ion-card-title>
+        {{ solicitacao.solicitacao.titulo }}
+      </ion-card-title>
+      <p>
+        {{ solicitacao.solicitacao.descricao }}
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col width-50>
+        <button ion-button clear small color="secondary" icon-left (click)="like(solicitacao, 's')">
               <ion-icon [name]="solicitacao.t == 's' ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'"></ion-icon>
               {{ solicitacao.p }}
             </button>
-            </ion-col>
-            <ion-col width-50>
-              <button ion-button clear small color="danger" icon-left (click)="like(solicitacao, 'n')">
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button clear small color="danger" icon-left (click)="like(solicitacao, 'n')">
               <ion-icon [name]="solicitacao.t == 'n' ? 'ios-thumbs-down' : 'ios-thumbs-down-outline'"></ion-icon>
               {{ solicitacao.n }}
             </button>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </div>
-    </li>
-  </ul>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="novaProposta()">
       <ion-icon name="add">

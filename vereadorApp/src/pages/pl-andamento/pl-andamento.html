@@ -18,6 +18,10 @@
 
 
   <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)">
+    <ion-avatar item-left>
+      <img [src]="pl.fotoUsuario">
+    </ion-avatar>
+    <h2>{{pl.nomeUsuario}}</h2>
     <img *ngIf="projeto.pl.fotoURL !== ''" [src]="projeto.pl.fotoURL" />
     <ion-card-content>
       <ion-card-title>

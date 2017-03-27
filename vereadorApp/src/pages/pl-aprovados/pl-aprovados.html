@@ -18,6 +18,10 @@
 
 
   <ion-card *ngFor="let pl of pls">
+    <ion-avatar item-left>
+      <img [src]="pl.fotoUsuario">
+    </ion-avatar>
+    <h2>{{pl.nomeUsuario}}</h2>
     <img *ngIf="pl.fotoURL !== ''" [src]="pl.fotoURL" />
     <ion-card-content>
       <ion-card-title>

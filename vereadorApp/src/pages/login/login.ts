@@ -37,6 +37,25 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  loginTeste() {
+    let user = new Usuario();
+    user.IDUsuario = "1";
+    user.cpf = "111.111.111-11";
+    user.email = "cleybsonc@gmail.com";
+    user.fotoURL = "https://media.licdn.com/media/AAEAAQAAAAAAAAfAAAAAJDk5ZDNhNDI4LTNmOTMtNGI5Yy1iZDIzLTk3NjM1YmVmMTkzNA.jpg";
+    user.genero = "male";
+    user.nascimento = "2017-01-01";
+    user.nome = "Cleybson Cardoso";
+    user.permissao = 1;
+    user.pontos = 300;
+    user.socialID = "102628559883950264990";
+    this.adm(user);
+    this.storage.set(user);
+    this.navCtrl.setRoot(HomePage);
+
+  }
+
+
   logarFacebook() {
     this.pushService.getId().then(idPush => {
       this.facebookService.loginFacebook(idPush).then(resposta => {
@@ -60,8 +79,8 @@ export class LoginPage {
 
   }
 
-  adm(user :Usuario){
-    if(user.permissao == 1){
+  adm(user: Usuario) {
+    if (user.permissao == 1) {
       this.pushService.addTag("adm");
     }
   }

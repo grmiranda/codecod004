@@ -83,7 +83,7 @@ export class SolicPropostasPage {
 
   private abrirOpcoes(solicitacao: Solicitacao) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Opções',
+      title: solicitacao.titulo,
       buttons: [
         {
           text: 'Remover',
@@ -99,9 +99,8 @@ export class SolicPropostasPage {
           handler: () => {
             let modal = this.modalCtrl.create(RequerimentoPage, { solicitacao: solicitacao });
             modal.onDidDismiss(data => {
-              console.log("teste");
+              console.log(data);
               if (data != null && data != undefined) {
-                alert(JSON.stringify(data));
               }
             });
             modal.present();

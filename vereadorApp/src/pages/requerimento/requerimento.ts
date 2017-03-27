@@ -35,19 +35,19 @@ export class RequerimentoPage {
     if (this.solicitacao.andamento == null || this.solicitacao.andamento.trim() == '') {
       this.displayToast('Descreva o andamento da Solicitação');
     } else {
-      this.view.dismiss(this.requerimento);
+      this.confirmado();
       //this.feedService.showPromptConfirmarVarios(this.solicitacao.ids, this.solicitacao.pushs, this, this.solicitacao);
     }
   }
 
-  private confirmado(solicitacaoAtual) {
-    this.requerimento.IDSolicitacao = solicitacaoAtual.IDSolicitacao;
-    this.requerimento.idUsuarioSolicitacao = solicitacaoAtual.IDUsuario;
+  private confirmado() {
+    this.requerimento.IDSolicitacao = this.solicitacao.IDSolicitacao;
+    this.requerimento.idUsuarioSolicitacao = this.solicitacao.IDUsuario;
     this.requerimentoService.addRequerimento(this.requerimento).then(res => {
       if (!res.error && res.value) {
         //works fine
         this.displayToast('Concluído');
-        this.navCtrl.pop();
+        this.view.dismiss(this.requerimento);
       } else {
         this.showConfirm();
       }

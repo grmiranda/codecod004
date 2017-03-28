@@ -18,19 +18,24 @@
 
 
   <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)">
-    <ion-avatar item-left>
-      <img [src]="solicitacao.solicitacao.fotoUsuario">
-    </ion-avatar>
-    <h2>{{solicitacao.solicitacao.nomeUsuario}}</h2>
+
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="solicitacao.solicitacao.fotoUsuario">
+      </ion-avatar>
+      <h2>{{solicitacao.solicitacao.nomeUsuario}}</h2>
+    </ion-item>
+
     <img *ngIf="solicitacao.solicitacao.fotoURL" [src]="solicitacao.solicitacao.fotoURL" />
     <ion-card-content>
-      <ion-card-title>
-        {{ solicitacao.solicitacao.titulo }}
-      </ion-card-title>
+      <h2>
+          {{ solicitacao.solicitacao.titulo }}
+      </h2>
       <p>
         {{ solicitacao.solicitacao.descricao }}
       </p>
     </ion-card-content>
+
     <ion-row no-padding>
       <ion-col width-50>
         <button ion-button clear small color="secondary" icon-left (click)="like(solicitacao, 's')">
@@ -46,7 +51,7 @@
       </ion-col>
     </ion-row>
   </ion-card>
-  
+
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="novaProposta()">
       <ion-icon name="add">

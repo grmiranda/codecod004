@@ -35,6 +35,7 @@ export class SolicSolicitadosPage {
     loading.present();
 
     this.solicitacaoService.getSolicitacoes('sl').then(res => {
+      console.log(res);
       loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;

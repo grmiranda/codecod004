@@ -57,7 +57,7 @@ export class RequerimentoPage {
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
-        this.solicitacao.fotoURL = url;
+        this.requerimento.fotos.push(url);
       }
     });
   }
@@ -65,9 +65,18 @@ export class RequerimentoPage {
   private tirarFoto() {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
-        this.solicitacao.fotoURL = url;
+        this.requerimento.fotos.push(url);
       }
     });
+  }
+
+  private removerFoto(url: string) {
+    let index = this.requerimento.fotos.indexOf(url);
+    if(index == 0){
+      this.requerimento.fotos.shift();
+    }else if(index > 0){
+      this.requerimento.fotos.splice(index, 1);
+    }
   }
 
   private displayToast(mensagem: string) {

@@ -4,6 +4,7 @@ export class ProjetoDeLei{
     public titulo: string = "";
     public ementa: string = "";
     public fotoURL: string = "";
+    public fotos: string[] = [];
     public IDUsuario: number;
     public estado: string;
     //sa - sob aprovação pr-proposto pelo publico

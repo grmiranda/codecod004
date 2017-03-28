@@ -51,7 +51,6 @@ export class NovaPropostaPage {
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
-        this.solicitacao.fotoURL = url;
         this.solicitacao.fotos.push(url);
       }
     });
@@ -60,7 +59,6 @@ export class NovaPropostaPage {
   private tirarFoto() {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
-        this.solicitacao.fotoURL = url;
         this.solicitacao.fotos.push(url);
       }
     });

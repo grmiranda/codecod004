@@ -12,7 +12,6 @@ import { StorageService } from '../../providers/storage';
 export class NovaPropostaPage {
 
   private solicitacao: Solicitacao = new Solicitacao();
-  private fotos: string[] = [];
 
   constructor(private navCtrl: NavController,
     private toastCtrl: ToastController,
@@ -46,7 +45,6 @@ export class NovaPropostaPage {
           }
         });
       });
-
     }
   }
 
@@ -54,8 +52,7 @@ export class NovaPropostaPage {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
         this.solicitacao.fotoURL = url;
-        alert(JSON.stringify(url));
-        this.fotos.push(url);
+        this.solicitacao.fotos.push(url);
       }
     });
   }
@@ -64,8 +61,18 @@ export class NovaPropostaPage {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
         this.solicitacao.fotoURL = url;
+        this.solicitacao.fotos.push(url);
       }
     });
+  }
+
+  private removerFoto(url: string) {
+    let index = this.solicitacao.fotos.indexOf(url);
+    if(index == 0){
+      this.solicitacao.fotos.shift();
+    }else if(index > 0){
+      this.solicitacao.fotos.splice(index, 1);
+    }
   }
 
   private displayToast(mensagem: string) {

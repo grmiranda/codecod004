@@ -15,11 +15,14 @@
 			
 			if($estado == 'ap'){
 				while($row=$result->fetch_assoc()){
+					
 					$idU = $row['IDUsuario'];
 					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
 					$resultado = $con->query($sql);
 					$dado = $resultado->fetch_assoc();
 					$row['Push'] = $dado['Push'];
+					$row['nome'] = $dado['nome'];
+					$row['fotoURL'] = $dado['fotoURL'];
 					
 					$idS = $row['IDSolicitacao'];
 					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
@@ -56,7 +59,8 @@
 					$resultado = $con->query($sql);
 					$dado = $resultado->fetch_assoc();
 					$row['Push'] = $dado['Push'];
-
+					$row['nome'] = $dado['nome'];
+					$row['fotoURL'] = $dado['fotoURL'];
 					$idS = $row['IDSolicitacao'];
 					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
 					$resultado = $con->query($sql);

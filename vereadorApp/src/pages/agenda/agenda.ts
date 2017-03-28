@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, NavParams, ToastController, ModalController } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { MonthViewComponent } from 'ionic2-calendar/monthview';
 import { WeekViewComponent } from 'ionic2-calendar/weekview';
@@ -9,12 +9,6 @@ import { AdicionarEventoPage } from '../adicionar-evento/adicionar-evento';
 import { EventoService } from '../../providers/evento-service';
 import { EventoPage } from '../evento/evento';
 
-/*
-  Generated class for the Agenda page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-agenda',
   templateUrl: 'agenda.html'
@@ -28,9 +22,7 @@ export class AgendaPage {
   private dataAtual: string = "";
   private mes: string = 'Dezembro'; //titulo
   data = new Date();
-  loader = this.loadingController.create({
-    content: "Carregando eventos"
-  });
+
 
   constructor(
     public navCtrl: NavController,
@@ -38,6 +30,7 @@ export class AgendaPage {
     public modalCtrl: ModalController,
     public calendarMd: NgCalendarModule,
     public loadingController: LoadingController,
+    private alertCtrl: AlertController,
     private eventoService: EventoService,
     private toastCtrl: ToastController
   ) {
@@ -48,7 +41,6 @@ export class AgendaPage {
   }
 
   ionViewWillEnter() {
-    console.log("teste");
     this.getEventos();
   }
 
@@ -58,11 +50,11 @@ export class AgendaPage {
   }
 
   reloadSource(startTime, endTime) {
-    
+
   }
 
   onEventSelected(event) { // evento diparado quando um evendo é selecionado na lista
-    this.navCtrl.push(EventoPage, {evento: event});
+    this.navCtrl.push(EventoPage, { evento: event });
   }
 
   onViewTitleChanged = (title: string) => { // atualiza o título
@@ -77,6 +69,14 @@ export class AgendaPage {
   }
 
   private getEventos() {
+
+
+    let loader = this.loadingController.create({
+      content: "Carregando eventos"
+    });
+
+    loader.present();
+
     this.eventoService.getEventos().then(res => {
 
       if (res != false) {
@@ -96,22 +96,38 @@ export class AgendaPage {
             IDUsuario: this.eventos[i].IDUsuario
           });
         }
-        console.log(this.eventSource);
       }
       else {
-        console.log("error");
+        this.showConfirm();
       }
-      this.loader.dismiss();
+
+      loader.dismiss();
 
     });
-
   }
 
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.getEventos();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
-  adicionar() {
+  private adicionar() {
     let modal = this.modalCtrl.create(AdicionarEventoPage, { dataAtual: this.dataAtual });
     modal.onDidDismiss(data => {
-        console.log("teste");
       if (data != null && data != undefined) {
         this.getEventos();
       }

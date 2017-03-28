@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
 import { DepoimentoService } from '../../providers/depoimento-service';
 
@@ -16,6 +16,7 @@ export class AvaliarDepoimentoPage {
     private toastCtrl: ToastController,
     public navParams: NavParams,
     private depoimentoService: DepoimentoService,
+    private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController
   ) {
     this.carregarDepoimentos();
@@ -69,7 +70,6 @@ export class AvaliarDepoimentoPage {
         }
       ]
     });
-
     actionSheet.present();
   }
 
@@ -82,4 +82,22 @@ export class AvaliarDepoimentoPage {
     toast.present();
   }
 
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarDepoimentos();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 }

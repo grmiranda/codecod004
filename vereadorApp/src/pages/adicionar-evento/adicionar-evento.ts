@@ -13,7 +13,6 @@ export class AdicionarEventoPage {
   private horaInicio = "";
   private horaTermino = "";
 
-
   constructor(
     private toastCtrl: ToastController,
     public navParams: NavParams,
@@ -25,7 +24,6 @@ export class AdicionarEventoPage {
     this.evento.DataInicio = this.navParams.get("dataAtual");
     this.evento.DataFim = this.navParams.get("dataAtual");
     this.storageService.get().then(res => this.evento.IDUsuario = res.IDUsuario);
-
   }
 
   private adicionar() {

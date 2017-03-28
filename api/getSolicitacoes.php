@@ -25,7 +25,7 @@
 					$row['fotoURL'] = $dado['fotoURL'];
 					
 					$idS = $row['IDSolicitacao'];
-					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
+					$sql = "SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
 					$resultado = $con->query($sql);
 					
 					$ids = array();

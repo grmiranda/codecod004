@@ -24,8 +24,18 @@
 		if($numrow !== 1){
 			echo json_encode(false);
 		}else{
-			$sql = "UPDATE publicacao SET fotoURL = '$fotoURL', titulo = '$titulo', texto = '$texto' WHERE IDPublicacao = '$IDPublicacao'";
+			//atualizando a publicacao
+			$sql = "UPDATE publicacao SET titulo = '$titulo', texto = '$texto' WHERE IDPublicacao = '$IDPublicacao'";
 			$con->query($sql);
+			//deletando todas as fotos relacioandas
+			$sql = "DELETE FROM fotourl WHERE id = '$IDPublicacao' AND tipo = 'publicacao'";
+			$con->query($sql);
+			//inserindo no banco as fotos atualizadas.
+			foreach ($fotoURL as $foto){
+				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$id', 'publicacao')";
+				$con->query($sql);
+			}
+
 			echo json_encode(true);
 		}
 	}

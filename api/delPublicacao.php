@@ -21,6 +21,10 @@
 			//caso nao exista publicacao com o id recebido
 			echo json_encode(false);
 		}else{
+			//deletando todas as fotos relacionada a publicacao
+			$sql = "DELETE FROM fotourl WHERE id = '$id' AND tipo = 'publicacao'";
+			$con->query($sql);
+			//removendo a publicacao
 			$sql = "DELETE FROM publicacao WHERE IDPublicacao = '$id'";
 			$con->query($sql);
 			

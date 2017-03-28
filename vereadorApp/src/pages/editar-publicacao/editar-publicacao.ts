@@ -35,7 +35,7 @@ export class EditarPublicacaoPage {
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
-        this.publicacao.fotoURL = url;
+        this.publicacao.fotoURL.push(url);
       }
     });
   }
@@ -43,9 +43,18 @@ export class EditarPublicacaoPage {
   private tirarFoto() {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
-        this.publicacao.fotoURL = url;
+        this.publicacao.fotoURL.push(url);
       }
     });
+  }
+
+  private removerFoto(url: string) {
+    let index = this.publicacao.fotoURL.indexOf(url);
+    if (index == 0) {
+      this.publicacao.fotoURL.shift();
+    } else if (index > 0) {
+      this.publicacao.fotoURL.splice(index, 1);
+    }
   }
 
   private showConfirm() {

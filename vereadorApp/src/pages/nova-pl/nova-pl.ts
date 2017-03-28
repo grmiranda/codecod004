@@ -71,7 +71,7 @@ export class NovaPlPage {
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
-        this.pl.fotos.push(url);
+        this.pl.fotoURL.push(url);
       }
     });
   }
@@ -79,17 +79,17 @@ export class NovaPlPage {
   private tirarFoto() {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
-        this.pl.fotos.push(url);
+        this.pl.fotoURL.push(url);
       }
     });
   }
 
   private removerFoto(url: string) {
-    let index = this.pl.fotos.indexOf(url);
+    let index = this.pl.fotoURL.indexOf(url);
     if (index == 0) {
-      this.pl.fotos.shift();
+      this.pl.fotoURL.shift();
     } else if (index > 0) {
-      this.pl.fotos.splice(index, 1);
+      this.pl.fotoURL.splice(index, 1);
     }
   }
 

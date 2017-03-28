@@ -21,10 +21,10 @@
 
     <!-- Imagem da coroa de louros que varia conforma a posição do usuario (1, 2, 3, default)-->
 
-    <img class="imagem-coroa" src="../image/coroa-1.png">
-    <!--img class="imagem-coroa" src="../image/coroa-2.png"-->
-    <!--img class="imagem-coroa" src="../image/coroa-3.png"-->
-    <!--img class="imagem-coroa" src="../image/coroa-default.png"-->
+    <img *ngIf="myRank.pos == 1" class="imagem-coroa" src="../image/coroa-1.png">
+    <img *ngIf="myRank.pos == 2" class="imagem-coroa" src="../image/coroa-2.png">
+    <img *ngIf="myRank.pos == 3" class="imagem-coroa" src="../image/coroa-3.png">
+    <img *ngIf="myRank.pos > 3" class="imagem-coroa" src="../image/coroa-default.png">
 
     <!-- Selecionar com o ngIf uma das imagens acima conforme a posição do usuário -->
 

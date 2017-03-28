@@ -51,7 +51,7 @@ export class NovaPropostaPage {
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
-        this.solicitacao.fotos.push(url);
+        this.solicitacao.fotoURL.push(url);
       }
     });
   }
@@ -59,17 +59,17 @@ export class NovaPropostaPage {
   private tirarFoto() {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
-        this.solicitacao.fotos.push(url);
+        this.solicitacao.fotoURL.push(url);
       }
     });
   }
 
   private removerFoto(url: string) {
-    let index = this.solicitacao.fotos.indexOf(url);
+    let index = this.solicitacao.fotoURL.indexOf(url);
     if(index == 0){
-      this.solicitacao.fotos.shift();
+      this.solicitacao.fotoURL.shift();
     }else if(index > 0){
-      this.solicitacao.fotos.splice(index, 1);
+      this.solicitacao.fotoURL.splice(index, 1);
     }
   }
 

@@ -12,16 +12,37 @@
 			$id = $_GET["id"];
 			$sql = "SELECT * FROM pl WHERE estado = '$estado' ORDER BY IDPL DESC";
 			$result = $con->query($sql);
-			
+			 
 			if($estado == 'ap' || $estado == 'tr'){
 				while($row=$result->fetch_assoc()){
 					$info = getLike($row['IDPL'], $id, $con);
 					$info->pl = $row;
+
+					$idPL = $row['IDPL'];
+					$sql = "SELECT * FROM fotourl WHERE id = '$idPL' AND tipo = 'pl'";
+					$resultado = $con->query($sql);
+					$fotos = array();
+
+					while ($f=$resultado->fetch_assoc()){
+						$fotos[] = $f;
+					}
 					$vetor[] = $info;
+					$vetor['fotoURL'] = $fotos;
 				}
 			}else{
 				while($row=$result->fetch_assoc()){
+
+					$idPL = $row['IDPL'];
+					$sql = "SELECT * FROM fotourl WHERE id = '$idPL' AND tipo = 'pl'";
+					$resultado = $con->query($sql);
+					$fotos = array();
+
+					while ($f=$resultado->fetch_assoc()){
+						$fotos[] = $f;
+					}
+
 					$vetor[] = $row;
+					$vetor['fotoURL'] = $fotos;
 				}
 			}
 			

@@ -17,8 +17,19 @@
 		$estado = $request->estado;
 
 		if (isset($titulo)){
-			$sql= "INSERT INTO pl (titulo, ementa, fotoURL, IDUsuario, estado) VALUES ('$titulo', '$ementa', '$fotoURL', '$IDUsuario', '$estado')";
+			$sql= "INSERT INTO pl (titulo, ementa, IDUsuario, estado) VALUES ('$titulo', '$ementa', '$IDUsuario', '$estado')";
 			$con->query($sql);
+
+			$sql = "SELECT * FROM pl WHERE titulo = '$titulo' AND ementa = '$ementa' AND = '$IDUsuario' AND estado = '$estado'";
+			$result = $con->query($sql);
+			$id = $result->fetch_assoc();
+			$id = $id['IDPL'];
+
+			foreach ($fotoURL as $foto){
+				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto' , $id, 'pl')";
+				$con->query($sql);
+			}
+
 			echo json_encode(true);
 		}else{
 			echo json_encode(false);

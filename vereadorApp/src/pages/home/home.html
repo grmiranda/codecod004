@@ -19,7 +19,7 @@
 
       <ion-card *ngFor="let publicacao of publicacoes" (press)="abrirOpcoes(publicacao)" (click)="abrirPublicacao(publicacao)">
         <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen></iframe>
-        <img *ngIf="publicacao.fotoURL !== '' && publicacao.video ==''" [src]="publicacao.fotoURL" />
+        <img *ngIf="publicacao.fotoURL[0] !== '' && publicacao.video ==''" [src]="publicacao.fotoURL" />
         <ion-card-content>
           <ion-card-title>
             {{ publicacao.titulo }}

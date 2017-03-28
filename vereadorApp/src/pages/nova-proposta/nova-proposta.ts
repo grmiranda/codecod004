@@ -12,6 +12,7 @@ import { StorageService } from '../../providers/storage';
 export class NovaPropostaPage {
 
   private solicitacao: Solicitacao = new Solicitacao();
+  private fotos: string[] = [];
 
   constructor(private navCtrl: NavController,
     private toastCtrl: ToastController,
@@ -53,6 +54,8 @@ export class NovaPropostaPage {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
         this.solicitacao.fotoURL = url;
+        alert(JSON.stringify(url));
+        this.fotos.push(url);
       }
     });
   }

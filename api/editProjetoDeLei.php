@@ -34,7 +34,7 @@ if (isset($postdata)) {
         $con->query($sql);
 
         foreach ($fotoURL as $foto){
-			$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto' , $id, 'pl')";
+			$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto' , '$id', 'pl')";
 			$con->query($sql);
 		}
 

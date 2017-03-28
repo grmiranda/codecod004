@@ -23,8 +23,20 @@ if (isset($postdata)) {
         $con->query($sql);
 
         //insere o requerimento da solicitacao escolhida
-        $sql = "INSERT INTO requerimento (fotoURL, data, IDSolicitacao) VALUES ('$fotoURL', '$data', '$IDSolicitacao')";
+        $sql = "INSERT INTO requerimento (data, IDSolicitacao) VALUES ('$data', '$IDSolicitacao')";
         $con->query($sql);
+
+        $sql = "SELECT * FROM requerimento WHERE data = '$data' AND IDSolicitacao = '$IDSolicitacao'";
+        $result = $con->query($sql);
+
+        $id = $result->fetch_assoc();
+        $id = $id['IDRequerimento'];
+
+        foreach ($fotoURL as $foto){
+            $sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$id', 'requerimento')";
+            $con->query($sql);
+        }
+
         echo json_encode(true);
 		
 		//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas

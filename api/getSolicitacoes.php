@@ -21,8 +21,8 @@
 					$resultado = $con->query($sql);
 					$dado = $resultado->fetch_assoc();
 					$row['Push'] = $dado['Push'];
-					$row['nome'] = $dado['nome'];
-					$row['fotoURL'] = $dado['fotoURL'];
+					$row['nomeUsuario'] = $dado['nome'];
+					$row['fotoUsuario'] = $dado['fotoURL'];
 					
 					$idS = $row['IDSolicitacao'];
 					$sql = "SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
@@ -42,8 +42,6 @@
 						
 					}
 
-					
-					
 					$row['ids'] = $ids;
 					$row['pushs'] = $pushs;
 					
@@ -59,8 +57,8 @@
 					$resultado = $con->query($sql);
 					$dado = $resultado->fetch_assoc();
 					$row['Push'] = $dado['Push'];
-					$row['nome'] = $dado['nome'];
-					$row['fotoURL'] = $dado['fotoURL'];
+					$row['nomeUsuario'] = $dado['nome'];
+					$row['fotoUsuario'] = $dado['fotoURL'];
 					$idS = $row['IDSolicitacao'];
 					$sql = " SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$idS' ";
 					$resultado = $con->query($sql);

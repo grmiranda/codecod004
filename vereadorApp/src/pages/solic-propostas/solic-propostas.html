@@ -18,6 +18,10 @@
 
 
   <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)">
+    <ion-avatar item-left>
+      <img [src]="solicitacao.solicitacao.fotoUsuario">
+    </ion-avatar>
+    <h2>{{solicitacao.solicitacao.nomeUsuario}}</h2>
     <img *ngIf="solicitacao.solicitacao.fotoURL" [src]="solicitacao.solicitacao.fotoURL" />
     <ion-card-content>
       <ion-card-title>

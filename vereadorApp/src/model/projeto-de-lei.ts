@@ -12,6 +12,8 @@ export class ProjetoDeLei{
     //tr - tramitando na camara
     //cp - concluido positivo
     //cn - faça analogia
+    public nomeUsuario:string = "";
+    public fotoUsuario:string = "";
     constructor(){
 
     }

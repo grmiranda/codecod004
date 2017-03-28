@@ -12,6 +12,8 @@ export class Solicitacao {
   public Push;
   public pushs = [];
   public ids = [];
+  public nomeUsuario:string = "";
+  public fotoUsuario:string = "";
 
   constructor() {
 

@@ -21,8 +21,11 @@
 			//caso nao exista solicitacao com o id recebido
 			echo json_encode(false);
 		}else{
-			$sql = "DELETE FROM pl WHERE IDPL = '$id'";
+			$sql = "DELETE FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
 			$con->query($sql);
+
+			$sql = "DELETE FROM pl WHERE IDPL = '$id'";
+			$con->query($sql); 
 			
 			echo json_encode(true);
 		}

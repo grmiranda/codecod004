@@ -27,8 +27,16 @@ if (isset($postdata)) {
     if ($numrow !== 1) {
         echo json_encode(false);
     } else {
-        $sql = "UPDATE pl SET fotoURL = '$fotoURL', titulo = '$titulo', ementa = '$ementa', estado = '$estado' WHERE IDPL = '$IDPL'";
+        $sql = "UPDATE pl SET titulo = '$titulo', ementa = '$ementa', estado = '$estado' WHERE IDPL = '$IDPL'";
+        $con->query($sql); 
+
+        $sql = "DELETE FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
         $con->query($sql);
+
+        foreach ($fotoURL as $foto){
+			$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto' , $id, 'pl')";
+			$con->query($sql);
+		}
 
         echo json_encode(true);
 

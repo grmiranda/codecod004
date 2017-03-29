@@ -35,6 +35,7 @@ export class TrofeuCidadaniaPage {
 
   private getMyRank() {
     this.pontuacaoService.getPontuacaoPorID(this.myID).then(res => {
+      console.log(res);
       if (!res.error) {
         this.myRank = res.data;
       }

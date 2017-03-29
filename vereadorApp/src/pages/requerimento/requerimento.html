@@ -1,5 +1,4 @@
-
-<ion-header >
+<ion-header>
   <ion-toolbar color="laranja">
     <ion-title>
       Requerimento
@@ -18,8 +17,16 @@
       <ion-label floating>Andamento</ion-label>
       <ion-textarea rows="10" [(ngModel)]="solicitacao.andamento" name="texto"></ion-textarea>
     </ion-item>
+
+    <ion-slides pager>
+
+      <ion-slide *ngFor="let requerimentoAtual of requerimento.fotoURL" style="margin-left: 10px">
+        <img [src]="requerimentoAtual" style="width: 100%;" (press)="opcaoApagar(requerimentoAtual)" />
+      </ion-slide>
+
+    </ion-slides>
+
     <ion-item>
-      <img *ngIf="requerimento.fotoURL !== ''" [src]="requerimento.fotoURL" style="width: 100%;" />
       <ion-row>
         <ion-col width-50>
           <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>

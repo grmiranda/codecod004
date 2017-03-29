@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, ToastController, NavParams, ActionSheetController } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { FotoService } from '../../providers/foto-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
@@ -18,6 +18,7 @@ export class NovaPlPage {
     public projetoDeLeiService: ProjetoDeLeiService,
     public navParams: NavParams,
     private toastCtrl: ToastController,
+    public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private fotoService: FotoService) {
 
@@ -82,6 +83,30 @@ export class NovaPlPage {
         this.pl.fotoURL.push(url);
       }
     });
+  }
+
+  private opcaoApagar(url) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "Remover foto " + (this.pl.fotoURL.indexOf(url) + 1),
+      buttons: [
+        {
+          text: 'Remover Foto',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.removerFoto(url);
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   private removerFoto(url: string) {

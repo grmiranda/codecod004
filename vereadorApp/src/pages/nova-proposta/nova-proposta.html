@@ -18,8 +18,16 @@
       <ion-label floating>Descrição</ion-label>
       <ion-textarea rows="10" [(ngModel)]="solicitacao.descricao" name="texto"></ion-textarea>
     </ion-item>
+    
+    <ion-slides pager>
+
+      <ion-slide *ngFor="let solicitacaoAtual of solicitacao.fotoURL" style="margin-left: 10px">
+        <img [src]="solicitacaoAtual" style="width: 100%;" (press)="opcaoApagar(solicitacaoAtual)" />
+      </ion-slide>
+
+    </ion-slides>
+      
     <ion-item>
-      <img *ngIf="solicitacao.fotoURL !== ''" [src]="solicitacao.fotoURL" style="width: 100%;" />
       <ion-row>
         <ion-col width-50>
           <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>

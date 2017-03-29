@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, AlertController  } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController, ActionSheetController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Publicacao } from '../../model/publicacao';
@@ -16,6 +16,7 @@ export class NovaPublicacaoPage {
     public navParams: NavParams,
     private toastCtrl: ToastController,
     public alertCtrl: AlertController,
+    public actionSheetCtrl: ActionSheetController,
     public publicacaoService: PublicacaoService,
     public fotoService: FotoService) {
 
@@ -78,6 +79,30 @@ export class NovaPublicacaoPage {
     });
   }
 
+  private opcaoApagar(url) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "Remover foto " + (this.publicacao.fotoURL.indexOf(url) + 1),
+      buttons: [
+        {
+          text: 'Remover Foto',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.removerFoto(url);
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
   private tirarFoto() {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
@@ -88,9 +113,9 @@ export class NovaPublicacaoPage {
 
   private removerFoto(url: string) {
     let index = this.publicacao.fotoURL.indexOf(url);
-    if(index == 0){
+    if (index == 0) {
       this.publicacao.fotoURL.shift();
-    }else if(index > 0){
+    } else if (index > 0) {
       this.publicacao.fotoURL.splice(index, 1);
     }
   }

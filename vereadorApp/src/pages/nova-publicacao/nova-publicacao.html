@@ -18,6 +18,15 @@
       <ion-label floating>Descrição</ion-label>
       <ion-textarea rows="10" [(ngModel)]="publicacao.texto" name="texto"></ion-textarea>
     </ion-item>
+
+     <ion-slides pager>
+
+      <ion-slide *ngFor="let publicacaoAtual of publicacao.fotoURL" style="margin-left: 10px">
+        <img [src]="publicacaoAtual" style="width: 100%;" (press)="opcaoApagar(publicacaoAtual)" />
+      </ion-slide>
+
+    </ion-slides>
+
     <ion-item>
       <img *ngIf="publicacao.fotoURL !== ''" [src]="publicacao.fotoURL" style="width: 100%;" />
       <ion-row>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
 import { Requerimento } from '../../model/requerimento';
 import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
@@ -22,15 +22,17 @@ export class RequerimentoPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private fotoService: FotoService,
+    public actionSheetCtrl: ActionSheetController,
     private requerimentoService: RequerimentoService,
     private feedService: FeedBackService
   ) {
-
     this.solicitacao = this.navParams.get("solicitacao");
+    this.solicitacao = new Solicitacao();
 
   }
 
   private finalizar() {
+    alert(JSON.stringify(this.requerimento.fotoURL.length));
 
     if (this.solicitacao.andamento == null || this.solicitacao.andamento.trim() == '') {
       this.displayToast('Descreva o andamento da Solicitação');
@@ -41,6 +43,7 @@ export class RequerimentoPage {
   }
 
   private confirmado() {
+    /*
     this.requerimento.IDSolicitacao = this.solicitacao.IDSolicitacao;
     this.requerimento.idUsuarioSolicitacao = this.solicitacao.IDUsuario;
     this.requerimentoService.addRequerimento(this.requerimento).then(res => {
@@ -52,14 +55,40 @@ export class RequerimentoPage {
         this.showConfirm();
       }
     });
+    */
   }
 
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
+      alert(JSON.stringify(url));
       if (url !== "false") {
         this.requerimento.fotoURL.push(url);
       }
     });
+  }
+
+  private opcaoApagar(url) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "Remover foto " + (this.requerimento.fotoURL.indexOf(url) + 1),
+      buttons: [
+        {
+          text: 'Remover Foto',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.removerFoto(url);
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   private tirarFoto() {
@@ -72,9 +101,9 @@ export class RequerimentoPage {
 
   private removerFoto(url: string) {
     let index = this.requerimento.fotoURL.indexOf(url);
-    if(index == 0){
+    if (index == 0) {
       this.requerimento.fotoURL.shift();
-    }else if(index > 0){
+    } else if (index > 0) {
       this.requerimento.fotoURL.splice(index, 1);
     }
   }

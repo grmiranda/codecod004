@@ -24,6 +24,9 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 
 
+import { RequerimentoPage } from '../pages/requerimento/requerimento';
+
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -32,7 +35,7 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
 
-  rootPage = SolicitacoesPage;
+  rootPage = LoginPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

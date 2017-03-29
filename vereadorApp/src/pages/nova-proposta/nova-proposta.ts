@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, ActionSheetController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Solicitacao } from '../../model/solicitacao';
@@ -17,7 +17,8 @@ export class NovaPropostaPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private solicitacaoService: SolicitacaoService,
-    private fotoService: FotoService,
+    private fotoService: FotoService,   
+    public actionSheetCtrl: ActionSheetController,
     private storageService: StorageService
   ) {
 
@@ -46,6 +47,30 @@ export class NovaPropostaPage {
         });
       });
     }
+  }
+
+  private opcaoApagar(url) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "Remover foto " + (this.solicitacao.fotoURL.indexOf(url) + 1),
+      buttons: [
+        {
+          text: 'Remover Foto',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.removerFoto(url);
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   private importarFoto() {

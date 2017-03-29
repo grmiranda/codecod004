@@ -12,16 +12,14 @@
 
 			while($row=$result->fetch_assoc()){
 				$id = $row['IDPublicacao'];
-
 				$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'publicacao'";
 				$resultado = $con->query($sql);
 				$fotos = array();
 				while ($f=$resultado->fetch_assoc()){
 					$fotos[] = $f;
 				}
-
+				$row['fotoURL'] = $fotos;
 				$vetor[] = $row;
-				$vetor['fotoURL'] = $fotos;
 			}
 			echo json_encode($vetor);
 		}

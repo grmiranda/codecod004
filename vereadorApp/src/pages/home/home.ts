@@ -16,8 +16,6 @@ export class HomePage {
 
   private publicacoes: Publicacao[] = [];
 
-  videoUrl: SafeResourceUrl;
-
   constructor(private platform: Platform,
     private alertCtrl: AlertController,
     private domSanitizer: DomSanitizer,
@@ -27,7 +25,6 @@ export class HomePage {
     private actionSheetCtrl: ActionSheetController,
     private menu: MenuController) {
 
-    this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/aw5pMBeOWM0');
     menu.enable(true);
   }
 
@@ -44,6 +41,7 @@ export class HomePage {
     loading.present();
 
     this.publicacaoService.getPublicacoes().then(res => {
+      console.log(res);
       loading.dismiss();
       if (!res.error) {
         let teste = res.data;

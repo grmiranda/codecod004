@@ -13,8 +13,8 @@
 		
 		$i = 0;
 		while($row=$result->fetch_assoc()){
+			$i++;
 			if($row['IDUsuario'] == $IDUsuario){
-				$i++;
 				$row['pos'] = $i;
 				echo json_encode($row);
 				return;

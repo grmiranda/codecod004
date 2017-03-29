@@ -16,8 +16,14 @@
 			if($estado == 'ap' || $estado == 'tr'){
 				while($row=$result->fetch_assoc()){
 					$info = getLike($row['IDPL'], $id, $con);
-					$info->pl = $row;
-
+					
+					$idU = $row['IDUsuario'];
+					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
+					$resultado = $con->query($sql);
+					$dado = $resultado->fetch_assoc();
+					$row['nomeUsuario'] = $dado['nome'];
+					$row['fotoUsuario'] = $dado['fotoURL'];
+					
 					$idPL = $row['IDPL'];
 					$sql = "SELECT * FROM fotourl WHERE id = '$idPL' AND tipo = 'pl'";
 					$resultado = $con->query($sql);
@@ -26,12 +32,23 @@
 					while ($f=$resultado->fetch_assoc()){
 						$fotos[] = $f;
 					}
+					$row['fotoURL'] = $fotos;
+					
+					$info->pl = $row;
+										
+					
 					$vetor[] = $info;
-					$vetor['fotoURL'] = $fotos;
 				}
 			}else{
 				while($row=$result->fetch_assoc()){
-
+					
+					$idU = $row['IDUsuario'];
+					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
+					$resultado = $con->query($sql);
+					$dado = $resultado->fetch_assoc();
+					$row['nomeUsuario'] = $dado['nome'];
+					$row['fotoUsuario'] = $dado['fotoURL'];
+				
 					$idPL = $row['IDPL'];
 					$sql = "SELECT * FROM fotourl WHERE id = '$idPL' AND tipo = 'pl'";
 					$resultado = $con->query($sql);
@@ -41,8 +58,8 @@
 						$fotos[] = $f;
 					}
 
+					$row['fotoURL'] = $fotos;
 					$vetor[] = $row;
-					$vetor['fotoURL'] = $fotos;
 				}
 			}
 			

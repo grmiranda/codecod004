@@ -76,8 +76,6 @@
 						$pushs[] = $dado['Push'];
 						
 					}
-
-					
 					
 					$row['ids'] = $ids;
 					$row['pushs'] = $pushs;

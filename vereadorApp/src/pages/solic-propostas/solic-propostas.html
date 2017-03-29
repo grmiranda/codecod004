@@ -15,8 +15,6 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-
-
   <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)">
 
     <ion-item>
@@ -26,7 +24,7 @@
       <h2>{{solicitacao.solicitacao.nomeUsuario}}</h2>
     </ion-item>
 
-    <img *ngIf="solicitacao.solicitacao.fotoURL.length != 0" [src]="solicitacao.solicitacao.fotoURL[0]" />
+    <img *ngIf="solicitacao.solicitacao.fotoURL" [src]="solicitacao.solicitacao" />
     <ion-card-content>
       <h2>
           {{ solicitacao.solicitacao.titulo }}

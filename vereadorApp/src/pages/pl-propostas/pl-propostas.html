@@ -15,12 +15,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-
   <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)">
-    <ion-avatar item-left>
-      <img [src]="pl.fotoUsuario">
-    </ion-avatar>
-    <h2>{{pl.nomeUsuario}}</h2>
+
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="projeto.pl.fotoUsuario" />
+      </ion-avatar>
+      <h2>{{projeto.pl.nomeUsuario}}</h2>
+    </ion-item>
     <ion-card-content>
       <ion-card-title>
         {{ projeto.pl.titulo }}
@@ -34,7 +36,7 @@
         <button ion-button clear small color="secondary" icon-left (click)="like(projeto, 's')">
               <ion-icon [name]="projeto.t == 's' ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'"></ion-icon>
               {{ projeto.p }}
-            </button>
+        </button>
       </ion-col>
       <ion-col width-50>
         <button ion-button clear small color="danger" icon-left (click)="like(projeto, 'n')">

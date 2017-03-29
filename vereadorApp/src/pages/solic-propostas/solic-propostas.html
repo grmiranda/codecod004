@@ -26,7 +26,7 @@
       <h2>{{solicitacao.solicitacao.nomeUsuario}}</h2>
     </ion-item>
 
-    <img *ngIf="solicitacao.solicitacao.fotoURL" [src]="solicitacao.solicitacao.fotoURL" />
+    <img *ngIf="solicitacao.solicitacao.fotoURL.length != 0" [src]="solicitacao.solicitacao.fotoURL[0]" />
     <ion-card-content>
       <h2>
           {{ solicitacao.solicitacao.titulo }}

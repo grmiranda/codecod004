@@ -83,7 +83,7 @@ export class AvaliarSolicitacaoPage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.feedService.showPromptReprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);            
+            this.feedService.showPromptReprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);
           }
         },
         {

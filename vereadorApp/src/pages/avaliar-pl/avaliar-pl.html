@@ -15,10 +15,12 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-card *ngFor="let pl of pls" (press)="abrirOpcoes(pl)">
-    <ion-avatar item-left>
-      <img [src]="pl.fotoUsuario">
-    </ion-avatar>
-    <h2>{{pl.nomeUsuario}}</h2>
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="pl.fotoUsuario">
+      </ion-avatar>
+      <h2>{{pl.nomeUsuario}}</h2>
+    </ion-item>
     <ion-card-content>
       <ion-card-title>
         {{ pl.titulo }}

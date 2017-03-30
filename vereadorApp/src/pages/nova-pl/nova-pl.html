@@ -14,15 +14,11 @@
       <ion-label floating>Ementa</ion-label>
       <ion-textarea rows="10" [(ngModel)]="pl.ementa" name="texto"></ion-textarea>
     </ion-item>
-
     <ion-slides pager>
-
-      <ion-slide *ngFor="let plAtual of pl.fotoURL" style="margin-left: 10px">
+      <ion-slide *ngFor="let plAtual of pl.fotoURL">
         <img [src]="plAtual" style="width: 100%;" (press)="opcaoApagar(plAtual)" />
       </ion-slide>
-
-    </ion-slides>
-    
+    </ion-slides> 
     <ion-item>
       <ion-row>
         <ion-col width-50>

@@ -24,7 +24,11 @@
       </ion-avatar>
       <h2>{{pl.nomeUsuario}}</h2>
     </ion-item>
-    <img *ngIf="pl.fotoURL.length != 0" [src]="pl.fotoURL[0]" />
+    <ion-slides *ngIf="pl.fotoURL.length != 0" pager>
+      <ion-slide *ngFor="let plAtual of pl.fotoURL">
+        <img [src]="plAtual" style="width: 100%;"/>
+      </ion-slide>
+    </ion-slides>
     <ion-card-content>
       <ion-card-title>
         {{ pl.titulo }}

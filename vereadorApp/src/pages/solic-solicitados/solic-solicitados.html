@@ -22,10 +22,12 @@
       <h2>{{solicitacao.nomeUsuario}}</h2>
     </ion-item>
 
-    <ion-slides *ngIf="solicitacao.fotoURL.length != 0" pager>
+    <ion-slides pager>
+
       <ion-slide *ngFor="let solicitacaoAtual of solicitacao.fotoURL">
         <img [src]="solicitacaoAtual" style="width: 100%;" />
       </ion-slide>
+
     </ion-slides>
 
     <ion-card-content>
@@ -35,7 +37,7 @@
       <p>
         {{ solicitacao.descricao }}
       </p>
-      <button ion-button clear color="secondary" icon-left>
+      <button ion-button clear color="secondary" icon-left (click)="abrirRequirimento(solicitacao)">
             <ion-icon name="browsers"></ion-icon>
             Requerimento
           </button>

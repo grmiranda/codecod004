@@ -143,7 +143,7 @@ export class FeedBackService {
     }).present();
   }
 
-  public showPromptConfirmarVarios(idUser: string[], push, funcao, solicitacao) {
+  public showPromptConfirmarVariosRequerimento(idUser: string[], push, funcao, solicitacao, requerimento) {
     this.alertCtrl.create({
       title: 'Recusar',
       message: "Digite mensagem para usuario",
@@ -163,19 +163,25 @@ export class FeedBackService {
         {
           text: 'Enviar',
           handler: data => {
-            let mensagemEnviar = new CorpoMensagem();
-            mensagemEnviar.mensagem = data.mensagem;
-            mensagemEnviar.remetente = this.meuId;
-            for (let i = 0; i < idUser.length; i++) {
-              mensagemEnviar.destinatario = idUser[i];
-              this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
-                if (res == true) {
-                  let pessoa = { Push: push[i] };
-                  this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
-                }
-              });
+            if (data != "") {
+              let mensagemEnviar = new CorpoMensagem();
+              mensagemEnviar.mensagem = data.mensagem;
+              mensagemEnviar.remetente = this.meuId;
+              for (let i = 0; i < idUser.length; i++) {
+                mensagemEnviar.destinatario = idUser[i];
+                this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+                  if (res == true) {
+                    let pessoa = { Push: push[i] };
+                    this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
+                  }
+                });
+              }
             }
-            funcao.confirmado(solicitacao);
+            else {
+              if (funcao != null) {
+                funcao.confirmado(solicitacao, requerimento);
+              }
+            }
           }
         }]
     }).present();

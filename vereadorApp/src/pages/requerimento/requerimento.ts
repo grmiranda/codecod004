@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
 import { Requerimento } from '../../model/requerimento';
-import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
-import { RequerimentoService } from '../../providers/requerimento-service';
 import { FeedBackService } from '../../providers/feed-back-service';
 
 
@@ -14,7 +12,7 @@ import { FeedBackService } from '../../providers/feed-back-service';
 export class RequerimentoPage {
 
   public requerimento: Requerimento = new Requerimento();
-  public solicitacao: Solicitacao;
+  private andamento: string = "";
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -23,44 +21,25 @@ export class RequerimentoPage {
     private alertCtrl: AlertController,
     private fotoService: FotoService,
     public actionSheetCtrl: ActionSheetController,
-    private requerimentoService: RequerimentoService,
     private feedService: FeedBackService
   ) {
-    this.solicitacao = this.navParams.get("solicitacao");
-    this.solicitacao = new Solicitacao();
 
   }
 
   private finalizar() {
-    alert(JSON.stringify(this.requerimento.fotoURL.length));
 
-    if (this.solicitacao.andamento == null || this.solicitacao.andamento.trim() == '') {
+    if (this.andamento == '') {
       this.displayToast('Descreva o andamento da Solicitação');
     } else {
-      this.confirmado();
+      this.view.dismiss({requerimento: this.requerimento, andamento: this.andamento});
       //this.feedService.showPromptConfirmarVarios(this.solicitacao.ids, this.solicitacao.pushs, this, this.solicitacao);
     }
   }
 
-  private confirmado() {
-    /*
-    this.requerimento.IDSolicitacao = this.solicitacao.IDSolicitacao;
-    this.requerimento.idUsuarioSolicitacao = this.solicitacao.IDUsuario;
-    this.requerimentoService.addRequerimento(this.requerimento).then(res => {
-      if (!res.error && res.value) {
-        //works fine
-        this.displayToast('Concluído');
-        this.view.dismiss(this.requerimento);
-      } else {
-        this.showConfirm();
-      }
-    });
-    */
-  }
+
 
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
-      alert(JSON.stringify(url));
       if (url !== "false") {
         this.requerimento.fotoURL.push(url);
       }
@@ -116,25 +95,6 @@ export class RequerimentoPage {
     });
 
     toast.present();
-  }
-
-  private showConfirm() {
-    let confirm = this.alertCtrl.create({
-      title: 'Falha na conexão',
-      message: 'Tentar Novamente ?',
-      buttons: [
-        {
-          text: 'Cancelar'
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            this.finalizar();
-          }
-        }
-      ]
-    });
-    confirm.present();
   }
 
   private cancel() {

@@ -143,7 +143,8 @@ const cloudSettings: CloudSettings = {
     DepoimentoPage,
     NovoDepoimentoPage,
     AvaliarDepoimentoPage,
-    VisualizarSolicitacaoPage
+    VisualizarSolicitacaoPage,
+    Autoresize
   ],
   imports: [
     IonicModule.forRoot(MyApp),

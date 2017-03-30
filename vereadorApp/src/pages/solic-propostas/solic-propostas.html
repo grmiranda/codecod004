@@ -15,7 +15,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)">
+  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)" (click)="abrirSolicitacao(solicitacao.solicitacao)">
 
     <ion-item>
       <ion-avatar item-left>
@@ -24,18 +24,18 @@
       <h2>{{solicitacao.solicitacao.nomeUsuario}}</h2>
     </ion-item>
 
-    <ion-slides pager>
+    <ion-slides *ngIf="solicitacao.solicitacao.fotoURL.lenght != 0" pager>
 
-      <ion-slide *ngFor="let solicitacaoAtual of solicitacao.solicitacao.fotoURL" style="margin-left: 10px">
+      <ion-slide *ngFor="let solicitacaoAtual of solicitacao.solicitacao.fotoURL">
         <img [src]="solicitacaoAtual" style="width: 100%;" />
       </ion-slide>
 
     </ion-slides>
 
     <ion-card-content>
-      <h2>
+      <ion-card-title>
         {{ solicitacao.solicitacao.titulo }}
-      </h2>
+      </ion-card-title>
       <p>
         {{ solicitacao.solicitacao.descricao }}
       </p>

@@ -35,7 +35,7 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
 
 
-  rootPage = LoginPage;
+  rootPage = SolicitacoesPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;

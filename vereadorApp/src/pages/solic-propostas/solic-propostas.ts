@@ -12,6 +12,7 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 import { NegacaoPage } from '../negacao/negacao';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { RequerimentoService } from '../../providers/requerimento-service';
+import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
 
 @Component({
   selector: 'page-solic-propostas',
@@ -213,6 +214,10 @@ export class SolicPropostasPage {
         this.showConfirm();
       }
     });
+  }
+
+  private abrirSolicitacao(soli:Solicitacao){
+    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
   }
 
 }

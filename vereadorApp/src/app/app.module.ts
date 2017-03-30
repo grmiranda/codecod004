@@ -9,6 +9,7 @@ import { SolicAprovadosPage } from '../pages/solic-aprovados/solic-aprovados';
 import { SolicPropostasPage } from '../pages/solic-propostas/solic-propostas';
 import { SolicSolicitadosPage } from '../pages/solic-solicitados/solic-solicitados';
 import { SolicReprovadosPage } from '../pages/solic-reprovados/solic-reprovados';
+import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visualizar-solicitacao';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
 import { NegacaoPage } from '../pages/negacao/negacao';
 import { AvaliarSolicitacaoPage } from '../pages/avaliar-solicitacao/avaliar-solicitacao';
@@ -141,7 +142,8 @@ const cloudSettings: CloudSettings = {
     HistoriaPage,
     DepoimentoPage,
     NovoDepoimentoPage,
-    AvaliarDepoimentoPage
+    AvaliarDepoimentoPage,
+    VisualizarSolicitacaoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -195,7 +197,8 @@ const cloudSettings: CloudSettings = {
     HistoriaPage,
     DepoimentoPage,
     NovoDepoimentoPage,
-    AvaliarDepoimentoPage
+    AvaliarDepoimentoPage,
+    VisualizarSolicitacaoPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,

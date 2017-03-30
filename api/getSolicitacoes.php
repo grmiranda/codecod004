@@ -41,10 +41,30 @@
 						$pushs[] = $dado['Push'];
 						
 					}
+					
+					$idDono = $row['IDUsuario'];
+
+					if (!in_array($idDono, $ids)){
+						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idDono'";
+						$tes = $con->query($sql);
+						$dado = $tes->fetch_assoc();
+
+						$ids[] = $idDono;
+						$pushs = $dado['Push'];
+					}
+
+					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";
+					$resultado = $con->query($sql);
+					$fotos = array();
+
+					while ($f=$resultado->fetch_assoc()){
+						$fotos[] = $f['fotoURL'];
+					}
 
 					$row['ids'] = $ids;
 					$row['pushs'] = $pushs;
-					
+					$row['fotoURL'] = $fotos;
+
 					$info = getLike($row['IDSolicitacao'], $id, $con);
 					$info->solicitacao = $row;
 					
@@ -87,8 +107,28 @@
 						
 					}
 					
+					$idDono = $row['IDUsuario'];
+
+					if (!in_array($idDono, $ids)){
+						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idDono'";
+						$tes = $con->query($sql);
+						$dado = $tes->fetch_assoc();
+
+						$ids[] = $idDono;
+						$pushs = $dado['Push'];
+					}
+
+					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";
+					$resultado = $con->query($sql);
+					$fotos = array();
+
+					while($f=$resultado->fetch_assoc()){
+						$fotos[] = $f['fotoURL'];
+					}
+
 					$row['ids'] = $ids;
 					$row['pushs'] = $pushs;
+					$row['fotoURL'] = $fotos;
 					$vetor[] = $row;
 				}
 			}

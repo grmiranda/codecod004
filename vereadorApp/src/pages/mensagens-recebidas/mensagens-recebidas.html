@@ -1,10 +1,3 @@
-<!--
-  Generated template for the MensagensRecebidas page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-header>
   <ion-navbar color="laranja">
     <ion-buttons start *ngIf="mensagensSelecionadas.length != 0">
@@ -23,7 +16,7 @@
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openOptions($event)">
-        <ion-icon name="more"></ion-icon>
+        <ion-icon *ngIf="mensagensSelecionadas.length>0" name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

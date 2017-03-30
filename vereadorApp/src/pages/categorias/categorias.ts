@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { TelefonesPage } from '../telefones/telefones';
 import { Http } from '@angular/http';
 import { Categorias } from '../../model/categoriasTelefone';
@@ -18,9 +18,21 @@ export class CategoriasPage {
   private search: string = "";
 
   constructor(
+    private alertCtrl: AlertController,
+    public loadingController: LoadingController,
     public navCtrl: NavController,
-    public navParams: NavParams,
     private http: Http) {
+    this.carregarItens();
+  }
+
+  private carregarItens() {
+
+
+    let loader = this.loadingController.create({
+      content: "Carregando eventos"
+    });
+
+    loader.present();
 
     this.http.get(this.link).toPromise().then(res => {
       this.categorias = res.json();
@@ -31,7 +43,11 @@ export class CategoriasPage {
       }
       this.quicksort(this.todosTelefones, 0, this.todosTelefones.length - 1);
       this.auxTelefones = this.todosTelefones;
-    }).catch(() => alert("Erro ao se comunicar com o servidor"));
+      loader.dismiss();
+    }).catch(()=>{
+      loader.dismiss();
+      this.tentarNovamente();
+    });
 
     this.initializeItems();
   }
@@ -100,5 +116,24 @@ export class CategoriasPage {
     numero = numero.replace(" ", "");
     numero = numero.replace("-", "");
     CallNumber.callNumber(numero, true);
+  }
+
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarItens();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

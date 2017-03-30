@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, PopoverController, ToastController } from 'ionic-angular';
+import { NavController, PopoverController, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { EnviarMensagemPage } from '../enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../../providers/mensagem-service';
 import { StorageService } from '../../providers/storage';
@@ -9,13 +9,6 @@ import { ModalAbrirMensagemPage } from '../modal-abrir-mensagem/modal-abrir-mens
 import { ModalOpcoesPage } from '../modal-opcoes/modal-opcoes';
 import { Usuario } from '../../model/user';
 
-
-/*
-  Generated class for the MensagensEnviadas page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-mensagens-enviadas',
   templateUrl: 'mensagens-enviadas.html'
@@ -30,10 +23,10 @@ export class MensagensEnviadasPage {
   constructor(
     public navCtrl: NavController,
     private mensagemService: MensagemService,
-    public navParams: NavParams,
+    private loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     private storageService: StorageService,
-    public actionSheetCtrl: ActionSheetController,
     public popoverCtrl: PopoverController,
     private toastCtrl: ToastController
   ) {
@@ -41,25 +34,36 @@ export class MensagensEnviadasPage {
 
   }
 
-    ionViewDidEnter() {
+  ionViewDidEnter() {
     this.storageService.get().then(res => {
       this.meuUser = res;
       this.carregar();
     });
 
   }
-  
-  carregar() {
+
+  private carregar() {
+
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
 
     this.selecao = false;
     this.mensagemService.getMensagemEnviada(this.meuUser.IDUsuario).then(res => {
-      this.mensagens = res;
-      this.mensagensSelecionadas = [];
+      loading.dismiss();
+      if (res) {
+        this.mensagens = res;
+        this.mensagensSelecionadas = [];
+      } else {
+        this.tentarNovamente();
+      }
     });
 
   }
 
-  corBackground(mensagem: CorpoMensagem) {
+  private corBackground(mensagem: CorpoMensagem) {
     if (!this.selecao) {
       return '#ffffff';
     } if (this.mensagensSelecionadas.indexOf(mensagem) != -1) {
@@ -69,8 +73,7 @@ export class MensagensEnviadasPage {
     }
   }
 
-  abrirMensagem(mensagemSelecionada: CorpoMensagem) {
-
+  private abrirMensagem(mensagemSelecionada: CorpoMensagem) {
     if (!this.selecao) {
       let modal = this.modalCtrl.create(ModalAbrirMensagemPage, { mensagem: mensagemSelecionada });
       modal.onDidDismiss(data => {
@@ -83,9 +86,7 @@ export class MensagensEnviadasPage {
         }
       });
       modal.present();
-
     } else {
-
       let index = this.mensagensSelecionadas.indexOf(mensagemSelecionada);
       if (index == -1) {
         this.mensagensSelecionadas.push(mensagemSelecionada);
@@ -95,7 +96,6 @@ export class MensagensEnviadasPage {
           this.selecao = false;
         }
       }
-
     }
   }
 
@@ -113,12 +113,12 @@ export class MensagensEnviadasPage {
     });
   }
 
-  opcoesMsg(mensagem: CorpoMensagem) {
+  private opcoesMsg(mensagem: CorpoMensagem) {
     this.selecao = true;
     this.mensagensSelecionadas.push(mensagem);
   }
 
-  openOptions(event: any) {
+  private openOptions(event: any) {
     let popover = this.popoverCtrl.create(ModalOpcoesPage, { opcoes: ['Responder', 'Excluir'] });
     let ev = {
       target: {
@@ -149,9 +149,35 @@ export class MensagensEnviadasPage {
     popover.present({ ev: event });
   }
 
-  cancelarSelecoes() {
+  private cancelarSelecoes() {
     this.selecao = false;
     this.mensagensSelecionadas = [];
+  }
+
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregar();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  private doRefresh(refresher) {
+    this.carregar();
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
   }
 
 }

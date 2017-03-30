@@ -60,7 +60,7 @@ export class PontuacaoService {
   }
 
   private handleErrorMessage(error: any) {
-    let retorno = { error: false, data: 'Ocorreu um erro!' };
+    let retorno = { error: true, data: 'Ocorreu um erro!' };
     return retorno;
   }
 

@@ -78,8 +78,9 @@ export class AgendaPage {
     loader.present();
 
     this.eventoService.getEventos().then(res => {
+      loader.dismiss();
 
-      if (res != false) {
+      if (res) {
         this.eventos = res;
 
         this.eventSource = [];
@@ -96,17 +97,13 @@ export class AgendaPage {
             IDUsuario: this.eventos[i].IDUsuario
           });
         }
+      } else {
+        this.tentarNovamente();
       }
-      else {
-        this.showConfirm();
-      }
-
-      loader.dismiss();
-
     });
   }
 
-  private showConfirm() {
+  private tentarNovamente() {
     let confirm = this.alertCtrl.create({
       title: 'Falha na conexão',
       message: 'Tentar Novamente ?',

@@ -9,6 +9,11 @@
 
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list [virtualScroll]="depoimentos">
     <ion-item *virtualItem="let depoimento" (press)="abrirOpcoes(depoimento)">
       <ion-avatar item-left>

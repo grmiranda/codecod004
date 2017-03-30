@@ -20,6 +20,14 @@ export class RequerimentoService {
       .catch(this.handleErrorMessage);
   }
 
+  public reprovarRequerimento(motivoNegacao): Promise<any> {
+    return this.http
+      .post('http://www.dsoutlet.com.br/apiLuiz/addMotivo.php', JSON.stringify(motivoNegacao), { headers: this.headers })
+      .toPromise()
+      .then(res => this.extractAddData(res))
+      .catch(this.handleErrorMessage);
+  }
+
   private extractAddData(res: Response) {
     let retorno = { error: false, value: false };
     let data = res.json();

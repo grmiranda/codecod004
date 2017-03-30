@@ -7,7 +7,9 @@ import { LikeSolicitacao } from '../../model/like-solicitacao';
 import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { Requerimento } from '../../model/requerimento';
+import { Negacao } from '../../model/negacao';
 import { RequerimentoPage } from '../requerimento/requerimento';
+import { NegacaoPage } from '../negacao/negacao';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { RequerimentoService } from '../../providers/requerimento-service';
 
@@ -19,6 +21,7 @@ export class SolicPropostasPage {
 
   private solicitacoes: any[] = [];
   private myID;
+  private loading;
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
@@ -44,14 +47,14 @@ export class SolicPropostasPage {
 
   private carregarSolicitacoes() {
 
-    let loading = this.loadingCtrl.create({
+    this.loading = this.loadingCtrl.create({
       content: 'Carregando'
     });
 
-    loading.present();
+    this.loading.present();
 
     this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
-      loading.dismiss();
+      this.loading.dismiss();
       if (!res.error) {
         this.solicitacoes = res.data;
       } else {
@@ -64,15 +67,20 @@ export class SolicPropostasPage {
     this.navCtrl.push(NovaPropostaPage);
   }
 
-  private reprovar(solicitacao: Solicitacao) {
-    solicitacao.estado = 'rc';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
-      if (!res.error) {
-        this.carregarSolicitacoes();
-      } else {
-
-        //error
+  private reprovar(solicitacao, motivoNegacao) {
+    this.requerimentoService.reprovarRequerimento(motivoNegacao).then(respostaRequerimento => {
+      if (respostaRequerimento.value == true) {
+        this.displayToast("Negação feita com sucesso");
+        solicitacao.estado = "rc";
+        this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+          if (!res.error) {
+            this.carregarSolicitacoes();
+          } else {
+            this.displayToast("Erro ao enviar proposta");
+          }
+        });
       }
+      this.loading.dismiss();
     });
   }
 
@@ -104,22 +112,45 @@ export class SolicPropostasPage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.feedService.showPromptReprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao);
+            let modal = this.modalCtrl.create(NegacaoPage, { operacao: "novo" });
+            modal.onDidDismiss(data => {
+              this.loading = this.loadingCtrl.create({
+                content: 'Carregando'
+              });
+
+              this.loading.present();
+              let motivoNegacao = new Negacao();
+              if (data != null && data != undefined) {
+                motivoNegacao = data.requerimento;
+                solicitacao.andamento = data.andamento;
+                motivoNegacao.IDSolicitacao = solicitacao.IDSolicitacao;
+                motivoNegacao.idUsuarioSolicitacao = solicitacao.IDUsuario;
+                let msg = data.msg;
+                this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, motivoNegacao, msg);
+              }
+            });
+            modal.present();
           }
         },
         {
           text: 'Requerimento',
           icon: 'archive',
           handler: () => {
-            let modal = this.modalCtrl.create(RequerimentoPage, { solicitacao: solicitacao });
+            let modal = this.modalCtrl.create(RequerimentoPage, { operacao: "novo" });
             modal.onDidDismiss(data => {
+              this.loading = this.loadingCtrl.create({
+                content: 'Carregando'
+              });
+
+              this.loading.present();
               let requerimento = new Requerimento();
               if (data != null && data != undefined) {
                 requerimento = data.requerimento;
                 solicitacao.andamento = data.andamento;
                 requerimento.IDSolicitacao = solicitacao.IDSolicitacao;
                 requerimento.idUsuarioSolicitacao = solicitacao.IDUsuario;
-                this.feedService.showPromptConfirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, requerimento);
+                let msg = data.msg;
+                this.feedService.confirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, requerimento, msg);
               }
             });
             modal.present();
@@ -150,6 +181,7 @@ export class SolicPropostasPage {
           }
         });
       }
+      this.loading.dismiss();
     });
   }
 

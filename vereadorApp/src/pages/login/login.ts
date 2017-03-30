@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, Events } from 'ionic-angular';
 import { FacebookService } from '../../providers/facebook-service';
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
@@ -23,12 +23,15 @@ export class LoginPage {
     private gpService: GooglePlusService,
     private menu: MenuController,
     private storage: StorageService,
-    private pushService: PushService
+    private pushService: PushService,
+    public events: Events
+
   ) {
     this.menu.enable(false);
     this.storage.get().then(response => {
       if (response.socialID != '') {
         this.navCtrl.setRoot(HomePage);
+        this.events.publish('user:changed', response);
       }
     });
   }

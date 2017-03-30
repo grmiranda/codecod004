@@ -21,7 +21,11 @@
       </ion-avatar>
       <h2>{{solicitacao.nomeUsuario}}</h2>
     </ion-item>
-    <img *ngIf="solicitacao.fotoURL" [src]="solicitacao.fotoURL" />
+    <ion-slides *ngIf="solicitacao.fotoURL.length != 0" pager>
+      <ion-slide *ngFor="let solicitacaoAtual of solicitacao.fotoURL">
+        <img [src]="solicitacaoAtual" style="width: 100%;" />
+      </ion-slide>
+    </ion-slides>
     <ion-card-content>
       <ion-card-title>
         {{ solicitacao.titulo }}

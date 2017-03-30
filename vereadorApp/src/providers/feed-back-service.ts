@@ -105,86 +105,51 @@ export class FeedBackService {
     }).present();
   }
 
-  public showPromptReprovarVarios(idUser: string[], push, funcao, solicitacao) {
-    this.alertCtrl.create({
-      title: 'Recusar',
-      message: "Digite mensagem para usuario",
-      inputs: [
-        {
-          name: 'mensagem',
-          placeholder: 'Digite aqui'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            return false;
+  public reprovarVarios(idUser: string[], push, funcao, solicitacao, motivoNegacao, msg: string) {
+    if (msg != "") {
+      let mensagemEnviar = new CorpoMensagem();
+      mensagemEnviar.mensagem = msg;
+      mensagemEnviar.remetente = this.meuId;
+      for (let i = 0; i < idUser.length; i++) {
+        mensagemEnviar.destinatario = idUser[i];
+        this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+          if (res == true) {
+            let pessoa = { Push: push[i] };
+            this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
           }
-        },
-        {
-          text: 'Enviar',
-          handler: data => {
-            let mensagemEnviar = new CorpoMensagem();
-            mensagemEnviar.mensagem = data.mensagem;
-            mensagemEnviar.remetente = this.meuId;
-            for (let i = 0; i < idUser.length; i++) {
-              mensagemEnviar.destinatario = idUser[i];
-              this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
-                if (res == true) {
-                  let pessoa = { Push: push[i] };
-                  this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
-                }
-              });
-            }
-            funcao.reprovar(solicitacao);
-          }
-        }]
-    }).present();
+          funcao.reprovar(solicitacao, motivoNegacao);
+        });
+      }
+    }
+    else {
+      if (funcao != null) {
+        funcao.reprovar(solicitacao, motivoNegacao);
+      }
+    }
   }
 
-  public showPromptConfirmarVariosRequerimento(idUser: string[], push, funcao, solicitacao, requerimento) {
-    this.alertCtrl.create({
-      title: 'Recusar',
-      message: "Digite mensagem para usuario",
-      inputs: [
-        {
-          name: 'mensagem',
-          placeholder: 'Digite aqui'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            return false;
+  public confirmarVariosRequerimento(idUser: string[], push, funcao, solicitacao, requerimento, msg: string) {
+
+    if (msg != "") {
+      let mensagemEnviar = new CorpoMensagem();
+      mensagemEnviar.mensagem = msg;
+      mensagemEnviar.remetente = this.meuId;
+      for (let i = 0; i < idUser.length; i++) {
+        mensagemEnviar.destinatario = idUser[i];
+        this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+          if (res == true) {
+            let pessoa = { Push: push[i] };
+            this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
           }
-        },
-        {
-          text: 'Enviar',
-          handler: data => {
-            if (data != "") {
-              let mensagemEnviar = new CorpoMensagem();
-              mensagemEnviar.mensagem = data.mensagem;
-              mensagemEnviar.remetente = this.meuId;
-              for (let i = 0; i < idUser.length; i++) {
-                mensagemEnviar.destinatario = idUser[i];
-                this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
-                  if (res == true) {
-                    let pessoa = { Push: push[i] };
-                    this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
-                  }
-                });
-              }
-            }
-            else {
-              if (funcao != null) {
-                funcao.confirmado(solicitacao, requerimento);
-              }
-            }
-          }
-        }]
-    }).present();
+          funcao.confirmado(solicitacao, requerimento);
+        });
+      }
+    }
+    else {
+      if (funcao != null) {
+        funcao.confirmado(solicitacao, requerimento);
+      }
+    }
   }
 
 }

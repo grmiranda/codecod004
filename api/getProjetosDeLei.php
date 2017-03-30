@@ -30,7 +30,7 @@
 					$fotos = array();
 
 					while ($f=$resultado->fetch_assoc()){
-						$fotos[] = $f;
+						$fotos[] = $f['fotoURL'];
 					}
 					$row['fotoURL'] = $fotos;
 					

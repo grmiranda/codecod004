@@ -21,7 +21,9 @@
 			//caso nao exista solicitacao com o id recebido
 			echo json_encode(false);
 		}else{
-			$sql = "DELETE FROM solicitacao WHERE IDSolicitacao = '$id'";
+			$sql = "DELETE FROM fotourl WHERE id = '$id' AND tipo = 'solicitacao'";
+			$con->query($sql);
+			$sql = "DELETE FROM solicitacao WHERE IDSolicitacao = '$id'"; 
 			$con->query($sql);
 			$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$id'";
 			$con->query($sql);

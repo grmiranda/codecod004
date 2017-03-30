@@ -25,6 +25,7 @@ export class MensagensEnviadasPage {
   private mensagens: CorpoMensagem[];
   private selecao: boolean = false;
   private mensagensSelecionadas: CorpoMensagem[] = [];
+  private meuUser: Usuario;
 
   constructor(
     public navCtrl: NavController,
@@ -36,18 +37,24 @@ export class MensagensEnviadasPage {
     public popoverCtrl: PopoverController,
     private toastCtrl: ToastController
   ) {
+    this.storageService.get().then(res => this.meuUser);
+
   }
 
-  ionViewDidEnter() {
-    this.carregar();
-  }
-
-  carregar() {
+    ionViewDidEnter() {
     this.storageService.get().then(res => {
-      this.mensagemService.getMensagemEnviada(res.IDUsuario).then(res => {
-        this.mensagens = res;
-        this.mensagensSelecionadas = [];
-      });
+      this.meuUser = res;
+      this.carregar();
+    });
+
+  }
+  
+  carregar() {
+
+    this.selecao = false;
+    this.mensagemService.getMensagemEnviada(this.meuUser.IDUsuario).then(res => {
+      this.mensagens = res;
+      this.mensagensSelecionadas = [];
     });
 
   }
@@ -93,18 +100,16 @@ export class MensagensEnviadasPage {
   }
 
   private excluirMsg(id) {
-    this.storageService.get().then(res => {
-      this.mensagemService.deletar(res.IDUsuario, id).then(res => {
-        if (res == true) {
-          this.carregar();
-          let toast = this.toastCtrl.create({
-            message: 'Mensagem apagada com sucesso',
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
-        }
-      });
+    this.mensagemService.deletar(this.meuUser.IDUsuario, id).then(res => {
+      if (res == true) {
+        this.carregar();
+        let toast = this.toastCtrl.create({
+          message: 'Mensagem apagada com sucesso',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
     });
   }
 
@@ -144,7 +149,7 @@ export class MensagensEnviadasPage {
     popover.present({ ev: event });
   }
 
-  cancelarSelecoes(){
+  cancelarSelecoes() {
     this.selecao = false;
     this.mensagensSelecionadas = [];
   }

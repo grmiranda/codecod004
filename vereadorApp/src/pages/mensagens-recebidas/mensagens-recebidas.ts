@@ -23,6 +23,7 @@ export class MensagensRecebidasPage {
   private mensagens: CorpoMensagem[];
   private selecao: boolean = false;
   private mensagensSelecionadas: CorpoMensagem[] = [];
+  private meuUser: Usuario;
 
   constructor(
     public navCtrl: NavController,
@@ -34,11 +35,14 @@ export class MensagensRecebidasPage {
     public popoverCtrl: PopoverController,
     private toastCtrl: ToastController
   ) {
-
   }
 
   ionViewDidEnter() {
-    this.carregar();
+    this.storageService.get().then(res => {
+      this.meuUser = res;
+      this.carregar();
+    });
+
   }
 
   enviarMensagem() {
@@ -48,14 +52,12 @@ export class MensagensRecebidasPage {
 
 
   carregar() {
-    
-  this.selecao = false;
-  this.storageService.get().then(res => {
-    this.mensagemService.getMensagemRecebida(res.IDUsuario).then(res => {
+
+    this.selecao = false;
+    this.mensagemService.getMensagemRecebida(this.meuUser.IDUsuario).then(res => {
       this.mensagens = res;
       this.mensagensSelecionadas = [];
     });
-  });
 
   }
 
@@ -115,18 +117,16 @@ export class MensagensRecebidasPage {
   }
 
   private excluirMsg(id) {
-    this.storageService.get().then(res => {
-      this.mensagemService.deletar(res.IDUsuario, id).then(res => {
-        if (res == true) {
-          this.carregar();
-          let toast = this.toastCtrl.create({
-            message: 'Mensagem apagada com sucesso',
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
-        }
-      });
+    this.mensagemService.deletar(this.meuUser.IDUsuario, id).then(res => {
+      if (res == true) {
+        this.carregar();
+        let toast = this.toastCtrl.create({
+          message: 'Mensagem apagada com sucesso',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
     });
   }
 

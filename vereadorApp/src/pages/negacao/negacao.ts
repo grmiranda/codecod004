@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
-import { Requerimento } from '../../model/requerimento';
+import { Negacao } from '../../model/negacao';
 import { FotoService } from '../../providers/foto-service';
 
 
@@ -8,9 +8,9 @@ import { FotoService } from '../../providers/foto-service';
   selector: 'page-requerimento',
   templateUrl: 'requerimento.html'
 })
-export class RequerimentoPage {
+export class NegacaoPage {
 
-  public requerimento: Requerimento = new Requerimento();
+  public motivo: Negacao = new Negacao();
   private andamento: string = "";
   private operacao: string = "";
 
@@ -26,7 +26,7 @@ export class RequerimentoPage {
     this.operacao = this.navParams.get("operacao");
     if (this.operacao == "visualizar") {
       this.andamento = this.navParams.get("andamento");
-      this.requerimento = this.navParams.get("requerimento");
+      this.motivo = this.navParams.get("negacao");
     }
 
   }
@@ -40,7 +40,7 @@ export class RequerimentoPage {
         this.enviarMensagem();
 
       } else {
-        this.view.dismiss({ requerimento: this.requerimento, andamento: this.andamento });
+        this.view.dismiss({ negacao: this.motivo, andamento: this.andamento });
       }
       //this.feedService.showPromptConfirmarVarios(this.solicitacao.ids, this.solicitacao.pushs, this, this.solicitacao);
     }
@@ -51,14 +51,14 @@ export class RequerimentoPage {
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
-        this.requerimento.fotoURL.push(url);
+        this.motivo.fotoURL.push(url);
       }
     });
   }
 
   private opcaoApagar(url) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: "Remover foto " + (this.requerimento.fotoURL.indexOf(url) + 1),
+      title: "Remover foto " + (this.motivo.fotoURL.indexOf(url) + 1),
       buttons: [
         {
           text: 'Remover Foto',
@@ -83,23 +83,23 @@ export class RequerimentoPage {
   private tirarFoto() {
     this.fotoService.tirarFoto().then(url => {
       if (url !== "false") {
-        this.requerimento.fotoURL.push(url);
+        this.motivo.fotoURL.push(url);
       }
     });
   }
 
   private removerFoto(url: string) {
-    let index = this.requerimento.fotoURL.indexOf(url);
+    let index = this.motivo.fotoURL.indexOf(url);
     if (index == 0) {
-      this.requerimento.fotoURL.shift();
+      this.motivo.fotoURL.shift();
     } else if (index > 0) {
-      this.requerimento.fotoURL.splice(index, 1);
+      this.motivo.fotoURL.splice(index, 1);
     }
   }
 
   public enviarMensagem() {
     this.alertCtrl.create({
-      title: 'Aprovar',
+      title: 'Motivo de negação',
       message: "Digite mensagem para usuario",
       inputs: [
         {
@@ -116,7 +116,7 @@ export class RequerimentoPage {
         {
           text: 'Enviar',
           handler: data => {
-            this.view.dismiss({ requerimento: this.requerimento, andamento: this.andamento, msg: data.mensagem });
+            this.view.dismiss({ negacao: this.motivo, andamento: this.andamento, msg: data.mensagem });
           }
         }]
     }).present();

@@ -23,7 +23,7 @@
                 $result = $con->query($sql);
                 $fotos = array();
                 while ($f=$result->fetch_assoc()){
-                    $fotos[] = $f;
+                    $fotos[] = $f['fotoURL'];
                 }
                 $dados['fotoURL'] = $fotos;
                 echo json_encode($dados);

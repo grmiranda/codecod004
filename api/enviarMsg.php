@@ -28,9 +28,29 @@
 		$sql = "INSERT INTO caixadesaida (IDMensagem, IDUsuario) VALUES ('$idM','$idR')";
 		$con->query($sql);
 
-		$sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM','$idD', '0')";
-		$con->query($sql);
+		$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idD'";
+		$result = $con->query($sql);
+		$dados = $result->fetch_assoc();
+		$permissao = $dados['permissao'];
 
+		if ($permissao == 1){
+
+			$sql = "SELECT * FROM usuario WHERE permissao = '1'";
+			$result = $con->query($sql);
+
+			while($row=$result->fetch_assoc()){
+				$aux = $row['IDUsuario'];
+				if ($aux != $idR){
+					$sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM', '$aux', '0')";
+					$con->query($sql);
+				}
+			}
+
+		} else {
+
+			$sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM','$idD', '0')";
+			$con->query($sql);
+		}
 		echo json_encode(true);
 	}
 	$con->close();

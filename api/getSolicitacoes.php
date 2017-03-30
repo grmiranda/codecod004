@@ -107,6 +107,8 @@
 						
 					}
 					
+					$idDono = $row['IDUsuario'];
+
 					if (!in_array($idDono, $ids)){
 						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idDono'";
 						$tes = $con->query($sql);

@@ -36,8 +36,15 @@
 					
 					$info->pl = $row;
 										
-					
 					$vetor[] = $info;
+					
+					//ordena o vetor por curtidas
+					usort($vetor, function ($a, $b) {
+						if ($a->p == $b->p) return 0;
+							return (($a->p < $b->p) ? 1 : -1);
+						}
+					);
+					
 				}
 			}else{
 				while($row=$result->fetch_assoc()){

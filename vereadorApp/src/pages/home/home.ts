@@ -33,7 +33,6 @@ export class HomePage {
   }
 
   private carregarFeed() {
-
     let loading = this.loadingCtrl.create({
       content: 'Carregando'
     });
@@ -41,7 +40,6 @@ export class HomePage {
     loading.present();
 
     this.publicacaoService.getPublicacoes().then(res => {
-      console.log(res);
       loading.dismiss();
       if (!res.error) {
         let teste = res.data;
@@ -128,10 +126,25 @@ export class HomePage {
   }
 
   private doRefresh(refresher) {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+
+    loading.present();
+
     this.publicacaoService.getPublicacoes().then(res => {
-      refresher.complete();
+      loading.dismiss();
       if (!res.error) {
-        this.publicacoes = res.data;
+        let teste = res.data;
+        for(let p of teste){
+          if(p.video !== ''){
+            p.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(p.video);
+          }
+        }
+        this.publicacoes = teste;
+      } else {
+        //ocorreu um error
+        this.tentarNovamente();
       }
     });
   }

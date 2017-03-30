@@ -100,7 +100,7 @@
 					$resultado = $con->query($sql);
 					$fotos = array();
 
-					while($f=$resultado->fethc_assoc()){
+					while($f=$resultado->fetch_assoc()){
 						$fotos[] = $f;
 					}
 

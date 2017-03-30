@@ -3,12 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Categorias } from '../../model/categoriasTelefone';
 import { CallNumber } from 'ionic-native';
 
-/*
-  Generated class for the Telefones page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-telefones',
   templateUrl: 'telefones.html'
@@ -29,9 +23,6 @@ export class TelefonesPage {
     this.initializeItems();
   }
 
-  ionViewDidLoad() {
-
-  }
   initializeItems() {
     this.instituicao = this.auxInstituicao;
   }
@@ -52,7 +43,6 @@ export class TelefonesPage {
   }
 
   ligar(telefoneInstituicao: string) {
-    console.log(telefoneInstituicao);
     let numero = telefoneInstituicao.replace("(", "");
     numero = numero.replace(")", "");
     numero = numero.replace(" ", "");

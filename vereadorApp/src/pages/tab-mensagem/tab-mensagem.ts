@@ -21,8 +21,4 @@ export class TabMensagemPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TabMensagemPage');
-  }
-
 }

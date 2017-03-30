@@ -3,12 +3,6 @@ import { NavController, NavParams, ToastController, ModalController } from 'ioni
 import { EditarEventoPage } from '../editar-evento/editar-evento';
 import { EventoService } from '../../providers/evento-service';
 
-/*
-  Generated class for the Evento page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-evento',
   templateUrl: 'evento.html'
@@ -29,7 +23,6 @@ export class EventoPage {
     public modalCtrl: ModalController
   ) {
     this.evento = this.navParams.get("evento");
-    console.log(this.evento);
 
     //format datatime
     let dataAtuals = new Date();
@@ -52,31 +45,22 @@ export class EventoPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EventoPage');
-  }
-
   private editar() {
     let modal = this.modalCtrl.create(EditarEventoPage, { evento: this.evento, dataInicio: this.dataInicio, dataFim: this.dataFim, horaInicio: this.horaInicio, horaFim: this.horaTermino });
     modal.onDidDismiss(data => {
       if (data != undefined) {
-        console.log("data");
-        console.log(data);
         this.evento = data.evento;
         this.dataInicio = data.dataInicio;
         this.dataFim = data.dataFim;
         this.horaInicio = data.horaInicio;
         this.horaTermino = data.horaFim;
-        console.log("atual");
-        console.log(this.evento);
-        
+
       }
     });
     modal.present();
   }
 
   private excluir() {
-    console.log(this.evento.id);
     this.eventoService.removeEvento(this.evento.id).then(res => {
       if (res == true) {
         this.presentToast("Excluido com sucesso");
@@ -95,7 +79,4 @@ export class EventoPage {
     });
     toast.present();
   }
-
-
-
 }

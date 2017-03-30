@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Questoes } from '../../model/Questoes';
 import 'rxjs/add/operator/toPromise';
-/*
-  Generated class for the Informacao page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-informacao',
   templateUrl: 'informacao.html'
@@ -20,26 +15,51 @@ export class InformacaoPage {
   private questaoEscolhida = new Questoes();
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
     private http: Http
-    ) {
-      
-      this.http.get(this.link).toPromise().then(res=>this.questoes = res.json()).catch(()=>alert("Erro ao se comunicar com o servidor"));
-      
-    }
+  ) {
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InformacaoPage');
+    this.carregarInformacoes();
   }
 
-  escolherPergunta(pergunta){
-    if(this.questaoEscolhida == pergunta){
+  private carregarInformacoes() {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
+    loading.present();
+
+    this.http.get(this.link).toPromise().then(res => {
+      loading.dismiss();
+      this.questoes = res.json();
+    }).catch(() => this.tentarNovamente());
+  }
+
+  private escolherPergunta(pergunta) {
+    if (this.questaoEscolhida == pergunta) {
       this.questaoEscolhida = new Questoes();
-    } else{
+    } else {
       this.questaoEscolhida = pergunta;
     }
   }
 
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregarInformacoes();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
 }

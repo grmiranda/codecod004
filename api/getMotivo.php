@@ -10,7 +10,7 @@
             $id = $_GET["id"];
 
             $sql = "SELECT * FROM motivo WHERE IDMotivo = '$id'";
-            $result = $con->fetch_assoc();
+            $result = $con->query($sql);
 
             $num = $result->num_rows;
 

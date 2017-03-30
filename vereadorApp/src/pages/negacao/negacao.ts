@@ -5,8 +5,8 @@ import { FotoService } from '../../providers/foto-service';
 
 
 @Component({
-  selector: 'page-requerimento',
-  templateUrl: 'requerimento.html'
+  selector: 'page-negacao',
+  templateUrl: 'negacao.html'
 })
 export class NegacaoPage {
 

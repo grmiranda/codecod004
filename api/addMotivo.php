@@ -12,6 +12,10 @@
 		
 		$id = $request->IDSolicitacao;
 		$texto = $request->Motivo;
+		$fotoURL = $request->fotoURL;
+		$IDSolicitacao = $request->IDSolicitacao;
+		$idUsuarioSolicitacao = $request->idUsuarioSolicitacao;
+		$data = date('Y-m-d');
 		
 		
 		if (isset($texto)){

@@ -1,3 +1,31 @@
 page-negacao {
-
+ion-title{
+        text-align: center;
+        margin-right: 15% !important;
+    }
+    ion-list{
+        padding: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 10px !important;
+        resize: vertical !important;
+    }
+    ion-item{
+        padding: 0 !important;
+        margin-left: 10px !important;
+        margin-right:10px !important;
+    }
+    ion-col{
+        align-items: center !important;
+    }
+    ion-label{
+        margin-left: 10px !important;
+    }
+    .fabbuttons{
+        align-self: center !important;
+        margin-left: 30%;
+    }
+    .blockbutton{
+        text-align: center !important;
+        margin-right: 30px !important;
+    }
 }

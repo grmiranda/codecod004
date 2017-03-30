@@ -42,9 +42,18 @@
 						
 					}
 
+					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";
+					$resultado = $con->query($sql);
+					$fotos = array();
+
+					while ($f=$resultado->fetch_assoc()){
+						$fotos[] = $f;
+					}
+
 					$row['ids'] = $ids;
 					$row['pushs'] = $pushs;
-					
+					$row['fotoURL'] = $fotos;
+
 					$info = getLike($row['IDSolicitacao'], $id, $con);
 					$info->solicitacao = $row;
 					
@@ -87,8 +96,17 @@
 						
 					}
 					
+					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";
+					$resultado = $con->query($sql);
+					$fotos = array();
+
+					while($f=$resultado->fethc_assoc()){
+						$fotos[] = $f;
+					}
+
 					$row['ids'] = $ids;
 					$row['pushs'] = $pushs;
+					$row['fotoURL'] = $fotos;
 					$vetor[] = $row;
 				}
 			}

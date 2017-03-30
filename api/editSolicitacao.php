@@ -33,9 +33,18 @@ if (isset($postdata)) {
     if ($numrow !== 1) {
         echo json_encode(false);
     } else {
-        $sql = "UPDATE solicitacao SET fotoURL = '$fotoURL', titulo = '$titulo', descricao = '$descricao', andamento = '$andamento', estado = '$estado' WHERE IDSolicitacao = '$IDSolicitacao'";
+        $sql = "UPDATE solicitacao SET titulo = '$titulo', descricao = '$descricao', andamento = '$andamento', estado = '$estado' WHERE IDSolicitacao = '$IDSolicitacao'";
         $con->query($sql);
-        echo json_encode(true);
+
+        $sql = "DELETE FROM fotourl WHERE id = '$id' AND tipo = 'solicitacao'";
+        $con->query($sql);
+
+        foreach ($fotoURL as $foto){
+            $sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$id', 'solicitacao')";
+            $con->query($sql);
+        }
+
+        echo json_encode(true); 
 
 
         if ($estado == 'ap') { //se a solicitacao for aceita o usuario criador recebe pontuacao

@@ -36,7 +36,7 @@ export class NovaPropostaPage {
           if (!res.error) {
             if (res.value) {
               //works fine
-              this.displayToast('Requisição enviada!');
+              this.displayToast('Enviado com sucesso pra analise!');
               this.navCtrl.pop();
             }
           } else {

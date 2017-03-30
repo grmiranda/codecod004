@@ -15,8 +15,12 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)">
+  <ion-item *ngIf="pls.length == 0">
+    <h3 class="semPost">Nenhuma proposta de lei</h3>
+    <h2 class="semPost">Seja o Primeiro</h2>
+  </ion-item>
 
+  <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="projeto.pl.fotoUsuario" />

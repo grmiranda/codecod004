@@ -16,12 +16,16 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-item *ngIf="publicacoes.length == 0">
+    <h3 class="semPost">Ainda não existem publicações</h3>
+  </ion-item>
+
   <ion-card *ngFor="let publicacao of publicacoes" (press)="abrirOpcoes(publicacao)" (click)="abrirPublicacao(publicacao)">
     <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen></iframe>
 
     <ion-slides *ngIf="publicacao.fotoURL.length != 0" pager>
       <ion-slide *ngFor="let publicacaoAtual of publicacao.fotoURL">
-        <img [src]="publicacaoAtual" style="width: 100%;"/>
+        <img [src]="publicacaoAtual" style="width: 100%;" />
       </ion-slide>
     </ion-slides>
     <ion-card-content>

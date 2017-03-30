@@ -15,7 +15,7 @@ import { Usuario } from '../../model/user';
 })
 export class MensagensRecebidasPage {
 
-  private mensagens: CorpoMensagem[];
+  private mensagens: CorpoMensagem[] = [];
   private selecao: boolean = false;
   private mensagensSelecionadas: CorpoMensagem[] = [];
   private meuUser: Usuario;

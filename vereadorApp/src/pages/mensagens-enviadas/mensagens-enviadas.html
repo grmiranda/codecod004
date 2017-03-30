@@ -24,6 +24,10 @@
 
 <ion-content padding>
 
+  <ion-item *ngIf="mensagens.length == 0">
+    <h3 class="semPost">Caixa de saída vazia</h3>
+  </ion-item>
+
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles" refreshingText="Carregando...">
     </ion-refresher-content>

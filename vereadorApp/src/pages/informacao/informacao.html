@@ -10,6 +10,10 @@
 
 <ion-content>
 
+  <ion-item *ngIf="questoes.length == 0">
+    <h3 class="semPost">Nenhuma informação cadastrada</h3>
+  </ion-item>
+
   <ion-item *ngFor="let questao of questoes" (click)="escolherPergunta(questao)">
     <h3 class="margemLimitada">{{questao.pergunta}}</h3>
     <p *ngIf="questao == questaoEscolhida" class="margemLimitada">{{questao.resposta}}</p>

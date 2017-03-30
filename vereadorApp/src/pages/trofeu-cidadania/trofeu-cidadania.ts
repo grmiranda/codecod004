@@ -12,7 +12,7 @@ export class TrofeuCidadaniaPage {
 
   private rank: Usuario[] = [new Usuario(), new Usuario(), new Usuario()];
   private myRank: Usuario = new Usuario();
-  private myID = 8;
+  private myID = 0;
   private loading = this.loadingCtrl.create({
     content: 'Carregando'
   });

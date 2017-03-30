@@ -32,7 +32,7 @@
 			$con->query($sql);
 			//inserindo no banco as fotos atualizadas.
 			foreach ($fotoURL as $foto){
-				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$id', 'publicacao')";
+				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$IDPublicacao', 'publicacao')";
 				$con->query($sql);
 			}
 

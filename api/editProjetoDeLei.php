@@ -30,11 +30,11 @@ if (isset($postdata)) {
         $sql = "UPDATE pl SET titulo = '$titulo', ementa = '$ementa', estado = '$estado' WHERE IDPL = '$IDPL'";
         $con->query($sql); 
 
-        $sql = "DELETE FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
+        $sql = "DELETE FROM fotourl WHERE id = '$IDPL' AND tipo = 'pl'";
         $con->query($sql);
 
         foreach ($fotoURL as $foto){
-			$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto' , '$id', 'pl')";
+			$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto' , '$IDPL', 'pl')";
 			$con->query($sql);
 		}
 

@@ -24,7 +24,8 @@ export class SolicPropostasPage {
   private myID;
   private loading;
 
-  constructor(public platform: Platform,
+  constructor(
+    public platform: Platform,
     public navCtrl: NavController,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
@@ -39,6 +40,7 @@ export class SolicPropostasPage {
   ) {
   }
 
+
   ionViewWillEnter() {
     this.storage.get().then(res => {
       this.myID = res.IDUsuario;
@@ -46,14 +48,12 @@ export class SolicPropostasPage {
     });
   }
 
-  private carregarSolicitacoes() {
 
+  private carregarSolicitacoes() {
     this.loading = this.loadingCtrl.create({
       content: 'Carregando'
     });
-
     this.loading.present();
-
     this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
       this.loading.dismiss();
       if (!res.error) {
@@ -64,26 +64,25 @@ export class SolicPropostasPage {
     });
   }
 
+
   private novaProposta() {
     this.navCtrl.push(NovaPropostaPage);
   }
 
-  private reprovar(solicitacao, motivoNegacao) {
-    this.requerimentoService.reprovarRequerimento(motivoNegacao).then(respostaRequerimento => {
-      if (respostaRequerimento.value == true) {
-        this.displayToast("Negação feita com sucesso");
-        solicitacao.estado = "rc";
-        this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
-          if (!res.error) {
-            this.carregarSolicitacoes();
-          } else {
-            this.displayToast("Erro ao enviar proposta");
-          }
-        });
+
+  private reprovar(solicitacao) {
+    this.displayToast("Negação feita com sucesso");
+    solicitacao.estado = "cn";
+    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+      if (!res.error) {
+        this.carregarSolicitacoes();
+      } else {
+        this.displayToast("Erro ao enviar proposta");
       }
       this.loading.dismiss();
-    });
+    }).catch(() => this.loading.dismiss());
   }
+
 
   private displayToast(mensagem: string) {
     let toast = this.toastCtrl.create({
@@ -91,9 +90,9 @@ export class SolicPropostasPage {
       duration: 3000,
       position: 'top'
     });
-
     toast.present();
   }
+
 
   private like(solicitacao, tipo: string) {
     solicitacao.t = solicitacao.t == tipo ? 'u' : tipo;
@@ -115,19 +114,14 @@ export class SolicPropostasPage {
           handler: () => {
             let modal = this.modalCtrl.create(NegacaoPage, { operacao: "novo" });
             modal.onDidDismiss(data => {
-              this.loading = this.loadingCtrl.create({
-                content: 'Carregando'
-              });
-
-              this.loading.present();
-              let motivoNegacao = new Negacao();
               if (data != null && data != undefined) {
-                motivoNegacao = data.requerimento;
+                this.loading = this.loadingCtrl.create({
+                  content: 'Carregando'
+                });
+                this.loading.present();
                 solicitacao.andamento = data.andamento;
-                motivoNegacao.IDSolicitacao = solicitacao.IDSolicitacao;
-                motivoNegacao.idUsuarioSolicitacao = solicitacao.IDUsuario;
                 let msg = data.msg;
-                this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, motivoNegacao, msg);
+                this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, msg);
               }
             });
             modal.present();
@@ -139,13 +133,12 @@ export class SolicPropostasPage {
           handler: () => {
             let modal = this.modalCtrl.create(RequerimentoPage, { operacao: "novo" });
             modal.onDidDismiss(data => {
-              this.loading = this.loadingCtrl.create({
-                content: 'Carregando'
-              });
-
-              this.loading.present();
               let requerimento = new Requerimento();
               if (data != null && data != undefined) {
+                this.loading = this.loadingCtrl.create({
+                  content: 'Carregando'
+                });
+                this.loading.present();
                 requerimento = data.requerimento;
                 solicitacao.andamento = data.andamento;
                 requerimento.IDSolicitacao = solicitacao.IDSolicitacao;
@@ -169,6 +162,7 @@ export class SolicPropostasPage {
     actionSheet.present();
   }
 
+
   private confirmado(solicitacao, requerimento) {
     this.requerimentoService.addRequerimento(requerimento).then(respostaRequerimento => {
       if (respostaRequerimento.value == true) {
@@ -183,8 +177,9 @@ export class SolicPropostasPage {
         });
       }
       this.loading.dismiss();
-    });
+    }).catch(() => this.loading.dismiss());
   }
+
 
   private showConfirm() {
     let confirm = this.alertCtrl.create({
@@ -205,6 +200,7 @@ export class SolicPropostasPage {
     confirm.present();
   }
 
+
   private doRefresh(refresher) {
     this.solicitacaoService.getSolicitacoesPropostas('ap', this.myID).then(res => {
       refresher.complete();
@@ -216,8 +212,8 @@ export class SolicPropostasPage {
     });
   }
 
+
   private abrirSolicitacao(soli:Solicitacao){
     this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
   }
-
 }

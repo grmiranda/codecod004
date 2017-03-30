@@ -30,6 +30,10 @@
     </ion-refresher-content>
   </ion-refresher>
 
+  <ion-item *ngIf="mensagens.length == 0">
+    <h3 class="semPost">Caixa de entrada vazia</h3>
+  </ion-item>
+
   <ion-list [virtualScroll]="mensagens">
     <ion-item *virtualItem="let mensagem" [style.background-color]="corBackground(mensagem)" (click)="abrirMensagem(mensagem)"
       (press)="opcoesMsg(mensagem)">

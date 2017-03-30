@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, NavParams, LoadingController, ViewController, ActionSheetController } from 'ionic-angular';
 import { Requerimento } from '../../model/requerimento';
+import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
+import { RequerimentoService } from '../../providers/requerimento-service';
+
 
 
 @Component({
@@ -13,6 +16,8 @@ export class RequerimentoPage {
   public requerimento: Requerimento = new Requerimento();
   private andamento: string = "";
   private operacao: string = "";
+  private solicitacao: Solicitacao;
+  private visualizar: boolean = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -20,29 +25,37 @@ export class RequerimentoPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private fotoService: FotoService,
-    public actionSheetCtrl: ActionSheetController
+    public loadingCtrl: LoadingController,
+    public actionSheetCtrl: ActionSheetController,
+    private requerimentoService: RequerimentoService
   ) {
 
     this.operacao = this.navParams.get("operacao");
     if (this.operacao == "visualizar") {
-      this.andamento = this.navParams.get("andamento");
-      this.requerimento = this.navParams.get("requerimento");
-    }
+      this.visualizar = true;
+      var loading = this.loadingCtrl.create({
+        content: 'Carregando'
+      });
 
+      loading.present();
+      this.solicitacao = this.navParams.get("solicitacao");
+      this.requerimentoService.getRequerimentosByID(this.solicitacao.IDSolicitacao).then(buscaRequerimento => {
+        this.requerimento = buscaRequerimento;
+        this.andamento = this.solicitacao.andamento;
+        loading.dismiss();
+      }).catch(()=>loading.dismiss());
+    } 
   }
 
   private finalizar() {
-
     if (this.andamento == '') {
       this.displayToast('Descreva o andamento');
     } else {
       if (this.operacao == "novo") {
         this.enviarMensagem();
-
       } else {
         this.view.dismiss({ requerimento: this.requerimento, andamento: this.andamento });
       }
-      //this.feedService.showPromptConfirmarVarios(this.solicitacao.ids, this.solicitacao.pushs, this, this.solicitacao);
     }
   }
 

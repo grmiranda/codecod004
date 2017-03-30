@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 export class InformacaoPage {
 
   private link: string = "http://dsoutlet.com.br/apiLuiz/getInformacoes.php?info";
-  private questoes: Questoes[];
+  private questoes: Questoes[] = [];
   private questaoEscolhida = new Questoes();
 
   constructor(

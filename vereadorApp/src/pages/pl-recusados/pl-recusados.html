@@ -16,6 +16,9 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-item *ngIf="pls.length == 0">
+    <h3 class="semPost">Nenhuma proposta de lei</h3>
+  </ion-item>
 
   <ion-card *ngFor="let pl of pls">
     <ion-item>

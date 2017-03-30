@@ -72,7 +72,7 @@ export class AgendaPage {
 
 
     let loader = this.loadingController.create({
-      content: "Carregando eventos"
+      content: "Carregando"
     });
 
     loader.present();

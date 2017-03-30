@@ -34,40 +34,20 @@ export class FeedBackService {
   }
 
   public showPromptAprovar(idUser: string, push, funcao, solicitacao) {
-    this.alertCtrl.create({
-      title: 'Aceitar',
-      message: "Digite mensagem para usuario",
-      inputs: [
-        {
-          name: 'mensagem',
-          placeholder: 'Digite aqui'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            return false;
-          }
-        },
-        {
-          text: 'Enviar',
-          handler: data => {
-            let mensagemEnviar = new CorpoMensagem();
-            mensagemEnviar.mensagem = data.mensagem;
-            mensagemEnviar.destinatario = idUser;
-            mensagemEnviar.remetente = this.meuId;
-            this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
-              if (res == true) {
-                funcao.aprovar(solicitacao);
-                let pessoa = { Push: push };
-                this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
-              }
-            });
-          }
-        }]
-    }).present();
+    let mensagemEnviar = new CorpoMensagem();
+    mensagemEnviar.mensagem = "Pedido enviado para avaliação foi aceito com sucesso";
+    mensagemEnviar.destinatario = idUser;
+    mensagemEnviar.remetente = this.meuId;
+    this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+      if (res == true) {
+        funcao.aprovar(solicitacao);
+        let pessoa = { Push: push };
+        this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
+      }
+      funcao.aprovar(solicitacao);
+    });
   }
+
 
   public showPromptReprovar(idUser: string, push, funcao, solicitacao) {
     this.alertCtrl.create({
@@ -83,29 +63,33 @@ export class FeedBackService {
         {
           text: 'Cancel',
           handler: data => {
-            return false;
           }
         },
         {
           text: 'Enviar',
           handler: data => {
-            let mensagemEnviar = new CorpoMensagem();
-            mensagemEnviar.mensagem = data.mensagem;
-            mensagemEnviar.destinatario = idUser;
-            mensagemEnviar.remetente = this.meuId;
-            this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
-              if (res == true) {
-                funcao.reprovar(solicitacao);
-                let pessoa = { Push: push };
-                this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
-              }
-            });
+            if (data.mensagem != "") {
+              let mensagemEnviar = new CorpoMensagem();
+              mensagemEnviar.mensagem = data.mensagem;
+              mensagemEnviar.destinatario = idUser;
+              mensagemEnviar.remetente = this.meuId;
+              this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+                if (res == true) {
+                  funcao.reprovar(solicitacao);
+                  let pessoa = { Push: push };
+                  this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
+                }
+              });
+            } else {
+              funcao.aprovar(solicitacao);
+            }
+
           }
         }]
     }).present();
   }
 
-  public reprovarVarios(idUser: string[], push, funcao, solicitacao, motivoNegacao, msg: string) {
+  public reprovarVarios(idUser: string[], push, funcao, solicitacao, msg: string) {
     if (msg != "") {
       let mensagemEnviar = new CorpoMensagem();
       mensagemEnviar.mensagem = msg;
@@ -117,13 +101,13 @@ export class FeedBackService {
             let pessoa = { Push: push[i] };
             this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
           }
-          funcao.reprovar(solicitacao, motivoNegacao);
+          funcao.reprovar(solicitacao);
         });
       }
     }
     else {
       if (funcao != null) {
-        funcao.reprovar(solicitacao, motivoNegacao);
+        funcao.reprovar(solicitacao);
       }
     }
   }

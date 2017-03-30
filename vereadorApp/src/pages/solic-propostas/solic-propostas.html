@@ -15,7 +15,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+
+  <ion-item *ngIf="solicitacoes.length == 0">
+    <h3 class="semPost">Ainda não existem solicitações</h3>
+    <h2 class="semPost">Seja o Primeiro</h2>
+  </ion-item>
+
   <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)" (click)="abrirSolicitacao(solicitacao.solicitacao)">
+
 
     <ion-item>
       <ion-avatar item-left>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ActionSheetController, Platform, LoadingController, AlertController } from 'ionic-angular';
 import { Solicitacao } from '../../model/solicitacao';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
+import { RequerimentoPage } from '../requerimento/requerimento';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class SolicSolicitadosPage {
     private alertCtrl: AlertController,
     public navCtrl: NavController,
     public solicitacaoService: SolicitacaoService,
-    public actionSheetCtrl: ActionSheetController) {
+    public actionSheetCtrl: ActionSheetController
+    ) {
 
   }
 
@@ -154,5 +156,9 @@ export class SolicSolicitadosPage {
         this.tentarNovamente();
       }
     });
+  }
+
+  private abrirRequirimento(solicitacao: Solicitacao){
+    this.navCtrl.push(RequerimentoPage, {solicitacao: solicitacao, operacao : "visualizar"});
   }
 }

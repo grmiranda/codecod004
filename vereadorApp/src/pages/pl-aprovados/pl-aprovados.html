@@ -16,6 +16,9 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-item *ngIf="pls.length == 0">
+    <h3 class="semPost">Nenhuma proposta de lei aprovada</h3>
+  </ion-item>
 
   <ion-card *ngFor="let pl of pls">
     <ion-item>
@@ -24,9 +27,10 @@
       </ion-avatar>
       <h2>{{pl.nomeUsuario}}</h2>
     </ion-item>
+    
     <ion-slides *ngIf="pl.fotoURL.length != 0" pager>
       <ion-slide *ngFor="let plAtual of pl.fotoURL">
-        <img [src]="plAtual" style="width: 100%;"/>
+        <img [src]="plAtual" style="width: 100%;" />
       </ion-slide>
     </ion-slides>
     <ion-card-content>

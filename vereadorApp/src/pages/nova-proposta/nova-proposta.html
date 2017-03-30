@@ -41,22 +41,6 @@
         </ion-col>
       </ion-row>
     </ion-item>
-
-    <ion-item *ngFor="let foto of fotos">
-      <img *ngIf="foto !== ''" [src]="foto" style="width: 100%;" />
-      <ion-row>
-        <ion-col width-50>
-          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-                <ion-icon name="image"></ion-icon>
-              </button>
-        </ion-col>
-        <ion-col width-50>
-          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-                <ion-icon name="camera"></ion-icon>
-              </button>
-        </ion-col>
-      </ion-row>
-    </ion-item>
     <ion-item>
       <button class="blockbutton" (click)="requisitar()" color="secondary" ion-button block large>Realizar Solicitação</button>
     </ion-item>

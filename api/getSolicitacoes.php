@@ -41,6 +41,17 @@
 						$pushs[] = $dado['Push'];
 						
 					}
+					
+					$idDono = $row['IDUsuario'];
+
+					if (!in_array($idDono, $ids)){
+						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idDono'";
+						$tes = $con->query($sql);
+						$dado = $tes->fetch_assoc();
+
+						$ids[] = $idDono;
+						$pushs = $dado['Push'];
+					}
 
 					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";
 					$resultado = $con->query($sql);
@@ -96,6 +107,15 @@
 						
 					}
 					
+					if (!in_array($idDono, $ids)){
+						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idDono'";
+						$tes = $con->query($sql);
+						$dado = $tes->fetch_assoc();
+
+						$ids[] = $idDono;
+						$pushs = $dado['Push'];
+					}
+
 					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";
 					$resultado = $con->query($sql);
 					$fotos = array();

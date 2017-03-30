@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, PopoverController, ToastController } from 'ionic-angular';
+import { NavController, ActionSheetController, PopoverController, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { EnviarMensagemPage } from '../enviar-mensagem/enviar-mensagem';
 import { MensagemService } from '../../providers/mensagem-service';
 import { StorageService } from '../../providers/storage';
@@ -8,12 +8,7 @@ import { ModalController } from 'ionic-angular';
 import { ModalAbrirMensagemPage } from '../modal-abrir-mensagem/modal-abrir-mensagem';
 import { ModalOpcoesPage } from '../modal-opcoes/modal-opcoes';
 import { Usuario } from '../../model/user';
-/*
-  Generated class for the MensagensRecebidas page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-mensagens-recebidas',
   templateUrl: 'mensagens-recebidas.html'
@@ -28,11 +23,12 @@ export class MensagensRecebidasPage {
   constructor(
     public navCtrl: NavController,
     private mensagemService: MensagemService,
-    public navParams: NavParams,
     public modalCtrl: ModalController,
+    private loadingCtrl: LoadingController,
     private storageService: StorageService,
     public actionSheetCtrl: ActionSheetController,
     public popoverCtrl: PopoverController,
+    private alertCtrl: AlertController,
     private toastCtrl: ToastController
   ) {
   }
@@ -42,23 +38,30 @@ export class MensagensRecebidasPage {
       this.meuUser = res;
       this.carregar();
     });
-
   }
 
-  enviarMensagem() {
+  private enviarMensagem() {
     this.navCtrl.push(EnviarMensagemPage);
   }
 
+  private carregar() {
 
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando'
+    });
 
-  carregar() {
+    loading.present();
 
     this.selecao = false;
     this.mensagemService.getMensagemRecebida(this.meuUser.IDUsuario).then(res => {
-      this.mensagens = res;
-      this.mensagensSelecionadas = [];
+      loading.dismiss();
+      if (res) {
+        this.mensagens = res;
+        this.mensagensSelecionadas = [];
+      } else {
+        this.tentarNovamente();
+      }
     });
-
   }
 
   private doRefresh(refresher) {
@@ -68,7 +71,7 @@ export class MensagensRecebidasPage {
     }, 2000);
   }
 
-  corBackground(mensagem: CorpoMensagem) {
+  private corBackground(mensagem: CorpoMensagem) {
     if (!this.selecao) {
       if (mensagem.lida == 0) {
         return '#ed9e1e';
@@ -82,8 +85,7 @@ export class MensagensRecebidasPage {
     }
   }
 
-  abrirMensagem(mensagemSelecionada: CorpoMensagem) {
-
+  private abrirMensagem(mensagemSelecionada: CorpoMensagem) {
     if (!this.selecao) {
       if (mensagemSelecionada.lida == 0) {
         this.mensagemService.ler(mensagemSelecionada.id);
@@ -112,7 +114,6 @@ export class MensagensRecebidasPage {
           this.selecao = false;
         }
       }
-
     }
   }
 
@@ -130,12 +131,12 @@ export class MensagensRecebidasPage {
     });
   }
 
-  opcoesMsg(mensagem: CorpoMensagem) {
+  private opcoesMsg(mensagem: CorpoMensagem) {
     this.selecao = true;
     this.mensagensSelecionadas.push(mensagem);
   }
 
-  openOptions(event: any) {
+  private openOptions(event: any) {
     let popover = this.popoverCtrl.create(ModalOpcoesPage, { opcoes: ['Responder', 'Excluir'] });
     let ev = {
       target: {
@@ -166,8 +167,27 @@ export class MensagensRecebidasPage {
     popover.present({ ev: event });
   }
 
-  cancelarSelecoes() {
+  private cancelarSelecoes() {
     this.selecao = false;
     this.mensagensSelecionadas = [];
+  }
+
+  private tentarNovamente() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregar();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

@@ -1,41 +1,27 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
-import { EnviarMensagemPage } from '../enviar-mensagem/enviar-mensagem';
+import { NavParams, ViewController } from 'ionic-angular';
 
-
-/*
-  Generated class for the ModalAbrirMensagem page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-modal-abrir-mensagem',
   templateUrl: 'modal-abrir-mensagem.html'
 })
 export class ModalAbrirMensagemPage {
 
-  private mensagem;
+  private mensagem: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
+  constructor(public navParams: NavParams, public view: ViewController) {
     this.mensagem = navParams.get('mensagem');
-    console.log(this.mensagem);
-
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalAbrirMensagemPage');
+  private cancel() {
+    this.view.dismiss();
   }
 
-  cancel() {
-    this.view.dismiss()
+  private excluir() {
+    this.view.dismiss("excluir");
   }
-
-  excluir() {
-    this.view.dismiss("excluir")
-  }
-  enviar() {
-    this.view.dismiss("enviar")
+  private enviar() {
+    this.view.dismiss("enviar");
   }
 
 }

@@ -32,7 +32,10 @@ export class InformacaoPage {
     this.http.get(this.link).toPromise().then(res => {
       loading.dismiss();
       this.questoes = res.json();
-    }).catch(() => this.tentarNovamente());
+    }).catch(() =>{
+      loading.dismiss();
+      this.tentarNovamente()
+    });
   }
 
   private escolherPergunta(pergunta) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { ActionSheetController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
 import { DepoimentoService } from '../../providers/depoimento-service';
 
@@ -12,9 +12,8 @@ export class AvaliarDepoimentoPage {
 
   private depoimentos: Depoimento[] = [];
 
-  constructor(public navCtrl: NavController,
-    private toastCtrl: ToastController,
-    public navParams: NavParams,
+  constructor(private toastCtrl: ToastController,
+    public loadingController: LoadingController,
     private depoimentoService: DepoimentoService,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController
@@ -22,9 +21,21 @@ export class AvaliarDepoimentoPage {
     this.carregarDepoimentos();
   }
 
-  carregarDepoimentos() {
-    this.depoimentoService.getDepoimentoAvaliar().then(depoi => {
-      this.depoimentos = depoi;
+  private carregarDepoimentos() {
+
+    let loader = this.loadingController.create({
+      content: "Carregando eventos"
+    });
+
+    loader.present();
+
+    this.depoimentoService.getDepoimentoAvaliar().then(depoimentos => {
+      loader.dismiss();
+      if (depoimentos) {
+        this.depoimentos = depoimentos;
+      } else {
+        this.tentarNovamente();
+      }
     });
   }
 
@@ -73,6 +84,17 @@ export class AvaliarDepoimentoPage {
     actionSheet.present();
   }
 
+  private doRefresh(refresher) {
+    this.depoimentoService.getDepoimentoAvaliar().then(depoimentos => {
+      refresher.complete();
+      if (depoimentos) {
+        this.depoimentos = depoimentos;
+      } else {
+        this.tentarNovamente();
+      }
+    });
+  }
+
   private presentToast(text) {
     let toast = this.toastCtrl.create({
       message: text,
@@ -82,7 +104,7 @@ export class AvaliarDepoimentoPage {
     toast.present();
   }
 
-  private showConfirm() {
+  private tentarNovamente() {
     let confirm = this.alertCtrl.create({
       title: 'Falha na conexão',
       message: 'Tentar Novamente ?',

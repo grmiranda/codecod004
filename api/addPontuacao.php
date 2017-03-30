@@ -8,7 +8,7 @@ function pontuarUsuario($IDUsuario, $tipo, $con)
 
     switch ($tipo) {
         case 1: //solicitacao aceita pelo app
-            $pontos = 50;
+            $pontos = 30;
             break;
         case 2: //solicitacao solicitada na camara
             $pontos = 100;

@@ -126,14 +126,10 @@ export class HomePage {
   }
 
   private doRefresh(refresher) {
-    let loading = this.loadingCtrl.create({
-      content: 'Carregando'
-    });
-
-    loading.present();
 
     this.publicacaoService.getPublicacoes().then(res => {
-      loading.dismiss();
+      refresher.complete();
+      
       if (!res.error) {
         let teste = res.data;
         for(let p of teste){

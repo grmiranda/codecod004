@@ -20,19 +20,19 @@
     <h3 class="semPost">Nenhuma proposta de lei em andamento</h3>
   </ion-item>
 
-  <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)" (click)="abrirPL(projeto.pl)">
+  <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="projeto.pl.fotoUsuario">
       </ion-avatar>
       <h2>{{projeto.pl.nomeUsuario}}</h2>
     </ion-item>
-    <ion-slides *ngIf="projeto.pl.fotoURL.length != 0" pager>
+    <ion-slides (click)="abrirPL(projeto.pl)" *ngIf="projeto.pl.fotoURL.length != 0" pager>
       <ion-slide *ngFor="let plAtual of projeto.pl.fotoURL">
         <img [src]="plAtual" style="width: 100%;"/>
       </ion-slide>
     </ion-slides>
-    <ion-card-content>
+    <ion-card-content (click)="abrirPL(projeto.pl)">
       <ion-card-title>
         {{ projeto.pl.titulo }}
       </ion-card-title>

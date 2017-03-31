@@ -40,7 +40,6 @@ export class RequerimentoPage {
       loading.present();
       this.solicitacao = this.navParams.get("solicitacao");
       this.requerimentoService.getRequerimentosByID(this.solicitacao.IDSolicitacao).then(buscaRequerimento => {
-        alert(JSON.stringify(buscaRequerimento));
         this.requerimento = buscaRequerimento;
         this.andamento = this.solicitacao.andamento;
         loading.dismiss();
@@ -152,5 +151,6 @@ export class RequerimentoPage {
 
   private editar(){
     this.visualizar = false;
+    alert(JSON.stringify(this.requerimento));
   }
 }

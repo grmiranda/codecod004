@@ -5,12 +5,12 @@
 <?php 
 	$vetor   = array();
 	$the_request = &$_GET;
-	if (isset($_GET["id"])){
-		if ($_GET["id"] != ""){
+	if (isset($_GET["solicitacaoID"])){
+		if ($_GET["solicitacaoID"] != ""){
 
-            $id = $_GET['id'];
+            $id = $_GET['solicitacaoID'];
 
-			$sql = "SELECT * FROM requerimento WHERE IDSolicitacao = '$id' ORDER BY IDRequerimento DESC";
+			$sql = "SELECT * FROM requerimento WHERE IDSolicitacao = '$id'";
 			$result = $con->query($sql);
             
             $num = $result->num_rows;
@@ -19,7 +19,8 @@
                 echo json_encode(false);
             } else {
                 $dados = $result->fetch_assoc();
-                $sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'requerimento'";
+                $idrequerimento = $dados['IDRequerimento'];
+                $sql = "SELECT * FROM fotourl WHERE id = '$idrequerimento' AND tipo = 'requerimento'";
                 $result = $con->query($sql);
                 $fotos = array();
                 while ($f=$result->fetch_assoc()){

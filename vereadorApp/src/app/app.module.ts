@@ -24,6 +24,7 @@ import { NovaPlPage } from '../pages/nova-pl/nova-pl';
 import { PlPropostasPage } from '../pages/pl-propostas/pl-propostas';
 import { AvaliarPlPage } from '../pages/avaliar-pl/avaliar-pl';
 import { PlRecusadosPage } from '../pages/pl-recusados/pl-recusados';
+import { VisualizarPlPage } from '../pages/visualizar-pl/visualizar-pl';
 import { EventoPage } from '../pages/evento/evento';
 import { EditarEventoPage } from '../pages/editar-evento/editar-evento';
 import { FotoService } from '../providers/foto-service';
@@ -144,7 +145,8 @@ const cloudSettings: CloudSettings = {
     NovoDepoimentoPage,
     AvaliarDepoimentoPage,
     VisualizarSolicitacaoPage,
-    Autoresize
+    Autoresize,
+    VisualizarPlPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -199,7 +201,8 @@ const cloudSettings: CloudSettings = {
     DepoimentoPage,
     NovoDepoimentoPage,
     AvaliarDepoimentoPage,
-    VisualizarSolicitacaoPage
+    VisualizarSolicitacaoPage,
+    VisualizarPlPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,

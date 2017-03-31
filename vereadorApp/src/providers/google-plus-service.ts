@@ -46,7 +46,6 @@ export class GooglePlusService {
 
 
   public logoutGoogle() {
-    alert("Deslogado com sucesso");
     this.googleAuth.logout();
   }
 

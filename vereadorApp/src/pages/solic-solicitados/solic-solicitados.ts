@@ -24,7 +24,7 @@ export class SolicSolicitadosPage {
     private modalCtrl: ModalController,
     public solicitacaoService: SolicitacaoService,
     public actionSheetCtrl: ActionSheetController,
-    private requerimento: RequerimentoService
+    private requerimentoService: RequerimentoService
   ) {
 
   }
@@ -180,14 +180,21 @@ export class SolicSolicitadosPage {
 
   private editSolicitacao(solicitacao: Solicitacao, requerimento): Promise<boolean> {
     return this.solicitacaoService.editSolicitacao(solicitacao).then(altSol => {
-      if (altSol) {
+      alert(JSON.stringify(altSol));
+      if (altSol.value) {
         this.editRequerimento(requerimento);
       }
     });
   }
 
   private editRequerimento(requerimento) {
-    this.displayToast("Requisição alterada com sucesso");
+    this.requerimentoService.editRequerimento(requerimento).then(resReq => {
+      if (resReq.value) {
+        this.displayToast("Requisição alterada com sucesso");
+      } else {
+        this.displayToast("erro ao alterar requisição");        
+      }
+    });
   }
 
   private abrirSolicitacao(soli: Solicitacao) {

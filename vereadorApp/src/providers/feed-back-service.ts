@@ -44,7 +44,6 @@ export class FeedBackService {
         let pessoa = { Push: push };
         this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
       }
-      funcao.aprovar(solicitacao);
     });
   }
 

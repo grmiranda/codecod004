@@ -54,17 +54,20 @@ export class CadastroPage {
   }
 
   private cadastrar() {
-    this.pushService.getId().then(idPush => {
-      this.cadastroService.cadastrar(this.usuario, idPush).then(res => {
-        if (res == false) {
-          alert("Erro ao cadastrar Usuario");
-        } else {
-          alert(JSON.stringify(res));
-          this.storage.set(res);
-          this.navCtrl.setRoot(HomePage);
-        }
-      })
-    });
+    if (this.valido()) {
+      this.pushService.getId().then(idPush => {
+        this.usuario.Push = idPush;
+        this.cadastroService.cadastrar(this.usuario).then(res => {
+          if (res == false) {
+            alert("Erro ao cadastrar Usuario");
+          } else {
+            alert(JSON.stringify(res));
+            this.storage.set(res);
+            this.navCtrl.setRoot(HomePage);
+          }
+        })
+      });
+    }
   }
 
   private cancelar() {

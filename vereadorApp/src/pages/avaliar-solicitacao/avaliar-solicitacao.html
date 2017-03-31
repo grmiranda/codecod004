@@ -18,7 +18,7 @@
     <h3 class="semPost">Nenhuma solicitação para ser avaliada</h3>
   </ion-item>
 
-  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao)">
+  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao)" (click)="abrirSolicitacao(solicitacao)">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="solicitacao.fotoUsuario">

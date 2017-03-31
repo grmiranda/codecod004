@@ -20,7 +20,7 @@
     <h2 class="semPost">Seja o Primeiro</h2>
   </ion-item>
 
-  <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)">
+  <ion-card *ngFor="let projeto of pls" (press)="abrirOpcoes(projeto.pl)" (click)="abrirPL(projeto.pl)">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="projeto.pl.fotoUsuario" />

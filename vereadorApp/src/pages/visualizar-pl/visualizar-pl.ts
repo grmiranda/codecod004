@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ProjetoDeLei } from '../../model/projeto-de-lei';
 
 /*
   Generated class for the VisualizarPl page.
@@ -13,7 +14,12 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class VisualizarPlPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  private pl: ProjetoDeLei;
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams) {
+      this.pl = navParams.get("pl");
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VisualizarPlPage');

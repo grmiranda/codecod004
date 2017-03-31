@@ -1,18 +1,28 @@
-<!--
-  Generated template for the VisualizarPl page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>visualizarPl</ion-title>
+  <ion-navbar color="laranja">
+    <ion-title>{{pl.titulo}}</ion-title>
+    <ion-buttons end>
+      <button class="compartilhar" ion-button icon-only>
+        <ion-icon name="share-alt"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-card>
+    <ion-slides *ngIf="pl.fotoURL.lenght != 0" pager>
+      <ion-slide *ngFor="let plAtual of pl.fotoURL">
+        <img [src]="plAtual" style="width: 100%;" />
+      </ion-slide>
+    </ion-slides>
+    <div padding class="scrolling">
+      <ion-label>Descrição</ion-label>
+      <ion-textarea rows="10" [(ngModel)]="pl.ementa" readonly="true" name="texto"></ion-textarea>
+    </div>
+  </ion-card>
 </ion-content>

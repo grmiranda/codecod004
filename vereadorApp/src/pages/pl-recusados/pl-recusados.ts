@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
+import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 
 
 @Component({
@@ -14,7 +15,10 @@ export class PlRecusadosPage {
 
   constructor(public projetoDeLeiService: ProjetoDeLeiService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    public navCtrl: NavController) {
+
+    }
 
   ionViewWillEnter() {
     this.carregarPropostas();
@@ -67,5 +71,9 @@ export class PlRecusadosPage {
         this.showConfirm();
       }
     });
+  }
+
+  public abrirPL(pl: ProjetoDeLei){
+    this.navCtrl.push(VisualizarPlPage, {pl: pl});
   }
 }

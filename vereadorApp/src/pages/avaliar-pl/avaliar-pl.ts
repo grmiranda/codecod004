@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, Platform, LoadingController } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, Platform, LoadingController } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
+import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 
 @Component({
   selector: 'page-avaliar-pl',
@@ -15,7 +16,10 @@ export class AvaliarPlPage {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
-    public platform: Platform) { }
+    public platform: Platform,
+    public navCtrl: NavController) {
+
+    }
 
   ionViewWillEnter() {
     this.carregarPropostas();
@@ -148,6 +152,10 @@ export class AvaliarPlPage {
       ]
     });
     confirm.present();
+  }
+
+  public abrirPL(pl: ProjetoDeLei){
+    this.navCtrl.push(VisualizarPlPage, {pl: pl});
   }
 
 }

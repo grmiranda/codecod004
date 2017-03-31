@@ -6,6 +6,7 @@ import { LikeService } from '../../providers/like-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { NovaPlPage } from '../nova-pl/nova-pl';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
+import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 
 @Component({
   selector: 'page-pl-andamento',
@@ -172,6 +173,10 @@ export class PlAndamentoPage {
         this.tentarNovamente();
       }
     });
+  }
+
+  public abrirPL(pl: ProjetoDeLei){
+    this.navCtrl.push(VisualizarPlPage, {pl: pl});
   }
 
 }

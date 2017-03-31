@@ -19,7 +19,7 @@
     <h3 class="semPost">Nenhuma proposta para ser avaliada</h3>
   </ion-item>
 
-  <ion-card *ngFor="let pl of pls" (press)="abrirOpcoes(pl)">
+  <ion-card *ngFor="let pl of pls" (press)="abrirOpcoes(pl)" (click)="abrirPL(pl)">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="pl.fotoUsuario">

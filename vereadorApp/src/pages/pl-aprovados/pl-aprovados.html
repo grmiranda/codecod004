@@ -20,7 +20,7 @@
     <h3 class="semPost">Nenhuma proposta de lei aprovada</h3>
   </ion-item>
 
-  <ion-card *ngFor="let pl of pls">
+  <ion-card *ngFor="let pl of pls" (click)="abrirPL(pl)">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="pl.fotoUsuario">

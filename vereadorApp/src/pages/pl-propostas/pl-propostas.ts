@@ -7,6 +7,7 @@ import { StorageService } from '../../providers/storage';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { LikeService } from '../../providers/like-service';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
+import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 
 
 @Component({
@@ -155,6 +156,10 @@ export class PlPropostasPage {
         this.tentarNovamente();
       }
     });
+  }
+
+  public abrirPL(pl: ProjetoDeLei){
+    this.navCtrl.push(VisualizarPlPage, {pl: pl});
   }
 
 }

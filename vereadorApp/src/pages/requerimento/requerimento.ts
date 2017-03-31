@@ -148,4 +148,8 @@ export class RequerimentoPage {
   private cancel() {
     this.view.dismiss();
   }
+
+  private editar(){
+    this.visualizar = false;
+  }
 }

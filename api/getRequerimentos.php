@@ -10,7 +10,7 @@
 
             $id = $_GET['id'];
 
-			$sql = "SELECT * FROM requerimento WHERE IDRequerimento = '$id' ORDER BY IDRequerimento DESC";
+			$sql = "SELECT * FROM requerimento WHERE IDSolicitacao = '$id' ORDER BY IDRequerimento DESC";
 			$result = $con->query($sql);
             
             $num = $result->num_rows;

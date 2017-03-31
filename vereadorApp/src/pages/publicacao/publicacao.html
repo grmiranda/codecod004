@@ -14,14 +14,18 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  
+
 
 </ion-header>
 
 
 <ion-content>
-  <!-- imagem vai aqui -->
-  <img [src]="publicacao.fotoURL" />
-    <!-- texto vai aqui -->
-    <p>{{publicacao.texto}}</p>
+  <ion-card>
+    <ion-slides *ngIf="publicacao.fotoURL.length != 0" pager>
+      <ion-slide *ngFor="let publicacaoAtual of publicacao.fotoURL">
+        <img [src]="publicacaoAtual" style="width: 100%;" />
+      </ion-slide>
+    </ion-slides>
+    <ion-textarea rows="10" [(ngModel)]="publicacao.texto" readonly="true" name="texto"></ion-textarea>
+  </ion-card>
 </ion-content>

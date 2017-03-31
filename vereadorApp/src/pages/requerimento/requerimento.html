@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar color="laranja">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
       Requerimento
     </ion-title>
-    <ion-buttons start>
-      <button ion-button (click)="cancel()">
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -29,18 +29,21 @@
     <ion-item>
       <ion-row>
         <ion-col width-50>
-          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large [disabled]="visualizar">
               <ion-icon name="image"></ion-icon>
             </button>
         </ion-col>
         <ion-col width-50>
-          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large [disabled]="visualizar">
               <ion-icon name="camera"></ion-icon>
             </button>
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="visualizar">
+      <button class="blockbutton" (click)="editar()" color="secondary" ion-button block large>Editar</button>
+    </ion-item>
+    <ion-item *ngIf="!visualizar">
       <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Finalizar</button>
     </ion-item>
   </ion-list>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform, ToastController, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { Solicitacao } from '../../model/solicitacao';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
+import { RequerimentoService } from '../../providers/requerimento-service';
 import { RequerimentoPage } from '../requerimento/requerimento';
 import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
 
@@ -19,9 +20,12 @@ export class SolicSolicitadosPage {
     public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public navCtrl: NavController,
+    private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
     public solicitacaoService: SolicitacaoService,
-    public actionSheetCtrl: ActionSheetController
-    ) {
+    public actionSheetCtrl: ActionSheetController,
+    private requerimento: RequerimentoService
+  ) {
 
   }
 
@@ -153,17 +157,50 @@ export class SolicSolicitadosPage {
       refresher.complete();
       if (!res.error) {
         this.solicitacoes = res.data;
-      }else{
+      } else {
         this.tentarNovamente();
       }
     });
   }
 
-  private abrirRequirimento(solicitacao: Solicitacao){
-    this.navCtrl.push(RequerimentoPage, {solicitacao: solicitacao, operacao : "visualizar"});
+  private abrirRequirimento(solicitacao: Solicitacao) {
+    let modal = this.modalCtrl.create(RequerimentoPage, { solicitacao: solicitacao, operacao: "visualizar" });
+    modal.onDidDismiss(data => {
+      if (data != undefined) {
+        if (solicitacao.andamento != data.andamento) {
+          solicitacao.andamento = data.andamento;
+          this.editSolicitacao(solicitacao, data.requerimento);
+        } else {
+          this.editRequerimento(data.requerimento);
+        }
+      }
+    });
+    modal.present();
   }
 
-  private abrirSolicitacao(soli:Solicitacao){
-    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
+  private editSolicitacao(solicitacao: Solicitacao, requerimento): Promise<boolean> {
+    return this.solicitacaoService.editSolicitacao(solicitacao).then(altSol => {
+      if (altSol) {
+        this.editRequerimento(requerimento);
+      }
+    });
+  }
+
+  private editRequerimento(requerimento) {
+    this.displayToast("Requisição alterada com sucesso");
+  }
+
+  private abrirSolicitacao(soli: Solicitacao) {
+    this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: soli })
+  }
+
+  private displayToast(mensagem: string) {
+    let toast = this.toastCtrl.create({
+      message: mensagem,
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.present();
   }
 }

@@ -7,8 +7,6 @@ import { RequerimentoService } from '../../providers/requerimento-service';
 import { StorageService } from '../../providers/storage';
 import { Usuario } from '../../model/user';
 
-
-
 @Component({
   selector: 'page-requerimento',
   templateUrl: 'requerimento.html'
@@ -45,7 +43,7 @@ export class RequerimentoPage {
       this.solicitacao = this.navParams.get("solicitacao");
       this.requerimentoService.getRequerimentosByID(this.solicitacao.IDSolicitacao).then(buscaRequerimento => {
         this.requerimento = buscaRequerimento.data;
-        this.andamento = this.solicitacao.andamento;
+        this.andamento = this.solicitacao.andamento.toString();
         loading.dismiss();
       }).catch(() => loading.dismiss());
     }
@@ -112,7 +110,7 @@ export class RequerimentoPage {
       this.requerimento.fotoURL.shift();
     } else if (index > 0) {
       this.requerimento.fotoURL.splice(index, 1);
-    }
+    } 
   }
 
   public enviarMensagem() {
@@ -156,6 +154,5 @@ export class RequerimentoPage {
 
   private editar() {
     this.visualizar = false;
-    alert(JSON.stringify(this.requerimento));
   }
 }

@@ -4,6 +4,7 @@ import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Solicitacao } from '../../model/solicitacao';
 import { StorageService } from '../../providers/storage';
+import { PushService } from '../../providers/push-service';
 
 @Component({
   selector: 'page-nova-proposta',
@@ -19,7 +20,8 @@ export class NovaPropostaPage {
     private solicitacaoService: SolicitacaoService,
     private fotoService: FotoService,   
     public actionSheetCtrl: ActionSheetController,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private pushService: PushService
   ) {
 
   }
@@ -33,6 +35,7 @@ export class NovaPropostaPage {
       this.storageService.get().then(user => {
         this.solicitacao.IDUsuario = (+user.IDUsuario);
         this.solicitacaoService.addSolicitacao(this.solicitacao).then(res => {
+          this.pushService.pushGrupo("Nova solicitacao a ser avaliada", "administracao");
           if (!res.error) {
             if (res.value) {
               //works fine

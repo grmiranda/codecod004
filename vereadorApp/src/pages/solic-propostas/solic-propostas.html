@@ -21,7 +21,7 @@
     <h2 class="semPost">Seja o Primeiro</h2>
   </ion-item>
 
-  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)" (click)="abrirSolicitacao(solicitacao.solicitacao)">
+  <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)">
 
 
     <ion-item>
@@ -40,10 +40,10 @@
     </ion-slides>
 
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title (click)="abrirSolicitacao(solicitacao.solicitacao)">
         {{ solicitacao.solicitacao.titulo }}
       </ion-card-title>
-      <p>
+      <p (click)="abrirSolicitacao(solicitacao.solicitacao)">
         {{ solicitacao.solicitacao.descricao }}
       </p>
     </ion-card-content>

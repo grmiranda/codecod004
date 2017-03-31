@@ -37,8 +37,8 @@
     <ion-card-content>
       <ion-card-title (click)="abrirSolicitacao(solicitacao)">
         {{ solicitacao.titulo }}
-      </ion-card-title (click)="abrirSolicitacao(solicitacao)">
-      <p>
+      </ion-card-title>
+      <p (click)="abrirSolicitacao(solicitacao)">
         {{ solicitacao.descricao }}
       </p>
       <button ion-button clear color="secondary" icon-left (click)="abrirRequirimento(solicitacao)">

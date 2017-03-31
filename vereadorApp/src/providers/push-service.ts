@@ -46,7 +46,7 @@ export class PushService {
       "app_id": "04946cb2-d0f6-485b-a390-fea608737a42",
       "headings": { "en": "Luiz da Feira" },
       "data": { "foo": "bar" },
-      "included_segments": ["grupo"],
+      "included_segments": [grupo],
       "contents": { "en": mensagem }
     }), { headers: this.headers }).toPromise().then(res => alert(res)).catch(error => alert("erro ao enviar notificações"));
   }

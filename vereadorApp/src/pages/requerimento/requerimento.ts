@@ -4,6 +4,8 @@ import { Requerimento } from '../../model/requerimento';
 import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
 import { RequerimentoService } from '../../providers/requerimento-service';
+import { StorageService } from '../../providers/storage';
+import { Usuario } from '../../model/user';
 
 
 
@@ -18,6 +20,7 @@ export class RequerimentoPage {
   private operacao: string = "";
   private solicitacao: Solicitacao;
   private visualizar: boolean = false;
+  private meuUser: Usuario;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,9 +30,10 @@ export class RequerimentoPage {
     private fotoService: FotoService,
     public loadingCtrl: LoadingController,
     public actionSheetCtrl: ActionSheetController,
-    private requerimentoService: RequerimentoService
+    private requerimentoService: RequerimentoService,
+    private storageService: StorageService
   ) {
-
+    this.storageService.get().then(userRes => this.meuUser = userRes);
     this.operacao = this.navParams.get("operacao");
     if (this.operacao == "visualizar") {
       this.visualizar = true;
@@ -40,10 +44,10 @@ export class RequerimentoPage {
       loading.present();
       this.solicitacao = this.navParams.get("solicitacao");
       this.requerimentoService.getRequerimentosByID(this.solicitacao.IDSolicitacao).then(buscaRequerimento => {
-        this.requerimento = buscaRequerimento;
+        this.requerimento = buscaRequerimento.data;
         this.andamento = this.solicitacao.andamento;
         loading.dismiss();
-      }).catch(()=>loading.dismiss());
+      }).catch(() => loading.dismiss());
     }
   }
 
@@ -59,8 +63,6 @@ export class RequerimentoPage {
     }
   }
 
-
-
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
@@ -70,27 +72,30 @@ export class RequerimentoPage {
   }
 
   private opcaoApagar(url) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: "Remover foto " + (this.requerimento.fotoURL.indexOf(url) + 1),
-      buttons: [
-        {
-          text: 'Remover Foto',
-          role: 'destructive',
-          icon: 'trash',
-          handler: () => {
-            this.removerFoto(url);
+    if (this.meuUser.permissao == 1 && !this.visualizar) {
+
+      let actionSheet = this.actionSheetCtrl.create({
+        title: "Remover foto " + (this.requerimento.fotoURL.indexOf(url) + 1),
+        buttons: [
+          {
+            text: 'Remover Foto',
+            role: 'destructive',
+            icon: 'trash',
+            handler: () => {
+              this.removerFoto(url);
+            }
+          },
+          {
+            text: 'Cancel',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {
+            }
           }
-        },
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+        ]
+      });
+      actionSheet.present();
+    }
   }
 
   private tirarFoto() {
@@ -149,7 +154,7 @@ export class RequerimentoPage {
     this.view.dismiss();
   }
 
-  private editar(){
+  private editar() {
     this.visualizar = false;
     alert(JSON.stringify(this.requerimento));
   }

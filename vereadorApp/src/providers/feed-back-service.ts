@@ -124,13 +124,19 @@ export class FeedBackService {
             let pessoa = { Push: push[i] };
             this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
           }
-          funcao.confirmado(solicitacao, requerimento);
+          if (requerimento == null) {
+            funcao.confirmado(solicitacao, requerimento);
+          } else {
+            funcao.confirmado(solicitacao);
+          }
         });
       }
     }
     else {
-      if (funcao != null) {
+      if (requerimento == null) {
         funcao.confirmado(solicitacao, requerimento);
+      } else {
+        funcao.confirmado(solicitacao);
       }
     }
   }

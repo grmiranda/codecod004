@@ -31,6 +31,7 @@ export class Usuario {
         this.bairro = "";
         this.cidade = "";
         this.UF = "";
+        this.permissao = 0;
     }
 
 }

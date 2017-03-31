@@ -18,7 +18,7 @@ export class RequerimentoPage {
   private operacao: string = "";
   private solicitacao: Solicitacao;
   private visualizar: boolean = false;
-  private meuUser: Usuario;
+  private meuUser: Usuario = new Usuario();
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -38,7 +38,7 @@ export class RequerimentoPage {
       var loading = this.loadingCtrl.create({
         content: 'Carregando'
       });
-
+      
       loading.present();
       this.solicitacao = this.navParams.get("solicitacao");
       this.requerimentoService.getRequerimentosByID(this.solicitacao.IDSolicitacao).then(buscaRequerimento => {

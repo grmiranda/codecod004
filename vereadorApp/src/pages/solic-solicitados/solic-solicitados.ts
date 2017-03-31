@@ -5,6 +5,7 @@ import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { RequerimentoService } from '../../providers/requerimento-service';
 import { RequerimentoPage } from '../requerimento/requerimento';
 import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
+import { FeedBackService } from '../../providers/feed-back-service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class SolicSolicitadosPage {
     private modalCtrl: ModalController,
     public solicitacaoService: SolicitacaoService,
     public actionSheetCtrl: ActionSheetController,
-    private requerimentoService: RequerimentoService
+    private requerimentoService: RequerimentoService,
+    private feedBack: FeedBackService
   ) {
 
   }
@@ -52,11 +54,12 @@ export class SolicSolicitadosPage {
     });
   }
 
-  private aprovar(solicitacao: Solicitacao) {
+  private confirmado(solicitacao: Solicitacao) {
     solicitacao.estado = 'cp';
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
         //removeu
+        this.displayToast("Aprovado com sucesso")
         this.carregarSolicitacoes();
       } else {
         //error
@@ -70,6 +73,7 @@ export class SolicSolicitadosPage {
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
         //removeu
+        this.displayToast("Reprovado com sucesso")
         this.carregarSolicitacoes();
       } else {
         //error
@@ -87,14 +91,64 @@ export class SolicSolicitadosPage {
           role: 'destructive',
           icon: 'close-circle',
           handler: () => {
-            this.reprovar(solicitacao);
+            //motivo para a galera
+            let prompt = this.alertCtrl.create({
+              title: 'Reprovar',
+              message: "Informe o motivo para os usuario",
+              inputs: [
+                {
+                  name: 'mensagem',
+                  placeholder: 'mensagem'
+                },
+              ],
+              buttons: [
+                {
+                  text: 'Cancel',
+                  handler: data => {
+                  }
+                },
+                {
+                  text: 'Enviar',
+                  handler: data => {
+                    this.feedBack.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, data.mensagem);
+                  }
+                }
+              ]
+            });
+            prompt.present();
+
           }
         },
         {
           text: 'Aprovar',
           icon: 'checkmark-circle',
           handler: () => {
-            this.aprovar(solicitacao);
+
+            //aviso para a galera
+            let prompt = this.alertCtrl.create({
+              title: 'Aprovar',
+              message: "Informe o motivo para os usuario",
+              inputs: [
+                {
+                  name: 'mensagem',
+                  placeholder: 'mensagem'
+                },
+              ],
+              buttons: [
+                {
+                  text: 'Cancel',
+                  handler: data => {
+                  }
+                },
+                {
+                  text: 'Enviar',
+                  handler: data => {
+                    this.feedBack.confirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, null, data.mensagem);
+                  }
+                }
+              ]
+            });
+            prompt.present();
           }
         },
         {
@@ -141,7 +195,7 @@ export class SolicSolicitadosPage {
           text: 'Ok',
           handler: () => {
             if (tipo == 1) {
-              this.aprovar(solicitacao);
+              this.confirmado(solicitacao);
             } else if (tipo == 2) {
               this.reprovar(solicitacao);
             }
@@ -192,7 +246,7 @@ export class SolicSolicitadosPage {
       if (resReq.value) {
         this.displayToast("Requisição alterada com sucesso");
       } else {
-        this.displayToast("erro ao alterar requisição");        
+        this.displayToast("erro ao alterar requisição");
       }
     });
   }
@@ -207,7 +261,6 @@ export class SolicSolicitadosPage {
       duration: 3000,
       position: 'top'
     });
-
     toast.present();
   }
 }

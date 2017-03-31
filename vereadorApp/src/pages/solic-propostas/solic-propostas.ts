@@ -71,10 +71,10 @@ export class SolicPropostasPage {
 
 
   private reprovar(solicitacao) {
-    this.displayToast("Negação feita com sucesso");
     solicitacao.estado = "cn";
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
+        this.displayToast("Negação feita com sucesso");
         this.carregarSolicitacoes();
       } else {
         this.displayToast("Erro ao enviar proposta");
@@ -213,7 +213,7 @@ export class SolicPropostasPage {
   }
 
 
-  private abrirSolicitacao(soli:Solicitacao){
-    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
+  private abrirSolicitacao(soli: Solicitacao) {
+    this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: soli })
   }
 }

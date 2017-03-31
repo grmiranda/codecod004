@@ -1,14 +1,14 @@
-<?php 
+<?php
     include 'mySQL.php';
-    require 'mySQL.php';     
+    require 'mySQL.php';
 ?>
 
 <?php
 	$the_request = &$_POST;
 	$postdata = file_get_contents("php://input");
-	
+
 	if (isset($postdata)){
-		$request  = json_decode($postdata);	
+		$request  = json_decode($postdata);
 
 		$nome      = $request->nome;
 		$email     = $request->email;
@@ -22,7 +22,7 @@
 		$banido    = 0;
 
 		$telefone = $request->telefone;
-		
+
 		$endereco = $request->endereco;
 		$bairro   = $request->bairro;
 		$cidade   = $request->cidade;
@@ -33,7 +33,10 @@
 
 		$num = $result->num_rows;
 
-		if ($num !== 1 && $nome != ""){
+    if ($push == ""){
+      echo json_encode(false);
+    }
+    else if ($num !== 1 && $nome != ""){
 
 			$vetor = array();
 
@@ -45,7 +48,7 @@
 
 			$sql = "INSERT INTO usuario (nome, email, nascimento, cpf, fotoURL, genero, socialID, permissao, banido, Push) VALUES ('$nome', '$email', '$nasc', '$cpf', '$fotoURL', '$genero', '$socialID', '$permissao', '$banido', '$push')";
 			$con->query($sql);
-			
+
 			$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
 			$result = $con->query($sql);
 
@@ -59,7 +62,7 @@
 				$genero = 'female';
 			}
 
-			$vetor['IDUsuario']         = $id;
+			$vetor['IDUsuario']  = $id;
 			$vetor['nome']       = $nome;
 			$vetor['email']      = $email;
  			$vetor['genero']     = $genero;
@@ -77,10 +80,10 @@
 
 			$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
 			$con->query($sql);
-			
+
 			$sql = "INSERT INTO endereco (endereco, bairro, cidade, uf, IDUsuario) VALUES ('$endereco', '$bairro', '$cidade', '$UF', '$id')";
 			$con->query($sql);
-			
+
 			echo json_encode($vetor);
 
 		} else {

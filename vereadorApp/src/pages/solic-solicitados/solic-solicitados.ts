@@ -3,6 +3,7 @@ import { NavController, ActionSheetController, Platform, LoadingController, Aler
 import { Solicitacao } from '../../model/solicitacao';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { RequerimentoPage } from '../requerimento/requerimento';
+import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
 
 
 @Component({
@@ -160,5 +161,9 @@ export class SolicSolicitadosPage {
 
   private abrirRequirimento(solicitacao: Solicitacao){
     this.navCtrl.push(RequerimentoPage, {solicitacao: solicitacao, operacao : "visualizar"});
+  }
+
+  private abrirSolicitacao(soli:Solicitacao){
+    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
   }
 }

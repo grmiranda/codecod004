@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, ActionSheetController, LoadingController, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
+import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
 
 @Component({
   selector: 'page-solic-reprovados',
@@ -101,5 +102,9 @@ export class SolicReprovadosPage {
         this.showConfirm();
       }
     });
+  }
+
+  private abrirSolicitacao(soli:Solicitacao){
+    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
   }
 }

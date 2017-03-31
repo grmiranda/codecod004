@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, NavController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
+import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
 
 @Component({
   selector: 'page-solic-aprovados',
@@ -14,7 +15,8 @@ export class SolicAprovadosPage {
 
   constructor(private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    private solicitacaoService: SolicitacaoService) { }
+    private solicitacaoService: SolicitacaoService,
+    private navCtrl: NavController) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
@@ -66,6 +68,10 @@ export class SolicAprovadosPage {
         this.showConfirm();
       }
     });
+  }
+
+  private abrirSolicitacao(soli:Solicitacao){
+    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
   }
 
 }

@@ -18,7 +18,7 @@
     <h3 class="semPost">Ainda não existem solicitações</h3>
   </ion-item>
 
-  <ion-card *ngFor="let solicitacao of solicitacoes">
+  <ion-card *ngFor="let solicitacao of solicitacoes" (click)="abrirSolicitacao(solicitacao)">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="solicitacao.fotoUsuario">

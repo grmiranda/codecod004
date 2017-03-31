@@ -15,9 +15,9 @@
   </ion-refresher>
 
 
-    <ion-item *ngIf="depoimentos.length == 0">
-      <h3 class="semPost">Nenhum depoimento para ser avaliado</h3>
-    </ion-item>
+  <ion-item *ngIf="depoimentos.length == 0">
+    <h3 class="semPost">Nenhum depoimento para ser avaliado</h3>
+  </ion-item>
 
   <ion-list [virtualScroll]="depoimentos">
     <ion-item *virtualItem="let depoimento" (press)="abrirOpcoes(depoimento)">

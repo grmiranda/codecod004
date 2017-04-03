@@ -31,8 +31,14 @@
 			$sql = "DELETE FROM fotourl WHERE id = '$IDPublicacao' AND tipo = 'publicacao'";
 			$con->query($sql);
 			//inserindo no banco as fotos atualizadas.
+			
+			$i = 0;
 			foreach ($fotoURL as $foto){
-				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$IDPublicacao', 'publicacao')";
+				$arquivo = 'imagens/noticias/'.time().$i.'.jpeg'; //nome do arquivo que será gerado
+				$url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
+				$i++;
+				base64_to_jpeg($foto, $arquivo); //converte a foto base64 em jpeg
+				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$url', '$IDPublicacao', 'publicacao')";
 				$con->query($sql);
 			}
 
@@ -42,3 +48,4 @@
 	
 	$con->close();	
 ?>
+

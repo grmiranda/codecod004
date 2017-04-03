@@ -67,7 +67,7 @@
 			$vetor['nome']       = $nome;
 			$vetor['email']      = $email;
  			$vetor['genero']     = $genero;
-			$vetor['fotoURL']    = $fotoURL;
+			$vetor['fotoURL']    = $url;
 			$vetor['socialID']   = $socialID;
 			$vetor['cpf']        = $cpf;
 			$vetor['nascimento'] = $nasc;
@@ -80,7 +80,7 @@
 			$vetor['Push']       = $dados['Push'];
 			$vetor['pontos']     = $dados['pontos'];
 
-			echo json_encode($url);
+			echo json_encode($vetor);
 
 		}
 	}

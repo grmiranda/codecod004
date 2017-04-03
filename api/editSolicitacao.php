@@ -33,33 +33,44 @@ if (isset($postdata)) {
     if ($numrow !== 1) {
         echo json_encode(false);
     } else {
-        $sql = "UPDATE solicitacao SET titulo = '$titulo', descricao = '$descricao', andamento = '$andamento', estado = '$estado' WHERE IDSolicitacao = '$IDSolicitacao'";
-        $con->query($sql);
 
-        $sql = "DELETE FROM fotourl WHERE id = '$IDSolicitacao' AND tipo = 'solicitacao'";
-        $con->query($sql);
-
-        foreach ($fotoURL as $foto){
-            $sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$IDSolicitacao', 'solicitacao')";
+        if ($estado == 'rc'){
+            $sql = "DELETE FROM fotourl WHERE id = '$IDSolicitacao' AND tipo = 'solicitacao'";
             $con->query($sql);
+
+            $sql = "DELETE FROM solicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
+            $con->query($sql);
+
+        } else {
+
+            $sql = "UPDATE solicitacao SET titulo = '$titulo', descricao = '$descricao', andamento = '$andamento', estado = '$estado' WHERE IDSolicitacao = '$IDSolicitacao'";
+            $con->query($sql);
+
+            $sql = "DELETE FROM fotourl WHERE id = '$IDSolicitacao' AND tipo = 'solicitacao'";
+            $con->query($sql);
+
+            foreach ($fotoURL as $foto){
+                $sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$IDSolicitacao', 'solicitacao')";
+                $con->query($sql);
+            }
+
+
+
+
+            if ($estado == 'ap') { //se a solicitacao for aceita o usuario criador recebe pontuacao
+                pontuarUsuario($IDUsuario, 1, $con);
+            }else if($estado == 'cp'){ //se a solicitacao for realizada o usuario criador recebe pontuacao
+                pontuarUsuario($IDUsuario, 3, $con);
+                //deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+                $sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
+                $con->query($sql);
+
+            }else{
+                //deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+                $sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
+                $con->query($sql);
+            }
         }
-
-
-
-
-        if ($estado == 'ap') { //se a solicitacao for aceita o usuario criador recebe pontuacao
-            pontuarUsuario($IDUsuario, 1, $con);
-        }else if($estado == 'cp'){ //se a solicitacao for realizada o usuario criador recebe pontuacao
-            pontuarUsuario($IDUsuario, 3, $con);
-			//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
-			$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
-			$con->query($sql);
-
-        }else{
-			//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
-			$sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
-			$con->query($sql);
-		}
     echo json_encode(true); 
     }
 }

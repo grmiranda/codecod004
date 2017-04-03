@@ -48,11 +48,11 @@ export class AvaliarSolicitacaoPage {
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    });
+    }).catch(()=>loading.dismiss());
   }
 
 
-  private aprovar(solicitacao: Solicitacao) {
+  public aprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'ap';
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
@@ -64,7 +64,7 @@ export class AvaliarSolicitacaoPage {
     });
   }
 
-  private reprovar(solicitacao: Solicitacao) {
+  public reprovar(solicitacao: Solicitacao) {
     solicitacao.estado = 'rc';
     this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
       if (!res.error) {
@@ -73,7 +73,7 @@ export class AvaliarSolicitacaoPage {
       } else {
         this.showConfirm(2, solicitacao);
       }
-    })
+    });
   }
 
   private abrirOpcoes(solicitacao: Solicitacao) {

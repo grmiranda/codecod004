@@ -28,6 +28,7 @@ export class LoginPage {
 
   ) {
     this.menu.enable(false);
+    //this.loginTeste();
     this.storage.get().then(response => {
       if (response.socialID != '') {
         this.navCtrl.setRoot(HomePage);
@@ -42,7 +43,7 @@ export class LoginPage {
 
   loginTeste() {
     let user = new Usuario();
-    user.IDUsuario = "1";
+    user.IDUsuario = "2";
     user.cpf = "111.111.111-11";
     user.email = "cleybsonc@gmail.com";
     user.fotoURL = "https://media.licdn.com/media/AAEAAQAAAAAAAAfAAAAAJDk5ZDNhNDI4LTNmOTMtNGI5Yy1iZDIzLTk3NjM1YmVmMTkzNA.jpg";

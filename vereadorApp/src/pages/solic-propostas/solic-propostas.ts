@@ -8,6 +8,7 @@ import { NovaPropostaPage } from '../nova-proposta/nova-proposta';
 import { Solicitacao } from '../../model/solicitacao';
 import { Requerimento } from '../../model/requerimento';
 import { Negacao } from '../../model/negacao';
+import { Usuario } from '../../model/user';
 import { RequerimentoPage } from '../requerimento/requerimento';
 import { NegacaoPage } from '../negacao/negacao';
 import { FeedBackService } from '../../providers/feed-back-service';
@@ -23,6 +24,8 @@ export class SolicPropostasPage {
   private solicitacoes: any[] = [];
   private myID;
   private loading;
+  private meuUser: Usuario;
+
 
   constructor(
     public platform: Platform,
@@ -30,7 +33,7 @@ export class SolicPropostasPage {
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
     public solicitacaoService: SolicitacaoService,
-    public storage: StorageService,
+    public storageS: StorageService,
     public likeService: LikeService,
     public requerimentoService: RequerimentoService,
     private alertCtrl: AlertController,
@@ -38,11 +41,12 @@ export class SolicPropostasPage {
     public actionSheetCtrl: ActionSheetController,
     private feedService: FeedBackService
   ) {
+    this.storageS.get().then(resUser => this.meuUser = resUser);
   }
 
 
   ionViewWillEnter() {
-    this.storage.get().then(res => {
+    this.storageS.get().then(res => {
       this.myID = res.IDUsuario;
       this.carregarSolicitacoes();
     });
@@ -104,64 +108,65 @@ export class SolicPropostasPage {
 
 
   private abrirOpcoes(solicitacao: Solicitacao) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: solicitacao.titulo,
-      buttons: [
-        {
-          text: 'Remover',
-          role: 'destructive',
-          icon: 'trash',
-          handler: () => {
-            let modal = this.modalCtrl.create(NegacaoPage, { operacao: "novo" });
-            modal.onDidDismiss(data => {
-              if (data != null && data != undefined) {
-                this.loading = this.loadingCtrl.create({
-                  content: 'Carregando'
-                });
-                this.loading.present();
-                solicitacao.andamento = data.andamento;
-                let msg = data.msg;
-                this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, msg);
-              }
-            });
-            modal.present();
+    if (this.meuUser.permissao == 1) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: solicitacao.titulo,
+        buttons: [
+          {
+            text: 'Remover',
+            role: 'destructive',
+            icon: 'trash',
+            handler: () => {
+              let modal = this.modalCtrl.create(NegacaoPage, { operacao: "novo" });
+              modal.onDidDismiss(data => {
+                if (data != null && data != undefined) {
+                  this.loading = this.loadingCtrl.create({
+                    content: 'Carregando'
+                  });
+                  this.loading.present();
+                  solicitacao.andamento = data.andamento;
+                  let msg = data.msg;
+                  this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, msg);
+                }
+              });
+              modal.present();
+            }
+          },
+          {
+            text: 'Requerimento',
+            icon: 'archive',
+            handler: () => {
+              let modal = this.modalCtrl.create(RequerimentoPage, { operacao: "novo" });
+              modal.onDidDismiss(data => {
+                let requerimento = new Requerimento();
+                if (data != null && data != undefined) {
+                  this.loading = this.loadingCtrl.create({
+                    content: 'Carregando'
+                  });
+                  this.loading.present();
+                  requerimento = data.requerimento;
+                  solicitacao.andamento = data.andamento;
+                  requerimento.IDSolicitacao = solicitacao.IDSolicitacao;
+                  requerimento.idUsuarioSolicitacao = solicitacao.IDUsuario;
+                  let msg = data.msg;
+                  this.feedService.confirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, requerimento, msg);
+                }
+              });
+              modal.present();
+            }
+          },
+          {
+            text: 'Cancel',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {
+            }
           }
-        },
-        {
-          text: 'Requerimento',
-          icon: 'archive',
-          handler: () => {
-            let modal = this.modalCtrl.create(RequerimentoPage, { operacao: "novo" });
-            modal.onDidDismiss(data => {
-              let requerimento = new Requerimento();
-              if (data != null && data != undefined) {
-                this.loading = this.loadingCtrl.create({
-                  content: 'Carregando'
-                });
-                this.loading.present();
-                requerimento = data.requerimento;
-                solicitacao.andamento = data.andamento;
-                requerimento.IDSolicitacao = solicitacao.IDSolicitacao;
-                requerimento.idUsuarioSolicitacao = solicitacao.IDUsuario;
-                let msg = data.msg;
-                this.feedService.confirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, requerimento, msg);
-              }
-            });
-            modal.present();
-          }
-        },
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+        ]
+      });
+      actionSheet.present();
+    }
   }
-
 
   private confirmado(solicitacao, requerimento) {
     this.requerimentoService.addRequerimento(requerimento).then(respostaRequerimento => {

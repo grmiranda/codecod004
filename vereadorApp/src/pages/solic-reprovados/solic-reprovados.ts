@@ -43,37 +43,6 @@ export class SolicReprovadosPage {
     });
   }
 
-  private abrirOpcoes(solicitacao: any) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Opções',
-      buttons: [
-        {
-          text: 'Remover',
-          role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
-          handler: () => {
-
-          }
-        },
-        {
-          text: 'Requerimento',
-          icon: !this.platform.is('ios') ? 'create' : null,
-          handler: () => {
-
-          }
-        },
-        {
-          text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-
   private showConfirm() {
     let confirm = this.alertCtrl.create({
       title: 'Falha na conexão',

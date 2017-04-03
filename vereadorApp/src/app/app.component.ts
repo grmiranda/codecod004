@@ -43,7 +43,7 @@ export class MyApp {
 
   constructor(platform: Platform,
     public menuCtrl: MenuController,
-    private storage: StorageService,
+    private storageService: StorageService,
     private http: Http,
     public events: Events
   ) {
@@ -99,10 +99,10 @@ export class MyApp {
   }
 
   public sair() {
-    this.storage.get().then(res => {
+    this.storageService.get().then(res => {
       this.http.post("http://dsoutlet.com.br/apiLuiz/logout.php", JSON.stringify(res.socialID), { headers: this.headers }).toPromise().then(res => {
         if (res.json() == true) {
-          this.storage.deslogar();
+          this.storageService.deslogar();
           this.menuCtrl.close();
           this.navCtrl.setRoot(LoginPage);
         }

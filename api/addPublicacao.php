@@ -1,6 +1,7 @@
 <?php 
     include 'mySQL.php';
     require 'mySQL.php';     
+	include 'salvaImagem.php';
 ?>
 
 <?php
@@ -29,8 +30,13 @@
 			$id = $id['IDPublicacao'];
 
 			//adicionando todas as fotos relacionadas a publicacao
+			$i = 0;
 			foreach ($fotoURL as $foto){
-				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$id', 'publicacao')";
+				$arquivo = 'imagens/noticias/'.time().$i.'.jpeg'; //nome do arquivo que será gerado
+				$url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
+				$i++;
+				base64_to_jpeg($foto, $arquivo); //converte a foto base64 em jpeg
+				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$url', '$id', 'publicacao')";
 				$con->query($sql);
 			}
 

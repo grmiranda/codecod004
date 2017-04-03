@@ -1,6 +1,7 @@
 <?php 
     include 'mySQL.php';
-    require 'mySQL.php';     
+    require 'mySQL.php';
+	include 'salvaImagem.php';
 ?>
 
 <?php
@@ -20,13 +21,19 @@
 			$sql= "INSERT INTO pl (titulo, ementa, IDUsuario, estado) VALUES ('$titulo', '$ementa', '$IDUsuario', '$estado')";
 			$con->query($sql);
 
-			$sql = "SELECT * FROM pl WHERE titulo = '$titulo' AND ementa = '$ementa' AND = '$IDUsuario' AND estado = '$estado'";
+			$sql = "SELECT * FROM pl WHERE titulo = '$titulo' AND ementa = '$ementa' AND IDUsuario = '$IDUsuario' AND estado = '$estado'";
 			$result = $con->query($sql);
+
 			$id = $result->fetch_assoc();
 			$id = $id['IDPL'];
-
+		
 			foreach ($fotoURL as $foto){
-				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto' , '$id', 'pl')";
+				$arquivo = 'imagens/projetodelei/'.time().'.jpeg'; //nome do arquivo que será gerado
+				$url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
+				base64_to_jpeg($foto, $arquivo); //converte a foto base64 em jpeg
+				
+				$sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$url' , '$id', 'pl')";
+				
 				$con->query($sql);
 			}
 

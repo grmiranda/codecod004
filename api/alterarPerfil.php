@@ -1,6 +1,7 @@
 <?php 
     include 'mySQL.php';
-    require 'mySQL.php';     
+    require 'mySQL.php';
+	include 'salvaImagem.php';
 ?>
 
 <?php
@@ -22,6 +23,10 @@
 		$bairro   = $request->bairro;
 		$cidade   = $request->cidade;
 		$UF       = $request->UF;
+		
+		$arquivo = 'imagens/perfil/'.time().'.jpeg'; //nome do arquivo que será gerado
+		$url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
+		base64_to_jpeg($fotoURL, $arquivo); //converte a foto base64 em jpeg
 
 		$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);
@@ -41,8 +46,8 @@
 			} else {
 				$genero = 'f';
 			}
-
-			$sql = "UPDATE usuario SET nome = '$nome', email = '$email', nascimento = '$nasc', cpf = '$cpf', fotoURL = '$fotoURL', genero = '$genero' WHERE socialID = '$socialID'";
+			
+			$sql = "UPDATE usuario SET nome = '$nome', email = '$email', nascimento = '$nasc', cpf = '$cpf', fotoURL = '$url', genero = '$genero' WHERE socialID = '$socialID'";
 			$con->query($sql);
 
 			if ($genero == 'm'){
@@ -75,7 +80,7 @@
 			$vetor['Push']       = $dados['Push'];
 			$vetor['pontos']     = $dados['pontos'];
 
-			echo json_encode($vetor);
+			echo json_encode($url);
 
 		}
 	}

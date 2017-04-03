@@ -90,7 +90,7 @@ export class PerfilPage {
     }
   }
 
-  validacao(): boolean {
+  private validacao(): boolean {
     if (this.usuarioAtual.nome == "" || this.usuarioAtual.telefone == "") {
       return false;
     }
@@ -138,7 +138,6 @@ export class PerfilPage {
     }).then(imageData => {
       this.usuarioAtual.fotoURL = "data:image/jpeg;base64," + imageData;
     }, error => {
-      alert("ERROR -> " + JSON.stringify(error));
     });
   }
 
@@ -155,7 +154,6 @@ export class PerfilPage {
     }).then(imageData => {
       this.usuarioAtual.fotoURL = "data:image/jpeg;base64," + imageData;
     }, error => {
-      alert("ERROR -> " + JSON.stringify(error));
     });
   }
 }

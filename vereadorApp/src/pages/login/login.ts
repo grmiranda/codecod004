@@ -17,7 +17,8 @@ import { Usuario } from '../../model/user';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     private facebookService: FacebookService,
     private gpService: GooglePlusService,

@@ -88,7 +88,7 @@ export class MensagensRecebidasPage {
   private abrirMensagem(mensagemSelecionada: CorpoMensagem) {
     if (!this.selecao) {
       if (mensagemSelecionada.lida == 0) {
-        this.mensagemService.ler(mensagemSelecionada.id);
+        this.mensagemService.ler(mensagemSelecionada.id, this.meuUser.IDUsuario);
       }
       mensagemSelecionada.lida = 1;
       let modal = this.modalCtrl.create(ModalAbrirMensagemPage, { mensagem: mensagemSelecionada });

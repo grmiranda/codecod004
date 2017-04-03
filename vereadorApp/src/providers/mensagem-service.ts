@@ -27,8 +27,8 @@ export class MensagemService {
     .catch(this.handleErrorMessage);
   }
 
-  public ler(id){
-    this.http.get("http://dsoutlet.com.br/apiLuiz/ler.php?id="+ id).toPromise().then(res=>res.json());
+  public ler(id, idu){
+    this.http.get("http://dsoutlet.com.br/apiLuiz/ler.php?IDM="+ id + "&IDU=" + idu).toPromise().then(res=>res.json());
   }
 
   public deletar(IDUsuario, IDMensagem):Promise<boolean>{

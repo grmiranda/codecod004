@@ -15,7 +15,9 @@
 			 
 			if($estado == 'ap' || $estado == 'tr'){
 				while($row=$result->fetch_assoc()){
-					$info = getLike($row['IDPL'], $id, $con);
+
+					if (isset($_GET['id']))
+						$info = getLike($row['IDPL'], $id, $con);
 					
 					$idU = $row['IDUsuario'];
 					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";

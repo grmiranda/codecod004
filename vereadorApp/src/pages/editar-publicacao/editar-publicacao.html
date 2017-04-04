@@ -1,15 +1,8 @@
-<!--
-  Generated template for the EditarPublicacao page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Editar Publicação</ion-title>
+  <ion-navbar color="laranja">
+    <ion-title>Editar Notícia</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -24,8 +17,16 @@
       <ion-label floating>Descrição</ion-label>
       <ion-textarea rows="10" [(ngModel)]="publicacao.texto" name="texto"></ion-textarea>
     </ion-item>
+
+    <ion-slides pager>
+
+      <ion-slide *ngFor="let publicacaoAtual of publicacao.fotoURL">
+        <img [src]="publicacaoAtual" style="width: 100%;" (press)="opcaoApagar(publicacaoAtual)" />
+      </ion-slide>
+
+    </ion-slides>
+
     <ion-item>
-      <img *ngIf="publicacao.fotoURL !== ''" [src]="publicacao.fotoURL" style="width: 100%;" />
       <ion-row>
         <ion-col width-50>
           <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>

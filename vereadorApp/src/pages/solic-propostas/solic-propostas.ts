@@ -149,6 +149,7 @@ export class SolicPropostasPage {
                   requerimento.IDSolicitacao = solicitacao.IDSolicitacao;
                   requerimento.idUsuarioSolicitacao = solicitacao.IDUsuario;
                   let msg = data.msg;
+
                   this.feedService.confirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, requerimento, msg);
                 }
               });

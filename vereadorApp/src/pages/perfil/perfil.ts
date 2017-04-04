@@ -71,6 +71,8 @@ export class PerfilPage {
             text: 'Salvar',
             handler: () => {
               if (this.validacao()) {
+                  alert(JSON.stringify(this.usuarioAtual));
+                
                 this.mudarPhp().then(res => {
                   alert(JSON.stringify(res));
                   if (res.nome != "") {

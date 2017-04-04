@@ -86,7 +86,6 @@
 			$vetor['pontos']     = $dados['pontos'];
 
 			echo json_encode($vetor);
-			
 			//apaga foto antiga caso seja trocada
 			if($fotoAntiga !== $fotoURL){
 				apagarImagem($fotoAntiga, 'imagens/perfil/');

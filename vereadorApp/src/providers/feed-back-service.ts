@@ -112,7 +112,6 @@ export class FeedBackService {
   }
 
   public confirmarVariosRequerimento(idUser: string[], push, funcao, solicitacao, requerimento, msg: string) {
-
     if (msg != "") {
       let mensagemEnviar = new CorpoMensagem();
       mensagemEnviar.mensagem = msg;
@@ -125,18 +124,18 @@ export class FeedBackService {
             this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
           }
           if (requerimento == null) {
-            funcao.confirmado(solicitacao, requerimento);
-          } else {
             funcao.confirmado(solicitacao);
+          } else {
+            funcao.confirmado(solicitacao,requerimento );
           }
         });
       }
     }
     else {
       if (requerimento == null) {
-        funcao.confirmado(solicitacao, requerimento);
-      } else {
         funcao.confirmado(solicitacao);
+      } else {
+        funcao.confirmado(solicitacao, requerimento);
       }
     }
   }

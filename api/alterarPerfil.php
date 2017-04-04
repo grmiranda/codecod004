@@ -2,6 +2,7 @@
     include 'mySQL.php';
     require 'mySQL.php';
 	include 'salvaImagem.php';
+	include 'apagaImagem.php';
 ?>
 
 <?php
@@ -24,13 +25,17 @@
 		$cidade   = $request->cidade;
 		$UF       = $request->UF;
 		
-		$arquivo = 'imagens/perfil/'.time().'.jpeg'; //nome do arquivo que será gerado
-		$url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
-		base64_to_jpeg($fotoURL, $arquivo); //converte a foto base64 em jpeg
+		if(strpos($fotoURL, 'base')){
+			$arquivo = 'imagens/perfil/'.time().'.jpeg'; //nome do arquivo que será gerado
+			$url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
+			base64_to_jpeg($fotoURL, $arquivo); //converte a foto base64 em jpeg
+		}
 
 		$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
         $result = $con->query($sql);
-
+		
+		$fotoAntiga = $result->fetch_assoc()['fotoURL'];
+		
 		$num = $result->num_rows;
 
 		if ($num !== 1){
@@ -67,7 +72,7 @@
 			$vetor['nome']       = $nome;
 			$vetor['email']      = $email;
  			$vetor['genero']     = $genero;
-			$vetor['fotoURL']    = $fotoURL;
+			$vetor['fotoURL']    = $url;
 			$vetor['socialID']   = $socialID;
 			$vetor['cpf']        = $cpf;
 			$vetor['nascimento'] = $nasc;
@@ -80,7 +85,12 @@
 			$vetor['Push']       = $dados['Push'];
 			$vetor['pontos']     = $dados['pontos'];
 
-			echo json_encode($url);
+			echo json_encode($vetor);
+			
+			//apaga foto antiga caso seja trocada
+			if($fotoAntiga !== $fotoURL){
+				apagarImagem($fotoAntiga, 'imagens/perfil/');
+			}
 
 		}
 	}

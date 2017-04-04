@@ -31,11 +31,12 @@ export class NovaPublicacaoPage {
       this.publicacaoService.addPublicacao(this.publicacao).then(res => {
         if (!res.error) {
           if (res.value) {
-            //this.displayToast('Publicou com sucesso!');
-            //this.navCtrl.pop();
+            this.displayToast('Publicou com sucesso!');
+            this.navCtrl.pop();
           }
         } else {
           //error de conexao
+          this.showConfirm();
         }
       });
     }
@@ -101,6 +102,25 @@ export class NovaPublicacaoPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.publicar();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   private tirarFoto() {

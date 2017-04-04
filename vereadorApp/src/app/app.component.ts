@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, Events } from 'ionic-angular';
+import { Platform, MenuController, Nav, Events, ToastController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { StorageService } from '../providers/storage';
 import { HomePage } from '../pages/home/home';
@@ -40,9 +40,11 @@ export class MyApp {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private nome: string = "";
   private foto: string = "";
+  private countTimerForCloseApp: boolean = false;
 
-  constructor(platform: Platform,
+  constructor(private platform: Platform,
     public menuCtrl: MenuController,
+    private toastCtrl: ToastController,
     private storageService: StorageService,
     private http: Http,
     public events: Events
@@ -57,15 +59,25 @@ export class MyApp {
     { title: 'Informações úteis', component: InformacaoPage },
     { title: 'Perguntas Frequentes', component: CategoriasPage },
     { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
-    { title: 'Depoimentos', component: DepoimentoPage},
-    { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage},
-    { title: 'História do Vereador', component: HistoriaPage}]
+    { title: 'Depoimentos', component: DepoimentoPage },
+    { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage },
+    { title: 'História do Vereador', component: HistoriaPage }]
 
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {
       var notificationOpenedCallback = function (jsonData) {
       };
+
+      platform.registerBackButtonAction(() => {
+        if (this.navCtrl.canGoBack()) {
+          this.navCtrl.pop();
+        } else {
+          this.showConfirm();
+        }
+      }, 100);
+
+
 
       window["plugins"].OneSignal
         .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
@@ -82,6 +94,28 @@ export class MyApp {
         }
       });
     });
+  }
+
+  showConfirm() {
+    if (this.countTimerForCloseApp) {
+      this.platform.exitApp();
+    } else {
+      this.countTimerForCloseApp = true;
+      this.displayToast('Press again to exit.');
+      let timeout = setTimeout(() => {
+        this.countTimerForCloseApp = false;
+      }, 2000);
+    }
+
+  }
+
+  private displayToast(mensagem) {
+    let toast = this.toastCtrl.create({
+      message: mensagem,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   openPerfil() {

@@ -23,6 +23,7 @@ export class NovaPublicacaoPage {
   }
 
   private publicar() {
+
     if (this.publicacao.titulo === "") {
       this.displayToast('Insira um título à publicacao!');
     } else if (this.publicacao.texto === "") {
@@ -31,8 +32,8 @@ export class NovaPublicacaoPage {
       this.publicacaoService.addPublicacao(this.publicacao).then(res => {
         if (!res.error) {
           if (res.value) {
-            //this.displayToast('Publicou com sucesso!');
-            //this.navCtrl.pop();
+            this.displayToast('Publicou com sucesso!');
+            this.navCtrl.pop();
           }
         } else {
           //error de conexao

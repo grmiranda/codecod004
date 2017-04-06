@@ -80,7 +80,7 @@ export class FeedBackService {
                 }
               });
             } else {
-              funcao.aprovar(solicitacao);
+              funcao.reprovar(solicitacao);
             }
 
           }

@@ -65,8 +65,7 @@ export class AvaliarSolicitacaoPage {
   }
 
   public reprovar(solicitacao: Solicitacao) {
-    solicitacao.estado = 'rc';
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+    this.solicitacaoService.delSolicitacao(solicitacao).then(res => {
       if (!res.error) {
         this.displayToast('Solicitação Reprovada');
         this.carregarSolicitacoes();

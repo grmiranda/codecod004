@@ -26,7 +26,6 @@ export class SolicPropostasPage {
   private loading;
   private meuUser: Usuario;
 
-
   constructor(
     public platform: Platform,
     public navCtrl: NavController,
@@ -44,14 +43,12 @@ export class SolicPropostasPage {
     this.storageS.get().then(resUser => this.meuUser = resUser);
   }
 
-
   ionViewWillEnter() {
     this.storageS.get().then(res => {
       this.myID = res.IDUsuario;
       this.carregarSolicitacoes();
     });
   }
-
 
   private carregarSolicitacoes() {
     this.loading = this.loadingCtrl.create({
@@ -68,20 +65,17 @@ export class SolicPropostasPage {
     });
   }
 
-
   private novaProposta() {
     this.navCtrl.push(NovaPropostaPage);
   }
 
-
-  private reprovar(solicitacao) {
-    solicitacao.estado = "cn";
-    this.solicitacaoService.editSolicitacao(solicitacao).then(res => {
+  private reprovar(solicitacao: Solicitacao) {
+    this.solicitacaoService.delSolicitacao(solicitacao).then(res => {
       if (!res.error) {
         this.displayToast("Negação feita com sucesso");
         this.carregarSolicitacoes();
       } else {
-        this.displayToast("Erro ao enviar proposta");
+        this.displayToast("Erro ao negar proposta");
       }
       this.loading.dismiss();
     }).catch(() => this.loading.dismiss());
@@ -117,19 +111,19 @@ export class SolicPropostasPage {
             role: 'destructive',
             icon: 'trash',
             handler: () => {
-              let modal = this.modalCtrl.create(NegacaoPage, { operacao: "novo" });
-              modal.onDidDismiss(data => {
-                if (data != null && data != undefined) {
-                  this.loading = this.loadingCtrl.create({
-                    content: 'Carregando'
-                  });
-                  this.loading.present();
-                  solicitacao.andamento = data.andamento;
-                  let msg = data.msg;
-                  this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, msg);
-                }
-              });
-              modal.present();
+              //let modal = this.modalCtrl.create(NegacaoPage, { operacao: "novo" });
+              //modal.onDidDismiss(data => {
+                //if (data != null && data != undefined) {
+                  //this.loading = this.loadingCtrl.create({
+                  //  content: 'Carregando'
+                  //});
+                  //this.loading.present();
+                  //solicitacao.andamento = data.andamento;
+                  this.enviarMensagem(solicitacao);//abre o alert para o usuario dizer o motivo da reprovação da publicacao
+                  //this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, msg);
+                //}
+              //});
+              //modal.present();
             }
           },
           {
@@ -167,6 +161,32 @@ export class SolicPropostasPage {
       });
       actionSheet.present();
     }
+  }
+
+  public enviarMensagem(solicitacao: Solicitacao) {
+    this.alertCtrl.create({
+      title: 'Motivo de negação',
+      message: "Digite mensagem para usuario",
+      inputs: [
+        {
+          name: 'mensagem',
+          placeholder: 'Digite aqui'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Enviar',
+          handler: data => {
+            //envia o feedback para os usuários
+            this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, data.mensagem);
+          }
+        }]
+    }).present();
   }
 
   private confirmado(solicitacao, requerimento) {
@@ -217,7 +237,6 @@ export class SolicPropostasPage {
       }
     });
   }
-
 
   private abrirSolicitacao(soli: Solicitacao) {
     this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: soli })

@@ -29,6 +29,25 @@ export class SolicitacaoService {
     return retorno;
   }
 
+  public delSolicitacao(solicitacao: Solicitacao): Promise<any> {
+    alert(JSON.stringify(solicitacao));
+    return this.http
+      .post('http://www.dsoutlet.com.br/apiLuiz/delSolicitacao.php', JSON.stringify(solicitacao), { headers: this.headers })
+      .toPromise()
+      .then(res => this.extractDelData(res))
+      .catch(this.handleErrorMessage);
+  }
+
+  private extractDelData(res: Response) {
+    let retorno = { error: false, value: false };
+    let data = res.json();
+    alert(JSON.stringify(data));
+    if (data === true) {
+      retorno.value = true;
+    }
+    return retorno;
+  }
+
   public getSolicitacoes(estado: string): Promise<any> {
     return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getSolicitacoes.php?estado=' + estado)
       .toPromise()
@@ -72,6 +91,7 @@ export class SolicitacaoService {
   }
 
   private handleErrorMessage(error: any) {
+    alert(JSON.stringify(error));
     let retorno = { error: true };
     return retorno;
   }

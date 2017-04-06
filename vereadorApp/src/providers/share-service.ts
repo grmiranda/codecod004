@@ -19,7 +19,7 @@ export class ShareService {
     console.log('Hello ShareService Provider');
   }
 
-  /** 
+  /**
    * file pode ser uma imgagem
   */
   public compartilhar(mensagem: string, subject: string, file: string, url: string) {
@@ -42,7 +42,7 @@ export class ShareService {
         href: "https://www.facebook.com/luizdafeirapagina/?hc_ref=NEWSFEED",
         caption: message,
         description: subject,
-        picture: "https://scontent.fssa2-2.fna.fbcdn.net/v/t1.0-9/16640765_253622241751677_4601618157916284266_n.jpg?oh=cbbf8efced31718f2069a034842c6a83&oe=5963531E"
+        picture: image
       }).then(() => {
         let toast = this.toastCtrl.create({
           message: 'Compartilhado com sucesso',

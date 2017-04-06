@@ -4,6 +4,7 @@ import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Publicacao } from '../../model/publicacao';
 import { PushService } from '../../providers/push-service';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'page-nova-publicacao',
@@ -19,6 +20,7 @@ export class NovaPublicacaoPage {
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public publicacaoService: PublicacaoService,
+    private domSanitizer: DomSanitizer,
     public fotoService: FotoService,
     private pushService: PushService
     ) {
@@ -66,9 +68,12 @@ export class NovaPublicacaoPage {
           handler: data => {
             if (data.link.includes('https://youtu.be/')) {
               this.publicacao.video = data.link.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+              this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
+
             }
             else if (data.link.includes('watch?v=')) {
               this.publicacao.video = data.link.replace("watch?v=", "embed/");
+              this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
             }
           }
         }

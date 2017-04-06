@@ -29,7 +29,6 @@
 
     <ion-item>
       <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen></iframe>
-      <img *ngIf="publicacao.fotoURL.length != 0" [src]="publicacao.fotoURL" style="width: 100%;" />
       <ion-row>
         <ion-col width-33>
           <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>

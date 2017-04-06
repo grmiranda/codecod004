@@ -5,7 +5,7 @@ import { PublicacaoPage } from '../publicacao/publicacao';
 import { Platform, NavController, ActionSheetController, MenuController, AlertController, LoadingController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
-import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -129,7 +129,7 @@ export class HomePage {
 
     this.publicacaoService.getPublicacoes().then(res => {
       refresher.complete();
-      
+
       if (!res.error) {
         let teste = res.data;
         for(let p of teste){

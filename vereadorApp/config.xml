@@ -38,9 +38,6 @@
     <plugin name="cordova-plugin-statusbar" spec="2.2.1" />
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
-    <plugin name="cordova-plugin-googleplus" spec="~5.1.1">
-        <variable name="REVERSED_CLIENT_ID" value="myreversedclientid" />
-    </plugin>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
         <variable name="APP_ID" value="1865101920446266" />
         <variable name="APP_NAME" value="Luiz da Feira" />
@@ -52,4 +49,7 @@
     <preference name="AllowInlineMediaPlayback" value="true" />
     <allow-navigation href="*://*.youtube.com/*" />
     <plugin name="cordova-sqlite-storage" spec="~2.0.2" />
+    <plugin name="cordova-plugin-googleplus" spec="~5.1.1">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.381691927831-uu73n8h5m36f608msa83l2kpkld84rc3" />
+    </plugin>
 </widget>

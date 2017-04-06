@@ -31,6 +31,7 @@ import { RequerimentoPage } from '../pages/requerimento/requerimento';
 
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
+  private bloqueia: boolean = false;
 
 
   rootPage = LoginPage;
@@ -133,6 +134,7 @@ export class MyApp {
   }
 
   public sair() {
+    this.bloqueia = true;
     this.storageService.get().then(res => {
       this.http.post("http://dsoutlet.com.br/apiLuiz/logout.php", JSON.stringify(res.socialID), { headers: this.headers }).toPromise().then(res => {
         if (res.json() == true) {
@@ -140,8 +142,12 @@ export class MyApp {
           this.menuCtrl.close();
           this.navCtrl.setRoot(LoginPage);
         }
-      }).catch(() => alert("Erro ao se conectar com o servidor"));
-    }).catch(() => alert("Erro ao deslogar"));
+        this.bloqueia = false;
+      }).catch(() => this.displayToast("Erro ao se conectar com o servidor"));
+    }).catch(() => {
+      this.displayToast("Erro ao deslogar")
+      this.bloqueia = false;
+    });
   }
 
 }

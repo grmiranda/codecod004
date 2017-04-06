@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { NavController, NavParams, MenuController, Events, ToastController } from 'ionic-angular';
 import { FacebookService } from '../../providers/facebook-service';
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
@@ -17,6 +17,8 @@ import { Usuario } from '../../model/user';
 })
 export class LoginPage {
 
+  private bloqueia:boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -24,6 +26,7 @@ export class LoginPage {
     private gpService: GooglePlusService,
     private menu: MenuController,
     private storage: StorageService,
+    private toastCtrl: ToastController,
     private pushService: PushService,
     public events: Events
 
@@ -62,24 +65,26 @@ export class LoginPage {
 
 
   logarFacebook() {
+    this.bloqueia = true;
     this.pushService.getId().then(idPush => {
       this.facebookService.loginFacebook(idPush).then(resposta => {
         if (resposta[0] == "cadastro") {
 
           this.facebookService.getDados(resposta[1]).then(res => {
-
+            this.bloqueia = false;
             this.navCtrl.setRoot(CadastroPage, { dados: res });
+            
           });
 
         } else if (resposta[0] == "banido") {
-          alert("Conta foi banida do sistema");
+          this.displayToast("Conta foi banida do sistema");
+          this.bloqueia = false;
         } else if (resposta[0] == "existe") {
           this.adm(resposta[1]);
           this.storage.set(resposta[1]);
           this.navCtrl.setRoot(HomePage);
         }
-      });
-
+      }).catch(()=>this.bloqueia = false);
     });
 
   }
@@ -91,21 +96,31 @@ export class LoginPage {
   }
 
   logarGoogle() {
-
+    this.bloqueia = true;
     this.pushService.getId().then(idPush => {
       this.gpService.loginGoogle(idPush).then(resposta => {
         if (resposta[0] == "cadastro") {
+          this.bloqueia = false;
           this.navCtrl.setRoot(CadastroPage, { dados: this.gpService.getDados() });
         } else if (resposta[0] == "banido") {
-          alert("Conta foi banida do sistema");
+          this.bloqueia = false;
+          this.displayToast("Conta foi banida do sistema");
         } else if (resposta[0] == "existe") {
           this.adm(resposta[1]);
           this.storage.set(resposta[1]);
           this.navCtrl.setRoot(HomePage);
-
         }
-      });
+      }).catch(()=>this.bloqueia = false);
     });
+  }
+
+  private displayToast(mensagem) {
+    let toast = this.toastCtrl.create({
+      message: mensagem,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }

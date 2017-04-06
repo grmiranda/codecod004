@@ -50,6 +50,6 @@
     <allow-navigation href="*://*.youtube.com/*" />
     <plugin name="cordova-sqlite-storage" spec="~2.0.2" />
     <plugin name="cordova-plugin-googleplus" spec="~5.1.1">
-        <variable name="REVERSED_CLIENT_ID" value="/Users/codeondemand/Downloads/GoogleService-Info.plist" />
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.381691927831-uu73n8h5m36f608msa83l2kpkld84rc3" />
     </plugin>
 </widget>

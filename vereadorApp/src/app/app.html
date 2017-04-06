@@ -7,7 +7,7 @@
   <ion-content>
     <ion-list>
 
-      <button ion-item (click)="openPerfil()">
+      <button ion-item (click)="openPerfil()" [disabled]="bloqueia">
         <ion-avatar item-left>
           <img [src] ="foto">
         </ion-avatar>
@@ -15,10 +15,10 @@
         <p>Meu Perfil</p>
       </button>
 
-      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button ion-item *ngFor="let p of pages" [disabled]="bloqueia" (click)="openPage(p)">
         {{p.title}}
       </button>
-      <button ion-item (click)="sair()">
+      <button ion-item [disabled]="bloqueia" (click)="sair()">
         Sair
       </button>
     </ion-list>

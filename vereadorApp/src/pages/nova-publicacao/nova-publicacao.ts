@@ -141,6 +141,10 @@ export class NovaPublicacaoPage {
     });
   }
 
+  private removerVideo(){
+    this.publicacao.video = "";
+  }
+
   private removerFoto(url: string) {
     let index = this.publicacao.fotoURL.indexOf(url);
     if (index == 0) {

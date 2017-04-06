@@ -28,19 +28,19 @@
     </ion-slides>
 
     <ion-item>
-      <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen></iframe>
+      <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen (press)="removerVideo()"></iframe>
       <ion-row>
-        <ion-col width-33>
+        <ion-col *ngIf="publicacao.video == ''">
           <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
               <ion-icon name="image"></ion-icon>
             </button>
         </ion-col>
-        <ion-col width-33 *ngIf="publicacao.video == ''">
+        <ion-col *ngIf="publicacao.video == ''">
           <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
               <ion-icon name="camera"></ion-icon>
             </button>
         </ion-col>
-        <ion-col width-33 *ngIf="publicacao.fotoURL.length == 0">
+        <ion-col *ngIf="publicacao.fotoURL.length == 0">
           <button (click)="addLink()" class="fabbuttons" color="secondary" ion-fab large>
               <ion-icon name="logo-youtube"></ion-icon>
             </button>

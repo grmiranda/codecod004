@@ -3,6 +3,7 @@ import { NavController, NavParams, ToastController, AlertController, ActionSheet
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Publicacao } from '../../model/publicacao';
+import { PushService } from '../../providers/push-service';
 
 @Component({
   selector: 'page-nova-publicacao',
@@ -18,7 +19,9 @@ export class NovaPublicacaoPage {
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public publicacaoService: PublicacaoService,
-    public fotoService: FotoService) {
+    public fotoService: FotoService,
+    private pushService: PushService
+    ) {
 
   }
 
@@ -33,6 +36,7 @@ export class NovaPublicacaoPage {
         if (!res.error) {
           if (res.value) {
             this.displayToast('Publicou com sucesso!');
+            this.pushService.pushGrupo("Nova Noticia", "All");
             this.navCtrl.pop();
           }
         } else {

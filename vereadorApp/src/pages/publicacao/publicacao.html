@@ -8,7 +8,7 @@
 
   <ion-navbar color="laranja">
     <ion-title>{{publicacao.titulo}}</ion-title>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="publicacao.video==''">
       <button class="compartilhar" ion-button icon-only (click)="compartilhar()">
         <ion-icon name="share-alt"></ion-icon>
       </button>

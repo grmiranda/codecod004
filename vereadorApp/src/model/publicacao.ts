@@ -14,4 +14,13 @@ export class Publicacao {
 
   }
 
+  copy(publicaoCopia:Publicacao){
+    this.IDPublicacao = publicaoCopia.IDPublicacao;
+    this.titulo = publicaoCopia.titulo;
+    this.texto = publicaoCopia.texto;
+    this.fotoURL = [].concat(publicaoCopia.fotoURL);
+    this.video = publicaoCopia.video;
+
+  }
+
 }

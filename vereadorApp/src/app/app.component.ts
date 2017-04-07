@@ -50,7 +50,8 @@ export class MyApp {
     private http: Http,
     public events: Events
   ) {
-    this.pages = [{ title: 'Notícias', component: HomePage },
+    this.pages = [
+    { title: 'Notícias', component: HomePage },
     { title: 'Solicitações', component: SolicitacoesPage },
     { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },
     { title: 'Projetos de Lei', component: TabProjetosDeLeiPage },
@@ -121,6 +122,7 @@ export class MyApp {
 
   openPerfil() {
     this.menuCtrl.close();
+    this.pageAtual = "Perfil";
     this.navCtrl.setRoot(PerfilPage);
   }
 

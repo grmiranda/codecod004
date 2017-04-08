@@ -3,6 +3,7 @@ import { NavController, AlertController, NavParams, ActionSheetController } from
 import { Publicacao } from '../../model/publicacao';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'page-editar-publicacao',
@@ -12,13 +13,16 @@ export class EditarPublicacaoPage {
 
   public publicacao: Publicacao = new Publicacao();
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
+    private domSanitizer: DomSanitizer,
     public fotoService: FotoService,
     public publicacaoService: PublicacaoService) {
-    this.publicacao = JSON.parse(JSON.stringify(this.navParams.get("publicacao")));;
+    this.publicacao = this.navParams.get("publicacao");
+    this.converterVideoURL(this.publicacao.video);
   }
 
   private editar() {
@@ -33,12 +37,50 @@ export class EditarPublicacaoPage {
     });
   }
 
+  private addLink() {
+    let prompt = this.alertCtrl.create({
+      title: 'YouTube',
+      message: "Insira a url do vídeo do YouTube",
+      inputs: [
+        {
+          name: 'link',
+          placeholder: 'Link'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.converterVideoURL(data.link);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
   private importarFoto() {
     this.fotoService.importarFoto().then(url => {
       if (url !== "false") {
         this.publicacao.fotoURL.push(url);
       }
     });
+  }
+
+  private converterVideoURL(link) {
+    if (link.includes('https://youtu.be/')) {
+      this.publicacao.video = link.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+      this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
+    }
+    else if (link.includes('watch?v=')) {
+      this.publicacao.video = link.replace("watch?v=", "embed/");
+      this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
+    } else if(link.includes('embed/')){
+      this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);      
+    }
   }
 
   private opcaoApagar(url) {
@@ -80,6 +122,10 @@ export class EditarPublicacaoPage {
     } else if (index > 0) {
       this.publicacao.fotoURL.splice(index, 1);
     }
+  }
+
+  private removerVideo() {
+    this.publicacao.video = "";
   }
 
   private showConfirm() {

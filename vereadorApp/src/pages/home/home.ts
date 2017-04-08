@@ -6,7 +6,8 @@ import { Platform, NavController, ActionSheetController, MenuController, AlertCo
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-
+import { StorageService } from '../../providers/storage';
+import { Usuario } from '../../model/user';
 
 @Component({
   selector: 'page-home',
@@ -15,17 +16,22 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 export class HomePage {
 
   private publicacoes: Publicacao[] = [];
+  private meuUser: Usuario;
 
-  constructor(private platform: Platform,
+  constructor(
+    private platform: Platform,
     private alertCtrl: AlertController,
     private domSanitizer: DomSanitizer,
     private navCtrl: NavController,
+    private storageService: StorageService,
     private loadingCtrl: LoadingController,
     private publicacaoService: PublicacaoService,
     private actionSheetCtrl: ActionSheetController,
-    private menu: MenuController) {
-
+    private menu: MenuController
+  ) {
+    this.storageService.get().then(res => this.meuUser = res);
     menu.enable(true);
+    
   }
 
   ionViewWillEnter() {
@@ -43,8 +49,8 @@ export class HomePage {
       loading.dismiss();
       if (!res.error) {
         let teste = res.data;
-        for(let p of teste){
-          if(p.video !== ''){
+        for (let p of teste) {
+          if (p.video !== '') {
             p.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(p.video);
           }
         }
@@ -75,35 +81,39 @@ export class HomePage {
     });
   }
 
-  private abrirOpcoes(publicacao: any) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Opções',
-      buttons: [
-        {
-          text: 'Excluir',
-          role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
-          handler: () => {
-            this.deletarPublicacao(publicacao.IDPublicacao);
+  private abrirOpcoes(publicacao: Publicacao) {
+    if (this.meuUser.permissao == 1) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'Opções',
+        buttons: [
+          {
+            text: 'Excluir',
+            role: 'destructive',
+            icon: !this.platform.is('ios') ? 'trash' : null,
+            handler: () => {
+              this.deletarPublicacao(publicacao.IDPublicacao);
+            }
+          },
+          {
+            text: 'Editar',
+            icon: !this.platform.is('ios') ? 'create' : null,
+            handler: () => {
+              let publicacaoNova = new Publicacao();
+              publicacaoNova.copy(publicacao);
+              this.navCtrl.push(EditarPublicacaoPage, { publicacao: publicacaoNova });
+            }
+          },
+          {
+            text: 'Cancel',
+            icon: !this.platform.is('ios') ? 'close' : null,
+            role: 'cancel',
+            handler: () => {
+            }
           }
-        },
-        {
-          text: 'Editar',
-          icon: !this.platform.is('ios') ? 'create' : null,
-          handler: () => {
-            this.navCtrl.push(EditarPublicacaoPage, { publicacao: publicacao });
-          }
-        },
-        {
-          text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+        ]
+      });
+      actionSheet.present();
+    }
   }
 
   private tentarNovamente() {
@@ -132,8 +142,8 @@ export class HomePage {
 
       if (!res.error) {
         let teste = res.data;
-        for(let p of teste){
-          if(p.video !== ''){
+        for (let p of teste) {
+          if (p.video !== '') {
             p.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(p.video);
           }
         }

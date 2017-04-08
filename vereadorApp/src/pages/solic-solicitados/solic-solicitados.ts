@@ -217,7 +217,7 @@ export class SolicSolicitadosPage {
     });
   }
 
-  private abrirRequirimento(solicitacao: Solicitacao) {
+  private abrirRequerimento(solicitacao: Solicitacao) {
     let modal = this.modalCtrl.create(RequerimentoPage, { solicitacao: solicitacao, operacao: "visualizar" });
     modal.onDidDismiss(data => {
       if (data != undefined) {
@@ -234,7 +234,6 @@ export class SolicSolicitadosPage {
 
   private editSolicitacao(solicitacao: Solicitacao, requerimento): Promise<boolean> {
     return this.solicitacaoService.editSolicitacao(solicitacao).then(altSol => {
-      alert(JSON.stringify(altSol));
       if (altSol.value) {
         this.editRequerimento(requerimento);
       }

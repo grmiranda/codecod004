@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform, AlertController, ToastController, LoadingController } from 'ionic-angular';
+import { ModalController, NavController, ActionSheetController, Platform, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { MensagemService } from '../../providers/mensagem-service';
 import { StorageService } from '../../providers/storage';
@@ -8,6 +8,7 @@ import { CorpoMensagem } from '../../model/mensagem';
 import { PushService } from '../../providers/push-service';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
+import { EditarSolicitacaoPage } from '../editar-solicitacao/editar-solicitacao';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class AvaliarSolicitacaoPage {
 
   constructor(private platform: Platform,
     private toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public solicitacaoService: SolicitacaoService,
@@ -28,7 +31,6 @@ export class AvaliarSolicitacaoPage {
     public actionSheetCtrl: ActionSheetController,
     private pushService: PushService,
     private feedService: FeedBackService,
-    public navCtrl: NavController
   ) { }
 
   ionViewWillEnter() {
@@ -48,7 +50,7 @@ export class AvaliarSolicitacaoPage {
       if (!res.error) {
         this.solicitacoes = res.data;
       }
-    }).catch(()=>loading.dismiss());
+    }).catch(() => loading.dismiss());
   }
 
 
@@ -92,6 +94,13 @@ export class AvaliarSolicitacaoPage {
           icon: 'document',
           handler: () => {
             this.feedService.showPromptAprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);
+          }
+        },
+        {
+          text: 'Editar e Aprovar',
+          icon: 'create',
+          handler: () => {
+            this.editarSolicitacao(solicitacao);
           }
         },
         {
@@ -149,8 +158,19 @@ export class AvaliarSolicitacaoPage {
     });
   }
 
-  private abrirSolicitacao(soli:Solicitacao){
-    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: soli} )
+  private abrirSolicitacao(solicitacao:Solicitacao){
+    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: solicitacao} )
+  }
+
+  private editarSolicitacao(solicitacao: Solicitacao) {
+    let profileModal = this.modalCtrl.create(EditarSolicitacaoPage, { solicitacao: solicitacao });
+    profileModal.onDidDismiss((solicitacaoAtualizada) => {
+      if(solicitacaoAtualizada){
+        this.feedService.showPromptAprovar(solicitacaoAtualizada.IDUsuario.toString(), solicitacaoAtualizada.Push, this, solicitacaoAtualizada);
+        this.carregarSolicitacoes();
+      }
+    });
+    profileModal.present();
   }
 
 }

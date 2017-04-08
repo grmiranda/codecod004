@@ -1,5 +1,6 @@
 <?php
 include 'addPontuacao.php';
+include 'salvaImagem.php';
 include 'mySQL.php';
 require 'mySQL.php';
 ?>
@@ -32,8 +33,14 @@ if (isset($postdata)) {
         $id = $result->fetch_assoc();
         $id = $id['IDRequerimento'];
 
+        //adicionando todas as fotos relacionadas ao requerimento
+        $i = 0;
         foreach ($fotoURL as $foto){
-            $sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$foto', '$id', 'requerimento')";
+            $arquivo = 'imagens/requerimento/'.time().$i.$IDSolicitacao.'.jpeg'; //nome do arquivo que será gerado
+            $url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
+            $i++;
+            base64_to_jpeg($foto, $arquivo); //converte a foto base64 em jpeg
+            $sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$url', '$id', 'requerimento')";
             $con->query($sql);
         }
 

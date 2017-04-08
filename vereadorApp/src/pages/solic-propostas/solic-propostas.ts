@@ -14,6 +14,7 @@ import { NegacaoPage } from '../negacao/negacao';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { RequerimentoService } from '../../providers/requerimento-service';
 import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
+import { EditarSolicitacaoPage } from '../editar-solicitacao/editar-solicitacao';
 
 @Component({
   selector: 'page-solic-propostas',
@@ -111,19 +112,7 @@ export class SolicPropostasPage {
             role: 'destructive',
             icon: 'trash',
             handler: () => {
-              //let modal = this.modalCtrl.create(NegacaoPage, { operacao: "novo" });
-              //modal.onDidDismiss(data => {
-                //if (data != null && data != undefined) {
-                  //this.loading = this.loadingCtrl.create({
-                  //  content: 'Carregando'
-                  //});
-                  //this.loading.present();
-                  //solicitacao.andamento = data.andamento;
-                  this.enviarMensagem(solicitacao);//abre o alert para o usuario dizer o motivo da reprovação da publicacao
-                  //this.feedService.reprovarVarios(solicitacao.ids, solicitacao.pushs, this, solicitacao, msg);
-                //}
-              //});
-              //modal.present();
+              this.enviarMensagem(solicitacao);//abre o alert para o usuario dizer o motivo da reprovação da publicacao
             }
           },
           {
@@ -151,6 +140,13 @@ export class SolicPropostasPage {
             }
           },
           {
+            text: 'Editar',
+            icon: 'create',
+            handler: () => {
+              this.editarSolicitacao(solicitacao);
+            }
+          },
+          {
             text: 'Cancel',
             icon: 'close',
             role: 'cancel',
@@ -161,6 +157,15 @@ export class SolicPropostasPage {
       });
       actionSheet.present();
     }
+  }
+
+  private editarSolicitacao(solicitacao: Solicitacao) {
+    let profileModal = this.modalCtrl.create(EditarSolicitacaoPage, { solicitacao: solicitacao });
+    profileModal.onDidDismiss((solicitacaoAtualizada) => {
+      this.solicitacaoService.editSolicitacao(solicitacaoAtualizada).then(res =>
+        this.carregarSolicitacoes());
+    });
+    profileModal.present();
   }
 
   public enviarMensagem(solicitacao: Solicitacao) {

@@ -37,6 +37,10 @@
       <p>
         {{ solicitacao.descricao }}
       </p>
+      <button ion-button clear color="secondary" icon-left (click)="abrirRequerimento(solicitacao)">
+        <ion-icon name="browsers"></ion-icon>
+        Requerimento
+      </button>
     </ion-card-content>
   </ion-card>
 </ion-content>

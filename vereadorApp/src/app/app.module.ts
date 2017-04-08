@@ -51,6 +51,7 @@ import { ModalOpcoesPage } from '../pages/modal-opcoes/modal-opcoes';
 import { AdicionarEventoPage } from '../pages/adicionar-evento/adicionar-evento';
 import { CallNumber } from 'ionic-native';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { EditarSolicitacaoPage } from '../pages/editar-solicitacao/editar-solicitacao';
 import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { NovoDepoimentoPage } from '../pages/novo-depoimento/novo-depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
@@ -112,6 +113,7 @@ const cloudSettings: CloudSettings = {
     SolicSolicitadosPage,
     NovaPropostaPage,
     AvaliarSolicitacaoPage,
+    EditarSolicitacaoPage,
     RequerimentoPage,
     NegacaoPage,
     MensagensRecebidasPage,
@@ -168,6 +170,7 @@ const cloudSettings: CloudSettings = {
     SolicReprovadosPage,
     SolicSolicitadosPage,
     NovaPropostaPage,
+    EditarSolicitacaoPage,
     AvaliarSolicitacaoPage,
     RequerimentoPage,
     NegacaoPage,

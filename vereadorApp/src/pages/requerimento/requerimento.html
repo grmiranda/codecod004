@@ -20,22 +20,23 @@
 
     <ion-slides pager>
 
-      <ion-slide *ngFor="let requerimentoAtual of requerimento.fotoURL" style="margin-left: 10px">
+      <ion-slide *ngFor="let requerimentoAtual of requerimento.fotoURL">
         <img [src]="requerimentoAtual" style="width: 100%;" (press)="opcaoApagar(requerimentoAtual)" />
       </ion-slide>
 
     </ion-slides>
 
+    <!-- se for adm -->
     <div *ngIf="meuUser.permissao == 1">
-      <ion-item>
+      <ion-item *ngIf="!visualizar">
         <ion-row>
           <ion-col width-50>
-            <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large [disabled]="visualizar">
+            <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
               <ion-icon name="image"></ion-icon>
             </button>
           </ion-col>
           <ion-col width-50>
-            <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large [disabled]="visualizar">
+            <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
               <ion-icon name="camera"></ion-icon>
             </button>
           </ion-col>

@@ -18,7 +18,7 @@ export class NovaPropostaPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private solicitacaoService: SolicitacaoService,
-    private fotoService: FotoService,   
+    private fotoService: FotoService,
     public actionSheetCtrl: ActionSheetController,
     private storageService: StorageService,
     private pushService: PushService
@@ -39,7 +39,7 @@ export class NovaPropostaPage {
           if (!res.error) {
             if (res.value) {
               //works fine
-              this.displayToast('Enviado com sucesso pra analise!');
+              this.displayToast('Enviado com sucesso pra análise!');
               this.navCtrl.pop();
             }
           } else {

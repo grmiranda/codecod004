@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar color="laranja">
+    <ion-title>Editar Solicitação</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="solicitacao.titulo" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item class="itemtextarea">
+      <ion-label floating>Descrição</ion-label>
+      <ion-textarea rows="10" [(ngModel)]="solicitacao.descricao" name="descricao"></ion-textarea>
+    </ion-item>
+
+    <ion-slides pager>
+      <ion-slide *ngFor="let foto of solicitacao.fotoURL">
+        <img [src]="foto" style="width: 100%" (press)="opcaoApagar(foto)" />
+      </ion-slide>
+    </ion-slides>
+
+    <ion-item>
+      <ion-row>
+        <ion-col width-50>
+          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+              <ion-icon name="image"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col width-50>
+          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
+              <ion-icon name="camera"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <button class="blockbutton" (click)="editar()" color="secondary" ion-button block large>Concluir</button>
+    </ion-item>
+    <ion-item>
+      <button class="blockbutton" (click)="cancelar()" color="danger" ion-button block large>Cancelar</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

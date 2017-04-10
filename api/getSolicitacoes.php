@@ -32,14 +32,15 @@
 					$pushs = array();
 					while($l=$resultado->fetch_assoc()){
 						$userID = $l['IDUsuario'];
-						$ids[] = $userID;
+						
 						
 						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
 						$tes = $con->query($sql);
 						$dado = $tes->fetch_assoc();
-						
-						$pushs[] = $dado['Push'];
-						
+						if ($dado['permissao'] == 0){
+							$ids[] = $userID;
+							$pushs[] = $dado['Push'];
+						}
 					}
 					
 					$idDono = $row['IDUsuario'];
@@ -97,13 +98,15 @@
 					$pushs = array();
 					while($l=$resultado->fetch_assoc()){
 						$userID = $l['IDUsuario'];
-						$ids[] = $userID;
+						
 						
 						$sql = "SELECT * FROM usuario WHERE IDUsuario = '$userID'";
 						$tes = $con->query($sql);
 						$dado = $tes->fetch_assoc();
-						
-						$pushs[] = $dado['Push'];
+						if ($dado['permissao'] == 0){
+							$pushs[] = $dado['Push'];
+							$ids[] = $userID;
+						}
 						
 					}
 					

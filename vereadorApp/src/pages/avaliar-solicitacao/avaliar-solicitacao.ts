@@ -152,19 +152,18 @@ export class AvaliarSolicitacaoPage {
     });
   }
 
-  private abrirSolicitacao(solicitacao:Solicitacao){
-    this.navCtrl.push(VisualizarSolicitacaoPage, {solicitacao: solicitacao} )
+  private myCallbackFunction(service, page, solicitacaoAtualizada) {
+    return new Promise((resolve, reject) => {
+      service.showPromptAprovar(solicitacaoAtualizada.IDUsuario.toString(), solicitacaoAtualizada.Push, page, solicitacaoAtualizada, "Sua proposta foi modificada para melhor entendimento para os usuarios");
+    });
+  }
+
+  private abrirSolicitacao(solicitacao: Solicitacao) {
+    this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: solicitacao });
   }
 
   private editarSolicitacao(solicitacao: Solicitacao) {
-    let profileModal = this.modalCtrl.create(EditarSolicitacaoPage, { solicitacao: solicitacao });
-    profileModal.onDidDismiss((solicitacaoAtualizada) => {
-      if(solicitacaoAtualizada){
-        this.feedService.showPromptAprovar(solicitacaoAtualizada.IDUsuario.toString(), solicitacaoAtualizada.Push, this, solicitacaoAtualizada, "Sua proposta foi modificada para melhor entendimento para os usuarios");
-        this.carregarSolicitacoes();
-      }
-    });
-    profileModal.present();
+    this.navCtrl.push(EditarSolicitacaoPage, { solicitacao: solicitacao, funcao: this.myCallbackFunction, page: this, service: this.feedService });
   }
 
 }

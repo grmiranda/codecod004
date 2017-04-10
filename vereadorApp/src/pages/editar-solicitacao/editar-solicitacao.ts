@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavParams, NavController, ActionSheetController, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Solicitacao } from '../../model/solicitacao';
@@ -14,20 +14,18 @@ export class EditarSolicitacaoPage {
   private solicitacao: Solicitacao = new Solicitacao();
 
   constructor(public navParams: NavParams,
+    public navController: NavController,
     public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
-    public viewCtrl: ViewController,
     public fotoService: FotoService,
     public solicitacaoService: SolicitacaoService) {
     this.solicitacao = JSON.parse(JSON.stringify(this.navParams.get("solicitacao")));
   }
 
   private editar() {
-    this.viewCtrl.dismiss(this.solicitacao);
-  }
-
-  private cancelar() {
-    this.viewCtrl.dismiss();
+    let callback = this.navParams.get("page");
+    callback.myCallbackFunction(callback.feedService, callback, this.solicitacao);
+    this.navController.pop();
   }
 
   private importarFoto() {

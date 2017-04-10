@@ -73,7 +73,7 @@ export class LoginPage {
           this.facebookService.getDados(resposta[1]).then(res => {
             this.bloqueia = false;
             this.navCtrl.setRoot(CadastroPage, { dados: res });
-            
+
           });
 
         } else if (resposta[0] == "banido") {

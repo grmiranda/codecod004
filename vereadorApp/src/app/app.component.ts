@@ -80,7 +80,6 @@ export class MyApp {
       }, 100);
 
 
-
       window["plugins"].OneSignal
         .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
         .handleNotificationOpened(notificationOpenedCallback)

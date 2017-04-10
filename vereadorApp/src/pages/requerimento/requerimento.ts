@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, ToastController, NavParams, LoadingController, ViewController, ActionSheetController } from 'ionic-angular';
+import { AlertController, Platform, ToastController, NavParams, LoadingController, ViewController, ActionSheetController } from 'ionic-angular';
 import { Requerimento } from '../../model/requerimento';
 import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
@@ -22,7 +22,8 @@ export class RequerimentoPage {
 
   constructor(
     public navParams: NavParams,
-    public view: ViewController,
+    public platform: Platform,
+    public viewController: ViewController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private fotoService: FotoService,
@@ -31,6 +32,7 @@ export class RequerimentoPage {
     private requerimentoService: RequerimentoService,
     private storageService: StorageService
   ) {
+
     this.storageService.get().then(userRes => this.meuUser = userRes);
     this.operacao = this.navParams.get("operacao");
     if (this.operacao == "visualizar") {
@@ -56,7 +58,7 @@ export class RequerimentoPage {
       if (this.operacao == "novo") {
         this.enviarMensagem();
       } else {
-        this.view.dismiss({ requerimento: this.requerimento, andamento: this.andamento });
+        this.viewController.dismiss({ requerimento: this.requerimento, andamento: this.andamento });
       }
     }
   }
@@ -132,7 +134,7 @@ export class RequerimentoPage {
         {
           text: 'Enviar',
           handler: data => {
-            this.view.dismiss({ requerimento: this.requerimento, andamento: this.andamento, msg: data.mensagem });
+            this.viewController.dismiss({ requerimento: this.requerimento, andamento: this.andamento, msg: data.mensagem });
           }
         }]
     }).present();
@@ -149,7 +151,7 @@ export class RequerimentoPage {
   }
 
   private cancel() {
-    this.view.dismiss();
+    this.viewController.dismiss();
   }
 
   private editar() {

@@ -31,7 +31,7 @@ export class HomePage {
   ) {
     this.storageService.get().then(res => this.meuUser = res);
     menu.enable(true);
-    
+
   }
 
   ionViewWillEnter() {
@@ -70,8 +70,8 @@ export class HomePage {
     this.navCtrl.push(PublicacaoPage, { publicacao: publicacao });
   }
 
-  private deletarPublicacao(id: number) {
-    this.publicacaoService.deletePublicacao(id).then(res => {
+  private deletarPublicacao(publicacao) {
+    this.publicacaoService.deletePublicacao(publicacao).then(res => {
       if (!res.error) {
         if (res.value) {
           //deletou
@@ -91,7 +91,7 @@ export class HomePage {
             role: 'destructive',
             icon: !this.platform.is('ios') ? 'trash' : null,
             handler: () => {
-              this.deletarPublicacao(publicacao.IDPublicacao);
+              this.deletarPublicacao(publicacao);
             }
           },
           {

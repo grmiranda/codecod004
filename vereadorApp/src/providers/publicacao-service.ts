@@ -47,9 +47,9 @@ export class PublicacaoService {
     return retorno;
   }
 
-  public deletePublicacao(id: number): Promise<any> {
+  public deletePublicacao(publicacao: Publicacao): Promise<any> {
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/delPublicacao.php', JSON.stringify(id), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/delPublicacao.php', JSON.stringify(publicacao), { headers: this.headers })
       .toPromise()
       .then(res => this.extractDelData(res))
       .catch(this.handleErrorMessage);

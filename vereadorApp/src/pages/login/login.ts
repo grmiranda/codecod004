@@ -41,10 +41,6 @@ export class LoginPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
   loginTeste() {
     let user = new Usuario();
     user.IDUsuario = "2";

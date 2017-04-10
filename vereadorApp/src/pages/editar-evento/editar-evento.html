@@ -19,7 +19,7 @@
     </ion-item>
     <ion-item class="itemtextarea">
       <ion-label floating>Descrição</ion-label>
-      <ion-textarea rows="5" [(ngModel)]="descricao" name="texto"></ion-textarea>
+      <ion-textarea autoresize [(ngModel)]="descricao" name="texto"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating >Local</ion-label>
@@ -47,7 +47,7 @@
       <ion-input type="time" [(ngModel)]="horaTermino" name="horaTermino"></ion-input>
     </ion-item>
     <ion-item>
-      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Finalizar</button>
+      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Finalizar</button>
     </ion-item>
   </ion-list>
 </ion-content>

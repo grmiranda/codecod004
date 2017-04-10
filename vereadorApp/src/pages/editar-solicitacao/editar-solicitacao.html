@@ -13,7 +13,7 @@
     </ion-item>
     <ion-item class="itemtextarea">
       <ion-label floating>Descrição</ion-label>
-      <ion-textarea rows="10" [(ngModel)]="solicitacao.descricao" name="descricao"></ion-textarea>
+      <ion-textarea autoresize [(ngModel)]="solicitacao.descricao" name="descricao"></ion-textarea>
     </ion-item>
 
     <ion-slides pager>
@@ -37,7 +37,7 @@
       </ion-row>
     </ion-item>
     <ion-item>
-      <button class="blockbutton" (click)="editar()" color="secondary" ion-button block large>Concluir</button>
+      <button class="blockbutton" (click)="editar()" color="secondary" ion-button block default>Concluir</button>
     </ion-item>
   </ion-list>
 </ion-content>

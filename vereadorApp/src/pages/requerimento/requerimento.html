@@ -15,7 +15,7 @@
   <ion-list>
     <ion-item class="itemtextarea">
       <ion-label floating>Andamento</ion-label>
-      <ion-textarea rows="10" [(ngModel)]="andamento" [readonly]="visualizar" name="texto"></ion-textarea>
+      <ion-textarea autoresize [(ngModel)]="andamento" [readonly]="visualizar" name="texto"></ion-textarea>
     </ion-item>
 
     <ion-slides pager>
@@ -43,10 +43,10 @@
         </ion-row>
       </ion-item>
       <ion-item *ngIf="visualizar">
-        <button class="blockbutton" (click)="editar()" color="secondary" ion-button block large>Editar</button>
+        <button class="blockbutton" (click)="editar()" color="secondary" ion-button block default>Editar</button>
       </ion-item>
       <ion-item *ngIf="!visualizar">
-        <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Finalizar</button>
+        <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Finalizar</button>
       </ion-item>
     </div>
   </ion-list>

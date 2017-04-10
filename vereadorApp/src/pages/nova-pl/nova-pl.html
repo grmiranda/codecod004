@@ -12,29 +12,29 @@
     </ion-item>
     <ion-item class="itemtextarea">
       <ion-label floating>Ementa</ion-label>
-      <ion-textarea rows="10" [(ngModel)]="pl.ementa" name="texto"></ion-textarea>
+      <ion-textarea autoresize [(ngModel)]="pl.ementa" name="texto"></ion-textarea>
     </ion-item>
-    <ion-slides pager>
-      <ion-slide *ngFor="let plAtual of pl.fotoURL">
-        <img [src]="plAtual" style="width: 100%;" (press)="opcaoApagar(plAtual)" />
-      </ion-slide>
-    </ion-slides> 
+
+    <p class="centralizar" *ngIf="pl.fotoURL==''">Clique no "+" para adicionar Fotos</p>
+    <p class="centralizar" *ngIf="pl.fotoURL.lenght==0">Clique no "+" para adicionar mais Fotos</p>
+      <ion-grid *ngIf="pl.fotoURL==''">
+        <ion-row>
+          <ion-col *ngFor="let plAtual of pl.fotoURL" col-4 class="margem">
+            <div class="add">
+              <img [src]="plAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
+            </div>
+          </ion-col>
+          
+          <ion-col col-4 class="margem" (click)="opcaoAdd()">
+            <div class="add">
+              <ion-icon class="add-icon" name="add"></ion-icon> 
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     <ion-item>
-      <ion-row>
-        <ion-col width-50>
-          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="image"></ion-icon>
-            </button>
-        </ion-col>
-        <ion-col width-50>
-          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="camera"></ion-icon>
-            </button>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-    <ion-item>
-      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block large>Criar PL</button>
+      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Criar Projeto de Lei</button>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -51,7 +51,37 @@ export class NovaPropostaPage {
       });
     }
   }
-
+  opcaoAdd(){
+    let semFoto = this.actionSheetCtrl.create({
+      title: "Adicionar",
+      buttons: [
+        {
+          text: 'Foto da galeria',
+          role: 'image',
+          icon: 'trash',
+          handler: () => {
+            this.importarFoto();
+          }
+        },
+        {
+          text: 'Foto da câmera',
+          role: 'camera',
+          icon: 'trash',
+          handler: () => {
+            this.tirarFoto();
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    semFoto.present();
+  }
   private opcaoApagar(url) {
     let actionSheet = this.actionSheetCtrl.create({
       title: "Remover foto " + (this.solicitacao.fotoURL.indexOf(url) + 1),

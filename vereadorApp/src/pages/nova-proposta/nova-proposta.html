@@ -16,33 +16,29 @@
     </ion-item>
     <ion-item class="itemtextarea">
       <ion-label floating>Descrição</ion-label>
-      <ion-textarea rows="10" [(ngModel)]="solicitacao.descricao" name="texto"></ion-textarea>
+      <ion-textarea autosize [(ngModel)]="solicitacao.descricao" name="texto"></ion-textarea>
     </ion-item>
     
-    <ion-slides pager>
-
-      <ion-slide *ngFor="let solicitacaoAtual of solicitacao.fotoURL" style="margin-left: 10px">
-        <img [src]="solicitacaoAtual" style="width: 100%;" (press)="opcaoApagar(solicitacaoAtual)" />
-      </ion-slide>
-
-    </ion-slides>
-      
+    <p class="centralizar" *ngIf="solicitacao.fotoURL==''">Clique no "+" para adicionar Fotos</p>
+    <p class="centralizar" *ngIf="solicitacao.fotoURL.lenght==0">Clique no "+" para adicionar mais Fotos</p>
+      <ion-grid *ngIf="solicitacao.fotoURL==''">
+        <ion-row>
+          <ion-col *ngFor="let solicitacaoAtual of solicitacao.fotoURL" col-4 class="margem">
+            <div class="add">
+              <img [src]="solicitacaoAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
+            </div>
+          </ion-col>
+          
+          <ion-col col-4 class="margem" (click)="opcaoAdd()">
+            <div class="add">
+              <ion-icon class="add-icon" name="add"></ion-icon> 
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
     <ion-item>
-      <ion-row>
-        <ion-col width-50>
-          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="image"></ion-icon>
-            </button>
-        </ion-col>
-        <ion-col width-50>
-          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="camera"></ion-icon>
-            </button>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-    <ion-item>
-      <button class="blockbutton" (click)="requisitar()" color="secondary" ion-button block large>Realizar Solicitação</button>
+      <button class="blockbutton" (click)="requisitar()" color="secondary" ion-button block default >Realizar Solicitação</button>
     </ion-item>
 
   </ion-list>

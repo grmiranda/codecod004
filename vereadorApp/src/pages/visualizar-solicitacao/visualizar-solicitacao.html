@@ -22,10 +22,10 @@
     </ion-slides>
     <div padding class="scrolling">
       <ion-label>Descrição</ion-label>
-      <ion-textarea rows="5" [(ngModel)]="solicitacao.descricao" readonly="true" name="texto"></ion-textarea>
+      <ion-textarea autoresize [(ngModel)]="solicitacao.descricao" readonly="true" name="texto"></ion-textarea>
       <div *ngIf="solicitacao.andamento != ''">
         <ion-label>Andamento</ion-label>
-        <ion-textarea rows="6" [(ngModel)]="solicitacao.andamento" readonly="true" name="texto"></ion-textarea>
+        <ion-textarea autoresize [(ngModel)]="solicitacao.andamento" readonly="true" name="texto"></ion-textarea>
       </div>
     </div>
   </ion-card>

@@ -26,7 +26,8 @@
 					$row['nomeUsuario'] = $dado['nome'];
 					$row['fotoUsuario'] = $dado['fotoURL'];
 					$pushU = $dado['Push'];
-
+					$row['Push'] = $pushU;
+					
 					$idPL = $row['IDPL'];
 					$sql = "SELECT * FROM fotourl WHERE id = '$idPL' AND tipo = 'pl'";
 					$resultado = $con->query($sql);
@@ -47,9 +48,11 @@
 							$sql = "SELECT * FROM usuario WHERE IDUsuario = '$tempID'";
 							$aux = $con->query($sql);
 							$aux = $aux->fetch_assoc();
-							$aux = $aux['Push'];
-							$ids[] = $tempID;
-							$pushs[] = $aux;
+							if ($aux['permissao'] == 0){
+								$aux = $aux['Push'];
+								$ids[] = $tempID;
+								$pushs[] = $aux;
+							}
 						}
 					}
 
@@ -82,6 +85,7 @@
 					$row['nomeUsuario'] = $dado['nome'];
 					$row['fotoUsuario'] = $dado['fotoURL'];
 					$pushU = $dado['Push'];
+					$row['Push'] = $pushU;
 
 					$idPL = $row['IDPL'];
 					$sql = "SELECT * FROM fotourl WHERE id = '$idPL' AND tipo = 'pl'";
@@ -103,9 +107,11 @@
 							$sql = "SELECT * FROM usuario WHERE IDUsuario = '$tempID'";
 							$aux = $con->query($sql);
 							$aux = $aux->fetch_assoc();
-							$aux = $aux['Push'];
-							$ids[] = $tempID;
-							$pushs[] = $aux;
+							if ($aux['permissao'] == 0){
+								$aux = $aux['Push'];
+								$ids[] = $tempID;
+								$pushs[] = $aux;
+							}
 						}
 					}
 

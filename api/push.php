@@ -31,6 +31,10 @@
     return $response;
   }
 
+  function sendMessageToOne($msg, $id){
+
+  }
+
   function enviarPushToAll($msg){
     $response = sendMessageToAll($msg);
     $return["allresponses"] = $response;

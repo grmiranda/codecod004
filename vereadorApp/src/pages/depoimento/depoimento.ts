@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
 import { NovoDepoimentoPage } from '../novo-depoimento/novo-depoimento';
 import { DepoimentoService } from '../../providers/depoimento-service';
@@ -14,7 +14,6 @@ export class DepoimentoPage {
   constructor(public navCtrl: NavController,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
-    public navParams: NavParams,
     private depoimentoService: DepoimentoService) {
     this.carregar();
   }

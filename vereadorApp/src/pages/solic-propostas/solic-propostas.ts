@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform, LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
+import { NavController, ActionSheetController, LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
 import { StorageService } from '../../providers/storage';
@@ -28,7 +28,6 @@ export class SolicPropostasPage {
   private meuUser: Usuario;
 
   constructor(
-    public platform: Platform,
     public navCtrl: NavController,
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,

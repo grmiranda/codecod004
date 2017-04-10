@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
+import { AlertController, ToastController, NavParams, ViewController } from 'ionic-angular';
 import { Negacao } from '../../model/negacao';
 
 
@@ -13,12 +13,10 @@ export class NegacaoPage {
   private operacao: string = "";
 
   constructor(
-    public navCtrl: NavController,
     public navParams: NavParams,
     public view: ViewController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    public actionSheetCtrl: ActionSheetController
   ) {
 
     this.operacao = this.navParams.get("operacao");

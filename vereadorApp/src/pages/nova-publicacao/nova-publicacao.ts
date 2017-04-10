@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, AlertController, ActionSheetController } from 'ionic-angular';
+import { NavController, ToastController, AlertController, ActionSheetController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Publicacao } from '../../model/publicacao';
@@ -15,7 +15,6 @@ export class NovaPublicacaoPage {
   private publicacao: Publicacao = new Publicacao();
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
     private toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,

@@ -27,10 +27,6 @@ export class NovaPropostaPlPage {
 
   }
 
-  ionViewWillEnter() {
-
-  }
-
   private finalizar() {
     if (this.pl.titulo.trim() == '') {
       this.displayToast("Adicione um título à Proposta");

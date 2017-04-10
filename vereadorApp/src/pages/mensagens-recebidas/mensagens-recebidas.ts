@@ -124,7 +124,7 @@ export class MensagensRecebidasPage {
         let toast = this.toastCtrl.create({
           message: 'Mensagem apagada com sucesso',
           duration: 3000,
-          position: 'bottom'
+          position: 'top'
         });
         toast.present();
       }

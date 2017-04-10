@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ActionSheetController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, ActionSheetController, LoadingController, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
@@ -13,11 +13,10 @@ export class SolicReprovadosPage {
   private solicitacoes: Solicitacao[] = [];
 
 
-  constructor(public platform: Platform,
+  constructor(
     public navCtrl: NavController,
     private alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public solicitacaoService: SolicitacaoService) { }
 

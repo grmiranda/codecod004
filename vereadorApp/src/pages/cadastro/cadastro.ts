@@ -61,7 +61,6 @@ export class CadastroPage {
           if (res == false) {
             alert("Erro ao cadastrar Usuario");
           } else {
-            alert(JSON.stringify(res));
             this.storage.set(res);
             this.navCtrl.setRoot(HomePage);
           }

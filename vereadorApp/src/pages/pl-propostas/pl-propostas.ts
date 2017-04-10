@@ -17,7 +17,7 @@ import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 export class PlPropostasPage {
 
   private pls: any[] = [];
-  private myID = 8;
+  private myID;
 
   constructor(public projetoDeLeiService: ProjetoDeLeiService,
     public likeService: LikeService,
@@ -31,10 +31,10 @@ export class PlPropostasPage {
   }
 
   ionViewWillEnter() {
-    // this.storage.get().then(res => {
-    //   this.myID = res.IDUsuario;
+    this.storage.get().then(res => {
+      this.myID = res.IDUsuario;
     this.carregarPropostas();
-    // });
+    });
   }
 
   private carregarPropostas() {

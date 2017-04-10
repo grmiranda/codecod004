@@ -8,13 +8,6 @@ import { StorageService } from './storage';
 import { PushService } from './push-service';
 import { SolicitacaoService } from './solicitacao-service';
 
-
-/*
-  Generated class for the FeedBackService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class FeedBackService {
 
@@ -28,7 +21,6 @@ export class FeedBackService {
     public solicitacaoService: SolicitacaoService,
     private pushService: PushService
   ) {
-    console.log('Hello FeedBackService Provider');
     this.storageService.get().then(user => this.meuId = user.IDUsuario);
 
   }

@@ -12,10 +12,9 @@ export class PontuacaoService {
 
   }
 
-
   /*Retorna lista com todos os usuarios listados em ordem de pontuacao*/
   public rankGeral(): Promise<any> {
-    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getPontuacao.php?rank')
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/listaPontuacao.php?rank')
       .toPromise()
       .then(response => this.extractRankData(response))
       .catch(this.handleErrorMessage);

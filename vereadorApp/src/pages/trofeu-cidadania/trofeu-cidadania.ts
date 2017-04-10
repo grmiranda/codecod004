@@ -12,7 +12,7 @@ export class TrofeuCidadaniaPage {
 
   private rank: Usuario[] = [new Usuario(), new Usuario(), new Usuario()];
   private myRank: Usuario = new Usuario();
-  private myID = 0;
+  private myID;
   private loading = this.loadingCtrl.create({
     content: 'Carregando'
   });
@@ -25,11 +25,11 @@ export class TrofeuCidadaniaPage {
 
   ionViewWillEnter() {
     this.loading.present();
-    // this.storage.get().then(res => {
-    //  this.myID = res.IDUsuario;
-    this.getMyRank();
-    this.getTop3();
-    // });
+    this.storage.get().then(res => {
+      this.myID = res.IDUsuario;
+      this.getMyRank();
+      this.getTop3();
+    });
   }
 
   private getTop3() {

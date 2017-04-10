@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
+import {  NavParams, ToastController, ViewController } from 'ionic-angular';
 import { EventoService } from '../../providers/evento-service';
 import { Evento } from '../../model/evento';
 
-/*
-  Generated class for the EditarEvento page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-editar-evento',
   templateUrl: 'editar-evento.html'
@@ -27,7 +21,6 @@ export class EditarEventoPage {
 
   constructor(
     private toastCtrl: ToastController,
-    public navCtrl: NavController,
     public navParams: NavParams,
     private eventoService: EventoService,
     public view: ViewController

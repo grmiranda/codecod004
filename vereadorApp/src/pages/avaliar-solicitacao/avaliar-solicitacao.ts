@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, ActionSheetController, Platform, AlertController, ToastController, LoadingController } from 'ionic-angular';
+import { ModalController, NavController, ActionSheetController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
-import { MensagemService } from '../../providers/mensagem-service';
-import { StorageService } from '../../providers/storage';
 import { Solicitacao } from '../../model/solicitacao';
-import { CorpoMensagem } from '../../model/mensagem';
 import { PushService } from '../../providers/push-service';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
@@ -19,18 +16,15 @@ export class AvaliarSolicitacaoPage {
 
   private solicitacoes: Solicitacao[] = [];
 
-  constructor(private platform: Platform,
+  constructor(
     private toastCtrl: ToastController,
     public modalCtrl: ModalController,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public solicitacaoService: SolicitacaoService,
-    private mensagemService: MensagemService,
-    private storageService: StorageService,
     public actionSheetCtrl: ActionSheetController,
-    private pushService: PushService,
-    private feedService: FeedBackService,
+    private feedService: FeedBackService
   ) { }
 
   ionViewWillEnter() {

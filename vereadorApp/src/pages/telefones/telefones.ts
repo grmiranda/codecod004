@@ -15,7 +15,7 @@ export class TelefonesPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
+    public navParams: NavParams
   ) {
     this.categoria = this.navParams.get("categoria");
     this.instituicao = this.categoria.instituicao;

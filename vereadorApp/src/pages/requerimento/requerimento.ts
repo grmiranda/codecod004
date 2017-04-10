@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams, LoadingController, ViewController, ActionSheetController } from 'ionic-angular';
+import { AlertController, ToastController, NavParams, LoadingController, ViewController, ActionSheetController } from 'ionic-angular';
 import { Requerimento } from '../../model/requerimento';
 import { Solicitacao } from '../../model/solicitacao';
 import { FotoService } from '../../providers/foto-service';
@@ -20,7 +20,7 @@ export class RequerimentoPage {
   private visualizar: boolean = false;
   private meuUser: Usuario = new Usuario();
 
-  constructor(public navCtrl: NavController,
+  constructor(
     public navParams: NavParams,
     public view: ViewController,
     private toastCtrl: ToastController,
@@ -38,7 +38,7 @@ export class RequerimentoPage {
       var loading = this.loadingCtrl.create({
         content: 'Carregando'
       });
-      
+
       loading.present();
       this.solicitacao = this.navParams.get("solicitacao");
       this.requerimentoService.getRequerimentosByID(this.solicitacao.IDSolicitacao).then(buscaRequerimento => {
@@ -110,7 +110,7 @@ export class RequerimentoPage {
       this.requerimento.fotoURL.shift();
     } else if (index > 0) {
       this.requerimento.fotoURL.splice(index, 1);
-    } 
+    }
   }
 
   public enviarMensagem() {

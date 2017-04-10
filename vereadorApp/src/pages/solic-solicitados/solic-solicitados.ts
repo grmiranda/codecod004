@@ -17,7 +17,8 @@ export class SolicSolicitadosPage {
   private solicitacoes: Solicitacao[] = [];
 
 
-  constructor(public platform: Platform,
+  constructor(
+    public platform: Platform,
     public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public navCtrl: NavController,

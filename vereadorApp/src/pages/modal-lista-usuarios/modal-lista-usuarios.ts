@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { Usuario } from '../../model/user';
 
-/*
-  Generated class for the ModalListaUsuarios page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-modal-lista-usuarios',
   templateUrl: 'modal-lista-usuarios.html'
@@ -29,10 +23,6 @@ export class ModalListaUsuariosPage {
       this.selecionando = true;
     }
     this.initializeItems();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalListaUsuariosPage');
   }
 
   corBackground(usuarioAtual: Usuario) {

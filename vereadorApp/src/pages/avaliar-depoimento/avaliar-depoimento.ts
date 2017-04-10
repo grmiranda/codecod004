@@ -12,7 +12,8 @@ export class AvaliarDepoimentoPage {
 
   private depoimentos: Depoimento[] = [];
 
-  constructor(private toastCtrl: ToastController,
+  constructor(
+    private toastCtrl: ToastController,
     public loadingController: LoadingController,
     private depoimentoService: DepoimentoService,
     private alertCtrl: AlertController,

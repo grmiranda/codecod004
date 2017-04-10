@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController, AlertController } from 'ionic-angular';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { MonthViewComponent } from 'ionic2-calendar/monthview';
 import { WeekViewComponent } from 'ionic2-calendar/weekview';
@@ -26,13 +26,11 @@ export class AgendaPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     public modalCtrl: ModalController,
     public calendarMd: NgCalendarModule,
     public loadingController: LoadingController,
     private alertCtrl: AlertController,
     private eventoService: EventoService,
-    private toastCtrl: ToastController
   ) {
     this.calendar = {
       mode: 'month',

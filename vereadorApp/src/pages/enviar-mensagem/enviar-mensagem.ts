@@ -84,7 +84,7 @@ export class EnviarMensagemPage {
           let toast = this.toastCtrl.create({
             message: 'Mensagem enviada com sucesso',
             duration: 3000,
-            position: 'bottom'
+            position: 'top'
           });
           toast.present();
           this.pushService.pushUmaPessoa("Nova mensagem", this.usuarioSelecionado[i]);

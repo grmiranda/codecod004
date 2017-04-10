@@ -15,8 +15,9 @@ export class PlAprovadosPage {
   constructor(private projetoDeLeiService: ProjetoDeLeiService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    public navCtrl: NavController) {
-      
+    public navCtrl: NavController
+  ) {
+
     }
 
   ionViewWillEnter() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, AlertController, Platform, LoadingController } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { StorageService } from '../../providers/storage';
 import { LikeService } from '../../providers/like-service';
@@ -15,7 +15,7 @@ import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 export class PlAndamentoPage {
 
   private pls: any[] = [];
-  private myID = 8;
+  private myID;
 
   constructor(public navCtrl: NavController,
     public likeService: LikeService,
@@ -23,17 +23,16 @@ export class PlAndamentoPage {
     private loadingCtrl: LoadingController,
     public storage: StorageService,
     private alertCtrl: AlertController,
-    public navParams: NavParams,
-    public actionSheetCtrl: ActionSheetController,
-    public platform: Platform) {
+    public actionSheetCtrl: ActionSheetController
+  ) {
 
   }
 
   ionViewWillEnter() {
-    // this.storage.get().then(res => {
-    //   this.myID = res.IDUsuario;
+    this.storage.get().then(res => {
+      this.myID = res.IDUsuario;
     this.carregarPropostas();
-    // });
+    });
   }
 
   private carregarPropostas() {

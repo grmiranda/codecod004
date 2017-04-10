@@ -14,14 +14,14 @@ export class SolicAprovadosPage {
 
   private solicitacoes: Solicitacao[] = [];
 
-
   constructor(private loadingCtrl: LoadingController,
     private modalCtrl: ModalController,
     private requerimentoService: RequerimentoService,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private solicitacaoService: SolicitacaoService,
-    private navCtrl: NavController) { }
+    private navCtrl: NavController
+  ) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();

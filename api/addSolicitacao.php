@@ -31,7 +31,7 @@
 
 			$i = 0;
 			foreach ($fotoURL as $foto){
-				$arquivo = 'imagens/solicitacao/'.time().$i.'.jpeg'; //nome do arquivo que será gerado
+				$arquivo = 'imagens/solicitacao/'.time().$i.$IDUsuario.'.jpeg'; //nome do arquivo que será gerado
 				$url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
 				$i++;
 				base64_to_jpeg($foto, $arquivo); //converte a foto base64 em jpeg

@@ -44,7 +44,7 @@
 				if ($aux != $idR){
 					$sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM', '$aux', '0')";
 					$con->query($sql);
-					enviarPushTo('Nova Mensagem', $aux)
+					enviarPushTo('Nova Mensagem', $aux);
 				}
 			}
 

@@ -9,6 +9,7 @@ import { LikeService } from '../../providers/like-service';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 import { FeedBackService } from '../../providers/feed-back-service';
+import { Usuario } from '../../model/user';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { FeedBackService } from '../../providers/feed-back-service';
 export class PlPropostasPage {
 
   private pls: any[] = [];
-  private myID;
+  private myUser: Usuario;
 
   constructor(
     public projetoDeLeiService: ProjetoDeLeiService,
@@ -38,7 +39,7 @@ export class PlPropostasPage {
 
   ionViewWillEnter() {
     this.storage.get().then(res => {
-      this.myID = res.IDUsuario;
+      this.myUser = res;
       this.carregarPropostas();
     });
   }
@@ -51,7 +52,7 @@ export class PlPropostasPage {
 
     loading.present();
 
-    this.projetoDeLeiService.getProjetosDeLeiLikes('ap', this.myID).then(res => {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('ap', (+this.myUser.IDUsuario)).then(res => {
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
@@ -82,70 +83,72 @@ export class PlPropostasPage {
 
   private like(projetodelei, tipo: string) {
     projetodelei.t = projetodelei.t == tipo ? 'u' : tipo;
-    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.myID, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
+    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, (+this.myUser.IDUsuario), projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
       projetodelei.p = res.value.p;
       projetodelei.n = res.value.n;
     });
   }
 
   private abrirOpcoes(pl: ProjetoDeLei) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Opções',
-      buttons: [
-        {
-          text: 'Reprovar',
-          role: 'destructive',
-          icon: 'trash',
-          handler: () => {
-            this.alertCtrl.create({
-              title: 'Reprovar projeto de lei',
-              message: "Digite mensagem para usuario",
-              inputs: [
-                {
-                  name: 'mensagem',
-                  placeholder: 'Digite aqui'
-                },
-              ],
-              buttons: [
-                {
-                  text: 'Cancel',
-                  handler: data => {
-                  }
-                },
-                {
-                  text: 'Enviar',
-                  handler: data => {
-                    this.feedService.reprovarVarios(pl.ids, pl.pushs, this, pl, data.mensagem);
-                  }
-                }]
-            }).present();
-          }
-        },
-        {
-          text: 'Adicionar Projeto de Lei',
-          icon: 'logo-buffer',
-          handler: () => {
-            let modal = this.modalCtrl.create(NovaPlPage, { pl: pl });
-            modal.onDidDismiss(data => {
-              if (data != undefined) {
-                this.feedService.confirmarVariasPl(data.pl.ids, data.pl.pushs, this, data.pl, null, data.msg);
-              }
+    if (this.myUser.permissao == 1) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'Opções',
+        buttons: [
+          {
+            text: 'Reprovar',
+            role: 'destructive',
+            icon: 'trash',
+            handler: () => {
+              this.alertCtrl.create({
+                title: 'Reprovar projeto de lei',
+                message: "Digite mensagem para usuario",
+                inputs: [
+                  {
+                    name: 'mensagem',
+                    placeholder: 'Digite aqui'
+                  },
+                ],
+                buttons: [
+                  {
+                    text: 'Cancel',
+                    handler: data => {
+                    }
+                  },
+                  {
+                    text: 'Enviar',
+                    handler: data => {
+                      this.feedService.reprovarVarios(pl.ids, pl.pushs, this, pl, data.mensagem);
+                    }
+                  }]
+              }).present();
+            }
+          },
+          {
+            text: 'Adicionar Projeto de Lei',
+            icon: 'logo-buffer',
+            handler: () => {
+              let modal = this.modalCtrl.create(NovaPlPage, { pl: pl });
+              modal.onDidDismiss(data => {
+                if (data != undefined) {
+                  this.feedService.confirmarVariasPl(data.pl.ids, data.pl.pushs, this, data.pl, null, data.msg);
+                }
 
-            });
-            modal.present();
+              });
+              modal.present();
 
+            }
+          },
+          {
+            text: 'Cancel',
+            icon: !this.platform.is('ios') ? 'close' : null,
+            role: 'cancel',
+            handler: () => {
+            }
           }
-        },
-        {
-          text: 'Cancel',
-          icon: !this.platform.is('ios') ? 'close' : null,
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+        ]
+      });
+      actionSheet.present();
+    }
   }
 
   private confirmado(pl) {
@@ -164,7 +167,7 @@ export class PlPropostasPage {
       });
     } else {
       pl.estado = 'tr';
-      pl.IDUsuario = this.myID;
+      pl.IDUsuario = this.myUser.IDUsuario;
       this.projetoDeLeiService.addProjetoDeLei(pl).then(res => {
         if (!res.error && res.value) {
           //works fine
@@ -215,7 +218,7 @@ export class PlPropostasPage {
   }
 
   private doRefresh(refresher) {
-    this.projetoDeLeiService.getProjetosDeLeiLikes('ap', this.myID).then(res => {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('ap', (+this.myUser.IDUsuario)).then(res => {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;

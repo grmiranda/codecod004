@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, PopoverController } from 'ionic-angular';
 import { Publicacao } from '../../model/publicacao';
-import { ShareService } from '../../providers/share-service';
 import { CompartilharPage } from '../compartilhar/compartilhar';
 
 @Component({
@@ -14,8 +13,7 @@ export class PublicacaoPage {
 
   constructor(
     public navParams: NavParams,
-    public popoverCtrl: PopoverController,
-    private shareService: ShareService
+    public popoverCtrl: PopoverController
     ) {
     this.publicacao = this.navParams.get("publicacao");
   }
@@ -32,7 +30,6 @@ export class PublicacaoPage {
       }
     };
     popover.present({ ev: event });
-    //this.shareService.compartilhar(this.publicacao.titulo, this.publicacao.texto, this.publicacao.fotoURL, null);
   }
 
 }

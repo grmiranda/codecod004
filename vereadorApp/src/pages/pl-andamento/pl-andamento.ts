@@ -8,6 +8,7 @@ import { NovaPlPage } from '../nova-pl/nova-pl';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 import { FeedBackService } from '../../providers/feed-back-service';
+import { Usuario } from '../../model/user';
 
 @Component({
   selector: 'page-pl-andamento',
@@ -16,7 +17,7 @@ import { FeedBackService } from '../../providers/feed-back-service';
 export class PlAndamentoPage {
 
   private pls: any[] = [];
-  private myID;
+  private myUser: Usuario;
 
   constructor(
     public navCtrl: NavController,
@@ -34,7 +35,7 @@ export class PlAndamentoPage {
 
   ionViewWillEnter() {
     this.storage.get().then(res => {
-      this.myID = res.IDUsuario;
+      this.myUser = res;
       this.carregarPropostas();
     });
   }
@@ -47,7 +48,7 @@ export class PlAndamentoPage {
 
     loading.present();
 
-    this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('tr', (+this.myUser.IDUsuario)).then(res => {
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
@@ -88,84 +89,86 @@ export class PlAndamentoPage {
 
   private like(projetodelei, tipo: string) {
     projetodelei.t = projetodelei.t == tipo ? 'u' : tipo;
-    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.myID, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
+    this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.myUser.IDUsuario, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
       projetodelei.p = res.value.p;
       projetodelei.n = res.value.n;
     });
   }
 
   private abrirOpcoes(pl: ProjetoDeLei) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Opções',
-      buttons: [
-        {
-          text: 'Reprovar',
-          role: 'destructive',
-          icon: 'close-circle',
-          handler: () => {
-            this.alertCtrl.create({
-              title: 'Reprovar projeto de lei',
-              message: "Digite mensagem para usuario",
-              inputs: [
-                {
-                  name: 'mensagem',
-                  placeholder: 'Digite aqui'
-                },
-              ],
-              buttons: [
-                {
-                  text: 'Cancel',
-                  handler: data => {
-                  }
-                },
-                {
-                  text: 'Enviar',
-                  handler: data => {
-                    this.feedService.reprovarVarios(pl.ids, pl.pushs, this, pl, data.mensagem);
-                  }
-                }]
-            }).present();
-          }
-        },
-        {
-          text: 'Aprovar',
-          icon: 'checkmark-circle',
-          handler: () => {
-            this.alertCtrl.create({
-              title: 'Reprovar projeto de lei',
-              message: "Digite mensagem para usuario",
-              inputs: [
-                {
-                  name: 'mensagem',
-                  placeholder: 'Digite aqui'
-                },
-              ],
-              buttons: [
-                {
-                  text: 'Cancel',
-                  handler: data => {
-                  }
-                },
-                {
-                  text: 'Enviar',
-                  handler: data => {
-                    this.feedService.confirmarVariasPl(pl.ids, pl.pushs, this, pl, null, data.mensagem);
-                  }
-                }]
-            }).present();
+    if (this.myUser.permissao == 1) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'Opções',
+        buttons: [
+          {
+            text: 'Reprovar',
+            role: 'destructive',
+            icon: 'close-circle',
+            handler: () => {
+              this.alertCtrl.create({
+                title: 'Reprovar projeto de lei',
+                message: "Digite mensagem para usuario",
+                inputs: [
+                  {
+                    name: 'mensagem',
+                    placeholder: 'Digite aqui'
+                  },
+                ],
+                buttons: [
+                  {
+                    text: 'Cancel',
+                    handler: data => {
+                    }
+                  },
+                  {
+                    text: 'Enviar',
+                    handler: data => {
+                      this.feedService.reprovarVarios(pl.ids, pl.pushs, this, pl, data.mensagem);
+                    }
+                  }]
+              }).present();
+            }
+          },
+          {
+            text: 'Aprovar',
+            icon: 'checkmark-circle',
+            handler: () => {
+              this.alertCtrl.create({
+                title: 'Reprovar projeto de lei',
+                message: "Digite mensagem para usuario",
+                inputs: [
+                  {
+                    name: 'mensagem',
+                    placeholder: 'Digite aqui'
+                  },
+                ],
+                buttons: [
+                  {
+                    text: 'Cancel',
+                    handler: data => {
+                    }
+                  },
+                  {
+                    text: 'Enviar',
+                    handler: data => {
+                      this.feedService.confirmarVariasPl(pl.ids, pl.pushs, this, pl, null, data.mensagem);
+                    }
+                  }]
+              }).present();
 
+            }
+          },
+          {
+            text: 'Cancel',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {
+            }
           }
-        },
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+        ]
+      });
+      actionSheet.present();
+    }
   }
 
   private tentarNovamente() {
@@ -211,7 +214,7 @@ export class PlAndamentoPage {
   }
 
   private doRefresh(refresher) {
-    this.projetoDeLeiService.getProjetosDeLeiLikes('tr', this.myID).then(res => {
+    this.projetoDeLeiService.getProjetosDeLeiLikes('tr', (+this.myUser.IDUsuario)).then(res => {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;

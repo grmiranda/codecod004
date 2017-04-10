@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { StorageService } from '../../providers/storage';
 import { LikeService } from '../../providers/like-service';
@@ -18,11 +18,14 @@ export class PlAndamentoPage {
   private pls: any[] = [];
   private myID;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public likeService: LikeService,
     public projetoDeLeiService: ProjetoDeLeiService,
     private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
     public storage: StorageService,
+    private feedService: FeedBackService,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController
   ) {
@@ -32,7 +35,7 @@ export class PlAndamentoPage {
   ionViewWillEnter() {
     this.storage.get().then(res => {
       this.myID = res.IDUsuario;
-    this.carregarPropostas();
+      this.carregarPropostas();
     });
   }
 
@@ -48,7 +51,7 @@ export class PlAndamentoPage {
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
-      }else{
+      } else {
         this.tentarNovamente();
       }
     });
@@ -58,7 +61,7 @@ export class PlAndamentoPage {
     this.navCtrl.push(NovaPlPage);
   }
 
-  private aprovar(pl: ProjetoDeLei) {
+  private confirmado(pl: ProjetoDeLei) {
     pl.estado = 'cp';
     this.projetoDeLeiService.editProjetoDeLei(pl).then(res => {
       if (!res.error && res.value) {
@@ -100,14 +103,57 @@ export class PlAndamentoPage {
           role: 'destructive',
           icon: 'close-circle',
           handler: () => {
-            this.reprovar(pl);
+            this.alertCtrl.create({
+              title: 'Reprovar projeto de lei',
+              message: "Digite mensagem para usuario",
+              inputs: [
+                {
+                  name: 'mensagem',
+                  placeholder: 'Digite aqui'
+                },
+              ],
+              buttons: [
+                {
+                  text: 'Cancel',
+                  handler: data => {
+                  }
+                },
+                {
+                  text: 'Enviar',
+                  handler: data => {
+                    this.feedService.reprovarVarios(pl.ids, pl.pushs, this, pl, data.mensagem);
+                  }
+                }]
+            }).present();
           }
         },
         {
           text: 'Aprovar',
           icon: 'checkmark-circle',
           handler: () => {
-            this.aprovar(pl);
+            this.alertCtrl.create({
+              title: 'Reprovar projeto de lei',
+              message: "Digite mensagem para usuario",
+              inputs: [
+                {
+                  name: 'mensagem',
+                  placeholder: 'Digite aqui'
+                },
+              ],
+              buttons: [
+                {
+                  text: 'Cancel',
+                  handler: data => {
+                  }
+                },
+                {
+                  text: 'Enviar',
+                  handler: data => {
+                    this.feedService.confirmarVariasPl(pl.ids, pl.pushs, this, pl, null, data.mensagem);
+                  }
+                }]
+            }).present();
+
           }
         },
         {
@@ -153,7 +199,7 @@ export class PlAndamentoPage {
           text: 'Ok',
           handler: () => {
             if (tipo == 1) {
-              this.aprovar(pl);
+              this.confirmado(pl);
             } else if (tipo == 2) {
               this.reprovar(pl);
             }
@@ -169,14 +215,23 @@ export class PlAndamentoPage {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;
-      }else{
+      } else {
         this.tentarNovamente();
       }
     });
   }
 
-  public abrirPL(pl: ProjetoDeLei){
-    this.navCtrl.push(VisualizarPlPage, {pl: pl});
+  public abrirPL(pl: ProjetoDeLei) {
+    this.navCtrl.push(VisualizarPlPage, { pl: pl });
+  }
+
+  private displayToast(mensagem: string) {
+    let toast = this.toastCtrl.create({
+      message: mensagem,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }

@@ -48,6 +48,47 @@ export class NovaPublicacaoPage {
     }
   }
 
+  opcaoAdd(){
+    let semFoto = this.actionSheetCtrl.create({
+      title: "Adicionar",
+      buttons: [
+        {
+          text: 'Foto da galeria',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.importarFoto();
+          }
+        },
+        {
+          text: 'Foto da câmera',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.tirarFoto();
+          }
+        },
+        {
+          text: 'Vídeo',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.addLink();
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    semFoto.present();
+
+  }
+
   private addLink() {
     let prompt = this.alertCtrl.create({
       title: 'YouTube',

@@ -16,41 +16,28 @@
     </ion-item>
     <ion-item class="itemtextarea">
       <ion-label floating>Descrição</ion-label>
-      <ion-textarea rows="10" [(ngModel)]="publicacao.texto" name="texto"></ion-textarea>
+      <ion-textarea autoresize [(ngModel)]="publicacao.texto" name="texto"></ion-textarea>
     </ion-item>
-
-     <ion-slides pager>
-
-      <ion-slide *ngFor="let publicacaoAtual of publicacao.fotoURL" style="margin-left: 10px">
-        <img [src]="publicacaoAtual" style="width: 100%;" (press)="opcaoApagar(publicacaoAtual)" />
-      </ion-slide>
-
-    </ion-slides>
+    <p class="centralizar" *ngIf="publicacao.video=='' && publicacao.fotoURL.lenght!=0">Clique no "+" para adicionar Fotos ou um Vídeo</p>
+    <p class="centralizar" *ngIf="publicacao.fotoURL.lenght==0">Clique no "+" para adicionar mais Fotos</p>
+      <ion-grid *ngIf="publicacao.video==''">
+        <ion-row>
+          <ion-col col-4 *ngFor="let publicacaoAtual of publicacao.fotoURL" col-4 class="margem">
+            <div class="add">
+              <img [src]="publicacaoAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
+            </div>
+          </ion-col>
+          
+          <ion-col col-4 class="margem" (click)="opcaoAdd()">
+            <div class="add">
+              <ion-icon class="add-icon" name="add"></ion-icon> 
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
     <ion-item>
-      <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen ></iframe>
-      <ion-row>
-        <ion-col *ngIf="publicacao.video == ''">
-          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="image"></ion-icon>
-            </button>
-        </ion-col>
-        <ion-col *ngIf="publicacao.video == ''">
-          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="camera"></ion-icon>
-            </button>
-        </ion-col>
-        <ion-col *ngIf="publicacao.fotoURL.length == 0 && publicacao.video != ''">
-          <button (click)="removerVideo()" class="fabbuttons" color="danger" ion-fab large>
-              <ion-icon name="remove"></ion-icon>
-            </button>
-        </ion-col>
-        <ion-col *ngIf="publicacao.fotoURL.length == 0">
-          <button (click)="addLink()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="logo-youtube"></ion-icon>
-            </button>
-        </ion-col>
-      </ion-row>
+      <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen></iframe>
     </ion-item>
     <ion-item>
       <button class="blockbutton" (click)="publicar()" color="secondary" ion-button block large>Publicar</button>

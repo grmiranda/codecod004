@@ -1,6 +1,7 @@
 <?php 
     include 'mySQL.php';
-    require 'mySQL.php';     
+    require 'mySQL.php';
+	require 'push.php';     
 ?>
 
 <?php
@@ -43,6 +44,7 @@
 				if ($aux != $idR){
 					$sql = "INSERT INTO caixadeentrada (IDMensagem, IDUsuario, lido) VALUES ('$idM', '$aux', '0')";
 					$con->query($sql);
+					enviarPushTo('Nova Mensagem', $aux);
 				}
 			}
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams, ActionSheetController } from 'ionic-angular';
-import { ProjetoDeLeiService } from '../../providers/pl-service';
+import { NavController, AlertController, ToastController, NavParams, ActionSheetController, ViewController } from 'ionic-angular';
 import { FotoService } from '../../providers/foto-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { StorageService } from '../../providers/storage';
@@ -16,8 +15,8 @@ export class NovaPlPage {
   private myID;
 
   constructor(public navCtrl: NavController,
-    public projetoDeLeiService: ProjetoDeLeiService,
     public navParams: NavParams,
+    public view: ViewController,
     private toastCtrl: ToastController,
     public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
@@ -41,33 +40,33 @@ export class NovaPlPage {
     } else if (this.pl.ementa.trim() == '') {
       this.displayToast("Adicione uma ementa à Proposta");
     } else {
-      if (this.pl.IDUsuario) {
-        this.pl.estado = 'tr';
-        this.projetoDeLeiService.editProjetoDeLei(this.pl).then(res => {
-          if (!res.error && res.value) {
-            //works fine
-            this.displayToast('Projeto de Lei aceito!');
-            this.navCtrl.pop();
-          } else {
-            //error - falha conexao / tentar denovo
-            this.showConfirm();
-          }
-        });
-      } else {
-        this.pl.estado = 'tr';
-        this.pl.IDUsuario = this.myID;
-        this.projetoDeLeiService.addProjetoDeLei(this.pl).then(res => {
-          if (!res.error && res.value) {
-            //works fine
-            this.displayToast('Projeto de Lei criado!');
-            this.navCtrl.pop();
-          } else {
-            //error - falha conexao / tentar denovo
-            this.showConfirm();
-          }
-        });
-      }
+      this.enviarMensagem();
     }
+  }
+
+  public enviarMensagem() {
+    this.alertCtrl.create({
+      title: 'Aprovar',
+      message: "Digite mensagem para usuario",
+      inputs: [
+        {
+          name: 'mensagem',
+          placeholder: 'Digite aqui'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Enviar',
+          handler: data => {
+          this.view.dismiss({pl: this.pl, msg : data.mensagem});
+          }
+        }]
+    }).present();
   }
 
   private importarFoto() {
@@ -126,25 +125,6 @@ export class NovaPlPage {
       position: 'top'
     });
     toast.present();
-  }
-
-  private showConfirm() {
-    let confirm = this.alertCtrl.create({
-      title: 'Falha na conexão',
-      message: 'Tentar Novamente ?',
-      buttons: [
-        {
-          text: 'Cancelar'
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            this.finalizar();
-          }
-        }
-      ]
-    });
-    confirm.present();
   }
 
 }

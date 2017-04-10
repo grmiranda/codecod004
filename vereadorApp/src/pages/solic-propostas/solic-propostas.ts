@@ -81,7 +81,6 @@ export class SolicPropostasPage {
     }).catch(() => this.loading.dismiss());
   }
 
-
   private displayToast(mensagem: string) {
     let toast = this.toastCtrl.create({
       message: mensagem,
@@ -90,7 +89,6 @@ export class SolicPropostasPage {
     });
     toast.present();
   }
-
 
   private like(solicitacao, tipo: string) {
     solicitacao.t = solicitacao.t == tipo ? 'u' : tipo;

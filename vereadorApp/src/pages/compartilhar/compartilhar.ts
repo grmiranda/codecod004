@@ -40,7 +40,7 @@ export class CompartilharPage {
   }
 
   private compartilharWhatsApp(){
-    this.shareService.compartilharWhatsApp(this.titulo, this.foto, null);
+    this.shareService.compartilharWhatsApp(`*${this.titulo}* - ${this.subtitulo} \nvia *LUIZ DA FEIRA*`, this.foto, null);
     this.view.dismiss()
   }
 

@@ -58,8 +58,7 @@ export class AvaliarPlPage {
   }
 
   private reprovar(pl: ProjetoDeLei) {
-    pl.estado = 'pr';
-    this.projetoDeLeiService.editProjetoDeLei(pl).then(res => {
+    this.projetoDeLeiService.delete(pl).then(res => {
       if (!res.error && res.value) {
         //works fine
         this.carregarPropostas();

@@ -63,6 +63,14 @@ export class ProjetoDeLeiService {
       .catch(this.handleErrorMessage);
   }
 
+  public delete(projetoDeLei: ProjetoDeLei): Promise<any>{
+    return this.http
+      .post('http://www.dsoutlet.com.br/apiLuiz/delProjetoDeLei.php', JSON.stringify(projetoDeLei.IDPL), { headers: this.headers })
+      .toPromise()
+      .then(res => this.extractEditData(res))
+      .catch(this.handleErrorMessage);
+  }
+
   private extractEditData(res: Response) {
     let retorno = { error: false, value: false };
     let data = res.json();

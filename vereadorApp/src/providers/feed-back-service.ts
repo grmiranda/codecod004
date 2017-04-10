@@ -79,7 +79,7 @@ export class FeedBackService {
     }).present();
   }
 
-  public reprovarVarios(idUser: string[], push, funcao, solicitacao, msg: string) {
+  public reprovarVarios(idUser: string[], push, funcao, solicitacaoEPl, msg: string) {
     if (msg != "") {
       let mensagemEnviar = new CorpoMensagem();
       mensagemEnviar.mensagem = msg;
@@ -91,13 +91,13 @@ export class FeedBackService {
             let pessoa = { Push: push[i] };
             this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
           }
-          funcao.reprovar(solicitacao);
+          funcao.reprovar(solicitacaoEPl);
         });
       }
     }
     else {
       if (funcao != null) {
-        funcao.reprovar(solicitacao);
+        funcao.reprovar(solicitacaoEPl);
       }
     }
   }
@@ -114,12 +114,13 @@ export class FeedBackService {
             let pessoa = { Push: push[i] };
             this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
           }
-          if (requerimento == null) {
-            funcao.confirmado(solicitacao);
-          } else {
-            funcao.confirmado(solicitacao,requerimento );
-          }
+
         });
+      }
+      if (requerimento == null) {
+        funcao.confirmado(solicitacao);
+      } else {
+        funcao.confirmado(solicitacao, requerimento);
       }
     }
     else {
@@ -127,6 +128,36 @@ export class FeedBackService {
         funcao.confirmado(solicitacao);
       } else {
         funcao.confirmado(solicitacao, requerimento);
+      }
+    }
+  }
+
+
+  public confirmarVariasPl(idUser: string[], push, funcao, pl, aux, msg: string) {
+    if (msg != "") {
+      let mensagemEnviar = new CorpoMensagem();
+      mensagemEnviar.mensagem = msg;
+      mensagemEnviar.remetente = this.meuId;
+      for (let i = 0; i < idUser.length; i++) {
+        mensagemEnviar.destinatario = idUser[i];
+        this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
+          if (res == true) {
+            let pessoa = { Push: push[i] };
+            this.pushService.pushUmaPessoa("Nova mensagem", pessoa);
+          }
+        });
+      }
+      if (aux == null) {
+        funcao.confirmado(pl);
+      } else {
+        funcao.confirmado(pl, aux);
+      }
+    }
+    else {
+      if (aux == null) {
+        funcao.confirmado(pl);
+      } else {
+        funcao.confirmado(pl, aux);
       }
     }
   }

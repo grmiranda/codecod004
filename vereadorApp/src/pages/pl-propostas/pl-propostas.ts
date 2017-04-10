@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, Platform, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, ActionSheetController, Platform, AlertController, LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { NovaPropostaPlPage } from '../nova-proposta-pl/nova-proposta-pl';
 import { NovaPlPage } from '../nova-pl/nova-pl';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
@@ -8,6 +8,7 @@ import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { LikeService } from '../../providers/like-service';
 import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
+import { FeedBackService } from '../../providers/feed-back-service';
 
 
 @Component({
@@ -19,21 +20,26 @@ export class PlPropostasPage {
   private pls: any[] = [];
   private myID;
 
-  constructor(public projetoDeLeiService: ProjetoDeLeiService,
+  constructor(
+    public projetoDeLeiService: ProjetoDeLeiService,
     public likeService: LikeService,
     public storage: StorageService,
     public navCtrl: NavController,
+    private feedService: FeedBackService,
+    private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
-    public platform: Platform) {
+    private modalCtrl: ModalController,
+    public platform: Platform
+  ) {
 
   }
 
   ionViewWillEnter() {
     this.storage.get().then(res => {
       this.myID = res.IDUsuario;
-    this.carregarPropostas();
+      this.carregarPropostas();
     });
   }
 
@@ -55,12 +61,14 @@ export class PlPropostasPage {
     });
   }
 
+
+
   private novaProposta() {
     this.navCtrl.push(NovaPropostaPlPage);
   }
 
   private reprovar(pl: ProjetoDeLei) {
-    pl.estado = 'pr';
+    pl.estado = 'cn';
     this.projetoDeLeiService.editProjetoDeLei(pl).then(res => {
       if (!res.error) {
         //removeu
@@ -89,14 +97,43 @@ export class PlPropostasPage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.reprovar(pl);
+            this.alertCtrl.create({
+              title: 'Reprovar projeto de lei',
+              message: "Digite mensagem para usuario",
+              inputs: [
+                {
+                  name: 'mensagem',
+                  placeholder: 'Digite aqui'
+                },
+              ],
+              buttons: [
+                {
+                  text: 'Cancel',
+                  handler: data => {
+                  }
+                },
+                {
+                  text: 'Enviar',
+                  handler: data => {
+                    this.feedService.reprovarVarios(pl.ids, pl.pushs, this, pl, data.mensagem);
+                  }
+                }]
+            }).present();
           }
         },
         {
           text: 'Adicionar Projeto de Lei',
           icon: 'logo-buffer',
           handler: () => {
-            this.navCtrl.push(NovaPlPage, { pl: pl });
+            let modal = this.modalCtrl.create(NovaPlPage, { pl: pl });
+            modal.onDidDismiss(data => {
+              if (data != undefined) {
+                this.feedService.confirmarVariasPl(data.pl.ids, data.pl.pushs, this, data.pl, null, data.msg);
+              }
+
+            });
+            modal.present();
+
           }
         },
         {
@@ -109,6 +146,36 @@ export class PlPropostasPage {
       ]
     });
     actionSheet.present();
+  }
+
+  private confirmado(pl) {
+
+    if (pl.IDUsuario) {
+      pl.estado = 'tr';
+      this.projetoDeLeiService.editProjetoDeLei(pl).then(res => {
+        if (!res.error && res.value) {
+          //works fine
+          this.carregarPropostas();
+          this.displayToast('Projeto de Lei aceito!');
+        } else {
+          //error - falha conexao / tentar denovo
+          this.showConfirm(pl);
+        }
+      });
+    } else {
+      pl.estado = 'tr';
+      pl.IDUsuario = this.myID;
+      this.projetoDeLeiService.addProjetoDeLei(pl).then(res => {
+        if (!res.error && res.value) {
+          //works fine
+          this.carregarPropostas();
+          this.displayToast('Projeto de Lei criado!');
+        } else {
+          //error - falha conexao / tentar denovo
+          this.showConfirmPl(pl);
+        }
+      });
+    }
   }
 
   private showConfirm(pl: ProjetoDeLei) {
@@ -152,14 +219,42 @@ export class PlPropostasPage {
       refresher.complete();
       if (!res.error) {
         this.pls = res.data;
-      }else{
+      } else {
         this.tentarNovamente();
       }
     });
   }
 
-  public abrirPL(pl: ProjetoDeLei){
-    this.navCtrl.push(VisualizarPlPage, {pl: pl});
+  public abrirPL(pl: ProjetoDeLei) {
+    this.navCtrl.push(VisualizarPlPage, { pl: pl });
+  }
+
+  private showConfirmPl(pl) {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.confirmado(pl);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  private displayToast(mensagem: string) {
+    let toast = this.toastCtrl.create({
+      message: mensagem,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }

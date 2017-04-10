@@ -27,6 +27,6 @@
         <img [src]="publicacaoAtual" style="width: 100%;" />
       </ion-slide>
     </ion-slides>
-    <ion-textarea rows="10" [(ngModel)]="publicacao.texto" readonly="true" name="texto"></ion-textarea>
+    <ion-textarea autoresize [(ngModel)]="publicacao.texto" readonly="true" name="texto"></ion-textarea>
   </ion-card>
 </ion-content>

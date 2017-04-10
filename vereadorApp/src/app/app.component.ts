@@ -80,6 +80,7 @@ export class MyApp {
       }, 100);
 
 
+
       window["plugins"].OneSignal
         .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
         .handleNotificationOpened(notificationOpenedCallback)
@@ -102,7 +103,7 @@ export class MyApp {
       this.platform.exitApp();
     } else {
       this.countTimerForCloseApp = true;
-      this.displayToast('Press again to exit.');
+      this.displayToast('Pressione novamente para sair');
       let timeout = setTimeout(() => {
         this.countTimerForCloseApp = false;
       }, 2000);

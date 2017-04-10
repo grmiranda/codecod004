@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, LoadingController, MenuController } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
@@ -18,6 +18,7 @@ export class AvaliarPlPage {
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     private feedService: FeedBackService,
+    private menuCtrl: MenuController,
     public navCtrl: NavController) {
 
   }
@@ -156,6 +157,10 @@ export class AvaliarPlPage {
 
   public abrirPL(pl: ProjetoDeLei) {
     this.navCtrl.push(VisualizarPlPage, { pl: pl });
+  }
+
+  private toggleMenu(){
+    this.menuCtrl.toggle();
   }
 
 }

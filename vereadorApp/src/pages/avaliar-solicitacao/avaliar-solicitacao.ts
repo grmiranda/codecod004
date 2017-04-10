@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, ActionSheetController, AlertController, ToastController, LoadingController } from 'ionic-angular';
+import { ModalController, NavController, ActionSheetController, AlertController, ToastController, LoadingController, MenuController, ViewController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 import { PushService } from '../../providers/push-service';
@@ -22,9 +22,11 @@ export class AvaliarSolicitacaoPage {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
+    public menuCtrl: MenuController,
     public solicitacaoService: SolicitacaoService,
     public actionSheetCtrl: ActionSheetController,
-    private feedService: FeedBackService
+    private feedService: FeedBackService,
+    private viewCtrl: ViewController
   ) { }
 
   ionViewWillEnter() {
@@ -164,6 +166,10 @@ export class AvaliarSolicitacaoPage {
 
   private editarSolicitacao(solicitacao: Solicitacao) {
     this.navCtrl.push(EditarSolicitacaoPage, { solicitacao: solicitacao, funcao: this.myCallbackFunction, page: this, service: this.feedService });
+  }
+
+  private toggleMenu(){
+    this.menuCtrl.toggle();
   }
 
 }

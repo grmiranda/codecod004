@@ -71,15 +71,10 @@ export class MyApp {
       var notificationOpenedCallback = function (jsonData) {
       };
 
-      platform.registerBackButtonAction(() => {
-        if (this.navCtrl.canGoBack()) {
-          this.navCtrl.pop();
-        } else {
-          this.showConfirm();
-        }
-      }, 100);
-
-
+      // platform.registerBackButtonAction(() => {
+      //   console.log(this.navCtrl.getActive().name);
+      //   // console.log(this.navCtrl.getActiveChildNav().name);
+      // }, 100);
 
       window["plugins"].OneSignal
         .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
@@ -123,7 +118,7 @@ export class MyApp {
   openPerfil() {
     this.menuCtrl.close();
     this.pageAtual = "Perfil";
-    this.navCtrl.setRoot(PerfilPage);
+    this.navCtrl.push(PerfilPage);
   }
 
   openPage(page) {
@@ -131,7 +126,7 @@ export class MyApp {
     if (this.pageAtual === page.title) {
     } else {
       this.pageAtual = page.title;
-      this.navCtrl.setRoot(page.component);
+      this.navCtrl.push(page.component);
     }
   }
 

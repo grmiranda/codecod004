@@ -1,8 +1,10 @@
 <ion-header>
-  <ion-navbar color="laranja">
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
+  <ion-navbar hideBackButton="true" color="laranja">
+    <ion-buttons left>
+      <button class="menuIcon" ion-button icon-only (click)="toggleMenu()" style="padding-left: 25px">
+        <ion-icon name="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Troféu Cidadania</ion-title>
   </ion-navbar>
 </ion-header>

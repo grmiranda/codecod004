@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, MenuController } from 'ionic-angular';
 import { TelefonesPage } from '../telefones/telefones';
 import { Http } from '@angular/http';
 import { Categorias } from '../../model/categoriasTelefone';
@@ -20,6 +20,7 @@ export class CategoriasPage {
   constructor(
     private alertCtrl: AlertController,
     public loadingController: LoadingController,
+    private menuCtrl: MenuController,
     public navCtrl: NavController,
     private http: Http) {
     this.carregarItens();
@@ -44,7 +45,7 @@ export class CategoriasPage {
       this.quicksort(this.todosTelefones, 0, this.todosTelefones.length - 1);
       this.auxTelefones = this.todosTelefones;
       loader.dismiss();
-    }).catch(()=>{
+    }).catch(() => {
       loader.dismiss();
       this.tentarNovamente();
     });
@@ -136,4 +137,9 @@ export class CategoriasPage {
     });
     confirm.present();
   }
+
+  private toggleMenu() {
+    this.menuCtrl.toggle();
+  }
+
 }

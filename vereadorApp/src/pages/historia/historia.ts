@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { MenuController } from 'ionic-angular';
 
 @Component({
   selector: 'page-historia',
@@ -7,6 +7,10 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HistoriaPage {
 
-  constructor() {}
+  constructor(private menuCtrl: MenuController) {}
+
+  private toggleMenu(){
+    this.menuCtrl.toggle();
+  }
 
 }

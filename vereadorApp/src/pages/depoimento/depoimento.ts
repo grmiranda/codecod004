@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, MenuController } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
 import { NovoDepoimentoPage } from '../novo-depoimento/novo-depoimento';
 import { DepoimentoService } from '../../providers/depoimento-service';
@@ -12,6 +12,7 @@ export class DepoimentoPage {
   private depoimentos: Depoimento[] = [];
 
   constructor(public navCtrl: NavController,
+    private menuCtrl: MenuController,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private depoimentoService: DepoimentoService) {
@@ -69,4 +70,9 @@ export class DepoimentoPage {
     });
     confirm.present();
   }
+
+  private toggleMenu() {
+    this.menuCtrl.toggle();
+  }
+
 }

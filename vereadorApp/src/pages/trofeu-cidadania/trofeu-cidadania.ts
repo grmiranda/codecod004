@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, LoadingController } from 'ionic-angular';
+import { AlertController, LoadingController, MenuController } from 'ionic-angular';
 import { PontuacaoService } from '../../providers/pontuacao-service';
 import { Usuario } from '../../model/user';
 import { StorageService } from '../../providers/storage';
@@ -18,6 +18,7 @@ export class TrofeuCidadaniaPage {
   });
 
   constructor(private storage: StorageService, private pontuacaoService: PontuacaoService,
+    private menuCtrl: MenuController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
 
@@ -69,6 +70,10 @@ export class TrofeuCidadaniaPage {
       ]
     });
     confirm.present();
+  }
+
+  private toggleMenu() {
+    this.menuCtrl.toggle();
   }
 
 }

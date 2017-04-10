@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
+import { ActionSheetController, NavParams, ToastController, AlertController, LoadingController, MenuController } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
 import { DepoimentoService } from '../../providers/depoimento-service';
 
@@ -16,6 +16,7 @@ export class AvaliarDepoimentoPage {
     private toastCtrl: ToastController,
     public loadingController: LoadingController,
     private depoimentoService: DepoimentoService,
+    private menuCtrl: MenuController,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController
   ) {
@@ -123,4 +124,9 @@ export class AvaliarDepoimentoPage {
     });
     confirm.present();
   }
+
+  private toggleMenu() {
+    this.menuCtrl.toggle();
+  }
+
 }

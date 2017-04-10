@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ModalController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController, AlertController, MenuController } from 'ionic-angular';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { MonthViewComponent } from 'ionic2-calendar/monthview';
 import { WeekViewComponent } from 'ionic2-calendar/weekview';
@@ -28,6 +28,7 @@ export class AgendaPage {
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public calendarMd: NgCalendarModule,
+    private menuCtrl: MenuController,
     public loadingController: LoadingController,
     private alertCtrl: AlertController,
     private eventoService: EventoService,
@@ -129,4 +130,9 @@ export class AgendaPage {
     });
     modal.present();
   }
+
+  private toggleMenu(){
+    this.menuCtrl.toggle();
+  }
+
 }

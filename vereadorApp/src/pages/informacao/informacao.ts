@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Questoes } from '../../model/Questoes';
 import 'rxjs/add/operator/toPromise';
@@ -16,6 +16,7 @@ export class InformacaoPage {
 
   constructor(
     private alertCtrl: AlertController,
+    private menuCtrl: MenuController,
     private loadingCtrl: LoadingController,
     private http: Http
   ) {
@@ -32,7 +33,7 @@ export class InformacaoPage {
     this.http.get(this.link).toPromise().then(res => {
       loading.dismiss();
       this.questoes = res.json();
-    }).catch(() =>{
+    }).catch(() => {
       loading.dismiss();
       this.tentarNovamente()
     });
@@ -63,6 +64,10 @@ export class InformacaoPage {
       ]
     });
     confirm.present();
+  }
+
+  private toggleMenu() {
+    this.menuCtrl.toggle();
   }
 
 }

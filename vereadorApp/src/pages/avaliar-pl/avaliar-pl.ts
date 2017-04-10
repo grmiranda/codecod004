@@ -3,6 +3,7 @@ import { NavController, ActionSheetController, AlertController, Platform, Loadin
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
+import { FeedBackService } from '../../providers/feed-back-service';
 
 @Component({
   selector: 'page-avaliar-pl',
@@ -12,14 +13,16 @@ export class AvaliarPlPage {
 
   public pls: ProjetoDeLei[] = [];
 
-  constructor(public projetoDeLeiService: ProjetoDeLeiService,
+  constructor(
+    public projetoDeLeiService: ProjetoDeLeiService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
+    private feedService: FeedBackService,
     public navCtrl: NavController) {
 
-    }
+  }
 
   ionViewWillEnter() {
     this.carregarPropostas();
@@ -78,14 +81,14 @@ export class AvaliarPlPage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.reprovar(pl);
+            this.feedService.showPromptReprovar(pl.IDUsuario.toString(), pl.Push, this, pl);
           }
         },
         {
           text: 'Aprovar',
           icon: 'document',
           handler: () => {
-            this.aprovar(pl);
+            this.feedService.showPromptAprovar(pl.IDUsuario.toString(), pl.Push, this, pl, "Sua proposta de projeto de lei foi aceita com sucesso");
           }
         },
         {
@@ -154,8 +157,8 @@ export class AvaliarPlPage {
     confirm.present();
   }
 
-  public abrirPL(pl: ProjetoDeLei){
-    this.navCtrl.push(VisualizarPlPage, {pl: pl});
+  public abrirPL(pl: ProjetoDeLei) {
+    this.navCtrl.push(VisualizarPlPage, { pl: pl });
   }
 
 }

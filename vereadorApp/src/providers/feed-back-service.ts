@@ -33,9 +33,9 @@ export class FeedBackService {
 
   }
 
-  public showPromptAprovar(idUser: string, push, funcao, solicitacao) {
+  public showPromptAprovar(idUser: string, push, funcao, solicitacao, msg) {
     let mensagemEnviar = new CorpoMensagem();
-    mensagemEnviar.mensagem = "Pedido enviado para avaliação foi aceito com sucesso";
+    mensagemEnviar.mensagem = msg;
     mensagemEnviar.destinatario = idUser;
     mensagemEnviar.remetente = this.meuId;
     this.mensagemService.enviarMensagem(mensagemEnviar).then(res => {
@@ -46,7 +46,6 @@ export class FeedBackService {
       }
     });
   }
-
 
   public showPromptReprovar(idUser: string, push, funcao, solicitacao) {
     this.alertCtrl.create({

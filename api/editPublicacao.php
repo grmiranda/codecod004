@@ -14,10 +14,11 @@
 	if (isset($postdata)){
 		$request = json_decode($postdata);
 		
-		$IDPublicacao	  = $request->IDPublicacao;
-		$fotoURL    	  = $request->fotoURL;
-		$titulo    		  = $request->titulo;
-		$texto			  = $request->texto;
+		$IDPublicacao = $request->IDPublicacao;
+		$fotoURL = $request->fotoURL;
+		$titulo = $request->titulo;
+		$texto = $request->texto;
+		$video = $request->video;
 
 		$sql = "SELECT * FROM publicacao WHERE IDPublicacao = '$IDPublicacao'";
 		$result = $con->query($sql);
@@ -35,7 +36,7 @@
 			echo json_encode(false);
 		}else{
 			//atualizando a publicacao
-			$sql = "UPDATE publicacao SET titulo = '$titulo', texto = '$texto' WHERE IDPublicacao = '$IDPublicacao'";
+			$sql = "UPDATE publicacao SET titulo = '$titulo', texto = '$texto', video = '$video' WHERE IDPublicacao = '$IDPublicacao'";
 			$con->query($sql);
 			//deletando todas as fotos relacioandas
 			$sql = "DELETE FROM fotourl WHERE id = '$IDPublicacao' AND tipo = 'publicacao'";

@@ -1,4 +1,4 @@
-export class ProjetoDeLei{
+export class ProjetoDeLei {
 
     public IDPL: number;
     public titulo: string = "";
@@ -12,9 +12,13 @@ export class ProjetoDeLei{
     //tr - tramitando na camara
     //cp - concluido positivo
     //cn - faça analogia
-    public nomeUsuario:string = "";
-    public fotoUsuario:string = "";
-    constructor(){
+    public nomeUsuario: string = "";
+    public fotoUsuario: string = "";
+    public Push;
+    public pushs = [];
+    public ids = [];
+
+    constructor() {
 
     }
 

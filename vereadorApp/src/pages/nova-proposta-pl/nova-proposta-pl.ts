@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
+import { StorageService } from '../../providers/storage';
+import { PushService } from '../../providers/push-service';
 
 @Component({
   selector: 'page-nova-proposta-pl',
@@ -10,17 +12,23 @@ import { ProjetoDeLeiService } from '../../providers/pl-service';
 export class NovaPropostaPlPage {
 
   private pl: ProjetoDeLei = new ProjetoDeLei();
-  private myID = 8;
+  private myID;
 
   constructor(public navCtrl: NavController,
     public projetoDeLeiService: ProjetoDeLeiService,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private storageService: StorageService,
+    private pushNotification: PushService
+    ) {
+    this.storageService.get().then(res => {
+      this.myID = res.IDUsuario;
+    });
+
+  }
 
   ionViewWillEnter() {
-    // this.storage.get().then(res => {
-    //   this.myID = res.IDUsuario;
-    // });
+
   }
 
   private finalizar() {
@@ -33,6 +41,7 @@ export class NovaPropostaPlPage {
       this.pl.IDUsuario = this.myID;
       this.projetoDeLeiService.addProjetoDeLei(this.pl).then(res => {
         if (!res.error && res.value) {
+          this.pushNotification.pushGrupo("Novo Projeto de Lei para ser avaliado", "administracao");
           this.displayToast("Proposta enviada para avaliação");
           this.navCtrl.pop();
         } else {

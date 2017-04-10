@@ -93,7 +93,7 @@ export class AvaliarSolicitacaoPage {
           text: 'Aprovar',
           icon: 'document',
           handler: () => {
-            this.feedService.showPromptAprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);
+            this.feedService.showPromptAprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao, "Proposta de Solicitação aceita com sucesso");
           }
         },
         {
@@ -166,7 +166,7 @@ export class AvaliarSolicitacaoPage {
     let profileModal = this.modalCtrl.create(EditarSolicitacaoPage, { solicitacao: solicitacao });
     profileModal.onDidDismiss((solicitacaoAtualizada) => {
       if(solicitacaoAtualizada){
-        this.feedService.showPromptAprovar(solicitacaoAtualizada.IDUsuario.toString(), solicitacaoAtualizada.Push, this, solicitacaoAtualizada);
+        this.feedService.showPromptAprovar(solicitacaoAtualizada.IDUsuario.toString(), solicitacaoAtualizada.Push, this, solicitacaoAtualizada, "Sua proposta foi modificada para melhor entendimento para os usuarios");
         this.carregarSolicitacoes();
       }
     });

@@ -3,6 +3,7 @@ import { NavController, AlertController, ToastController, NavParams, ActionSheet
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { FotoService } from '../../providers/foto-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
+import { StorageService } from '../../providers/storage';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ProjetoDeLei } from '../../model/projeto-de-lei';
 export class NovaPlPage {
 
   private pl: ProjetoDeLei;
-  private myID = 8;
+  private myID;
 
   constructor(public navCtrl: NavController,
     public projetoDeLeiService: ProjetoDeLeiService,
@@ -20,18 +21,22 @@ export class NovaPlPage {
     private toastCtrl: ToastController,
     public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
-    private fotoService: FotoService) {
+    private fotoService: FotoService,
+    private storageService: StorageService
+    ) {
 
     this.pl = this.navParams.get("pl");
     if (this.pl == undefined) {
       this.pl = new ProjetoDeLei();
     }
+
+    this.storageService.get().then(res => {
+       this.myID = res.IDUsuario;
+     });
   }
 
   ionViewWillEnter() {
-    // this.storage.get().then(res => {
-    //   this.myID = res.IDUsuario;
-    // });
+   
   }
 
   private finalizar() {

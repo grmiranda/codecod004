@@ -72,6 +72,8 @@
 				}
 			}
 			
+			
+			
 			echo json_encode($vetor);
 		}
 	}

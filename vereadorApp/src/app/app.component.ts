@@ -34,7 +34,7 @@ export class MyApp {
   private bloqueia: boolean = false;
 
 
-  rootPage = LoginPage;
+  rootPage;
 
   pages: Array<{ title: string, component: any }>;
   pageAtual: string;
@@ -50,20 +50,31 @@ export class MyApp {
     private http: Http,
     public events: Events
   ) {
+
+    this.storageService.get().then(userAtual => {
+        if (userAtual.nome) {
+          this.navCtrl.setRoot(HomePage);
+        } else {
+          this.navCtrl.setRoot(LoginPage);
+        }
+        Splashscreen.hide();
+        this.events.publish('user:changed', userAtual);
+      });
+      
     this.pages = [
-    { title: 'Notícias', component: HomePage },
-    { title: 'Solicitações', component: SolicitacoesPage },
-    { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },
-    { title: 'Projetos de Lei', component: TabProjetosDeLeiPage },
-    { title: 'Avaliar Proposta', component: AvaliarPlPage },
-    { title: 'Mensagem', component: TabMensagemPage },
-    { title: 'Agenda', component: AgendaPage },
-    { title: 'Informações úteis', component: InformacaoPage },
-    { title: 'Perguntas Frequentes', component: CategoriasPage },
-    { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
-    { title: 'Depoimentos', component: DepoimentoPage },
-    { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage },
-    { title: 'História do Vereador', component: HistoriaPage }]
+      { title: 'Notícias', component: HomePage },
+      { title: 'Solicitações', component: SolicitacoesPage },
+      { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },
+      { title: 'Projetos de Lei', component: TabProjetosDeLeiPage },
+      { title: 'Avaliar Proposta', component: AvaliarPlPage },
+      { title: 'Mensagem', component: TabMensagemPage },
+      { title: 'Agenda', component: AgendaPage },
+      { title: 'Informações úteis', component: InformacaoPage },
+      { title: 'Perguntas Frequentes', component: CategoriasPage },
+      { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
+      { title: 'Depoimentos', component: DepoimentoPage },
+      { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage },
+      { title: 'História do Vereador', component: HistoriaPage }]
 
     this.pageAtual = 'Notícias';
 
@@ -82,8 +93,7 @@ export class MyApp {
         .endInit();
 
       StatusBar.styleDefault();
-      Splashscreen.hide();
-
+      
       events.subscribe('user:changed', user => {
         if (user !== undefined && user !== null) {
           this.nome = user.nome;

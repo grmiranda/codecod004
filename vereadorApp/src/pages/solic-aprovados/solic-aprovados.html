@@ -18,23 +18,23 @@
     <h3 class="semPost">Ainda não existem solicitações</h3>
   </ion-item>
 
-  <ion-card *ngFor="let solicitacao of solicitacoes" (click)="abrirSolicitacao(solicitacao)">
+  <ion-card *ngFor="let solicitacao of solicitacoes">
     <ion-item>
       <ion-avatar item-left>
         <img [src]="solicitacao.fotoUsuario">
       </ion-avatar>
       <h2>{{solicitacao.nomeUsuario}}</h2>
     </ion-item>
-    <ion-slides pager>
+    <ion-slides pager (click)="abrirSolicitacao(solicitacao)">
       <ion-slide *ngFor="let solicitacaoAtual of solicitacao.fotoURL">
         <img [src]="solicitacaoAtual" style="width: 100%;" />
       </ion-slide>
     </ion-slides>
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title (click)="abrirSolicitacao(solicitacao)">
         {{ solicitacao.titulo }}
       </ion-card-title>
-      <p>
+      <p (click)="abrirSolicitacao(solicitacao)">
         {{ solicitacao.descricao }}
       </p>
       <button ion-button clear color="secondary" icon-left (click)="abrirRequerimento(solicitacao)">

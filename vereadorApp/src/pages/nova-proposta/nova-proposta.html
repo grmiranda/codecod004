@@ -6,8 +6,7 @@
 
 </ion-header>
 
-
-<ion-content>
+<ion-content padding>
   <ion-list>
 
     <ion-item>
@@ -16,29 +15,27 @@
     </ion-item>
     <ion-item class="itemtextarea">
       <ion-label floating>Descrição</ion-label>
-      <ion-textarea autosize [(ngModel)]="solicitacao.descricao" name="texto"></ion-textarea>
+      <ion-textarea autosize [(ngModel)]="solicitacao.descricao" name="descricao"></ion-textarea>
     </ion-item>
-    
-    <p class="centralizar" *ngIf="solicitacao.fotoURL==''">Clique no "+" para adicionar Fotos</p>
-    <p class="centralizar" *ngIf="solicitacao.fotoURL.lenght==0">Clique no "+" para adicionar mais Fotos</p>
-      <ion-grid *ngIf="solicitacao.fotoURL==''">
-        <ion-row>
-          <ion-col *ngFor="let solicitacaoAtual of solicitacao.fotoURL" col-4 class="margem">
-            <div class="add">
-              <img [src]="solicitacaoAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
-            </div>
-          </ion-col>
-          
-          <ion-col col-4 class="margem" (click)="opcaoAdd()">
-            <div class="add">
-              <ion-icon class="add-icon" name="add"></ion-icon> 
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    
+    <p class="centralizar">Clique no "+" para adicionar Fotos</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let solicitacaoAtual of solicitacao.fotoURL" col-4 class="margem">
+          <div class="add">
+            <img [src]="solicitacaoAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
+          </div>
+        </ion-col>
+
+        <ion-col col-4 class="margem" (click)="opcaoAdd()">
+          <div class="add">
+            <ion-icon class="add-icon" name="add"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
     <ion-item>
-      <button class="blockbutton" (click)="requisitar()" color="secondary" ion-button block default >Realizar Solicitação</button>
+      <button class="blockbutton" (click)="requisitar()" color="secondary" ion-button block default>Realizar Solicitação</button>
     </ion-item>
 
   </ion-list>

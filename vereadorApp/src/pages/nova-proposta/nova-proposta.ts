@@ -58,7 +58,7 @@ export class NovaPropostaPage {
         {
           text: 'Foto da galeria',
           role: 'image',
-          icon: 'trash',
+          icon: 'md-image',
           handler: () => {
             this.importarFoto();
           }
@@ -66,7 +66,7 @@ export class NovaPropostaPage {
         {
           text: 'Foto da câmera',
           role: 'camera',
-          icon: 'trash',
+          icon: 'md-camera',
           handler: () => {
             this.tirarFoto();
           }

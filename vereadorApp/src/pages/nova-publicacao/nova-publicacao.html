@@ -6,7 +6,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
 
@@ -18,33 +17,32 @@
       <ion-label floating>Descrição</ion-label>
       <ion-textarea autoresize [(ngModel)]="publicacao.texto" name="texto"></ion-textarea>
     </ion-item>
-    <p class="centralizar" *ngIf="publicacao.video=='' && publicacao.fotoURL.lenght!=0">Clique no "+" para adicionar Fotos ou um Vídeo</p>
-    <p class="centralizar" *ngIf="publicacao.fotoURL.lenght==0">Clique no "+" para adicionar mais Fotos</p>
-      <ion-grid *ngIf="publicacao.video==''">
-        <ion-row>
-          <ion-col col-4 *ngFor="let publicacaoAtual of publicacao.fotoURL" col-4 class="margem">
-            <div class="add">
-              <img [src]="publicacaoAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
-            </div>
-          </ion-col>
-          
-          <ion-col col-4 class="margem" (click)="opcaoAdd()">
-            <div class="add">
-              <ion-icon class="add-icon" name="add"></ion-icon> 
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <p class="centralizar" *ngIf="publicacao.video=='' && publicacao.fotoURL.length!=0">Clique no "+" para adicionar Fotos ou um Vídeo</p>
+    <ion-grid *ngIf="publicacao.video==''">
+      <ion-row>
+        <ion-col col-4 *ngFor="let publicacaoAtual of publicacao.fotoURL" col-4 class="margem">
+          <div class="add">
+            <img [src]="publicacaoAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
+          </div>
+        </ion-col>
 
-    <ion-item>
-      <iframe *ngIf="publicacao.video!==''" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen></iframe>
-    </ion-item>
+        <ion-col col-4 class="margem" (click)="opcaoAdd()">
+          <div class="add">
+            <ion-icon class="add-icon" name="add"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <iframe *ngIf="publicacao.video!==''" class="centralizar" width="100%" height="315" [src]="publicacao.videoUrl" frameborder="0" allowfullscreen></iframe>
     <ion-item *ngIf="publicacao.video!==''">
-      <button class="blockbutton" (click)="removerVideo()" color="danger" ion-button block default>Deletar Video</button>
+      <button class="blockbutton" (click)="removerVideo()" color="danger" ion-button block default>Apagar Video</button>
     </ion-item>
+
     <ion-item>
       <button class="blockbutton" (click)="publicar()" color="secondary" ion-button block default>Publicar</button>
     </ion-item>
-  </ion-list>
 
+  </ion-list>
+2
 </ion-content>

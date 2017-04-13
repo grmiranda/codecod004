@@ -54,6 +54,9 @@ export class EditarPublicacaoPage {
         {
           text: 'Save',
           handler: data => {
+
+            this.publicacao.fotoURL = [];
+                        
             this.converterVideoURL(data.link);
           }
         }
@@ -79,7 +82,7 @@ export class EditarPublicacaoPage {
       this.publicacao.video = link.replace("watch?v=", "embed/");
       this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
     } else if(link.includes('embed/')){
-      this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);      
+      this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
     }
   }
 
@@ -105,6 +108,46 @@ export class EditarPublicacaoPage {
       ]
     });
     actionSheet.present();
+  }
+
+  opcaoAdd() {
+    let semFoto = this.actionSheetCtrl.create({
+      title: "Adicionar",
+      buttons: [
+        {
+          text: 'Foto da galeria',
+          role: 'destructive',
+          icon: 'md-image',
+          handler: () => {
+            this.importarFoto();
+          }
+        },
+        {
+          text: 'Foto da câmera',
+          role: 'destructive',
+          icon: 'md-camera',
+          handler: () => {
+            this.tirarFoto();
+          }
+        },
+        {
+          text: 'Vídeo',
+          role: 'destructive',
+          icon: 'logo-youtube',
+          handler: () => {
+            this.addLink();
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    semFoto.present();
   }
 
   private tirarFoto() {

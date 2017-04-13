@@ -22,7 +22,7 @@ export class NovaPublicacaoPage {
     private domSanitizer: DomSanitizer,
     public fotoService: FotoService,
     private pushService: PushService
-    ) {
+  ) {
 
   }
 
@@ -48,14 +48,14 @@ export class NovaPublicacaoPage {
     }
   }
 
-  opcaoAdd(){
+  opcaoAdd() {
     let semFoto = this.actionSheetCtrl.create({
       title: "Adicionar",
       buttons: [
         {
           text: 'Foto da galeria',
           role: 'destructive',
-          icon: 'trash',
+          icon: 'md-image',
           handler: () => {
             this.importarFoto();
           }
@@ -63,7 +63,7 @@ export class NovaPublicacaoPage {
         {
           text: 'Foto da câmera',
           role: 'destructive',
-          icon: 'trash',
+          icon: 'md-camera',
           handler: () => {
             this.tirarFoto();
           }
@@ -71,7 +71,7 @@ export class NovaPublicacaoPage {
         {
           text: 'Vídeo',
           role: 'destructive',
-          icon: 'trash',
+          icon: 'logo-youtube',
           handler: () => {
             this.addLink();
           }
@@ -92,7 +92,7 @@ export class NovaPublicacaoPage {
   private addLink() {
     let prompt = this.alertCtrl.create({
       title: 'YouTube',
-      message: "Insira a url do vídeo do YouTube",
+      message: "Insira a URL do vídeo do YouTube",
       inputs: [
         {
           name: 'link',
@@ -106,6 +106,10 @@ export class NovaPublicacaoPage {
         {
           text: 'Save',
           handler: data => {
+
+            this.publicacao.fotoURL = [];
+
+
             if (data.link.includes('https://youtu.be/')) {
               this.publicacao.video = data.link.replace("https://youtu.be/", "https://www.youtube.com/embed/");
               this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
@@ -181,7 +185,7 @@ export class NovaPublicacaoPage {
     });
   }
 
-  private removerVideo(){
+  private removerVideo() {
     this.publicacao.video = "";
   }
 

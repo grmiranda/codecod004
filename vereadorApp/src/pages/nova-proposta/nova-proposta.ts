@@ -51,7 +51,8 @@ export class NovaPropostaPage {
       });
     }
   }
-  opcaoAdd(){
+
+  private opcaoAdd() {
     let semFoto = this.actionSheetCtrl.create({
       title: "Adicionar",
       buttons: [
@@ -82,6 +83,7 @@ export class NovaPropostaPage {
     });
     semFoto.present();
   }
+
   private opcaoApagar(url) {
     let actionSheet = this.actionSheetCtrl.create({
       title: "Remover foto " + (this.solicitacao.fotoURL.indexOf(url) + 1),
@@ -124,9 +126,9 @@ export class NovaPropostaPage {
 
   private removerFoto(url: string) {
     let index = this.solicitacao.fotoURL.indexOf(url);
-    if(index == 0){
+    if (index == 0) {
       this.solicitacao.fotoURL.shift();
-    }else if(index > 0){
+    } else if (index > 0) {
       this.solicitacao.fotoURL.splice(index, 1);
     }
   }
@@ -159,4 +161,5 @@ export class NovaPropostaPage {
     });
     confirm.present();
   }
+
 }

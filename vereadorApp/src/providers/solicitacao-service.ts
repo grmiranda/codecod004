@@ -30,7 +30,6 @@ export class SolicitacaoService {
   }
 
   public delSolicitacao(solicitacao: Solicitacao): Promise<any> {
-    alert(JSON.stringify(solicitacao));
     return this.http
       .post('http://www.dsoutlet.com.br/apiLuiz/delSolicitacao.php', JSON.stringify(solicitacao), { headers: this.headers })
       .toPromise()
@@ -41,7 +40,6 @@ export class SolicitacaoService {
   private extractDelData(res: Response) {
     let retorno = { error: false, value: false };
     let data = res.json();
-    alert(JSON.stringify(data));
     if (data === true) {
       retorno.value = true;
     }
@@ -91,7 +89,6 @@ export class SolicitacaoService {
   }
 
   private handleErrorMessage(error: any) {
-    alert(JSON.stringify(error));
     let retorno = { error: true };
     return retorno;
   }

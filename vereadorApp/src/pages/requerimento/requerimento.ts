@@ -35,6 +35,7 @@ export class RequerimentoPage {
 
     this.storageService.get().then(userRes => this.meuUser = userRes);
     this.operacao = this.navParams.get("operacao");
+    
     if (this.operacao == "visualizar") {
       this.visualizar = true;
       var loading = this.loadingCtrl.create({
@@ -69,6 +70,38 @@ export class RequerimentoPage {
         this.requerimento.fotoURL.push(url);
       }
     });
+  }
+
+  private opcaoAdd() {
+    let semFoto = this.actionSheetCtrl.create({
+      title: "Adicionar",
+      buttons: [
+        {
+          text: 'Foto da galeria',
+          role: 'image',
+          icon: 'md-image',
+          handler: () => {
+            this.importarFoto();
+          }
+        },
+        {
+          text: 'Foto da câmera',
+          role: 'camera',
+          icon: 'md-camera',
+          handler: () => {
+            this.tirarFoto();
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    semFoto.present();
   }
 
   private opcaoApagar(url) {

@@ -18,6 +18,25 @@
       <button ion-item *ngFor="let p of pages" [disabled]="bloqueia" (click)="openPage(p)">
         {{p.title}}
       </button>
+
+      <button ion-item *ngIf="permissao == 1" [disabled]="bloqueia" (click)="menuAdm = !menuAdm; menuInfo= false;">
+        Avaliações
+      </button>
+      <div *ngIf="menuAdm" class="submenu" style="margin-right: 10px">
+        <button ion-item [disabled]="bloqueia" *ngFor="let pA of pagesAdm" (click)="openPage(pA)">
+          {{pA.title}}
+        </button>
+      </div>
+
+      <button ion-item [disabled]="bloqueia" (click)="menuInfo = !menuInfo; menuAdm = false;">
+        Informações
+      </button>
+      <div *ngIf="menuInfo" class="submenu" style="margin-right: 10px">
+        <button ion-item [disabled]="bloqueia" *ngFor="let pI of pagesInfo" (click)="openPage(pI)">
+          {{pI.title}}
+        </button>
+      </div>
+
       <button ion-item [disabled]="bloqueia" (click)="sair()">
         Sair
       </button>

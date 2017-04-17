@@ -32,7 +32,7 @@ export class LoginPage {
 
   ) {
     this.menu.enable(false);
-    //this.loginTeste();
+    this.loginTeste();
     this.storage.get().then(response => {
       if (response.socialID != '') {
         this.navCtrl.setRoot(HomePage);
@@ -56,7 +56,6 @@ export class LoginPage {
     this.adm(user);
     this.storage.set(user);
     this.navCtrl.setRoot(HomePage);
-
   }
 
 

@@ -155,4 +155,8 @@ export class HomePage {
     });
   }
 
+  private toggleMenu() {
+    this.menu.toggle();
+  }
+
 }

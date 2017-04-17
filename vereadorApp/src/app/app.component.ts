@@ -33,19 +33,30 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   private bloqueia: boolean = false;
 
-
   rootPage;
+
   private menuAdm: boolean = false;
   private menuInfo: boolean = false;
-  pages: Array<{ title: string, component: any }>;
-  pagesAdm: Array<{ title: string, component: any }>;
-  pagesInfo: Array<{ title: string, component: any }>;  
-  pageAtual: string;
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private nome: string = "";
   private foto: string = "";
   private permissao: number = 0;
   private countTimerForCloseApp: boolean = false;
+
+  pageAtual: any;
+  homePage = HomePage;
+  solicitacoesPage = SolicitacoesPage;
+  tabProjetosDeLeiPage = TabProjetosDeLeiPage;
+  tabMensagemPage = TabMensagemPage;
+  agendaPage = AgendaPage;
+  trofeuCidadaniaPage = TrofeuCidadaniaPage;
+  historiaPage = HistoriaPage;
+  depoimentoPage = DepoimentoPage;
+  avaliarSolicitacaoPage = AvaliarSolicitacaoPage;
+  avaliarPlPage = AvaliarPlPage;
+  avaliarDepoimentoPage = AvaliarDepoimentoPage;
+  informacaoPage = InformacaoPage;
+  categoriasPage = CategoriasPage;
 
   constructor(private platform: Platform,
     public menuCtrl: MenuController,
@@ -56,39 +67,24 @@ export class MyApp {
   ) {
 
     this.storageService.get().then(userAtual => {
-      this.permissao = userAtual.permissao;
-      if (userAtual.nome) {
-        this.navCtrl.setRoot(HomePage);
+      if (userAtual) {
+        this.permissao = userAtual.permissao;
+        if (userAtual.nome) {
+          this.navCtrl.setRoot(HomePage);
+        } else {
+          this.navCtrl.setRoot(LoginPage);
+        }
+        Splashscreen.hide();
+        this.events.publish('user:changed', userAtual);
       } else {
         this.navCtrl.setRoot(LoginPage);
       }
-      Splashscreen.hide();
-      this.events.publish('user:changed', userAtual);
     });
-
-    this.pages = [
-      { title: 'Notícias', component: HomePage },
-      { title: 'Solicitações', component: SolicitacoesPage },
-      { title: 'Projetos de Lei', component: TabProjetosDeLeiPage },
-      { title: 'Mensagem', component: TabMensagemPage },
-      { title: 'Agenda', component: AgendaPage },
-      { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
-      { title: 'História do Vereador', component: HistoriaPage },
-      { title: 'Depoimentos', component: DepoimentoPage }];
-
-    this.pagesAdm = [
-      { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },
-      { title: 'Avaliar Proposta', component: AvaliarPlPage },
-      { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage }];
-
-    this.pagesInfo = [
-      { title: 'Informações úteis', component: InformacaoPage },
-      { title: 'Perguntas Frequentes', component: CategoriasPage }];
 
     this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {
-      var notificationOpenedCallback = function (jsonData) {
+      var notificationOpenedCallback = function(jsonData) {
       };
 
       // platform.registerBackButtonAction(() => {
@@ -113,7 +109,7 @@ export class MyApp {
   }
 
 
-  showConfirm() {
+  private showConfirm() {
     if (this.countTimerForCloseApp) {
       this.platform.exitApp();
     } else {
@@ -135,22 +131,20 @@ export class MyApp {
     toast.present();
   }
 
-  openPerfil() {
+  private openPerfil() {
     this.menuCtrl.close();
     this.pageAtual = "Perfil";
     this.navCtrl.push(PerfilPage);
   }
 
-  openPage(page) {
+  private openPage(page) {
     this.menuCtrl.close();
-    if (this.pageAtual === page.title) {
+    if (this.pageAtual === page) {
     } else {
-      this.pageAtual = page.title;
-      this.navCtrl.push(page.component);
+      this.pageAtual = page;
+      this.navCtrl.push(page);
     }
   }
-
-
 
   public sair() {
     this.bloqueia = true;

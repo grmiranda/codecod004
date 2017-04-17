@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/v2/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -15,13 +13,27 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.background{ // plano de fundo Inicial
+.background {
+  // plano de fundo Inicial
   background-image: url('../image/fundo-tela-login.png');
   background-position: center;
   background-size: cover;
   position: relative;
 }
 
-.submenu{
+.menuFechado {
   margin-left: 30px;
+  height: 0;
+  -webkit-transition: height 300ms ease-in;
+  -moz-transition: height 300ms ease-in;
+  -o-transition: height 300ms ease-in;
+  transition: height 300ms ease-in;
+}
+
+.menuAvAberto {
+  height: 120px;
+}
+
+.menuInfoAberto {
+  height: 80px;
 }

@@ -142,7 +142,7 @@
 			
 			$dados['nomeUsuario'] = $dadosU['nome'];
 			$dados['fotoUsuario'] = $dadosU['fotoURL'];
-			$dados['Push'] = $dadoU['Push'];
+			$dados['Push'] = $dadosU['Push'];
 
 			$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
 			$result = $con->query($sql);

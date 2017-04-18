@@ -35,7 +35,6 @@ export class ShareService {
   }
 
   public compartilharFacebook(message, subject, image, url) {
-    alert(image.data);
     Facebook.showDialog(
       {
         method: "share",

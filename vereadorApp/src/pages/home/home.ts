@@ -7,6 +7,7 @@ import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { StorageService } from '../../providers/storage';
+import { DeepLinkService } from '../../providers/deep-link-service';
 import { Usuario } from '../../model/user';
 
 @Component({
@@ -31,7 +32,6 @@ export class HomePage {
   ) {
     this.storageService.get().then(res => this.meuUser = res);
     menu.enable(true);
-
   }
 
   ionViewWillEnter() {

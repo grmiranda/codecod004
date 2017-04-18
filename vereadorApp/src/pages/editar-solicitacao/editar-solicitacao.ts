@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavParams, NavController, ActionSheetController, AlertController, ViewController } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Solicitacao } from '../../model/solicitacao';
@@ -15,6 +15,7 @@ export class EditarSolicitacaoPage {
 
   constructor(public navParams: NavParams,
     public navController: NavController,
+    public viewCtrl: ViewController,
     public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     public fotoService: FotoService,
@@ -23,9 +24,7 @@ export class EditarSolicitacaoPage {
   }
 
   private editar() {
-    let callback = this.navParams.get("page");
-    callback.myCallbackFunction(callback.feedService, callback, this.solicitacao);
-    this.navController.pop();
+    this.viewCtrl.dismiss(this.solicitacao);
   }
 
   private importarFoto() {
@@ -34,6 +33,38 @@ export class EditarSolicitacaoPage {
         this.solicitacao.fotoURL.push(url);
       }
     });
+  }
+
+  private opcaoAdd() {
+    let semFoto = this.actionSheetCtrl.create({
+      title: "Adicionar",
+      buttons: [
+        {
+          text: 'Foto da galeria',
+          role: 'image',
+          icon: 'md-image',
+          handler: () => {
+            this.importarFoto();
+          }
+        },
+        {
+          text: 'Foto da câmera',
+          role: 'camera',
+          icon: 'md-camera',
+          handler: () => {
+            this.tirarFoto();
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    semFoto.present();
   }
 
   private opcaoApagar(url) {
@@ -94,6 +125,10 @@ export class EditarSolicitacaoPage {
       ]
     });
     confirm.present();
+  }
+
+  private cancel(){
+    this.viewCtrl.dismiss();
   }
 
 }

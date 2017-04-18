@@ -85,6 +85,38 @@ export class NovaPlPage {
     });
   }
 
+  opcaoAdd() {
+    let semFoto = this.actionSheetCtrl.create({
+      title: "Adicionar",
+      buttons: [
+        {
+          text: 'Foto da galeria',
+          role: 'destructive',
+          icon: 'md-image',
+          handler: () => {
+            this.importarFoto();
+          }
+        },
+        {
+          text: 'Foto da câmera',
+          role: 'destructive',
+          icon: 'md-camera',
+          handler: () => {
+            this.tirarFoto();
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    semFoto.present();
+  }
+
   private opcaoApagar(url) {
     let actionSheet = this.actionSheetCtrl.create({
       title: "Remover foto " + (this.pl.fotoURL.indexOf(url) + 1),
@@ -125,6 +157,10 @@ export class NovaPlPage {
       position: 'top'
     });
     toast.present();
+  }
+
+  private cancel(){
+    this.view.dismiss();
   }
 
 }

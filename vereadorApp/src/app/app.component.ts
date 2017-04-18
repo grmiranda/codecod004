@@ -24,6 +24,7 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
+import { Publicacao } from '../model/publicacao';
 
 declare var Branch;
 
@@ -35,8 +36,8 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   private bloqueia: boolean = false;
 
+  rootPage = LoginPage;
 
-  rootPage;
   private menuAdm: boolean = false;
   private menuInfo: boolean = false;
   pages: Array<{ title: string, component: any }>;
@@ -49,13 +50,26 @@ export class MyApp {
   private permissao: number = 0;
   private countTimerForCloseApp: boolean = false;
 
+  homePage = HomePage;
+  solicitacoesPage = SolicitacoesPage;
+  tabProjetosDeLeiPage = TabProjetosDeLeiPage;
+  tabMensagemPage = TabMensagemPage;
+  agendaPage = AgendaPage;
+  trofeuCidadaniaPage = TrofeuCidadaniaPage;
+  historiaPage = HistoriaPage;
+  depoimentoPage = DepoimentoPage;
+  avaliarSolicitacaoPage = AvaliarSolicitacaoPage;
+  avaliarPlPage = AvaliarPlPage;
+  avaliarDepoimentoPage = AvaliarDepoimentoPage;
+  informacaoPage = InformacaoPage;
+  categoriasPage = CategoriasPage;
+
   constructor(private platform: Platform,
     public menuCtrl: MenuController,
     private toastCtrl: ToastController,
     private storageService: StorageService,
     private http: Http,
     public events: Events
-
   ) {
     this.storageService.get().then(userAtual => {
       this.permissao = userAtual.permissao;
@@ -123,7 +137,8 @@ export class MyApp {
         alert('id ' + JSON.stringify(alias));
         if (alias[0] == "publicacao") {
           alert("entrou");
-          this.navCtrl.push(PublicacaoPage);
+          this.navCtrl.push(PublicacaoPage, { publicacao: new Publicacao() });
+
         }
 
       });
@@ -133,7 +148,7 @@ export class MyApp {
   }
 
 
-  showConfirm() {
+  private showConfirm() {
     if (this.countTimerForCloseApp) {
       this.platform.exitApp();
     } else {
@@ -155,22 +170,20 @@ export class MyApp {
     toast.present();
   }
 
-  openPerfil() {
+  private openPerfil() {
     this.menuCtrl.close();
     this.pageAtual = "Perfil";
     this.navCtrl.push(PerfilPage);
   }
 
-  openPage(page) {
+  private openPage(page) {
     this.menuCtrl.close();
-    if (this.pageAtual === page.title) {
+    if (this.pageAtual === page) {
     } else {
-      this.pageAtual = page.title;
-      this.navCtrl.push(page.component);
+      this.pageAtual = page;
+      this.navCtrl.push(page);
     }
   }
-
-
 
   public sair() {
     this.bloqueia = true;

@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar color="laranja">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Novo Projeto de Lei</ion-title>
   </ion-navbar>
 </ion-header>
@@ -15,23 +20,22 @@
       <ion-textarea autoresize [(ngModel)]="pl.ementa" name="texto"></ion-textarea>
     </ion-item>
 
-    <p class="centralizar" *ngIf="pl.fotoURL==''">Clique no "+" para adicionar Fotos</p>
-    <p class="centralizar" *ngIf="pl.fotoURL.lenght==0">Clique no "+" para adicionar mais Fotos</p>
-      <ion-grid *ngIf="pl.fotoURL==''">
-        <ion-row>
-          <ion-col *ngFor="let plAtual of pl.fotoURL" col-4 class="margem">
-            <div class="add">
-              <img [src]="plAtual" class="imagem-sm" (press)="opcaoApagar(publicacaoAtual)" />
-            </div>
-          </ion-col>
-          
-          <ion-col col-4 class="margem" (click)="opcaoAdd()">
-            <div class="add">
-              <ion-icon class="add-icon" name="add"></ion-icon> 
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <p class="centralizar">Clique no "+" para adicionar Fotos</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let plAtual of pl.fotoURL" col-4 class="margem">
+          <div class="add">
+            <img [src]="plAtual" class="imagem-sm" (press)="opcaoApagar(plAtual)" />
+          </div>
+        </ion-col>
+
+        <ion-col col-4 class="margem" (click)="opcaoAdd()">
+          <div class="add">
+            <ion-icon class="add-icon" name="add"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
     <ion-item>
       <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Criar Projeto de Lei</button>

@@ -1,34 +1,47 @@
 <ion-header>
-  <ion-toolbar color="laranja">
-    <ion-buttons start>
+  <ion-navbar color="laranja">
+    <ion-buttons left>
       <button ion-button icon-only (click)="cancel()">
         <ion-icon name="arrow-round-back"></ion-icon>
       </button>
     </ion-buttons>
-
-    <ion-title>
-      Requerimento
-    </ion-title>
-  </ion-toolbar>
+    <ion-title>Requerimento</ion-title>
+  </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list>
     <ion-item class="itemtextarea">
       <ion-label floating>Andamento</ion-label>
       <ion-textarea autoresize [(ngModel)]="andamento" [readonly]="visualizar" name="texto"></ion-textarea>
     </ion-item>
 
-    <ion-slides pager>
-
+    <ion-slides pager *ngIf="operacao != 'novo' && visualizar">
       <ion-slide *ngFor="let requerimentoAtual of requerimento.fotoURL">
         <img [src]="requerimentoAtual" style="width: 100%;" (press)="opcaoApagar(requerimentoAtual)" />
       </ion-slide>
-
     </ion-slides>
 
+    <p *ngIf="operacao == 'novo' || !visualizar" class="centralizar">Clique no "+" para adicionar Fotos</p>
+    <ion-grid *ngIf="operacao == 'novo' || !visualizar">
+      <ion-row>
+        <ion-col *ngFor="let requerimentoAtual of requerimento.fotoURL" col-4 class="margem">
+          <div class="add">
+            <img [src]="requerimentoAtual" class="imagem-sm" (press)="opcaoApagar(requerimentoAtual)" />
+          </div>
+        </ion-col>
+        <ion-col col-4 class="margem" (click)="opcaoAdd()">
+          <div class="add">
+            <ion-icon class="add-icon" name="add"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <button *ngIf="visualizar && meuUser.permissao == 1" class="blockbutton" (click)="editar()" color="secondary" ion-button block default>Editar</button>
+
     <!-- se for adm -->
-    <div *ngIf="meuUser.permissao == 1">
+    <!-- <div *ngIf="meuUser.permissao == 1">
       <ion-item *ngIf="!visualizar">
         <ion-row>
           <ion-col width-50>
@@ -49,6 +62,10 @@
       <ion-item *ngIf="!visualizar">
         <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Finalizar</button>
       </ion-item>
-    </div>
+    </div> -->
   </ion-list>
+
+  <button *ngIf="operacao == 'novo' || !visualizar" class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Finalizar</button>
+
+
 </ion-content>

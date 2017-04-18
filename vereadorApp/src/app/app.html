@@ -7,7 +7,7 @@
   <ion-content>
     <ion-list>
 
-      <button ion-item (click)="openPerfil()" [disabled]="bloqueia">
+      <button ion-item (click)="openPerfil(); menuAdm = false; menuInfo= false;">
         <ion-avatar item-left>
           <img [src] ="foto">
         </ion-avatar>
@@ -15,31 +15,68 @@
         <p>Meu Perfil</p>
       </button>
 
-      <button ion-item *ngFor="let p of pages" [disabled]="bloqueia" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+      <ion-item (click)="openPage(homePage);  menuAdm = false; menuInfo= false;">
+        Notícias
+      </ion-item>
 
-      <button ion-item *ngIf="permissao == 1" [disabled]="bloqueia" (click)="menuAdm = !menuAdm; menuInfo= false;">
+      <ion-item (click)="openPage(solicitacoesPage);  menuAdm = false; menuInfo= false;">
+        Solicitações
+      </ion-item>
+
+      <ion-item (click)="openPage(tabProjetosDeLeiPage);  menuAdm = false; menuInfo= false;">
+        Projetos de Lei
+      </ion-item>
+
+      <ion-item *ngIf="permissao == 1" (click)="menuAdm = !menuAdm; menuInfo= false;">
         Avaliações
-      </button>
-      <div *ngIf="menuAdm" class="submenu" style="margin-right: 10px">
-        <button ion-item [disabled]="bloqueia" *ngFor="let pA of pagesAdm" (click)="openPage(pA)">
-          {{pA.title}}
-        </button>
+      </ion-item>
+      <div class="menuFechado" [class.menuAvAberto]="menuAdm" style="margin-right: 10px">
+        <ion-item (click)="openPage(avaliarSolicitacaoPage);  menuAdm = false; menuInfo= false;">
+          Avaliar Solicitações
+        </ion-item>
+        <ion-item (click)="openPage(avaliarPlPage);  menuAdm = false; menuInfo= false;">
+          Avaliar Projeto de lei
+        </ion-item>
+        <ion-item (click)="openPage(avaliarDepoimentoPage);  menuAdm = false; menuInfo= false;">
+          Avaliar Depoimentos
+        </ion-item>
       </div>
 
-      <button ion-item [disabled]="bloqueia" (click)="menuInfo = !menuInfo; menuAdm = false;">
+      <ion-item (click)="openPage(tabMensagemPage);  menuAdm = false; menuInfo= false;">
+        Mensagens
+      </ion-item>
+
+      <ion-item (click)="openPage(agendaPage);  menuAdm = false; menuInfo= false;">
+        Agenda
+      </ion-item>
+
+      <ion-item (click)="menuInfo = !menuInfo; menuAdm = false;">
         Informações
-      </button>
-      <div *ngIf="menuInfo" class="submenu" style="margin-right: 10px">
-        <button ion-item [disabled]="bloqueia" *ngFor="let pI of pagesInfo" (click)="openPage(pI)">
-          {{pI.title}}
-        </button>
+      </ion-item>
+      <div class="menuFechado" [class.menuInfoAberto]="menuInfo" style="margin-right: 10px">
+        <ion-item (click)="openPage(informacaoPage);  menuAdm = false; menuInfo= false;">
+          Informações úteis
+        </ion-item>
+        <ion-item (click)="openPage(categoriasPage);  menuAdm = false; menuInfo= false;">
+          Perguntas Frequentes
+        </ion-item>
       </div>
 
-      <button ion-item [disabled]="bloqueia" (click)="sair()">
+      <ion-item (click)="openPage(trofeuCidadaniaPage);  menuAdm = false; menuInfo= false;">
+        Trofeu Cidadania
+      </ion-item>
+
+      <ion-item (click)="openPage(depoimentoPage);  menuAdm = false; menuInfo= false;">
+        Depoimentos
+      </ion-item>
+
+      <ion-item (click)="openPage(historiaPage);  menuAdm = false; menuInfo= false;">
+        História
+      </ion-item>
+
+      <ion-item (click)="sair();  menuAdm = false; menuInfo= false;">
         Sair
-      </button>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>

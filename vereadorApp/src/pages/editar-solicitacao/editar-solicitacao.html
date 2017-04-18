@@ -1,7 +1,14 @@
 <ion-header>
   <ion-navbar color="laranja">
+
+    <ion-buttons left>
+      <button ion-button icon-only (click)="cancel()" style="padding-left: 25px">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Editar Solicitação</ion-title>
   </ion-navbar>
+
 </ion-header>
 
 <ion-content padding>
@@ -15,29 +22,22 @@
       <ion-label floating>Descrição</ion-label>
       <ion-textarea autoresize [(ngModel)]="solicitacao.descricao" name="descricao"></ion-textarea>
     </ion-item>
-
-    <ion-slides pager>
-      <ion-slide *ngFor="let foto of solicitacao.fotoURL">
-        <img [src]="foto" style="width: 100%" (press)="opcaoApagar(foto)" />
-      </ion-slide>
-    </ion-slides>
-
-    <ion-item>
+    <p class="centralizar">Clique no "+" para adicionar Fotos</p>
+    <ion-grid>
       <ion-row>
-        <ion-col width-50>
-          <button (click)="importarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="image"></ion-icon>
-            </button>
+        <ion-col *ngFor="let solicitacaoAtual of solicitacao.fotoURL" col-4 class="margem">
+          <div class="add">
+            <img [src]="solicitacaoAtual" class="imagem-sm" (press)="opcaoApagar(solicitacaoAtual)" />
+          </div>
         </ion-col>
-        <ion-col width-50>
-          <button (click)="tirarFoto()" class="fabbuttons" color="secondary" ion-fab large>
-              <ion-icon name="camera"></ion-icon>
-            </button>
+
+        <ion-col col-4 class="margem" (click)="opcaoAdd()">
+          <div class="add">
+            <ion-icon class="add-icon" name="add"></ion-icon>
+          </div>
         </ion-col>
       </ion-row>
-    </ion-item>
-    <ion-item>
-      <button class="blockbutton" (click)="editar()" color="secondary" ion-button block default>Concluir</button>
-    </ion-item>
+    </ion-grid>
   </ion-list>
+  <button class="blockbutton" (click)="editar()" color="secondary" ion-button block default>Salvar Edição</button>
 </ion-content>

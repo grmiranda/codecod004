@@ -116,24 +116,7 @@ export class SolicPropostasPage {
             text: 'Requerimento',
             icon: 'archive',
             handler: () => {
-              let modal = this.modalCtrl.create(RequerimentoPage, { operacao: "novo" });
-              modal.onDidDismiss(data => {
-                let requerimento = new Requerimento();
-                if (data != null && data != undefined) {
-                  this.loading = this.loadingCtrl.create({
-                    content: 'Carregando'
-                  });
-                  this.loading.present();
-                  requerimento = data.requerimento;
-                  solicitacao.andamento = data.andamento;
-                  requerimento.IDSolicitacao = solicitacao.IDSolicitacao;
-                  requerimento.idUsuarioSolicitacao = solicitacao.IDUsuario;
-                  let msg = data.msg;
-
-                  this.feedService.confirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, requerimento, msg);
-                }
-              });
-              modal.present();
+              this.adicionarRequerimento(solicitacao);
             }
           },
           {
@@ -154,15 +137,6 @@ export class SolicPropostasPage {
       });
       actionSheet.present();
     }
-  }
-
-  private editarSolicitacao(solicitacao: Solicitacao) {
-    let profileModal = this.modalCtrl.create(EditarSolicitacaoPage, { solicitacao: solicitacao });
-    profileModal.onDidDismiss((solicitacaoAtualizada) => {
-      this.solicitacaoService.editSolicitacao(solicitacaoAtualizada).then(res =>
-        this.carregarSolicitacoes());
-    });
-    profileModal.present();
   }
 
   public enviarMensagem(solicitacao: Solicitacao) {
@@ -242,5 +216,40 @@ export class SolicPropostasPage {
 
   private abrirSolicitacao(soli: Solicitacao) {
     this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: soli })
+  }
+
+  private adicionarRequerimento(solicitacao: Solicitacao) {
+
+    let modal = this.modalCtrl.create(RequerimentoPage, { operacao: "novo" });
+    modal.onDidDismiss(data => {
+      let requerimento = new Requerimento();
+      if (data != null && data != undefined) {
+        this.loading = this.loadingCtrl.create({
+          content: 'Carregando'
+        });
+        this.loading.present();
+        requerimento = data.requerimento;
+        solicitacao.andamento = data.andamento;
+        requerimento.IDSolicitacao = solicitacao.IDSolicitacao;
+        requerimento.idUsuarioSolicitacao = solicitacao.IDUsuario;
+        let msg = data.msg;
+
+        this.feedService.confirmarVariosRequerimento(solicitacao.ids, solicitacao.pushs, this, solicitacao, requerimento, msg);
+      }
+    });
+    modal.present();
+
+  }
+
+  private editarSolicitacao(solicitacao: Solicitacao) {
+    let profileModal = this.modalCtrl.create(EditarSolicitacaoPage, { solicitacao: solicitacao });
+    profileModal.onDidDismiss((solicitacaoAtualizada) => {
+      if (solicitacaoAtualizada) {
+        this.solicitacaoService.editSolicitacao(solicitacaoAtualizada).then(res => {
+          this.carregarSolicitacoes();
+        });
+      }
+    });
+    profileModal.present();
   }
 }

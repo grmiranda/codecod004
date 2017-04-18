@@ -1,60 +1,71 @@
 page-nova-proposta {
-    ion-title{
-        text-align: center;
-        margin-right: 15% !important;
-    }
-    ion-list{
-        padding: 0 !important;
-        margin-left: 0 !important;
-        margin-right: 10px !important;
-        resize: vertical !important;
-    }
-    ion-item{
-        padding: 0 !important;
-        margin-left: 10px !important;
-        margin-right:10px !important;
-    }
-    ion-col{
-        align-items: center !important;
-    }
-    ion-label{
-        margin-left: 10px !important;
-    }
-    .fabbuttons{
-        align-self: center !important;
-        margin-left: 30%;
-    }
-    .blockbutton{
-        text-align: center !important;
-        margin-right: 30px !important;
-    }
-    .imagem-sm{
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
-    .add{
-        text-align: center;
-        background-color: lightgray;
-        height: 100px;
-        padding: 0px;
-        margin: 0px;
+  ion-title {
+    text-align: center;
+    margin-right: 15% !important;
+  }
 
-    }
-    .add-icon{
-        padding: 0px;
-        margin: 0px;
-        color: gray;
-        font-size: 50px;
-        position: relative;
-        top: 24px;
-    }
-    .addmargem{
-        padding: 2px;
-    }
-    .centralizar{
-        text-align: center;
-        color: gray;
+  ion-list {
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 10px !important;
+    resize: vertical !important;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: lightgray;
+  }
 
-    }
+  ion-item {
+    padding: 0 !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+
+  ion-col {
+    align-items: center !important;
+  }
+
+  ion-label {
+    margin-left: 10px !important;
+  }
+
+  .fabbuttons {
+    align-self: center !important;
+    margin-left: 30%;
+  }
+
+  .blockbutton {
+    text-align: center !important;
+  }
+
+  .imagem-sm {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .add {
+    text-align: center;
+    background-color: lightgray;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .add-icon {
+    padding: 0;
+    margin: 0;
+    color: gray;
+    font-size: 50px;
+    position: relative;
+    top: 24px;
+  }
+
+  .addmargem {
+    padding: 2px;
+  }
+
+  .centralizar {
+    text-align: center;
+    color: gray;
+  }
 }

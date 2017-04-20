@@ -5,3 +5,8 @@ npm install @ionic/cloud-angular --save
 
 Plugin do calendário (obrigatorio ter o typings instalado)
 npm install ionic2-calendar --save
+
+ionic plugin add cordova-plugin-x-socialsharing
+npm install --save @ionic-native/social-sharing
+
+cordova plugin add branch-cordova-sdk --variable BRANCH_KEY=key_live_agxuCk67gm0N5XZ72ohENfnbBub0Ds7V --variable URI_SCHEME=luizDeep

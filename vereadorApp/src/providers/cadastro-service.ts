@@ -18,8 +18,4 @@ export class CadastroService {
     return this.http.post(this.link, JSON.stringify(usuario), { headers: this.headers }).toPromise().then(res => res.json())
       .catch(() => alert("Erro ao tentar se conectar com servidor"));
   }
-  l
-
-
-
 }

@@ -1,0 +1,57 @@
+//crie a aplicação no branch
+//use o comando para adicionar o plugin na aplicação
+cordova plugin add branch-cordova-sdk --variable BRANCH_KEY=key_live_xxxxxxxxxxxxxxx --variable URI_SCHEME=yourapp
+//altere os valores do BRANCH_KEY e do URI_SCHEME para o indicado na configuração
+
+//declare a variavel branch no app.component
+********************************************************************************************************************
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { StatusBar, Splashscreen } from 'ionic-native';
+
+import { TabsPage } from '../pages/tabs/tabs';
+
+// Branch import
+declare var Branch;
+
+@Component({
+  template: `<ion-nav [root]="rootPage"></ion-nav>`
+})
+export class MyApp {
+  rootPage = TabsPage;
+
+  constructor(platform: Platform) {
+    platform.ready().then(() => {
+      StatusBar.styleDefault();
+      Splashscreen.hide();
+      branchInit();
+    });
+
+    platform.resume.subscribe(() => {
+      branchInit();
+    });
+
+    // Branch initialization
+    const branchInit = () => {
+      // only on devices
+      if (platform.is('core')) { return }
+      Branch.initSession(data => {
+        // read deep link data on click
+        alert('Deep Link Data: ' + JSON.stringify(data));
+      });
+    }
+  }
+}
+
+********************************************************************************************************************
+//configure o branch no config.xml
+********************************************************************************************************************
+<!-- Branch -->
+  <plugin name="branch-cordova-sdk" spec="^2.5.0" />
+  <branch-config>
+    <branch-key value="key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3" />
+    <uri-scheme value="branchcordova" />
+    <link-domain value="cordova.app.link" />
+    <ios-team-release value="PW4Q8885U7" />
+  </branch-config>
+********************************************************************************************************************

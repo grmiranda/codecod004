@@ -23,7 +23,10 @@ import { HistoriaPage } from '../pages/historia/historia';
 import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
+import { PublicacaoPage } from '../pages/publicacao/publicacao';
+import { Publicacao } from '../model/publicacao';
 
+declare var Branch;
 
 @Component({
   templateUrl: 'app.html'
@@ -37,13 +40,16 @@ export class MyApp {
 
   private menuAdm: boolean = false;
   private menuInfo: boolean = false;
+  pages: Array<{ title: string, component: any }>;
+  pagesAdm: Array<{ title: string, component: any }>;
+  pagesInfo: Array<{ title: string, component: any }>;
+  pageAtual: string;
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private nome: string = "";
   private foto: string = "";
   private permissao: number = 0;
   private countTimerForCloseApp: boolean = false;
 
-  pageAtual: any;
   homePage = HomePage;
   solicitacoesPage = SolicitacoesPage;
   tabProjetosDeLeiPage = TabProjetosDeLeiPage;
@@ -65,7 +71,18 @@ export class MyApp {
     private http: Http,
     public events: Events
   ) {
+    this.storageService.get().then(userAtual => {
+      this.permissao = userAtual.permissao;
+      if (userAtual.nome) {
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.navCtrl.setRoot(LoginPage);
+      }
+      Splashscreen.hide();
+      this.events.publish('user:changed', userAtual);
+    });
 
+<<<<<<< HEAD
      this.storageService.get().then(userAtual => {
        if (userAtual) {
          this.permissao = userAtual.permissao;
@@ -80,16 +97,32 @@ export class MyApp {
          this.navCtrl.setRoot(LoginPage);
        }
      });
+=======
+    this.pages = [
+      { title: 'Notícias', component: HomePage },
+      { title: 'Solicitações', component: SolicitacoesPage },
+      { title: 'Projetos de Lei', component: TabProjetosDeLeiPage },
+      { title: 'Mensagem', component: TabMensagemPage },
+      { title: 'Agenda', component: AgendaPage },
+      { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
+      { title: 'História do Vereador', component: HistoriaPage },
+      { title: 'Depoimentos', component: DepoimentoPage }];
+>>>>>>> e1f8fdf617e5b649a3414462b644f479dff1fb24
+
+    this.pagesAdm = [
+      { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },
+      { title: 'Avaliar Proposta', component: AvaliarPlPage },
+      { title: 'Avaliar Depoimentos', component: AvaliarDepoimentoPage }];
+
+    this.pagesInfo = [
+      { title: 'Informações úteis', component: InformacaoPage },
+      { title: 'Perguntas Frequentes', component: CategoriasPage }];
+
+    this.pageAtual = 'Notícias';
 
     platform.ready().then(() => {
-      var notificationOpenedCallback = function(jsonData) {
+      var notificationOpenedCallback = function (jsonData) {
       };
-
-      // platform.registerBackButtonAction(() => {
-      //   console.log(this.navCtrl.getActive().name);
-      //   // console.log(this.navCtrl.getActiveChildNav().name);
-      // }, 100);
-
       window["plugins"].OneSignal
         .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
         .handleNotificationOpened(notificationOpenedCallback)
@@ -103,7 +136,32 @@ export class MyApp {
           this.foto = user.fotoURL;
         }
       });
+      branchInit();
     });
+
+    platform.resume.subscribe(() => {
+      branchInit();
+    });
+
+    const branchInit = () => {
+      // only on devices
+      if (platform.is('core')) { return }
+      Branch.initSession(data => {
+        // read deep link data on click
+        alert('Deep Link Data: ' + JSON.stringify(data));
+        alert('id ' + JSON.stringify(data.url));
+        let alias = data.url.split("-");
+        alert('id ' + JSON.stringify(alias));
+        if (alias[0] == "publicacao") {
+          alert("entrou");
+          this.navCtrl.push(PublicacaoPage, { publicacao: new Publicacao() });
+
+        }
+
+      });
+    }
+
+
   }
 
 
@@ -160,5 +218,7 @@ export class MyApp {
       this.bloqueia = false;
     });
   }
+
+
 
 }

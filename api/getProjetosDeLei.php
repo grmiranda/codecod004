@@ -126,11 +126,40 @@
 				}
 			}
 			
+		}
+	} else if (isset($_GET['idpl'])){
+		if ($_GET['idpl'] != ""){
+			$id = $_GET['idpl'];
+
+			$sql = "SELECT * FROM pl WHERE IDPL = '$id'";
+			$result = $con->query($sql);
+			$dados = $result->fetch_assoc();
+
+			$idU = $dados['IDUsuario'];
+			$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU'";
+			$result = $con->query($sql);
+			$dadosU = $result->fetch_assoc();
 			
-			
-			echo json_encode($vetor);
+			$dados['nomeUsuario'] = $dadosU['nome'];
+			$dados['fotoUsuario'] = $dadosU['fotoURL'];
+			$dados['Push'] = $dadosU['Push'];
+
+			$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
+			$result = $con->query($sql);
+
+			$fotos = array();
+
+			while($f=$result->fetch_assoc()){
+				$fotos[] = $f['fotoURL'];
+			}
+
+			$dados['fotoURL'] = $fotos;
+
+			$vetor = $dados;
 		}
 	}
-	
+
+
+	echo json_encode($vetor);
 	$con->close();	
 ?>

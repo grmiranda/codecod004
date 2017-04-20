@@ -19,7 +19,7 @@ export class PublicacaoPage {
   }
 
   compartilhar(){
-    let popover = this.popoverCtrl.create(CompartilharPage, { titulo:this.publicacao.titulo, subtitulo:this.publicacao.texto, foto:this.publicacao.fotoURL[0] });
+    let popover = this.popoverCtrl.create(CompartilharPage, { titulo:this.publicacao.titulo, subtitulo:this.publicacao.texto, foto:this.publicacao.fotoURL[0], tipo: "publicacao", id: this.publicacao.IDPublicacao });
     let ev = {
       target: {
         getBoundingClientRect: () => {

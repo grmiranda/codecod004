@@ -33,7 +33,7 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   private bloqueia: boolean = false;
 
-  rootPage = LoginPage;
+  rootPage;
 
   private menuAdm: boolean = false;
   private menuInfo: boolean = false;
@@ -66,20 +66,20 @@ export class MyApp {
     public events: Events
   ) {
 
-    // this.storageService.get().then(userAtual => {
-    //   if (userAtual) {
-    //     this.permissao = userAtual.permissao;
-    //     if (userAtual.nome) {
-    //       this.navCtrl.setRoot(HomePage);
-    //     } else {
-    //       this.navCtrl.setRoot(LoginPage);
-    //     }
-    //     Splashscreen.hide();
-    //     this.events.publish('user:changed', userAtual);
-    //   } else {
-    //     this.navCtrl.setRoot(LoginPage);
-    //   }
-    // });
+    this.storageService.get().then(userAtual => {
+      if (userAtual) {
+        this.permissao = userAtual.permissao;
+        if (userAtual.nome) {
+          this.navCtrl.setRoot(HomePage);
+        } else {
+          this.navCtrl.setRoot(LoginPage);
+        }
+        Splashscreen.hide();
+        this.events.publish('user:changed', userAtual);
+      } else {
+        this.navCtrl.setRoot(LoginPage);
+      }
+    });
 
     platform.ready().then(() => {
       var notificationOpenedCallback = function(jsonData) {

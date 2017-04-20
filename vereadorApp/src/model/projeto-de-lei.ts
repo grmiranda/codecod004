@@ -22,4 +22,18 @@ export class ProjetoDeLei {
 
     }
 
+    converteSigraToTxt() {
+        if (this.estado == "sa") {
+            this.estado = "Sob Avaliação de administradores"
+        } else if (this.estado == "ap") {
+            this.estado = "Projeto aceita pela administração"
+        } else if (this.estado == "tr") {
+            this.estado = "tramitando na câmara de vereadores"
+        } else if (this.estado == "cp") {
+            this.estado = "Projeto está sendo aplicado"
+        } else if (this.estado == "cn") {
+            this.estado = "Projeto rejeitado pela câmara de vereadores"
+        }
+    }
+
 }

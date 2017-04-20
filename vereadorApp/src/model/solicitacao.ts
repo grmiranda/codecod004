@@ -12,10 +12,23 @@ export class Solicitacao {
   public Push;
   public pushs = [];
   public ids = [];
-  public nomeUsuario:string = "";
-  public fotoUsuario:string = "";
+  public nomeUsuario: string = "";
+  public fotoUsuario: string = "";
 
   constructor() {
 
+  }
+  converteSigraToTxt() {
+    if (this.estado == "sa") {
+      this.estado = "Sob Avaliação de administradores"
+    } else if (this.estado == "ap") {
+      this.estado = "Solicitação aceita pela administração"
+    } else if (this.estado == "sl") {
+      this.estado = "Solicitado na câmara de vereadores"
+    } else if (this.estado == "cp") {
+      this.estado = "Solicitação foi implementada"
+    } else if (this.estado == "cn") {
+      this.estado = "Solicitação rejeitado pela câmara de vereadores"
+    }
   }
 }

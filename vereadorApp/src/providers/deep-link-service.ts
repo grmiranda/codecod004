@@ -36,7 +36,7 @@ export class DeepLinkService {
         if(erro.code == 409){
           return "https://luizdafeira.app.link/" + url;
         } else {
-          return undefined;
+          return "https://luizdafeira.app.link/luizdafeira";
         }
       });
   }

@@ -24,7 +24,11 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
+import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visualizar-solicitacao';
+import { VisualizarPlPage } from '../pages/visualizar-pl/visualizar-pl';
 import { Publicacao } from '../model/publicacao';
+import { Solicitacao } from '../model/solicitacao';
+import { ProjetoDeLei } from '../model/projeto-de-lei';
 
 declare var Branch;
 
@@ -131,16 +135,22 @@ export class MyApp {
       if (platform.is('core')) { return }
       Branch.initSession(data => {
         // read deep link data on click
-        alert('Deep Link Data: ' + JSON.stringify(data));
-        alert('id ' + JSON.stringify(data.url));
         let alias = data.url.split("-");
-        alert('id ' + JSON.stringify(alias));
         if (alias[0] == "publicacao") {
-          alert("entrou");
-          this.navCtrl.push(PublicacaoPage, { publicacao: new Publicacao() });
+          let publicacao = new Publicacao();
+          publicacao.IDPublicacao = alias[1];
+          this.navCtrl.push(PublicacaoPage, { publicacao: publicacao });
+        
+        } else if (alias[0] == "solicitacao") {
+          let solicitacao = new Solicitacao();
+          solicitacao.IDSolicitacao = alias[1];
+          this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: solicitacao });
 
+        } else if (alias[0] == "pl") {
+          let pl = new ProjetoDeLei();
+          pl.IDPL = alias[1];
+          this.navCtrl.push(VisualizarPlPage, { pl: pl });
         }
-
       });
     }
 

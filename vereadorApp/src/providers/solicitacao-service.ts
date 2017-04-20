@@ -60,6 +60,13 @@ export class SolicitacaoService {
       .catch(this.handleErrorMessage);
   }
 
+  public getSolicitacaoId(id): Promise<any> {
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getSolicitacaoId.php?id=' + id)
+      .toPromise()
+      .then(response => this.extractGetData(response))
+      .catch(this.handleErrorMessage);
+  }
+
   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
     let data = res.json();

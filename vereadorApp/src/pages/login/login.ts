@@ -29,12 +29,7 @@ export class LoginPage {
 
   ) {
     this.menu.enable(false);
-    this.storage.get().then(response => {
-      if (response.socialID != '') {
-        this.navCtrl.setRoot(HomePage);
-        this.events.publish('user:changed', response);
-      }
-    });
+    
   }
 
   loginTeste() {

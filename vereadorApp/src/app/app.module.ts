@@ -81,6 +81,7 @@ import { CadastroService } from '../providers/cadastro-service';
 
 import { EventoService } from '../providers/evento-service';
 import { DepoimentoService } from '../providers/depoimento-service';
+import { DeepLinkService } from '../providers/deep-link-service';
 
 
 const cloudSettings: CloudSettings = {
@@ -208,7 +209,7 @@ const cloudSettings: CloudSettings = {
     VisualizarPlPage
   ],
 
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, DeepLinkService, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
     StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
     PontuacaoService, { provide: ErrorHandler, useClass: IonicErrorHandler }, GooglePlusService, ProjetoDeLeiService]
 

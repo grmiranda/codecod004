@@ -36,6 +36,13 @@ export class PublicacaoService {
       .catch(this.handleErrorMessage);
   }
 
+  public getPublicaoId(id): Promise<any> {
+    return this.http.get('http://www.dsoutlet.com.br/apiLuiz/getPublicacoes.php?id='+ id)
+      .toPromise()
+      .then(response => this.extractGetData(response))
+      .catch(this.handleErrorMessage);
+  }
+
   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
     let data = res.json();

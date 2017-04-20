@@ -86,7 +86,6 @@ export class MyApp {
       this.events.publish('user:changed', userAtual);
     });
 
-<<<<<<< HEAD
      this.storageService.get().then(userAtual => {
        if (userAtual) {
          this.permissao = userAtual.permissao;
@@ -101,7 +100,7 @@ export class MyApp {
          this.navCtrl.setRoot(LoginPage);
        }
      });
-=======
+
     this.pages = [
       { title: 'Notícias', component: HomePage },
       { title: 'Solicitações', component: SolicitacoesPage },
@@ -111,7 +110,6 @@ export class MyApp {
       { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
       { title: 'História do Vereador', component: HistoriaPage },
       { title: 'Depoimentos', component: DepoimentoPage }];
->>>>>>> e1f8fdf617e5b649a3414462b644f479dff1fb24
 
     this.pagesAdm = [
       { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },

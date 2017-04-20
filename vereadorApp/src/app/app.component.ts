@@ -40,7 +40,7 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   private bloqueia: boolean = false;
 
-  rootPage = LoginPage;
+  rootPage;
 
   private menuAdm: boolean = false;
   private menuInfo: boolean = false;
@@ -86,6 +86,22 @@ export class MyApp {
       this.events.publish('user:changed', userAtual);
     });
 
+<<<<<<< HEAD
+     this.storageService.get().then(userAtual => {
+       if (userAtual) {
+         this.permissao = userAtual.permissao;
+         if (userAtual.nome) {
+           this.navCtrl.setRoot(HomePage);
+         } else {
+           this.navCtrl.setRoot(LoginPage);
+         }
+         Splashscreen.hide();
+         this.events.publish('user:changed', userAtual);
+       } else {
+         this.navCtrl.setRoot(LoginPage);
+       }
+     });
+=======
     this.pages = [
       { title: 'Notícias', component: HomePage },
       { title: 'Solicitações', component: SolicitacoesPage },
@@ -95,6 +111,7 @@ export class MyApp {
       { title: 'Troféu Cidadania', component: TrofeuCidadaniaPage },
       { title: 'História do Vereador', component: HistoriaPage },
       { title: 'Depoimentos', component: DepoimentoPage }];
+>>>>>>> e1f8fdf617e5b649a3414462b644f479dff1fb24
 
     this.pagesAdm = [
       { title: 'Avaliar Solicitação', component: AvaliarSolicitacaoPage },

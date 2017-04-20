@@ -5,7 +5,7 @@ h1.titulo {
     text-align: center;
     font-size: 3em;
     font-family: merienda-one, cursive;
-    line-height: 350%;
+    line-height: 100%;
     font-weight: bold;
  } 
  h2.subtitulo{
@@ -13,11 +13,11 @@ h1.titulo {
     //color: rgb(240, 90, 0);
     text-align: center;
     font-size: 2em;
-    line-height: 150%;
+    line-height: 100%;
     font-weight: bold;
  }
  .escurecer{
-    background-color: rgba(0,0,0,0.5);
+    //background-color: rgba(0,0,0,0.2);
     height: 100%;
     top: 0;
     bottom: 0;
@@ -29,11 +29,17 @@ h1.titulo {
     position: absolute;
     text-align: center;
     top: 0;
-    bottom: 0;
+    bottom: 50%;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 30%;
     margin: auto;    
+}
+.footer-login{
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  background-image: linear-gradient(to bottom, transparent 20%, white);
 }
 button{
     height: 2em;
@@ -42,10 +48,11 @@ ion-footer{
     padding: 20px;
 }
 button:first-of-type{
-    background-color: rgba(56, 126, 245,0.6) !important;
+    background-color: rgba(56, 126, 245,0.85) !important;
+    margin-bottom: 10px;
 }
 button{
-    background-color: rgba(255, 0, 0,0.6) !important;
+    background-color: rgba(255, 0, 0,0.85) !important;
 }
 
 }

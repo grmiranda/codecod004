@@ -32,30 +32,30 @@ export class LoginPage {
 
   ) {
     this.menu.enable(false);
-    // this.storage.get().then(response => {
-    //   if (response.socialID != '') {
-    //     this.navCtrl.setRoot(HomePage);
-    //     this.events.publish('user:changed', response);
-    //   }
-    // });
+     this.storage.get().then(response => {
+       if (response.socialID != '') {
+         this.navCtrl.setRoot(HomePage);
+         this.events.publish('user:changed', response);
+       }
+     });
   }
 
-  // loginTeste() {
-  //   let user = new Usuario();
-  //   user.IDUsuario = "2";
-  //   user.cpf = "111.111.111-11";
-  //   user.email = "cleybsonc@gmail.com";
-  //   user.fotoURL = "https://media.licdn.com/media/AAEAAQAAAAAAAAfAAAAAJDk5ZDNhNDI4LTNmOTMtNGI5Yy1iZDIzLTk3NjM1YmVmMTkzNA.jpg";
-  //   user.genero = "male";
-  //   user.nascimento = "2017-01-01";
-  //   user.nome = "Cleybson Cardoso";
-  //   user.permissao = 1;
-  //   user.pontos = 300;
-  //   user.socialID = "102628559883950264990";
-  //   this.adm(user);
-  //   this.storage.set(user);
-  //   this.navCtrl.setRoot(HomePage);
-  // }
+   loginTeste() {
+     let user = new Usuario();
+     user.IDUsuario = "2";
+     user.cpf = "111.111.111-11";
+     user.email = "cleybsonc@gmail.com";
+     user.fotoURL = "https://media.licdn.com/media/AAEAAQAAAAAAAAfAAAAAJDk5ZDNhNDI4LTNmOTMtNGI5Yy1iZDIzLTk3NjM1YmVmMTkzNA.jpg";
+     user.genero = "male";
+     user.nascimento = "2017-01-01";
+     user.nome = "Cleybson Cardoso";
+     user.permissao = 1;
+     user.pontos = 300;
+     user.socialID = "102628559883950264990";
+     this.adm(user);
+     this.storage.set(user);
+     this.navCtrl.setRoot(HomePage);
+   }
 
 
   logarFacebook() {

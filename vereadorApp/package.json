@@ -22,7 +22,7 @@
     "@ionic-native/onesignal": "^3.4.4",
     "@ionic-native/social-sharing": "^3.5.0",
     "@ionic/cloud-angular": "^0.11.0",
-    "@ionic/storage": "^1.1.6",
+    "@ionic/storage": "^1.1.9",
     "angularfire2": "^2.0.0-beta.8",
     "firebase": "^3.6.10",
     "intl": "^1.2.5",

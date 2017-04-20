@@ -1,13 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.vereadorapp948739" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>vereadorApp</name>
-    <!-- Branch -->
     <plugin name="branch-cordova-sdk" spec="^2.5.0" />
     <branch-config>
         <branch-key value="key_live_agxuCk67gm0N5XZ72ohENfnbBub0Ds7V" />
         <uri-scheme value="luizDeep" />
         <link-domain value="luizdafeira.app.link" />
-        <ios-team-release value="PW4Q8885U7" />
+        <ios-team-release value="7LUBSMDT36" />
     </branch-config>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>

@@ -35,7 +35,7 @@
 				$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'publicacao'";
 				$resultado = $con->query($sql);
 				while ($f=$resultado->fetch_assoc()){
-					$fotos = $f['fotoURL'];
+					$fotos[] = $f['fotoURL'];
 				}
 				$vetor = $result->fetch_assoc();
 				$vetor['fotoURL'] = $fotos;

@@ -24,6 +24,7 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
 
+<<<<<<< HEAD
 import { Publicacao } from '../model/publicacao';
 import { ProjetoDeLei } from '../model/projeto-de-lei';
 import { Solicitacao } from '../model/solicitacao';
@@ -35,6 +36,8 @@ import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visua
 declare var Branch;
 
 
+=======
+>>>>>>> 7ab8c8929fd60fe50195820cffc1b477e4a998ee
 @Component({
   templateUrl: 'app.html'
 })
@@ -178,7 +181,11 @@ export class MyApp {
     if (this.pageAtual === page) {
     } else {
       this.pageAtual = page;
-      this.navCtrl.push(page);
+      if (page == HomePage) {
+        this.navCtrl.setRoot(page);
+      } else {
+        this.navCtrl.push(page);
+      }
     }
   }
 

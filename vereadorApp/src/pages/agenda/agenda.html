@@ -1,33 +1,28 @@
-<ion-header>
-  <ion-navbar hideBackButton="true" color="laranja">
-    <ion-buttons left>
-      <button class="menuIcon" ion-button icon-only (click)="toggleMenu()" style="padding-left: 25px">
-        <ion-icon name="md-menu"></ion-icon>
-      </button>
-    </ion-buttons>
+<ion-header no-border>
+
+  <ion-toolbar color="laranja">
+
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title>Agenda</ion-title>
-  </ion-navbar>
+
+  </ion-toolbar>
+
 </ion-header>
 
 <ion-content padding>
-<!--Barra superior do calendário-->
+  <!--Barra superior do calendário-->
   <ion-toolbar class="calendarToolbar" color="laranja">
-      <ion-title class="title">{{mes}}</ion-title>
+    <ion-title class="title">{{mes}}</ion-title>
   </ion-toolbar>
 
-  <calendar
-        [eventSource]="eventSource"
-        [calendarMode]="calendar.mode"
-        [currentDate]="calendar.currentDate"
-        (onCurrectDateChanged)="onCurrentDateChanged($event)"
-        (onRangeChanged)="reloadSource(startTime, endTime)"
-        (onEventSelected)="onEventSelected($event)"
-        (onTitleChanged)="onViewTitleChanged($event)"
-        (onTimeSelected)="onTimeSelected($event)"
-        step="30">
+  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrectDateChanged)="onCurrentDateChanged($event)" (onRangeChanged)="reloadSource(startTime, endTime)" (onEventSelected)="onEventSelected($event)"
+      (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
   </calendar>
 
-      <ion-fab right bottom>
-        <button ion-fab (click)="adicionar()" color="secondary"><ion-icon name="add"></ion-icon></button>
-      </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab (click)="adicionar()" color="secondary"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

@@ -24,8 +24,12 @@ export class BuscaUsuariosService {
     return this.http.get(this.link).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
   }
 
-  getUserList(id) {
+  getUserList(id): Promise<Usuario[]>  {
     return this.http.get('http://dsoutlet.com.br/apiLuiz/users.php?id=' + id).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
+  }
+
+  getBanido(id): Promise<boolean>  {
+    return this.http.get('http://dsoutlet.com.br/apiLuiz/banido.php?id=' + id).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
   }
 
 }

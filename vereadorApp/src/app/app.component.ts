@@ -32,6 +32,7 @@ import { Solicitacao } from '../model/solicitacao';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
 import { VisualizarPlPage } from '../pages/visualizar-pl/visualizar-pl';
 import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visualizar-solicitacao';
+
 // Branch import
 declare var Branch;
 
@@ -68,7 +69,8 @@ export class MyApp {
   informacaoPage = InformacaoPage;
   categoriasPage = CategoriasPage;
 
-  constructor(private platform: Platform,
+  constructor(
+    private platform: Platform,
     public menuCtrl: MenuController,
     private toastCtrl: ToastController,
     private storageService: StorageService,
@@ -86,11 +88,12 @@ export class MyApp {
           this.navCtrl.setRoot(LoginPage);
           branchInit();
         }
-        Splashscreen.hide();
         this.events.publish('user:changed', userAtual);
       } else {
         this.navCtrl.setRoot(LoginPage);
+        branchInit();
       }
+      Splashscreen.hide();
     });
     platform.ready().then(() => {
       var notificationOpenedCallback = function (jsonData) {
@@ -107,7 +110,12 @@ export class MyApp {
         if (user !== undefined && user !== null) {
           this.nome = user.nome;
           this.foto = user.fotoURL;
+          this.permissao = user.permissao;
         }
+      });
+
+      events.subscribe('banido', () => {
+        this.sair();
       });
     });
 

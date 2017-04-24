@@ -52,6 +52,7 @@ export class CompartilharPage {
 
   private compartilharFacebook() {
     if (this.verificaLink) {
+      alert(this.url);
       this.shareService.compartilharFacebook(this.titulo, this.subtitulo, this.foto, this.url);
     }
     this.view.dismiss()

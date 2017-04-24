@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { NovaPublicacaoPage } from '../nova-publicacao/nova-publicacao';
 import { EditarPublicacaoPage } from '../editar-publicacao/editar-publicacao';
 import { PublicacaoPage } from '../publicacao/publicacao';
-import { Platform, NavController, ActionSheetController, MenuController, AlertController, LoadingController } from 'ionic-angular';
+import { Platform, Events, NavController, ActionSheetController, MenuController, AlertController, LoadingController } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { Publicacao } from '../../model/publicacao';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { StorageService } from '../../providers/storage';
 import { DeepLinkService } from '../../providers/deep-link-service';
 import { Usuario } from '../../model/user';
+import { BuscaUsuariosService } from '../../providers/busca-usuarios-service';
 
 @Component({
   selector: 'page-home',
@@ -28,14 +29,31 @@ export class HomePage {
     private loadingCtrl: LoadingController,
     private publicacaoService: PublicacaoService,
     private actionSheetCtrl: ActionSheetController,
-    private menu: MenuController
+    private menu: MenuController,
+    private buscaUser: BuscaUsuariosService,
+    public events: Events
   ) {
-    this.storageService.get().then(res => this.meuUser = res);
+    this.storageService.get().then(res => {
+      this.meuUser = res;
+      this.banimento();
+    });
     menu.enable(true);
   }
 
   ionViewWillEnter() {
     this.carregarFeed();
+  }
+
+  banimento() {
+    this.buscaUser.getBanidoPermissao(this.meuUser.IDUsuario).then(resposta => {
+      if ((+resposta[0])) {
+        this.events.publish('banido');
+      }
+      if ((+resposta[1]) != this.meuUser.permissao) {
+        this.meuUser.permissao = (+resposta[1]);
+        this.storageService.set(this.meuUser);
+      }
+    });
   }
 
   private carregarFeed() {
@@ -148,6 +166,7 @@ export class HomePage {
           }
         }
         this.publicacoes = teste;
+        this.banimento();
       } else {
         //ocorreu um error
         this.tentarNovamente();

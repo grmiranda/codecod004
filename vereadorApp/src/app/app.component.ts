@@ -24,7 +24,6 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -140,7 +139,11 @@ export class MyApp {
     if (this.pageAtual === page) {
     } else {
       this.pageAtual = page;
-      this.navCtrl.push(page);
+      if (page == HomePage) {
+        this.navCtrl.setRoot(page);
+      } else {
+        this.navCtrl.push(page);
+      }
     }
   }
 

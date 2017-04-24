@@ -133,29 +133,37 @@
 
 			$sql = "SELECT * FROM pl WHERE IDPL = '$id'";
 			$result = $con->query($sql);
-			$dados = $result->fetch_assoc();
 
-			$idU = $dados['IDUsuario'];
-			$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU'";
-			$result = $con->query($sql);
-			$dadosU = $result->fetch_assoc();
+			$num = $result->num_rows;
+
+			if ($num == 1){
 			
-			$dados['nomeUsuario'] = $dadosU['nome'];
-			$dados['fotoUsuario'] = $dadosU['fotoURL'];
-			$dados['Push'] = $dadosU['Push'];
+				$dados = $result->fetch_assoc();
 
-			$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
-			$result = $con->query($sql);
+				$idU = $dados['IDUsuario'];
+				$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU'";
+				$result = $con->query($sql);
+				$dadosU = $result->fetch_assoc();
+				
+				$dados['nomeUsuario'] = $dadosU['nome'];
+				$dados['fotoUsuario'] = $dadosU['fotoURL'];
+				$dados['Push'] = $dadosU['Push'];
 
-			$fotos = array();
+				$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
+				$result = $con->query($sql);
 
-			while($f=$result->fetch_assoc()){
-				$fotos[] = $f['fotoURL'];
+				$fotos = array();
+
+				while($f=$result->fetch_assoc()){
+					$fotos[] = $f['fotoURL'];
+				}
+
+				$dados['fotoURL'] = $fotos;
+
+				$vetor = $dados;
+			} else {
+				$vetor = false;
 			}
-
-			$dados['fotoURL'] = $fotos;
-
-			$vetor = $dados;
 		}
 	}
 

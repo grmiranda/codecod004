@@ -22,6 +22,27 @@
 				$vetor[] = $row;
 			}
 			echo json_encode($vetor);
+		} else {
+			$id = $_GET['id'];
+			$sql = "SELECT * FROM publicacao WHERE IDPublicacao = '$id'";
+			$result = $con->query($sql);
+
+			$num = $result->num_rows;
+
+			if ($num == 1){
+
+				$fotos = array();
+				$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'publicacao'";
+				$resultado = $con->query($sql);
+				while ($f=$resultado->fetch_assoc()){
+					$fotos[] = $f['fotoURL'];
+				}
+				$vetor = $result->fetch_assoc();
+				$vetor['fotoURL'] = $fotos;
+				echo json_encode($vetor);
+			} else {
+				echo json_encode(false);
+			}
 		}
 	} 	
 	$con->close();	

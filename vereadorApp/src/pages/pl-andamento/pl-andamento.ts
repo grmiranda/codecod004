@@ -17,7 +17,7 @@ import { Usuario } from '../../model/user';
 export class PlAndamentoPage {
 
   private pls: any[] = [];
-  private myUser: Usuario;
+  private myUser: Usuario = new Usuario();
 
   constructor(
     public navCtrl: NavController,

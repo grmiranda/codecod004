@@ -45,9 +45,13 @@ export class HomePage {
   }
 
   banimento() {
-    this.buscaUser.getBanido(this.meuUser.IDUsuario).then(resposta => {
-      if (resposta) {
+    this.buscaUser.getBanidoPermissao(this.meuUser.IDUsuario).then(resposta => {
+      if ((+resposta[0])) {
         this.events.publish('banido');
+      }
+      if ((+resposta[1]) != this.meuUser.permissao) {
+        this.meuUser.permissao = (+resposta[1]);
+        this.storageService.set(this.meuUser);
       }
     });
   }

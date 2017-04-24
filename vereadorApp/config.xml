@@ -5,9 +5,9 @@
     <plugin name="branch-cordova-sdk" spec="^2.5.0" />
     <branch-config>
         <branch-key value="key_live_agxuCk67gm0N5XZ72ohENfnbBub0Ds7V" />
-        <uri-scheme value="luizDeep" />
+        <uri-scheme value="luizdafeira" />
         <link-domain value="luizdafeira.app.link" />
-        <ios-team-release value="PW4Q8885U7" />
+        <ios-team-release value="7LUBSMDT36" />
     </branch-config>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>

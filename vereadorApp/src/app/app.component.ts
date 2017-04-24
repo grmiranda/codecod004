@@ -24,6 +24,16 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
 
+import { Publicacao } from '../model/publicacao';
+import { ProjetoDeLei } from '../model/projeto-de-lei';
+import { Solicitacao } from '../model/solicitacao';
+
+import { PublicacaoPage } from '../pages/publicacao/publicacao';
+import { VisualizarPlPage } from '../pages/visualizar-pl/visualizar-pl';
+import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visualizar-solicitacao';
+// Branch import
+declare var Branch;
+
 
 @Component({
   templateUrl: 'app.html'
@@ -71,8 +81,10 @@ export class MyApp {
         this.permissao = userAtual.permissao;
         if (userAtual.nome) {
           this.navCtrl.setRoot(HomePage);
+          branchInit();
         } else {
           this.navCtrl.setRoot(LoginPage);
+          branchInit();
         }
         Splashscreen.hide();
         this.events.publish('user:changed', userAtual);
@@ -80,15 +92,9 @@ export class MyApp {
         this.navCtrl.setRoot(LoginPage);
       }
     });
-
     platform.ready().then(() => {
-      var notificationOpenedCallback = function(jsonData) {
+      var notificationOpenedCallback = function (jsonData) {
       };
-
-      // platform.registerBackButtonAction(() => {
-      //   console.log(this.navCtrl.getActive().name);
-      //   // console.log(this.navCtrl.getActiveChildNav().name);
-      // }, 100);
 
       window["plugins"].OneSignal
         .startInit("04946cb2-d0f6-485b-a390-fea608737a42")
@@ -104,6 +110,38 @@ export class MyApp {
         }
       });
     });
+
+    platform.resume.subscribe(() => {
+      branchInit();
+    });
+    // Branch initialization
+    const branchInit = () => {
+      // only on devices
+      if (platform.is('core')) { return }
+      Branch.initSession(data => {
+        // read deep link data on click
+        alert('Deep Link Data: ' + JSON.stringify(data));
+        let url = data.url.split("-");
+        alert(JSON.stringify(url));
+
+        if (url[0] == "publicacao") {
+          let publicacaoAtual = new Publicacao();
+          publicacaoAtual.IDPublicacao = url[1];
+          this.navCtrl.push(PublicacaoPage, { publicacao: publicacaoAtual })
+        } else if (url[0] == "pl") {
+          alert(JSON.stringify("entrou"));
+          let pl = new ProjetoDeLei();
+          pl.IDPL = url[1];
+          this.navCtrl.push(VisualizarPlPage, { pl: pl })
+        } else if (url[0] == "solicitacao") {
+          alert(JSON.stringify("entrou"));
+          let solicitacao = new Solicitacao();
+          solicitacao.IDSolicitacao = url[1];
+          this.navCtrl.push(VisualizarPlPage, { solicitacao: solicitacao })
+        }
+
+      });
+    }
   }
 
 

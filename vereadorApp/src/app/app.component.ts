@@ -24,7 +24,7 @@ import { DepoimentoPage } from '../pages/depoimento/depoimento';
 import { AvaliarDepoimentoPage } from '../pages/avaliar-depoimento/avaliar-depoimento';
 import { RequerimentoPage } from '../pages/requerimento/requerimento';
 
-<<<<<<< HEAD
+
 import { Publicacao } from '../model/publicacao';
 import { ProjetoDeLei } from '../model/projeto-de-lei';
 import { Solicitacao } from '../model/solicitacao';
@@ -35,9 +35,6 @@ import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visua
 // Branch import
 declare var Branch;
 
-
-=======
->>>>>>> 7ab8c8929fd60fe50195820cffc1b477e4a998ee
 @Component({
   templateUrl: 'app.html'
 })
@@ -123,24 +120,20 @@ export class MyApp {
       if (platform.is('core')) { return }
       Branch.initSession(data => {
         // read deep link data on click
-        alert('Deep Link Data: ' + JSON.stringify(data));
         let url = data.url.split("-");
-        alert(JSON.stringify(url));
 
         if (url[0] == "publicacao") {
           let publicacaoAtual = new Publicacao();
           publicacaoAtual.IDPublicacao = url[1];
           this.navCtrl.push(PublicacaoPage, { publicacao: publicacaoAtual })
         } else if (url[0] == "pl") {
-          alert(JSON.stringify("entrou"));
           let pl = new ProjetoDeLei();
           pl.IDPL = url[1];
           this.navCtrl.push(VisualizarPlPage, { pl: pl })
         } else if (url[0] == "solicitacao") {
-          alert(JSON.stringify("entrou"));
           let solicitacao = new Solicitacao();
           solicitacao.IDSolicitacao = url[1];
-          this.navCtrl.push(VisualizarPlPage, { solicitacao: solicitacao })
+          this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: solicitacao })
         }
 
       });

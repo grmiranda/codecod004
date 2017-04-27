@@ -18,7 +18,7 @@
     <ion-title class="title">{{mes}}</ion-title>
   </ion-toolbar>
 
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrectDateChanged)="onCurrentDateChanged($event)" (onRangeChanged)="reloadSource(startTime, endTime)" (onEventSelected)="onEventSelected($event)"
+  <calendar formatDayHeader="E" noEventsLabel="Sem Eventos" allDayLabel="Dia Inteiro" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrectDateChanged)="onCurrentDateChanged($event)" (onRangeChanged)="reloadSource(startTime, endTime)" (onEventSelected)="onEventSelected($event)"
       (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
   </calendar>
 

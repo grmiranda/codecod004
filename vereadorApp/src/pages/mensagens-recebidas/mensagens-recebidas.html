@@ -8,7 +8,7 @@
     <button ion-button menuToggle icon-only *ngIf="mensagensSelecionadas.length == 0">
       <ion-icon name='menu'></ion-icon>
     </button>
-    <ion-title *ngIf="mensagensSelecionadas.length == 0">
+    <ion-title class="TituloRecebidas" *ngIf="mensagensSelecionadas.length == 0">
       Mensagens Recebidas
     </ion-title>
     <ion-title *ngIf="mensagensSelecionadas.length != 0">
@@ -23,7 +23,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles" refreshingText="Carregando...">
@@ -34,8 +34,7 @@
     <h3 class="semPost">Caixa de entrada vazia</h3>
   </ion-item>
 
-  <ion-list [virtualScroll]="mensagens">
-    <ion-item *virtualItem="let mensagem" [style.background-color]="corBackground(mensagem)" (click)="abrirMensagem(mensagem)"
+    <ion-item *ngFor="let mensagem of mensagens" [style.background-color]="corBackground(mensagem)" (click)="abrirMensagem(mensagem)"
       (press)="opcoesMsg(mensagem)">
       <ion-avatar item-left>
         <img [src]="mensagem.foto">
@@ -45,7 +44,6 @@
       <p>{{mensagem.data}}</p>
     </ion-item>
 
-  </ion-list>
 
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="enviarMensagem()">

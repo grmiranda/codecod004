@@ -74,12 +74,12 @@ export class MensagensRecebidasPage {
   private corBackground(mensagem: CorpoMensagem) {
     if (!this.selecao) {
       if (mensagem.lida == 0) {
-        return '#ed9e1e';
+        return '#eaeaea';
       } else {
         return '#ffffff';
       }
     } if (this.mensagensSelecionadas.indexOf(mensagem) != -1) {
-      return '#0066ff';
+      return '#d3e8ff';
     } else {
       return '#ffffff';
     }

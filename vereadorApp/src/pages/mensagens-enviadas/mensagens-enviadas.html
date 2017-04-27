@@ -8,7 +8,7 @@
     <button ion-button menuToggle icon-only *ngIf="mensagensSelecionadas.length == 0">
       <ion-icon name='menu'></ion-icon>
     </button>
-    <ion-title *ngIf="mensagensSelecionadas.length == 0">
+    <ion-title class="TituloEnviadas" *ngIf="mensagensSelecionadas.length == 0">
       Mensagens Enviadas
     </ion-title>
     <ion-title *ngIf="mensagensSelecionadas.length != 0">
@@ -22,7 +22,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
   <ion-item *ngIf="mensagens.length == 0">
     <h3 class="semPost">Caixa de saída vazia</h3>
@@ -33,17 +33,13 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-list [virtualScroll]="mensagens">
-    <ion-item *virtualItem="let mensagem" [style.background-color]="corBackground(mensagem)" (click)="abrirMensagem(mensagem)"
-      (press)="opcoesMsg(mensagem)">
-      <ion-avatar item-left>
-        <img [src]="mensagem.foto">
-      </ion-avatar>
-      <h2>Para: {{mensagem.nome}}</h2>
-      <h3>{{ mensagem.mensagem }}</h3>
-      <p>{{mensagem.data}}</p>
-    </ion-item>
-
-  </ion-list>
+  <ion-item *ngFor="let mensagem of mensagens" [style.background-color]="corBackground(mensagem)" (click)="abrirMensagem(mensagem)" (press)="opcoesMsg(mensagem)">
+    <ion-avatar item-left>
+      <img [src]="mensagem.foto">
+    </ion-avatar>
+    <h2>Para: {{mensagem.nome}}</h2>
+    <h3>{{ mensagem.mensagem }}</h3>
+    <p>{{mensagem.data}}</p>
+  </ion-item>
 
 </ion-content>

@@ -1,18 +1,22 @@
 page-agenda {
-    .calendarToolbar ion-title{
+  .calendarToolbar ion-title {
     text-align: center;
     font-style: roboto;
     text-transform: capitalize;
-    margin-left: 10%;
-    }
-    .title{
-        font-size: 12px;
-    }
-    ion-header button{
-        width: 10% !important;
-    }
-    ion-title{
-        text-align: center;
-        margin-right: 10%;
-    }
+  }
+
+  .title {
+    font-size: 12px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  ion-header button {
+    width: 10% !important;
+  }
+
+  ion-title {
+    text-align: center;
+    // margin-right: 10%;
+  }
 }

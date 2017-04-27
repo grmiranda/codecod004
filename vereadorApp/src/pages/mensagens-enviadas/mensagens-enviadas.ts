@@ -67,7 +67,7 @@ export class MensagensEnviadasPage {
     if (!this.selecao) {
       return '#ffffff';
     } if (this.mensagensSelecionadas.indexOf(mensagem) != -1) {
-      return '#0066ff';
+      return '#d3e8ff';
     } else {
       return '#ffffff';
     }

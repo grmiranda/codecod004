@@ -12,6 +12,7 @@ export class AdicionarEventoPage {
   private evento: Evento = new Evento();
   private horaInicio = "";
   private horaTermino = "";
+  private desabilitar:boolean = false;
 
   constructor(
     private toastCtrl: ToastController,
@@ -27,6 +28,7 @@ export class AdicionarEventoPage {
   }
 
   private adicionar() {
+    this.desabilitar = true;
     if (this.validate()) {
       this.eventoService.addEvento(this.evento).then(res => {
         if (res.Titulo != undefined && res.Titulo != null) {
@@ -36,6 +38,8 @@ export class AdicionarEventoPage {
           this.showConfirm();
         }
       });
+    } else{
+      this.desabilitar = false;
     }
   }
 
@@ -88,7 +92,10 @@ export class AdicionarEventoPage {
       message: 'Tentar Novamente ?',
       buttons: [
         {
-          text: 'Cancelar'
+          text: 'Cancelar',
+          handler: () => {
+            this.desabilitar = false;
+          }
         },
         {
           text: 'Ok',

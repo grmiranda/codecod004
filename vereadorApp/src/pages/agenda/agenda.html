@@ -22,7 +22,7 @@
       (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
   </calendar>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom *ngIf="permissao == 1">
     <button ion-fab (click)="adicionar()" color="secondary"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>

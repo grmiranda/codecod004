@@ -23,15 +23,12 @@ export class EventoPage {
     public modalCtrl: ModalController
   ) {
     this.evento = this.navParams.get("evento");
+    
+    //format datatime
+    this.dataInicio = this.converterDataParaTexto(this.evento.startTime);
 
     //format datatime
-    let dataAtuals = new Date();
-    let dataAtual = this.evento.startTime.toISOString();
-    this.dataInicio = dataAtual.substring(0, 10);
-
-    //format datatime
-    dataAtual = this.evento.endTime.toISOString();
-    this.dataFim = dataAtual.substring(0, 10);
+    this.dataFim = this.converterDataParaTexto(this.evento.endTime);
 
     let horaCerta = this.evento.startTime.toTimeString();
     this.horaInicio = horaCerta.substring(0, 5);
@@ -54,7 +51,6 @@ export class EventoPage {
         this.dataFim = data.dataFim;
         this.horaInicio = data.horaInicio;
         this.horaTermino = data.horaFim;
-
       }
     });
     modal.present();
@@ -78,5 +74,13 @@ export class EventoPage {
       position: 'top'
     });
     toast.present();
+  }
+
+  private converterDataParaTexto(data):string{
+    if(data.getMonth() + 1 < 10 ){
+      return `${data.getFullYear()}-0${data.getMonth() + 1}-${data.getDate()}`;
+    } else {
+      return `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`;
+    }
   }
 }

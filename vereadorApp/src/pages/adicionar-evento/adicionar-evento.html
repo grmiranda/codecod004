@@ -48,5 +48,5 @@
     </ion-item>
   </ion-list>
   <!--Botão para adicionar evento-->
-  <button ion-button block (click)="adicionar()">Adicionar Evento</button>
+  <button ion-button block [disabled] = "desabilitar" (click)="adicionar()">Adicionar Evento</button>
 </ion-content>

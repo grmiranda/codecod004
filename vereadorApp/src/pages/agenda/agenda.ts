@@ -8,6 +8,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { AdicionarEventoPage } from '../adicionar-evento/adicionar-evento';
 import { EventoService } from '../../providers/evento-service';
 import { EventoPage } from '../evento/evento';
+import { StorageService } from '../../providers/storage';
+
 
 @Component({
   selector: 'page-agenda',
@@ -18,10 +20,10 @@ export class AgendaPage {
   private calendar;
   private eventSource = [];
   private isToday: boolean;
-  private permissao = "c";
   private dataAtual: string = "";
   private mes: string = 'Dezembro'; //titulo
   data = new Date();
+  private permissao: number = 0;
 
 
   constructor(
@@ -31,8 +33,10 @@ export class AgendaPage {
     private menuCtrl: MenuController,
     public loadingController: LoadingController,
     private alertCtrl: AlertController,
+    private storageService: StorageService,
     private eventoService: EventoService,
   ) {
+    this.storageService.get().then(resposta=>this.permissao = resposta.permissao);
     this.calendar = {
       mode: 'month',
       currentDate: new Date()
@@ -83,19 +87,18 @@ export class AgendaPage {
         this.eventos = res;
 
         this.eventSource = [];
-
-        for (let i = 0; i < this.eventos.length; i++) {
+        this.eventos.map(eventoAtual=>{
           this.eventSource.push({
-            id: this.eventos[i].IDEvento,
-            title: this.eventos[i].Titulo,
-            startTime: new Date(this.eventos[i].DataInicio),
-            endTime: new Date(this.eventos[i].DataTermino),
-            allDay: this.eventos[i].EventoDiario,
-            descricao: this.eventos[i].Descricao,
-            local: this.eventos[i].Local,
-            IDUsuario: this.eventos[i].IDUsuario
+            id: eventoAtual.IDEvento,
+            title: eventoAtual.Titulo,
+            startTime: new Date(eventoAtual.DataInicio),
+            endTime: new Date(eventoAtual.DataTermino),
+            descricao: eventoAtual.Descricao,
+            allDay: eventoAtual.EventoDiario,
+            local: eventoAtual.Local,
+            IDUsuario: eventoAtual.IDUsuario
           });
-        }
+        });
       } else {
         this.tentarNovamente();
       }

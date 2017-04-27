@@ -1,48 +1,55 @@
 page-pl-propostas {
-    .back{
-        background-color: rgba(132, 132, 132, 0.2);
-    }
-    ion-header button{
-        width: 10% !important;
-    }
-    ion-title{
-        text-align: center;
-        margin-right: 10%;
-    }
-    ion-content{
-        right: 0px !important;
-        border: 0px !important;
-        padding: 0px !important;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    ion-card{
-        right: 0px !important;
-        border: 0px !important;
-        padding: 0px !important;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    ion-card-content{
-        right: 0px !important;
-        border: 0px !important;
-        padding: 0px !important;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    ion-card-title{
-        font-size: 20px !important;
-        margin-left: 10px !important;
-    }
-    p{
-        font-size: 14px !important;
-        line-height: 20px !important;
-        margin-left: 10px !important;
-    }
+  .back {
+    background-color: rgba(132, 132, 132, 0.2);
+  }
+  // ion-header button{
+  //     width: 10% !important;
+  // }
+  // ion-title {
+  //   text-align: center !important;
+  //   // margin-right: 10%;
+  //   overflow: visible !important;
+  //   padding-right: 0;
+  // }
+
+  ion-content {
+    right: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  ion-card {
+    right: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  ion-card-content {
+    right: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  ion-card-title {
+    font-size: 20px !important;
+    margin-left: 10px !important;
+  }
+
+  p {
+    font-size: 14px !important;
+    line-height: 20px !important;
+    margin-left: 10px !important;
+  }
 }

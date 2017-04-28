@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
+import { NavController, ActionSheetController, LoadingController, AlertController, ToastController, ModalController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { LikeService } from '../../providers/like-service';
 import { StorageService } from '../../providers/storage';
@@ -32,6 +32,7 @@ export class SolicPropostasPage {
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
     public solicitacaoService: SolicitacaoService,
+    private platform: Platform,
     public storageS: StorageService,
     public likeService: LikeService,
     public requerimentoService: RequerimentoService,
@@ -107,28 +108,29 @@ export class SolicPropostasPage {
           {
             text: 'Remover',
             role: 'destructive',
-            icon: 'trash',
+            icon: !this.platform.is('ios') ? 'trash' : null,
             handler: () => {
               this.enviarMensagem(solicitacao);//abre o alert para o usuario dizer o motivo da reprovação da publicacao
             }
           },
           {
             text: 'Requerimento',
-            icon: 'archive',
+            icon: !this.platform.is('ios') ? 'archive' : null,
+
             handler: () => {
               this.adicionarRequerimento(solicitacao);
             }
           },
           {
             text: 'Editar',
-            icon: 'create',
+            icon: !this.platform.is('ios') ? 'create' : null,
             handler: () => {
               this.editarSolicitacao(solicitacao);
             }
           },
           {
             text: 'Cancel',
-            icon: 'close',
+            icon: !this.platform.is('ios') ? 'close' : null,
             role: 'cancel',
             handler: () => {
             }

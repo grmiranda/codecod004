@@ -90,7 +90,7 @@ export class SolicSolicitadosPage {
         {
           text: 'Reprovar',
           role: 'destructive',
-          icon: 'close-circle',
+          icon: !this.platform.is('ios') ? 'close-circle' : null,
           handler: () => {
             //motivo para a galera
             let prompt = this.alertCtrl.create({
@@ -122,7 +122,8 @@ export class SolicSolicitadosPage {
         },
         {
           text: 'Aprovar',
-          icon: 'checkmark-circle',
+          icon: !this.platform.is('ios') ? 'checkmark-circle' : null,
+
           handler: () => {
 
             //aviso para a galera

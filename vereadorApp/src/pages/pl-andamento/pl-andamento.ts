@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, LoadingController, ToastController, Platform } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { StorageService } from '../../providers/storage';
 import { LikeService } from '../../providers/like-service';
@@ -25,6 +25,7 @@ export class PlAndamentoPage {
     public projetoDeLeiService: ProjetoDeLeiService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
+    public platform: Platform,
     public storage: StorageService,
     private feedService: FeedBackService,
     private alertCtrl: AlertController,
@@ -103,7 +104,7 @@ export class PlAndamentoPage {
           {
             text: 'Reprovar',
             role: 'destructive',
-            icon: 'close-circle',
+            icon: !this.platform.is('ios') ? 'lose-circle' : null,
             handler: () => {
               this.alertCtrl.create({
                 title: 'Reprovar projeto de lei',

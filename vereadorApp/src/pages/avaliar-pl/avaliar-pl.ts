@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, AlertController, LoadingController, MenuController } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, LoadingController, MenuController, Platform } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
@@ -15,6 +15,7 @@ export class AvaliarPlPage {
 
   constructor(public projetoDeLeiService: ProjetoDeLeiService,
     private loadingCtrl: LoadingController,
+    private platform: Platform,
     private alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     private feedService: FeedBackService,
@@ -77,21 +78,21 @@ export class AvaliarPlPage {
         {
           text: 'Reprovar',
           role: 'destructive',
-          icon: 'trash',
+          icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             this.feedService.showPromptReprovar(pl.IDUsuario.toString(), pl.Push, this, pl);
           }
         },
         {
           text: 'Aprovar',
-          icon: 'document',
+          icon: !this.platform.is('ios') ? 'document' : null,
           handler: () => {
             this.feedService.showPromptAprovar(pl.IDUsuario.toString(), pl.Push, this, pl, "Sua proposta de projeto de lei foi aceita com sucesso");
           }
         },
         {
           text: 'Cancel',
-          icon: 'close',
+          icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
           }

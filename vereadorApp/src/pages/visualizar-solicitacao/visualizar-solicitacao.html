@@ -21,7 +21,7 @@
       </ion-slide>
     </ion-slides>
     <div padding class="scrolling">
-      <ion-label>{{solicitacao.titulo}}</ion-label>
+      <h2>{{solicitacao.titulo}}</h2>
       <ion-label>Descrição</ion-label>
       <ion-textarea autoresize [(ngModel)]="solicitacao.descricao" readonly="true" name="texto"></ion-textarea>
       <div *ngIf="solicitacao.andamento != ''">
@@ -29,20 +29,35 @@
         <ion-textarea autoresize [(ngModel)]="solicitacao.andamento" readonly="true" name="texto"></ion-textarea>
       </div>
     </div>
+
+    <ion-row no-padding>
+      <ion-col width-50 class="centralizar">
+        <button ion-button clear small [color]="tipo == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(solicitacao, 's')">
+          <ion-icon name="md-thumbs-up"></ion-icon>
+          Apoiar - {{ apoio }}
+        </button>
+      </ion-col>
+      <ion-col width-50 class="centralizar">
+        <button ion-button clear small [color]="tipo == 'n' ? 'danger' : 'cinza'" icon-left (click)="like(solicitacao, 'n')">
+          <ion-icon name="md-thumbs-down"></ion-icon>
+          Reprovar - {{ reprovacao }}
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-card>
 
   <ion-row *ngIf="permissao == 1">
     <ion-col width-50>
-      <button ion-button icon-left block [disabled]="desabilitar" (click)="editar()" color="secondary"><ion-icon name="create"></ion-icon>Editar</button>
+      <button ion-button default icon-left block [disabled]="desabilitar" (click)="editar()" color="secondary"><ion-icon name="create"></ion-icon>Editar</button>
     </ion-col>
     <ion-col width-50>
-      <button ion-button icon-left block [disabled]="desabilitar" (click)="excluir()" color="danger"><ion-icon name="trash"></ion-icon>Excluir</button>
+      <button ion-button default icon-left block [disabled]="desabilitar" (click)="excluir()" color="danger"><ion-icon name="trash"></ion-icon>Excluir</button>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <button *ngIf="permissao == 1 && solicitacao.estado == 'ap'" ion-button icon-left block (click)="requerimento()" color="secondary"><ion-icon name="archive"></ion-icon>Fazer Requerimento</button>
-      <button *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'cp'" ion-button icon-left block (click)="abrirRequerimento()" color="secondary"><ion-icon name="archive"></ion-icon>Abrir Requerimento</button>
+      <button *ngIf="permissao == 1 && solicitacao.estado == 'ap'" ion-button default icon-left block (click)="requerimento()" color="secondary"><ion-icon name="archive"></ion-icon>Fazer Requerimento</button>
+      <button *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'cp'" ion-button default icon-left block (click)="abrirRequerimento()" color="secondary"><ion-icon name="archive"></ion-icon>Abrir Requerimento</button>
     </ion-col>
   </ion-row>
 

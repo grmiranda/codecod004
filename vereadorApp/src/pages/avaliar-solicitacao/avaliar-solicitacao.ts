@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, ActionSheetController, AlertController, ToastController, LoadingController, MenuController, ViewController } from 'ionic-angular';
+import { ModalController, NavController, ActionSheetController, AlertController, ToastController, LoadingController, MenuController, ViewController, Platform } from 'ionic-angular';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 import { PushService } from '../../providers/push-service';
@@ -17,6 +17,7 @@ export class AvaliarSolicitacaoPage {
 
   constructor(
     private toastCtrl: ToastController,
+    private platform: Platform,
     public modalCtrl: ModalController,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
@@ -79,28 +80,28 @@ export class AvaliarSolicitacaoPage {
         {
           text: 'Negar',
           role: 'destructive',
-          icon: 'trash',
+          icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             this.feedService.showPromptReprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao);
           }
         },
         {
           text: 'Aprovar',
-          icon: 'document',
+          icon: !this.platform.is('ios') ? 'document' : null,
           handler: () => {
             this.feedService.showPromptAprovar(solicitacao.IDUsuario.toString(), solicitacao.Push, this, solicitacao, "Proposta de Solicitação aceita com sucesso");
           }
         },
         {
           text: 'Editar e Aprovar',
-          icon: 'create',
+          icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
             this.editarSolicitacao(solicitacao);
           }
         },
         {
           text: 'Cancel',
-          icon: 'close',
+          icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
           }

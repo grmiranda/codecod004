@@ -30,6 +30,15 @@ export class LikeService {
     return retorno;
   }
 
+  private extractGetData(res: Response): any {
+    let retorno = { error: false, value: false};
+    let data = res.json();
+    if (data) {
+      retorno.value = data;
+    }
+    return retorno;
+  }
+
   public addLikeProjetoDeLei(like: LikeProjetoDeLei): Promise<any> {
     return this.http
       .post('http://www.dsoutlet.com.br/apiLuiz/addLikeProjetoDeLei.php', JSON.stringify(like), { headers: this.headers })
@@ -38,7 +47,15 @@ export class LikeService {
       .catch(this.handleErrorMessage);
   }
 
-  private handleErrorMessage(error: any) {
+  public getLikeSolicitacaoByID(idUsuario, idSolicitacao){
+    return this.http
+      .get('http://www.dsoutlet.com.br/apiLuiz/getLikeSolicitacaoID.php?user='+idUsuario+'&&solicitacao='+idSolicitacao, { headers: this.headers })
+      .toPromise()
+      .then(res => this.extractGetData(res))
+      .catch(this.handleErrorMessage);
+  }
+
+  private handleErrorMessage(error: any): any {
     let retorno = { error: true };
     return retorno;
   }

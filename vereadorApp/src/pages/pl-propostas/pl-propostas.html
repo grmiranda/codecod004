@@ -35,17 +35,17 @@
         {{ projeto.pl.ementa }}
       </p>
     </ion-card-content>
-    <ion-row no-padding>
+    <ion-row no-padding class="centralizar">
       <ion-col width-50>
-        <button ion-button clear small color="secondary" icon-left (click)="like(projeto, 's')">
-              <ion-icon [name]="projeto.t == 's' ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'"></ion-icon>
-              {{ projeto.p }}
+        <button ion-button clear small [color]="projeto.t == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(projeto, 's')">
+              <ion-icon name="md-thumbs-up"></ion-icon>
+              Apoiar - {{ projeto.p }}
         </button>
       </ion-col>
-      <ion-col width-50>
-        <button ion-button clear small color="danger" icon-left (click)="like(projeto, 'n')">
-              <ion-icon [name]="projeto.t == 'n' ? 'ios-thumbs-down' : 'ios-thumbs-down-outline'"></ion-icon>
-              {{ projeto.n }}
+      <ion-col width-50 class="centralizar">
+        <button ion-button clear small [color]="projeto.t == 'n' ? 'danger' : 'cinza'" icon-left (click)="like(projeto, 'n')">
+              <ion-icon name="md-thumbs-down"></ion-icon>
+              Reprovar - {{ projeto.n }}
             </button>
       </ion-col>
     </ion-row>

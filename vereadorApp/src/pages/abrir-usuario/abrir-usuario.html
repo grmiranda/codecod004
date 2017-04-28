@@ -1,0 +1,71 @@
+<!--
+  Generated template for the AbrirUsuario page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="laranja">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      {{ usuario.nome }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <img src="{{usuario.fotoURL}}" alt="foto perfil" height="200" width="200" style="border-radius: 50%;">
+    <ion-item>
+      <ion-label floating>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.nome" readonly="true" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.email" readonly="true" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Telefone</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.telefone" readonly="true" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating *ngIf="usuario.cpf != ''">CPF</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.cpf" readonly="true" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating *ngIf="usuario.UF != ''">UF</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.UF" readonly="true" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating *ngIf="usuario.cidade != ''">Cidade</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.cidade" readonly="true" name="cidade"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating *ngIf="usuario.bairro != ''">bairro</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.bairro" readonly="true" name="bairro"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating *ngIf="usuario.endereco != ''">endereco</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.endereco" readonly="true" name="endereco"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.permissao" readonly="true" name="permissao"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Conta</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.banido" readonly="true" name="banido"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col width-50>
+      <button ion-button block [disabled]="desabilitar" (click)="permisao()" color={{corP()}}>{{nomePermisao()}}</button>
+    </ion-col>
+    <ion-col width-50>
+      <button ion-button block [disabled]="desabilitar" (click)="conta()" color={{corC()}}>{{nomeConta()}}</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -3,7 +3,7 @@
 	require 'mySQL.php';
 ?>
 <?php
-	$vetor   = array();
+	$vetor = array();
 	$the_request = &$_GET;
 	if (isset($_GET["id"])){
 		$id = $_GET["id"];
@@ -11,8 +11,9 @@
 		$sql = " SELECT * FROM usuario WHERE IDUsuario = '$id' ";
 		$result = $con->query($sql);
 		$dados = $result->fetch_assoc();
-		$banimento = $dados['banido'];
-		echo $banimento;
+		$vetor[] = $dados['banido'];
+		$vetor[] = $dados['permissao'];
+		echo json_encode($vetor);
 	}
 	$con->close();
 ?>

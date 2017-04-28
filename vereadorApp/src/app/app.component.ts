@@ -32,6 +32,7 @@ import { Solicitacao } from '../model/solicitacao';
 import { PublicacaoPage } from '../pages/publicacao/publicacao';
 import { VisualizarPlPage } from '../pages/visualizar-pl/visualizar-pl';
 import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visualizar-solicitacao';
+import { BuscaUsuarioPage } from '../pages/busca-usuario/busca-usuario';
 
 // Branch import
 declare var Branch;
@@ -54,7 +55,6 @@ export class MyApp {
   private permissao: number = 0;
   private countTimerForCloseApp: boolean = false;
 
-  pageAtual: any;
   homePage = HomePage;
   solicitacoesPage = SolicitacoesPage;
   tabProjetosDeLeiPage = TabProjetosDeLeiPage;
@@ -68,6 +68,7 @@ export class MyApp {
   avaliarDepoimentoPage = AvaliarDepoimentoPage;
   informacaoPage = InformacaoPage;
   categoriasPage = CategoriasPage;
+  buscaUsuario = BuscaUsuarioPage;
 
   constructor(
     private platform: Platform,
@@ -173,21 +174,17 @@ export class MyApp {
 
   private openPerfil() {
     this.menuCtrl.close();
-    this.pageAtual = "Perfil";
     this.navCtrl.push(PerfilPage);
   }
 
   private openPage(page) {
     this.menuCtrl.close();
-    if (this.pageAtual === page) {
+    if (page == HomePage) {
+      this.navCtrl.setRoot(page);
     } else {
-      this.pageAtual = page;
-      if (page == HomePage) {
-        this.navCtrl.setRoot(page);
-      } else {
-        this.navCtrl.push(page);
-      }
+      this.navCtrl.push(page);
     }
+
   }
 
   public sair() {

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
 import { EditarEventoPage } from '../editar-evento/editar-evento';
 import { EventoService } from '../../providers/evento-service';
+import { StorageService } from '../../providers/storage';
+
 
 @Component({
   selector: 'page-evento',
@@ -14,14 +16,18 @@ export class EventoPage {
   private dataFim;
   private horaInicio;
   private horaTermino;
+  private permissao = 0;
+  private desabilitar: boolean = false;
 
   constructor(
     private toastCtrl: ToastController,
     public navCtrl: NavController,
     public navParams: NavParams,
     private eventoService: EventoService,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private storageService: StorageService
   ) {
+    this.storageService.get().then(resposta=> this.permissao = resposta.permissao);
     this.evento = this.navParams.get("evento");
     
     //format datatime
@@ -57,6 +63,7 @@ export class EventoPage {
   }
 
   private excluir() {
+    this.desabilitar = true;
     this.eventoService.removeEvento(this.evento.id).then(res => {
       if (res == true) {
         this.presentToast("Excluido com sucesso");
@@ -64,7 +71,7 @@ export class EventoPage {
       } else {
         this.presentToast("Erro ao excluir");
       }
-    });
+    }).catch(()=>this.desabilitar = false);
   }
 
   private presentToast(text) {

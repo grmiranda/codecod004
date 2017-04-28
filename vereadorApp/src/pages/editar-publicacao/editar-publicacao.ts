@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, NavParams, ActionSheetController } from 'ionic-angular';
+import { NavController, AlertController, NavParams, ActionSheetController, ToastController } from 'ionic-angular';
 import { Publicacao } from '../../model/publicacao';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { PublicacaoPage } from '../publicacao/publicacao';
 
 @Component({
   selector: 'page-editar-publicacao',
@@ -20,7 +21,9 @@ export class EditarPublicacaoPage {
     private alertCtrl: AlertController,
     private domSanitizer: DomSanitizer,
     public fotoService: FotoService,
-    public publicacaoService: PublicacaoService) {
+    public publicacaoService: PublicacaoService,
+    private toastCtrl: ToastController
+  ) {
     this.publicacao = this.navParams.get("publicacao");
     this.converterVideoURL(this.publicacao.video);
   }
@@ -30,6 +33,9 @@ export class EditarPublicacaoPage {
       if (!res.error) {
         if (res.value) {
           this.navCtrl.pop();
+          this.navCtrl.pop();
+          this.navCtrl.push(PublicacaoPage, { publicacao: this.publicacao });
+          this.presentToast("Alterado com sucesso");
         }
       } else {
         this.showConfirm();
@@ -56,7 +62,7 @@ export class EditarPublicacaoPage {
           handler: data => {
 
             this.publicacao.fotoURL = [];
-                        
+
             this.converterVideoURL(data.link);
           }
         }
@@ -81,7 +87,7 @@ export class EditarPublicacaoPage {
     else if (link.includes('watch?v=')) {
       this.publicacao.video = link.replace("watch?v=", "embed/");
       this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
-    } else if(link.includes('embed/')){
+    } else if (link.includes('embed/')) {
       this.publicacao.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.publicacao.video);
     }
   }
@@ -188,6 +194,15 @@ export class EditarPublicacaoPage {
       ]
     });
     confirm.present();
+  }
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }

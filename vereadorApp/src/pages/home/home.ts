@@ -61,7 +61,6 @@ export class HomePage {
       content: 'Carregando'
     });
 
-    loading.present();
 
     this.publicacaoService.getPublicacoes().then(res => {
       loading.dismiss();

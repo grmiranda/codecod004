@@ -28,6 +28,18 @@
                 }
 
                 $temp = array();
+				
+				if($row['permissao'] == 1){
+					$temp['permissao'] = "Administrador";
+				} else {
+					$temp['permissao'] = "Comum";
+				}
+				
+				if($row['banido'] == 1){
+					$temp['banido'] = "Banida";
+				} else {
+					$temp['banido'] = "Ativa";
+				}
 
                 $temp['IDUsuario'] = $row['IDUsuario'];
                 $temp['nome'] = $row['nome'];
@@ -94,6 +106,6 @@
                 echo json_encode($temp);
             }
         }
-	} 	
+	} 
 	$con->close();	
 ?>

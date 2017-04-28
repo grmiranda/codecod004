@@ -83,6 +83,11 @@ import { EventoService } from '../providers/evento-service';
 import { DepoimentoService } from '../providers/depoimento-service';
 import { DeepLinkService } from '../providers/deep-link-service';
 
+import { AbrirUsuarioPage } from '../pages/abrir-usuario/abrir-usuario';
+import { BuscaUsuarioPage } from '../pages/busca-usuario/busca-usuario';
+import { OpcoesUsuarioService } from '../providers/opcoes-usuario-service';
+
+
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -149,7 +154,9 @@ const cloudSettings: CloudSettings = {
     AvaliarDepoimentoPage,
     VisualizarSolicitacaoPage,
     Autoresize,
-    VisualizarPlPage
+    VisualizarPlPage,
+    AbrirUsuarioPage,
+    BuscaUsuarioPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -206,11 +213,13 @@ const cloudSettings: CloudSettings = {
     NovoDepoimentoPage,
     AvaliarDepoimentoPage,
     VisualizarSolicitacaoPage,
-    VisualizarPlPage
+    VisualizarPlPage,
+    AbrirUsuarioPage,
+    BuscaUsuarioPage
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, DeepLinkService, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
-    StorageService, CadastroService, LikeService, FotoService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
+    StorageService, CadastroService, LikeService, FotoService, OpcoesUsuarioService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
     PontuacaoService, { provide: ErrorHandler, useClass: IonicErrorHandler }, GooglePlusService, ProjetoDeLeiService]
 
 

@@ -46,6 +46,10 @@
         Mensagens
       </ion-item>
 
+      <ion-item *ngIf="permissao == 1" (click)="openPage(buscaUsuario);  menuAdm = false; menuInfo= false;">
+        Buscar Usuário
+      </ion-item>
+
       <ion-item (click)="openPage(agendaPage);  menuAdm = false; menuInfo= false;">
         Agenda
       </ion-item>
@@ -54,10 +58,10 @@
         Informações
       </ion-item>
       <div class="menuFechado" [class.menuInfoAberto]="menuInfo" style="margin-right: 10px">
-        <ion-item (click)="openPage(informacaoPage);  menuAdm = false; menuInfo= false;">
-          Informações Úteis
-        </ion-item>
         <ion-item (click)="openPage(categoriasPage);  menuAdm = false; menuInfo= false;">
+          Telefones Úteis
+        </ion-item>
+        <ion-item (click)="openPage(informacaoPage);  menuAdm = false; menuInfo= false;">
           Perguntas Frequentes
         </ion-item>
       </div>

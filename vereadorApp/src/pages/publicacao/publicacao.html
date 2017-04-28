@@ -29,4 +29,13 @@
     </ion-slides>
     <ion-textarea autoresize [(ngModel)]="publicacao.texto" readonly="true" name="texto"></ion-textarea>
   </ion-card>
+
+  <ion-row *ngIf="permissao == 1">
+    <ion-col width-50>
+      <button ion-button icon-left block (click)="editar()" color="secondary"><ion-icon name="create"></ion-icon>Editar</button>
+    </ion-col>
+    <ion-col width-50>
+      <button ion-button icon-left block (click)="excluir()" color="danger"><ion-icon name="trash"></ion-icon>Excluir</button>
+    </ion-col>
+  </ion-row>
 </ion-content>

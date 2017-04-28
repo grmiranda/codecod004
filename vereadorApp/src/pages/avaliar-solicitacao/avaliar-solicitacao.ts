@@ -4,7 +4,6 @@ import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { Solicitacao } from '../../model/solicitacao';
 import { PushService } from '../../providers/push-service';
 import { FeedBackService } from '../../providers/feed-back-service';
-import { VisualizarSolicitacaoPage } from '../visualizar-solicitacao/visualizar-solicitacao';
 import { EditarSolicitacaoPage } from '../editar-solicitacao/editar-solicitacao';
 
 
@@ -152,10 +151,6 @@ export class AvaliarSolicitacaoPage {
         this.solicitacoes = res.data;
       }
     });
-  }
-
-  private abrirSolicitacao(solicitacao: Solicitacao) {
-    this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: solicitacao });
   }
 
   private editarSolicitacao(solicitacao: Solicitacao) {

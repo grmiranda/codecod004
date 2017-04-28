@@ -18,7 +18,8 @@ export class EditarEventoPage {
   private horaInicio;
   private horaTermino;
   private allDay: boolean = false;
-
+  private desabilitar: boolean = false;
+  
   constructor(
     private toastCtrl: ToastController,
     public navParams: NavParams,
@@ -37,6 +38,7 @@ export class EditarEventoPage {
   }
 
   public finalizar() {
+    this.desabilitar = true;
     let evento = new Evento();
     evento.Allday = this.allDay;
     evento.IDEvento = this.evento.id;
@@ -55,8 +57,12 @@ export class EditarEventoPage {
           this.evento.allDay = evento.Allday;
           this.view.dismiss({evento: this.evento, dataInicio: this.dataInicio, dataFim: this.dataFim, horaInicio: this.horaInicio, horaFim: this.horaTermino, allDay: this.allDay});
           this.presentToast("Alterado com sucesso");
+        } else {
+          this.desabilitar = false;
         }
-      });
+      }).catch(()=> this.desabilitar = false);
+    } else {
+      this.desabilitar = false;
     }
 
 

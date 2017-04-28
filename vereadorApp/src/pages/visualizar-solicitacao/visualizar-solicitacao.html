@@ -29,4 +29,20 @@
       </div>
     </div>
   </ion-card>
+
+  <ion-row *ngIf="permissao == 1">
+    <ion-col width-50>
+      <button ion-button icon-left block [disabled]="desabilitar" (click)="editar()" color="secondary"><ion-icon name="create"></ion-icon>Editar</button>
+    </ion-col>
+    <ion-col width-50>
+      <button ion-button icon-left block [disabled]="desabilitar" (click)="excluir()" color="danger"><ion-icon name="trash"></ion-icon>Excluir</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button *ngIf="permissao == 1 && solicitacao.estado == 'ap'" ion-button icon-left block (click)="requerimento()" color="secondary"><ion-icon name="archive"></ion-icon>Fazer Requerimento</button>
+      <button *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'cp'" ion-button icon-left block (click)="abrirRequerimento()" color="secondary"><ion-icon name="archive"></ion-icon>Abrir Requerimento</button>
+    </ion-col>
+  </ion-row>
+
 </ion-content>

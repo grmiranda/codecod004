@@ -1,0 +1,30 @@
+<!--
+  Generated template for the BuscaUsuario page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="laranja">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Buscar Usuário
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let usuario of usuarios" [style.background-color]="usuario.permissao=='Comum' ? '#ffffff' : '#edffe5'" (click)="exibirUsuario(usuario)" >
+      <ion-avatar item-left>
+        <img [src]="usuario.fotoURL">
+      </ion-avatar>
+      <h2>{{ usuario.nome }}</h2>
+      <p>{{ usuario.telefone || usuario.email }}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

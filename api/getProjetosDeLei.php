@@ -51,7 +51,9 @@
 							if ($aux['permissao'] == 0){
 								$aux = $aux['Push'];
 								$ids[] = $tempID;
-								$pushs[] = $aux;
+								if($aux != ""){
+									$pushs[] = $aux;
+								}
 							}
 						}
 					}
@@ -110,7 +112,9 @@
 							if ($aux['permissao'] == 0){
 								$aux = $aux['Push'];
 								$ids[] = $tempID;
-								$pushs[] = $aux;
+								if($aux != ""){
+									$pushs[] = $aux;
+								}
 							}
 						}
 					}

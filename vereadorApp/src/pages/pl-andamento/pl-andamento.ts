@@ -104,7 +104,7 @@ export class PlAndamentoPage {
           {
             text: 'Reprovar',
             role: 'destructive',
-            icon: !this.platform.is('ios') ? 'lose-circle' : null,
+            icon: !this.platform.is('ios') ? 'close-circle' : null,
             handler: () => {
               this.alertCtrl.create({
                 title: 'Reprovar projeto de lei',

@@ -82,7 +82,6 @@ export class VisualizarPlPage {
   }
 
   private like(projetodelei, tipo: string) {
-    alert(this.id);
     if (this.id != "0" && this.id != undefined) {
       projetodelei.t = projetodelei.t == tipo ? 'u' : tipo;
       this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.id, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {

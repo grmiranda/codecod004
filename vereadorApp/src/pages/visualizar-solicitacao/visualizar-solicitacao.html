@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <ion-row no-padding>
+    <ion-row no-padding *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'cp'">
       <ion-col width-50 class="centralizar">
         <button ion-button clear small [color]="tipo == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(solicitacao, 's')">
           <ion-icon name="md-thumbs-up"></ion-icon>

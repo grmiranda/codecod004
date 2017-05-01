@@ -1,6 +1,7 @@
 <?php
 	include 'mySQL.php';
 	require 'mySQL.php';
+	include 'getIdPush.php';
 ?>
 <?php 
 	$the_request = &$_GET;
@@ -18,8 +19,16 @@
 		}
 		$row['fotoURL'] = $fotos;
 		
-		$sql = "SELECT * FROM apoiosolicitacao WHERE IDSolicitacao = '$id' ";
+		$idU = $row['IDUsuario'];
+		$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
 		$resultado = $con->query($sql);
+		$dado = $resultado->fetch_assoc();
+		$row['nomeUsuario'] = $dado['nome'];
+		$row['fotoUsuario'] = $dado['fotoURL'];
+		
+		$idsPush = getIdApoio($idPostagem, $tipoPostagem);
+		$row['ids'] = $ids;
+		$row['pushs'] = $pushs;
 		
 		echo json_encode($row);
 	} 	

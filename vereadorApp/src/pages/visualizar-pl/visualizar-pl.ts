@@ -6,6 +6,8 @@ import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { StorageService } from '../../providers/storage';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { NovaPlPage } from '../nova-pl/nova-pl';
+import { LikeService } from '../../providers/like-service';
+import { LikeProjetoDeLei } from '../../model/like-projeto-de-lei';
 
 
 @Component({
@@ -16,6 +18,9 @@ export class VisualizarPlPage {
 
   private pl: ProjetoDeLei;
   private permissao = 0;
+  private id = "0";
+  private projeto;
+  private carregando: boolean = false;
 
   constructor(
     public navParams: NavParams,
@@ -28,23 +33,28 @@ export class VisualizarPlPage {
     public projetoDeLeiService: ProjetoDeLeiService,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    private navctrl: NavController
+    private navctrl: NavController,
+    public likeService: LikeService
   ) {
-    this.pl = navParams.get("pl");
-    console.log(this.pl);
-    if (this.pl.titulo == "") {
+    this.projeto = navParams.get("pl");
+    this.pl = this.projeto.pl;
+    if (this.pl == undefined || this.pl.titulo == "") {
+      this.carregando = true;
       let loading = this.loadingCtrl.create({
         content: 'Carregando'
       });
       loading.present();
-      this.plService.plGetId(this.pl.IDPL).then(res => {
+      this.plService.plGetId(this.projeto.IDPL).then(res => {
         loading.dismiss();
-        this.pl = res.data;
-        this.storageService.get().then(resposta => this.permissao = resposta.permissao);
+        this.projeto = res.data;
+        this.pl = this.projeto.pl;
+        this.carregando = false;
       }).catch(() => loading.dismiss());
-    } else {
-      this.storageService.get().then(resposta => this.permissao = resposta.permissao);
     }
+    this.storageService.get().then(resposta => {
+      this.permissao = resposta.permissao;
+      this.id = resposta.IDUsuario;
+    });
   }
 
   compartilhar() {
@@ -69,6 +79,19 @@ export class VisualizarPlPage {
       }
     });
     modal.present();
+  }
+
+  private like(projetodelei, tipo: string) {
+    alert(this.id);
+    if (this.id != "0" && this.id != undefined) {
+      projetodelei.t = projetodelei.t == tipo ? 'u' : tipo;
+      this.likeService.addLikeProjetoDeLei(new LikeProjetoDeLei(tipo, this.id, projetodelei.pl.IDPL, projetodelei.pl.IDUsuario)).then(res => {
+        projetodelei.p = res.value.p;
+        projetodelei.n = res.value.n;
+      });
+    } else {
+      this.displayToast("Faça o login no sistema antes para poder dar seu voto");
+    }
   }
 
   reprovarPl() {
@@ -175,6 +198,14 @@ export class VisualizarPlPage {
       position: 'top'
     });
     toast.present();
+  }
+
+  nome() {
+    if (this.pl.estado == 'ap') {
+      return "Adicionar Ofício";
+    } else if (this.pl.estado == 'tr') {
+      return "Aprovado";
+    }
   }
 
 }

@@ -53,6 +53,7 @@ export class PlAndamentoPage {
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
+        console.log(this.pls);
       } else {
         this.tentarNovamente();
       }
@@ -135,7 +136,7 @@ export class PlAndamentoPage {
             icon: 'checkmark-circle',
             handler: () => {
               this.alertCtrl.create({
-                title: 'Reprovar projeto de lei',
+                title: 'Aprovar projeto de lei',
                 message: "Digite mensagem para usuario",
                 inputs: [
                   {
@@ -225,7 +226,7 @@ export class PlAndamentoPage {
     });
   }
 
-  public abrirPL(pl: ProjetoDeLei) {
+  public abrirPL(pl) {
     this.navCtrl.push(VisualizarPlPage, { pl: pl });
   }
 

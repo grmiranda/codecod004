@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  
+
 
   <ion-card>
     <ion-item>
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <ion-row no-padding *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'cp'">
+    <ion-row no-padding *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'ap'">
       <ion-col width-50 class="centralizar">
         <button ion-button clear small [color]="tipo == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(solicitacao, 's')">
           <ion-icon name="md-thumbs-up"></ion-icon>

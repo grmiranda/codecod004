@@ -50,13 +50,13 @@
 
     <ion-row no-padding>
       <ion-col width-50 class="centralizar">
-        <button ion-button clear small [color]="solicitacao.t == 's' ? 'secondary' : 'cinza'" icon-left (click)="like('s')">
+        <button ion-button clear small [color]="solicitacao.t == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(solicitacao, 's')">
               <ion-icon name="md-thumbs-up"></ion-icon>
               Apoiar - {{ solicitacao.p }}
             </button>
       </ion-col>
       <ion-col width-50 class="centralizar">
-        <button ion-button clear small [color]="solicitacao.t == 'n' ? 'danger' : 'cinza'" icon-left (click)="like('n')">
+        <button ion-button clear small [color]="solicitacao.t == 'n' ? 'danger' : 'cinza'" icon-left (click)="like(solicitacao, 'n')">
               <ion-icon name="md-thumbs-down"></ion-icon>
               Reprovar - {{ solicitacao.n }}
         </button>

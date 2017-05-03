@@ -15,7 +15,6 @@ export class FotoService {
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
       targetWidth: 500,
-      targetHeight: 500,
       saveToPhotoAlbum: false
     }).then(imageData => ("data:image/jpeg;base64," + imageData), error => ('false'));
   }
@@ -28,7 +27,6 @@ export class FotoService {
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
       targetWidth: 500,
-      targetHeight: 500,
       saveToPhotoAlbum: true
     }).then(imageData => ("data:image/jpeg;base64," + imageData), error => ('false'));
   }

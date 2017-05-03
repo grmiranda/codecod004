@@ -50,19 +50,19 @@ export class VisualizarSolicitacaoPage {
         loading.dismiss();
         this.solicitacao = res.data;
       }).catch(() => loading.dismiss());
-    } else {
-      storageService.get().then(resp => {
-        this.permissao = resp.permissao;
-        this.idUsuario = resp.IDUsuario;
-        this.likeService.getLikeSolicitacaoByID(this.idUsuario, this.solicitacao.IDSolicitacao).then(res => {
-          if(!res.error){
-            this.tipo = res.value.t;
-            this.apoio = res.value.p;
-            this.reprovacao = res.value.n;
-          }
-        });
-      });
     }
+    storageService.get().then(resp => {
+      this.permissao = resp.permissao;
+      this.idUsuario = resp.IDUsuario;
+      this.likeService.getLikeSolicitacaoByID(this.idUsuario, this.solicitacao.IDSolicitacao).then(res => {
+        if (!res.error) {
+          this.tipo = res.value.t;
+          this.apoio = res.value.p;
+          this.reprovacao = res.value.n;
+        }
+      });
+    });
+
   }
 
   compartilhar() {
@@ -214,12 +214,18 @@ export class VisualizarSolicitacaoPage {
   }
 
   private like(tipo: string) {
-    this.tipo = this.tipo == tipo ? 'u' : tipo;
+    alert(this.idUsuario);
+    if (this.idUsuario != 0 && this.idUsuario != undefined) {
+      this.tipo = this.tipo == tipo ? 'u' : tipo;
     this.likeService.addLikeSolicitacao(new LikeSolicitacao(tipo, this.idUsuario, this.solicitacao.IDSolicitacao, this.solicitacao.IDUsuario)).then(res => {
       JSON.stringify(res);
       this.apoio = res.value.p;
       this.reprovar = res.value.n;
     });
+    } else {
+      this.displayToast("Faça o login no sistema antes para poder dar seu voto");
+    }
+    
   }
 
 }

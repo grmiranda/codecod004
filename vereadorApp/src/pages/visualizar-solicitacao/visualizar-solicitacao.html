@@ -14,14 +14,22 @@
 
 
 <ion-content>
+  
+
   <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="solicitacao.fotoUsuario">
+      </ion-avatar>
+      <h2>{{solicitacao.nomeUsuario}}</h2>
+    </ion-item>
     <ion-slides *ngIf="solicitacao.fotoURL.lenght != 0" pager>
       <ion-slide *ngFor="let solicitacaoAtual of solicitacao.fotoURL">
         <img [src]="solicitacaoAtual" style="width: 100%;" />
       </ion-slide>
     </ion-slides>
     <div padding class="scrolling">
-      <h2>{{solicitacao.titulo}}</h2>
+      <h1>{{solicitacao.titulo}}</h1>
       <ion-label>Descrição</ion-label>
       <ion-textarea autoresize [(ngModel)]="solicitacao.descricao" readonly="true" name="texto"></ion-textarea>
       <div *ngIf="solicitacao.andamento != ''">
@@ -30,7 +38,7 @@
       </div>
     </div>
 
-    <ion-row no-padding>
+    <ion-row no-padding *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'cp'">
       <ion-col width-50 class="centralizar">
         <button ion-button clear small [color]="tipo == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(solicitacao, 's')">
           <ion-icon name="md-thumbs-up"></ion-icon>

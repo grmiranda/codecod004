@@ -39,7 +39,9 @@
 						$dado = $tes->fetch_assoc();
 						if ($dado['permissao'] == 0){
 							$ids[] = $userID;
-							$pushs[] = $dado['Push'];
+							if($dado['Push'] != ""){
+								$pushs[] = $dado['Push'];
+							}
 						}
 					}
 					
@@ -51,7 +53,10 @@
 						$dado = $tes->fetch_assoc();
 
 						$ids[] = $idDono;
-						$pushs = $dado['Push'];
+						if($dado['Push'] != ""){
+							$pushs[] = $dado['Push'];
+						}
+						
 					}
 
 					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";
@@ -104,8 +109,10 @@
 						$tes = $con->query($sql);
 						$dado = $tes->fetch_assoc();
 						if ($dado['permissao'] == 0){
-							$pushs[] = $dado['Push'];
 							$ids[] = $userID;
+							if($dado['Push'] != ""){
+								$pushs[] = $dado['Push'];
+							}
 						}
 						
 					}
@@ -118,7 +125,9 @@
 						$dado = $tes->fetch_assoc();
 
 						$ids[] = $idDono;
-						$pushs = $dado['Push'];
+						if($dado['Push'] != ""){
+							$pushs[] = $dado['Push'];
+						}
 					}
 
 					$sql = "SELECT * FROM fotourl WHERE id = '$idS' AND tipo = 'solicitacao'";

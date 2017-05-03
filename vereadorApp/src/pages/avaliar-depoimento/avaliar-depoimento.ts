@@ -27,7 +27,7 @@ export class AvaliarDepoimentoPage {
   private carregarDepoimentos() {
 
     let loader = this.loadingController.create({
-      content: "Carregando eventos"
+      content: "Carregando avaliações"
     });
 
     loader.present();

@@ -97,7 +97,7 @@ export class PlPropostasPage {
           {
             text: 'Reprovar',
             role: 'destructive',
-            icon: 'trash',
+            icon: !this.platform.is('ios') ? 'trash' : null,
             handler: () => {
               this.alertCtrl.create({
                 title: 'Reprovar projeto de lei',
@@ -125,7 +125,7 @@ export class PlPropostasPage {
           },
           {
             text: 'Adicionar Ofício',
-            icon: 'logo-buffer',
+            icon: !this.platform.is('ios') ? 'logo-buffer' : null,
             handler: () => {
               let modal = this.modalCtrl.create(NovaPlPage, { pl: pl });
               modal.onDidDismiss(data => {

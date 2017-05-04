@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar color="laranja">
-    <ion-title style="padding: 0px">Projeto em Câmara</ion-title>
+    <ion-title style="padding-left: 0px; padding-right: 0px">Projeto em Câmara</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list>
     <ion-item>
       <ion-label floating>Título</ion-label>
@@ -14,7 +14,6 @@
       <ion-label floating>Ementa</ion-label>
       <ion-textarea autoresize [(ngModel)]="pl.ementa" name="texto"></ion-textarea>
     </ion-item>
-
     <p class="centralizar">Clique no "+" para adicionar Fotos</p>
     <ion-grid>
       <ion-row>
@@ -32,8 +31,8 @@
       </ion-row>
     </ion-grid>
 
-    <ion-item>
-      <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Criar Projeto de Lei</button>
-    </ion-item>
   </ion-list>
+  
+  <button class="blockbutton" (click)="finalizar()" color="secondary" ion-button block default>Criar Projeto de Lei</button>
+
 </ion-content>

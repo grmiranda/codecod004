@@ -34,7 +34,7 @@ export class TrofeuCidadaniaPage {
   }
 
   private getTop3() {
-    this.pontuacaoService.rankMelhores(this.myID).then(res => {
+    this.pontuacaoService.rankMelhores(3).then(res => {
       this.loading.dismiss();
       if (!res.error) {
         this.rank = res.data;

@@ -17,7 +17,7 @@
       <ion-textarea autoresize [(ngModel)]="evento.descricao" readonly="true" name="texto"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-label floating >Local</ion-label>
+      <ion-label floating>Local</ion-label>
       <ion-input type="text" [(ngModel)]="evento.local" readonly="true"></ion-input>
     </ion-item>
     <ion-item>
@@ -41,13 +41,13 @@
       <ion-label floating>Horário de término</ion-label>
       <ion-input type="time" [(ngModel)]="horaTermino" readonly="true"></ion-input>
     </ion-item>
-      <ion-row *ngIf="permissao == 1">
-        <ion-col width-50>
-          <button ion-button icon-left block [disabled]="desabilitar" (click)="editar()" color="secondary" ><ion-icon name="create"></ion-icon>Editar</button>
-        </ion-col>
-        <ion-col width-50>
-          <button ion-button icon-left block [disabled]="desabilitar" (click)="excluir()" color="danger" ><ion-icon name="trash"></ion-icon>Excluir</button>          
-        </ion-col>
-      </ion-row>
+    <ion-row *ngIf="permissao == 1">
+      <ion-col width-50>
+        <button ion-button icon-left block [disabled]="desabilitar" (click)="editar()" color="secondary"><ion-icon name="create"></ion-icon>Editar</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button icon-left block [disabled]="desabilitar" (click)="excluir()" color="danger"><ion-icon name="trash"></ion-icon>Excluir</button>
+      </ion-col>
+    </ion-row>
   </ion-list>
 </ion-content>

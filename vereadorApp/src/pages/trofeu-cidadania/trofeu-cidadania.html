@@ -51,10 +51,10 @@
   <h2 class="titulo-rank">TOP 3</h2>
 
   <!-- Primeiro colocado -->
-  <ion-card>
+  <ion-card *ngIf="rank[0]">
     <ion-item>
       <ion-avatar item-left>
-        <img class="primeiro"  src="{{ rank[0].fotoURL }}">
+        <img class="primeiro" src="{{ rank[0].fotoURL }}">
       </ion-avatar>
       <h2>{{ rank[0].nome }}</h2>
     </ion-item>
@@ -65,7 +65,7 @@
   </ion-card>
 
   <!-- Segundo colocado -->
-  <ion-card>
+  <ion-card *ngIf="rank[1]">
     <ion-item>
       <ion-avatar item-left>
         <img class="segundo" src="{{ rank[1].fotoURL }}">
@@ -79,10 +79,10 @@
   </ion-card>
 
   <!-- Terceiro colocado -->
-  <ion-card>
+  <ion-card *ngIf="rank[2]">
     <ion-item>
       <ion-avatar item-left>
-        <img class="terceiro"  src="{{ rank[2].fotoURL }}">
+        <img class="terceiro" src="{{ rank[2].fotoURL }}">
       </ion-avatar>
       <h2>{{ rank[2].nome }}</h2>
     </ion-item>

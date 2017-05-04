@@ -53,7 +53,6 @@ export class PlAndamentoPage {
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
-        console.log(this.pls);
       } else {
         this.tentarNovamente();
       }

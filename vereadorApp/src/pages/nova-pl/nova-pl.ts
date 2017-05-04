@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, NavParams, ActionSheetController, ViewController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, NavParams, ActionSheetController, ViewController, Platform } from 'ionic-angular';
 import { FotoService } from '../../providers/foto-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
+import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { StorageService } from '../../providers/storage';
-
 
 @Component({
   selector: 'page-nova-pl',
@@ -16,11 +16,13 @@ export class NovaPlPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public projetoDeLeiService: ProjetoDeLeiService,
     public view: ViewController,
     private toastCtrl: ToastController,
     public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private fotoService: FotoService,
+    public platform: Platform,
     private storageService: StorageService
     ) {
 
@@ -40,33 +42,18 @@ export class NovaPlPage {
     } else if (this.pl.ementa.trim() == '') {
       this.displayToast("Adicione uma ementa à Proposta");
     } else {
-      this.enviarMensagem();
+      this.pl.estado = 'tr';
+      this.pl.IDUsuario = this.myID;
+      this.projetoDeLeiService.addProjetoDeLei(this.pl).then(res => {
+        if (!res.error && res.value) {
+          this.displayToast("Projeto criado com sucesso!");
+          this.navCtrl.pop();
+        } else {
+          //error - falta de conexão / tentar novamente
+          this.showConfirm();
+        }
+      });
     }
-  }
-
-  public enviarMensagem() {
-    this.alertCtrl.create({
-      title: 'Aprovar',
-      message: "Digite mensagem para usuario",
-      inputs: [
-        {
-          name: 'mensagem',
-          placeholder: 'Digite aqui'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Enviar',
-          handler: data => {
-          this.view.dismiss({pl: this.pl, msg : data.mensagem});
-          }
-        }]
-    }).present();
   }
 
   private importarFoto() {
@@ -91,23 +78,21 @@ export class NovaPlPage {
       buttons: [
         {
           text: 'Foto da galeria',
-          role: 'destructive',
-          icon: 'md-image',
+          icon: !this.platform.is('ios') ? 'md-image' : null,
           handler: () => {
             this.importarFoto();
           }
         },
         {
           text: 'Foto da câmera',
-          role: 'destructive',
-          icon: 'md-camera',
+          icon: !this.platform.is('ios') ? 'md-camera' : null,
           handler: () => {
             this.tirarFoto();
           }
         },
         {
           text: 'Cancel',
-          icon: 'close',
+          icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
           }
@@ -124,14 +109,14 @@ export class NovaPlPage {
         {
           text: 'Remover Foto',
           role: 'destructive',
-          icon: 'trash',
+          icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             this.removerFoto(url);
           }
         },
         {
           text: 'Cancel',
-          icon: 'close',
+          icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
           }
@@ -161,6 +146,25 @@ export class NovaPlPage {
 
   private cancel(){
     this.view.dismiss();
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.finalizar();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

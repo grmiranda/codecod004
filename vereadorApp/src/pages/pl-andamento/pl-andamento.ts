@@ -132,7 +132,7 @@ export class PlAndamentoPage {
           },
           {
             text: 'Aprovar',
-            icon: 'checkmark-circle',
+            icon: !this.platform.is('ios') ? 'checkmark-circle' : null,
             handler: () => {
               this.alertCtrl.create({
                 title: 'Aprovar projeto de lei',
@@ -161,7 +161,7 @@ export class PlAndamentoPage {
           },
           {
             text: 'Cancel',
-            icon: 'close',
+            icon: !this.platform.is('ios') ? 'close' : null,
             role: 'cancel',
             handler: () => {
             }

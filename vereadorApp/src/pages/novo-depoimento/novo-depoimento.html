@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="laranja">
-    <ion-title>Novo Depoimento</ion-title>
+    <ion-title style="padding-left: 0px; padding-right: 0px">Novo Depoimento</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,8 +11,6 @@
       <ion-label floating>Depoimento</ion-label>
       <ion-textarea autoresize name="textoDepoimento" [(ngModel)]="textoDepoimento"></ion-textarea>
     </ion-item>
-    <ion-item>
-      <button class="blockbutton" (click)="enviar()" color="secondary" ion-button block default>Publicar</button>
-    </ion-item>
   </ion-list>
+  <button class="blockbutton" (click)="enviar()" color="secondary" ion-button block default>Publicar</button>
 </ion-content>

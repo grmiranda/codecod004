@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="laranja">
     <ion-title>
       Mensagem
     </ion-title>
@@ -12,16 +12,23 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-item>
-    <ion-avatar item-left>
-      <img [src]="mensagem.foto">
-    </ion-avatar>
-    <h2>{{mensagem.nome}}</h2>
-    <h4>{{mensagem.data}}</h4>
-  </ion-item>
-  {{ mensagem.mensagem }}
+  <ion-card class="cardGrande">
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="mensagem.foto">
+      </ion-avatar>
+      <h2>{{mensagem.nome}}</h2>
+      <p>{{mensagem.data}}</p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>
+        {{ mensagem.mensagem }}
+      </p>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
 
@@ -29,10 +36,10 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6>
-        <button ion-button color="danger" large icon-right full (click)="excluir()">Excluir <ion-icon name="trash"></ion-icon></button>
+        <button ion-button color="danger" default icon-right full (click)="excluir()">Excluir <ion-icon name="trash"></ion-icon></button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button color="secondary" icon-right large full (click)="enviar()">Mensagem <ion-icon name="send"></ion-icon></button>
+        <button ion-button color="secondary" default icon-right full (click)="enviar()">Mensagem <ion-icon name="send"></ion-icon></button>
       </ion-col>
     </ion-row>
   </ion-grid>

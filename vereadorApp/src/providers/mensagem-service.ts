@@ -13,7 +13,7 @@ export class MensagemService {
   }
 
   public enviarMensagem(mensagem : CorpoMensagem):Promise<boolean>{
-      alert(JSON.stringify(mensagem));
+      // alert(JSON.stringify(mensagem));
       return this.http.post("http://dsoutlet.com.br/apiLuiz/enviarMsg.php", JSON.stringify(mensagem), { headers: this.headers }).toPromise().then(res=>res.json())
       .catch(this.handleErrorMessage);
   }

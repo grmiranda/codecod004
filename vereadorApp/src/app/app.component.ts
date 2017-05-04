@@ -87,8 +87,8 @@ export class MyApp {
   ) {
 
     this.storageService.get().then(userAtual => {
-      if (userAtual.IDUsuario != undefined && userAtual.IDUsuario != "0") {
-        this.id = userAtual.IDUsuario;   
+      if (userAtual!= null && userAtual.IDUsuario != undefined && userAtual.IDUsuario != "0") {
+        this.id = userAtual.IDUsuario;
         this.badgesService.publicar(this.id);
       }
       if (userAtual) {
@@ -109,7 +109,7 @@ export class MyApp {
     });
     platform.ready().then(() => {
       var notificationOpenedCallback = function (jsonData) {
-        this.storageService.get().then(userAtual =>  this.badgesService.publicar(userAtual.IDUsuario));        
+        this.storageService.get().then(userAtual =>  this.badgesService.publicar(userAtual.IDUsuario));
       };
 
       window["plugins"].OneSignal

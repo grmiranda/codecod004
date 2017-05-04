@@ -18,8 +18,8 @@
   </ion-item>
 
   <ion-item *ngFor="let questao of questoes" (click)="escolherPergunta(questao)">
-    <h3 class="margemLimitada">{{questao.pergunta}}</h3>
-    <p *ngIf="questao == questaoEscolhida" class="margemLimitada">{{questao.resposta}}</p>
+    <h3 class="pergunta">{{questao.pergunta}}</h3>
+    <p *ngIf="questao == questaoEscolhida" class="resposta">{{questao.resposta}}</p>
   </ion-item>
 
 

@@ -29,7 +29,7 @@ export class LoginPage {
 
   ) {
     this.menu.enable(false);
-    this.loginTeste();
+    //this.loginTeste();
   }
 
   loginTeste() {

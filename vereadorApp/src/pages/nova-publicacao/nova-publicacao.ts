@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, AlertController, ActionSheetController } from 'ionic-angular';
+import { NavController, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
 import { PublicacaoService } from '../../providers/publicacao-service';
 import { FotoService } from '../../providers/foto-service';
 import { Publicacao } from '../../model/publicacao';
@@ -16,6 +16,7 @@ export class NovaPublicacaoPage {
 
   constructor(public navCtrl: NavController,
     private toastCtrl: ToastController,
+    public platform: Platform,
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public publicacaoService: PublicacaoService,
@@ -54,32 +55,30 @@ export class NovaPublicacaoPage {
       buttons: [
         {
           text: 'Foto da galeria',
-          role: 'destructive',
-          icon: 'md-image',
+          icon: !this.platform.is('ios') ? 'md-image' : null,
           handler: () => {
             this.importarFoto();
           }
         },
         {
           text: 'Foto da câmera',
-          role: 'destructive',
-          icon: 'md-camera',
+          icon: !this.platform.is('ios') ? 'md-camera' : null,
           handler: () => {
             this.tirarFoto();
           }
         },
         {
           text: 'Vídeo',
-          role: 'destructive',
-          icon: 'logo-youtube',
+          icon: !this.platform.is('ios') ? 'logo-youtube' : null,
+
           handler: () => {
             this.addLink();
           }
         },
         {
           text: 'Cancel',
-          icon: 'close',
           role: 'cancel',
+          icon: !this.platform.is('ios') ? 'close' : null,
           handler: () => {
           }
         }
@@ -141,14 +140,14 @@ export class NovaPublicacaoPage {
         {
           text: 'Remover Foto',
           role: 'destructive',
-          icon: 'trash',
+          icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             this.removerFoto(url);
           }
         },
         {
           text: 'Cancel',
-          icon: 'close',
+          icon: !this.platform.is('ios') ? 'close' : null,
           role: 'cancel',
           handler: () => {
           }

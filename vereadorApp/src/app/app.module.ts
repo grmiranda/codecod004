@@ -87,7 +87,7 @@ import { AbrirUsuarioPage } from '../pages/abrir-usuario/abrir-usuario';
 import { BuscaUsuarioPage } from '../pages/busca-usuario/busca-usuario';
 import { OpcoesUsuarioService } from '../providers/opcoes-usuario-service';
 
-
+import { BadgesService } from '../providers/badges-service';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -219,7 +219,7 @@ const cloudSettings: CloudSettings = {
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, DeepLinkService, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
-    StorageService, CadastroService, LikeService, FotoService, OpcoesUsuarioService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
+    StorageService, BadgesService, CadastroService, LikeService, FotoService, OpcoesUsuarioService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
     PontuacaoService, { provide: ErrorHandler, useClass: IonicErrorHandler }, GooglePlusService, ProjetoDeLeiService]
 
 

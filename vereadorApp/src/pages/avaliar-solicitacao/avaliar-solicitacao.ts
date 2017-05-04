@@ -5,7 +5,8 @@ import { Solicitacao } from '../../model/solicitacao';
 import { PushService } from '../../providers/push-service';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { EditarSolicitacaoPage } from '../editar-solicitacao/editar-solicitacao';
-
+import { BadgesService } from '../../providers/badges-service';
+import { StorageService } from '../../providers/storage';
 
 @Component({
   selector: 'page-avaliar-solicitacao',
@@ -26,15 +27,21 @@ export class AvaliarSolicitacaoPage {
     public solicitacaoService: SolicitacaoService,
     public actionSheetCtrl: ActionSheetController,
     private feedService: FeedBackService,
-    private viewCtrl: ViewController
+    private viewCtrl: ViewController,
+    public badgesService: BadgesService,
+    public storageService: StorageService
   ) { }
 
   ionViewWillEnter() {
     this.carregarSolicitacoes();
+    
   }
 
   private carregarSolicitacoes() {
-
+    this.storageService.get().then(res => {
+      this.badgesService.publicar(res.IDUsuario);
+    });
+    
     let loading = this.loadingCtrl.create({
       content: 'Carregando'
     });

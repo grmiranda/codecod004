@@ -4,6 +4,8 @@ import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { ProjetoDeLei } from '../../model/projeto-de-lei';
 import { VisualizarPlPage } from '../visualizar-pl/visualizar-pl';
 import { FeedBackService } from '../../providers/feed-back-service';
+import { BadgesService } from '../../providers/badges-service';
+import { StorageService } from '../../providers/storage';
 
 @Component({
   selector: 'page-avaliar-pl',
@@ -20,16 +22,21 @@ export class AvaliarPlPage {
     public actionSheetCtrl: ActionSheetController,
     private feedService: FeedBackService,
     private menuCtrl: MenuController,
-    public navCtrl: NavController) {
-
+    public navCtrl: NavController,
+    public badgesService: BadgesService,
+    public storageService: StorageService
+  ) {
   }
 
   ionViewWillEnter() {
     this.carregarPropostas();
+
   }
 
   private carregarPropostas() {
-
+    this.storageService.get().then(res => {
+      this.badgesService.publicar(res.IDUsuario);
+    });
     let loading = this.loadingCtrl.create({
       content: 'Carregando'
     });
@@ -160,7 +167,7 @@ export class AvaliarPlPage {
     this.navCtrl.push(VisualizarPlPage, { pl: pl });
   }
 
-  private toggleMenu(){
+  private toggleMenu() {
     this.menuCtrl.toggle();
   }
 

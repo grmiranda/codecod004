@@ -34,6 +34,7 @@ import { VisualizarPlPage } from '../pages/visualizar-pl/visualizar-pl';
 import { VisualizarSolicitacaoPage } from '../pages/visualizar-solicitacao/visualizar-solicitacao';
 import { BuscaUsuarioPage } from '../pages/busca-usuario/busca-usuario';
 
+import { BadgesService } from '../providers/badges-service';
 // Branch import
 declare var Branch;
 
@@ -54,6 +55,11 @@ export class MyApp {
   private foto: string = "";
   private permissao: number = 0;
   private countTimerForCloseApp: boolean = false;
+  private msg = 0;
+  private pl = 0;
+  private solicitacao = 0;
+  private depoimento = 0;
+  private id = "0";
 
   homePage = HomePage;
   solicitacoesPage = SolicitacoesPage;
@@ -76,10 +82,15 @@ export class MyApp {
     private toastCtrl: ToastController,
     private storageService: StorageService,
     private http: Http,
-    public events: Events
+    public events: Events,
+    public badgesService: BadgesService
   ) {
 
     this.storageService.get().then(userAtual => {
+      if (userAtual.IDUsuario != undefined && userAtual.IDUsuario != "0") {
+        this.id = userAtual.IDUsuario;   
+        this.badgesService.publicar(this.id);
+      }
       if (userAtual) {
         this.permissao = userAtual.permissao;
         if (userAtual.nome) {
@@ -98,7 +109,7 @@ export class MyApp {
     });
     platform.ready().then(() => {
       var notificationOpenedCallback = function (jsonData) {
-        //alert(JSON.stringify(jsonData));
+        this.storageService.get().then(userAtual =>  this.badgesService.publicar(userAtual.IDUsuario));        
       };
 
       window["plugins"].OneSignal
@@ -114,6 +125,13 @@ export class MyApp {
           this.foto = user.fotoURL;
           this.permissao = user.permissao;
         }
+      });
+
+      events.subscribe('badges', badges => {
+        this.msg = badges.mensagens;
+        this.pl = badges.pl;
+        this.solicitacao = badges.solicitacao;
+        this.depoimento = badges.depoimento;
       });
 
       events.subscribe('banido', () => {

@@ -23,7 +23,6 @@
 
   <ion-card *ngFor="let solicitacao of solicitacoes" (press)="abrirOpcoes(solicitacao.solicitacao)">
 
-
     <ion-item>
       <ion-avatar item-left>
         <img [src]="solicitacao.solicitacao.fotoUsuario">
@@ -31,7 +30,7 @@
       <h2>{{solicitacao.solicitacao.nomeUsuario}}</h2>
     </ion-item>
 
-    <ion-slides *ngIf="solicitacao.solicitacao.fotoURL.lenght != 0" pager>
+    <ion-slides *ngIf="solicitacao.solicitacao.fotoURL.length != 0" pager (click)="abrirSolicitacao(solicitacao.solicitacao)">
 
       <ion-slide *ngFor="let solicitacaoAtual of solicitacao.solicitacao.fotoURL">
         <img [src]="solicitacaoAtual" style="width: 100%;" />

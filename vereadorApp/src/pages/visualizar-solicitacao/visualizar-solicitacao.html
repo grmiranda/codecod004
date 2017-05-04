@@ -23,7 +23,7 @@
       </ion-avatar>
       <h2>{{solicitacao.nomeUsuario}}</h2>
     </ion-item>
-    <ion-slides *ngIf="solicitacao.fotoURL.lenght != 0" pager>
+    <ion-slides *ngIf="solicitacao.fotoURL.length != 0" pager>
       <ion-slide *ngFor="let solicitacaoAtual of solicitacao.fotoURL">
         <img [src]="solicitacaoAtual" style="width: 100%;" />
       </ion-slide>
@@ -40,13 +40,13 @@
 
     <ion-row no-padding *ngIf="solicitacao.estado == 'sl' || solicitacao.estado == 'ap'">
       <ion-col width-50 class="centralizar">
-        <button ion-button clear small [color]="tipo == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(solicitacao, 's')">
+        <button ion-button clear small [color]="tipo == 's' ? 'secondary' : 'cinza'" icon-left (click)="like('s')">
           <ion-icon name="md-thumbs-up"></ion-icon>
           Apoiar - {{ apoio }}
         </button>
       </ion-col>
       <ion-col width-50 class="centralizar">
-        <button ion-button clear small [color]="tipo == 'n' ? 'danger' : 'cinza'" icon-left (click)="like(solicitacao, 'n')">
+        <button ion-button clear small [color]="tipo == 'n' ? 'danger' : 'cinza'" icon-left (click)="like('n')">
           <ion-icon name="md-thumbs-down"></ion-icon>
           Reprovar - {{ reprovacao }}
         </button>

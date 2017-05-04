@@ -59,4 +59,5 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.381691927831-uu73n8h5m36f608msa83l2kpkld84rc3" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="~2.0.3" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
 </widget>

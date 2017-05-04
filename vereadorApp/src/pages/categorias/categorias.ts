@@ -30,7 +30,7 @@ export class CategoriasPage {
 
 
     let loader = this.loadingController.create({
-      content: "Carregando eventos"
+      content: "Carregando Telefones"
     });
 
     loader.present();

@@ -49,17 +49,17 @@
     </ion-card-content>
 
     <ion-row no-padding>
-      <ion-col width-50>
-        <button ion-button clear small color="secondary" icon-left (click)="like(solicitacao, 's')">
-              <ion-icon [name]="solicitacao.t == 's' ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'"></ion-icon>
-              {{ solicitacao.p }}
+      <ion-col width-50 class="centralizar">
+        <button ion-button clear small [color]="solicitacao.t == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(solicitacao, 's')">
+              <ion-icon name="md-thumbs-up"></ion-icon>
+              Apoiar - {{ solicitacao.p }}
             </button>
       </ion-col>
-      <ion-col width-50>
-        <button ion-button clear small color="danger" icon-left (click)="like(solicitacao, 'n')">
-              <ion-icon [name]="solicitacao.t == 'n' ? 'ios-thumbs-down' : 'ios-thumbs-down-outline'"></ion-icon>
-              {{ solicitacao.n }}
-            </button>
+      <ion-col width-50 class="centralizar">
+        <button ion-button clear small [color]="solicitacao.t == 'n' ? 'danger' : 'cinza'" icon-left (click)="like(solicitacao, 'n')">
+              <ion-icon name="md-thumbs-down"></ion-icon>
+              Reprovar - {{ solicitacao.n }}
+        </button>
       </ion-col>
     </ion-row>
   </ion-card>

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="laranja">
-    <ion-title>{{pl.titulo}}</ion-title>
+    <ion-title>Projeto de Lei</ion-title>
     <ion-buttons end>
       <button class="compartilhar" ion-button icon-only (click)="compartilhar()">
         <ion-icon name="share-alt"></ion-icon>
@@ -14,15 +14,50 @@
 
 
 <ion-content>
-  <ion-card>
-    <ion-slides *ngIf="pl.fotoURL.lenght != 0" pager>
-      <ion-slide *ngFor="let plAtual of pl.fotoURL">
-        <img [src]="plAtual" style="width: 100%;" />
-      </ion-slide>
-    </ion-slides>
-    <div padding class="scrolling">
-      <ion-label>Descrição</ion-label>
-      <ion-textarea autoresize [(ngModel)]="pl.ementa" readonly="true" name="texto"></ion-textarea>
+  <div *ngIf="!carregando">
+    <ion-card *ngIf="pl.nomeUsuario != ''">
+      <ion-item *ngIf="pl.nomeUsuario != ''">
+        <ion-avatar item-left>
+          <img [src]="pl.fotoUsuario">
+        </ion-avatar>
+        <h2>{{pl.nomeUsuario}}</h2>
+      </ion-item>
+      <ion-slides *ngIf="pl.fotoURL.lenght != 0" pager>
+        <ion-slide *ngFor="let plAtual of pl.fotoURL">
+          <img [src]="plAtual" style="width: 100%;" />
+        </ion-slide>
+      </ion-slides>
+      <div padding class="scrolling">
+        <h1>{{pl.titulo}}</h1>
+        <ion-label>Descrição</ion-label>
+        <ion-textarea autoresize [(ngModel)]="pl.ementa" readonly="true" name="texto"></ion-textarea>
+      </div>
+    </ion-card>
+
+    <div *ngIf="pl.estado=='tr' || pl.estado=='ap'">
+      <ion-row no-padding class="centralizar">
+        <ion-col width-50>
+          <button ion-button clear small [color]="projeto.t == 's' ? 'secondary' : 'cinza'" icon-left (click)="like(projeto, 's')">
+              <ion-icon name="md-thumbs-up"></ion-icon>
+              Apoiar - {{ projeto.p }}
+        </button>
+        </ion-col>
+        <ion-col width-50 class="centralizar">
+          <button ion-button clear small [color]="projeto.t == 'n' ? 'danger' : 'cinza'" icon-left (click)="like(projeto, 'n')">
+              <ion-icon name="md-thumbs-down"></ion-icon>
+              Reprovar - {{ projeto.n }}
+            </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="permissao == 1">
+        <ion-col width-50>
+          <button ion-button default icon-left block (click)="adicionarOficio()" color="secondary"><ion-icon name="logo-buffer"></ion-icon>{{nome()}}</button>
+        </ion-col>
+        <ion-col width-50>
+          <button ion-button default icon-left block (click)="reprovarPl()" color="danger"><ion-icon name="trash"></ion-icon>Reprovar</button>
+        </ion-col>
+      </ion-row>
     </div>
-  </ion-card>
+  </div>
 </ion-content>

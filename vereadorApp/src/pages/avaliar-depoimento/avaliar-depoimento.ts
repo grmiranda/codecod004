@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, NavParams, ToastController, AlertController, LoadingController, MenuController } from 'ionic-angular';
+import { ActionSheetController, NavParams, ToastController, AlertController, LoadingController, MenuController, Platform } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
 import { DepoimentoService } from '../../providers/depoimento-service';
 
@@ -15,6 +15,7 @@ export class AvaliarDepoimentoPage {
   constructor(
     private toastCtrl: ToastController,
     public loadingController: LoadingController,
+    private platform: Platform,
     private depoimentoService: DepoimentoService,
     private menuCtrl: MenuController,
     private alertCtrl: AlertController,
@@ -26,7 +27,7 @@ export class AvaliarDepoimentoPage {
   private carregarDepoimentos() {
 
     let loader = this.loadingController.create({
-      content: "Carregando eventos"
+      content: "Carregando avaliações"
     });
 
     loader.present();
@@ -48,7 +49,7 @@ export class AvaliarDepoimentoPage {
         {
           text: 'Negar',
           role: 'destructive',
-          icon: 'trash',
+          icon: !this.platform.is('trash') ? 'trash' : null,
           handler: () => {
             this.depoimentoService.negar(depoimento.IDDepoimento).then(res => {
               if (res == true) {
@@ -62,7 +63,8 @@ export class AvaliarDepoimentoPage {
         },
         {
           text: 'Aprovar',
-          icon: 'checkmark-circle',
+          icon: !this.platform.is('ios') ? 'checkmark-circle' : null,
+
           handler: () => {
             this.depoimentoService.aprovar(depoimento.IDDepoimento).then(res => {
               if (res == true) {
@@ -76,7 +78,7 @@ export class AvaliarDepoimentoPage {
         },
         {
           text: 'Cancel',
-          icon: 'close',
+          icon: !this.platform.is('close') ? 'trash' : null,
           role: 'cancel',
           handler: () => {
           }

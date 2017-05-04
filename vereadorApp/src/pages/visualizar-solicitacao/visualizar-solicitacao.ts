@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, PopoverController, LoadingController, ToastController, ModalController, AlertController, NavController } from 'ionic-angular';
 import { Solicitacao } from '../../model/solicitacao';
 import { CompartilharPage } from '../compartilhar/compartilhar';
+import { LikeSolicitacao } from '../../model/like-solicitacao';
 import { SolicitacaoService } from '../../providers/solicitacao-service';
 import { FeedBackService } from '../../providers/feed-back-service';
 import { RequerimentoService } from '../../providers/requerimento-service';
@@ -9,7 +10,7 @@ import { RequerimentoPage } from '../requerimento/requerimento';
 import { Requerimento } from '../../model/requerimento';
 import { StorageService } from '../../providers/storage';
 import { EditarSolicitacaoPage } from '../editar-solicitacao/editar-solicitacao';
-
+import { LikeService } from '../../providers/like-service';
 
 @Component({
   selector: 'page-visualizar-solicitacao',
@@ -20,6 +21,10 @@ export class VisualizarSolicitacaoPage {
   private solicitacao: Solicitacao = new Solicitacao();
   private loading;
   private permissao = 0;
+  private idUsuario: any = 0;
+  private tipo: any = 'n';
+  private apoio: any = 0;
+  private reprovacao: any = 0;
 
   constructor(
     public navParams: NavParams,
@@ -32,6 +37,7 @@ export class VisualizarSolicitacaoPage {
     private solicitacaoService: SolicitacaoService,
     private toastCtrl: ToastController,
     private feedService: FeedBackService,
+    private likeService: LikeService,
     storageService: StorageService
   ) {
     this.solicitacao = navParams.get('solicitacao');
@@ -44,9 +50,19 @@ export class VisualizarSolicitacaoPage {
         loading.dismiss();
         this.solicitacao = res.data;
       }).catch(() => loading.dismiss());
-    } else {
-      storageService.get().then(resp => this.permissao = resp.permissao);
     }
+    storageService.get().then(resp => {
+      this.permissao = resp.permissao;
+      this.idUsuario = resp.IDUsuario;
+      this.likeService.getLikeSolicitacaoByID(this.idUsuario, this.solicitacao.IDSolicitacao).then(res => {
+        if (!res.error) {
+          this.tipo = res.value.t;
+          this.apoio = res.value.p;
+          this.reprovacao = res.value.n;
+        }
+      });
+    });
+
   }
 
   compartilhar() {
@@ -197,6 +213,19 @@ export class VisualizarSolicitacaoPage {
     });
   }
 
-
+  private like(tipo: string) {
+    alert(this.idUsuario);
+    if (this.idUsuario != 0 && this.idUsuario != undefined) {
+      this.tipo = this.tipo == tipo ? 'u' : tipo;
+    this.likeService.addLikeSolicitacao(new LikeSolicitacao(tipo, this.idUsuario, this.solicitacao.IDSolicitacao, this.solicitacao.IDUsuario)).then(res => {
+      JSON.stringify(res);
+      this.apoio = res.value.p;
+      this.reprovar = res.value.n;
+    });
+    } else {
+      this.displayToast("Faça o login no sistema antes para poder dar seu voto");
+    }
+    
+  }
 
 }

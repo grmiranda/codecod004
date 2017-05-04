@@ -124,7 +124,7 @@ export class PlPropostasPage {
             }
           },
           {
-            text: 'Adicionar Projeto de Lei',
+            text: 'Adicionar Ofício',
             icon: 'logo-buffer',
             handler: () => {
               let modal = this.modalCtrl.create(NovaPlPage, { pl: pl });

@@ -1,4 +1,5 @@
 <?php
+	include 'getLikeProjetoDeLei.php';
 	include 'mySQL.php';
 	require 'mySQL.php';
 ?>
@@ -10,8 +11,11 @@
 		$sql = "SELECT * FROM pl WHERE IDPL = '$id'";
 		$result = $con->query($sql);
 		$numrow = $result->num_rows;
+		$row=$result->fetch_assoc();
+		$info = getLike($row['IDPL'], $id, $con);
+		
 		if($numrow == 1){
-			$row=$result->fetch_assoc();
+			
 			$sql = "SELECT * FROM fotourl WHERE id = '$id' AND tipo = 'pl'";
 			$resultado = $con->query($sql);
 			$fotos = array();
@@ -20,7 +24,14 @@
 			}
 			$row['fotoURL'] = $fotos;
 		}
-		echo json_encode($row);
+		$idU = $row['IDUsuario'];
+		$sql = "SELECT * FROM usuario WHERE IDUsuario = '$idU' ";
+		$resultado = $con->query($sql);
+		$dado = $resultado->fetch_assoc();
+		$row['nomeUsuario'] = $dado['nome'];
+		$row['fotoUsuario'] = $dado['fotoURL'];
+		$info->pl = $row;
+		echo json_encode($info);
 	} 	
 	$con->close();	
 ?>

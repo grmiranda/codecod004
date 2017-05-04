@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, LoadingController, ToastController, Platform } from 'ionic-angular';
 import { ProjetoDeLeiService } from '../../providers/pl-service';
 import { StorageService } from '../../providers/storage';
 import { LikeService } from '../../providers/like-service';
@@ -25,6 +25,7 @@ export class PlAndamentoPage {
     public projetoDeLeiService: ProjetoDeLeiService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
+    public platform: Platform,
     public storage: StorageService,
     private feedService: FeedBackService,
     private alertCtrl: AlertController,
@@ -52,6 +53,7 @@ export class PlAndamentoPage {
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;
+        console.log(this.pls);
       } else {
         this.tentarNovamente();
       }
@@ -103,7 +105,7 @@ export class PlAndamentoPage {
           {
             text: 'Reprovar',
             role: 'destructive',
-            icon: 'close-circle',
+            icon: !this.platform.is('ios') ? 'close-circle' : null,
             handler: () => {
               this.alertCtrl.create({
                 title: 'Reprovar projeto de lei',
@@ -134,7 +136,7 @@ export class PlAndamentoPage {
             icon: 'checkmark-circle',
             handler: () => {
               this.alertCtrl.create({
-                title: 'Reprovar projeto de lei',
+                title: 'Aprovar projeto de lei',
                 message: "Digite mensagem para usuario",
                 inputs: [
                   {
@@ -224,7 +226,7 @@ export class PlAndamentoPage {
     });
   }
 
-  public abrirPL(pl: ProjetoDeLei) {
+  public abrirPL(pl) {
     this.navCtrl.push(VisualizarPlPage, { pl: pl });
   }
 

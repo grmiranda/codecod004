@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ActionSheetController, NavParams, ToastController, AlertController, LoadingController, MenuController, Platform } from 'ionic-angular';
 import { Depoimento } from '../../model/depoimento';
 import { DepoimentoService } from '../../providers/depoimento-service';
-
-
+import { BadgesService } from '../../providers/badges-service';
+import { StorageService } from '../../providers/storage';
 @Component({
   selector: 'page-avaliar-depoimento',
   templateUrl: 'avaliar-depoimento.html'
@@ -19,13 +19,21 @@ export class AvaliarDepoimentoPage {
     private depoimentoService: DepoimentoService,
     private menuCtrl: MenuController,
     private alertCtrl: AlertController,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public badgesService: BadgesService,
+    public storageService: StorageService
   ) {
+  }
+
+  ionViewDidEnter() {
     this.carregarDepoimentos();
+
   }
 
   private carregarDepoimentos() {
-
+    this.storageService.get().then(res => {
+      this.badgesService.publicar(res.IDUsuario);
+    });
     let loader = this.loadingController.create({
       content: "Carregando avaliações"
     });

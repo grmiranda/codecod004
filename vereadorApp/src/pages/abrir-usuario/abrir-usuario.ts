@@ -64,25 +64,31 @@ export class AbrirUsuarioPage {
   }
 
   conta() {
+    this.desabilitar = true;
     this.opcoesUsuarioService.banimento(this.usuario.IDUsuario).then(resposta => {
       if(resposta){
         this.usuario = resposta;
+        this.desabilitar = false;        
         this.displayToast("Alteração feita com sucesso");
       }else{
+        this.desabilitar = false;                
         this.displayToast("Erro ao fazer alteração");                
       }
-    });
+    }).catch(()=>this.desabilitar = false);
   }
 
   permisao() {
+    this.desabilitar = true;
     this.opcoesUsuarioService.permissao(this.usuario.IDUsuario).then(resposta => {
       if(resposta){
         this.usuario = resposta;
+        this.desabilitar = false;        
         this.displayToast("Alteração feita com sucesso");        
       } else{
+        this.desabilitar = false;        
         this.displayToast("Erro ao fazer alteração");        
       }
-    });
+    }).catch(()=>this.desabilitar = false);
   }
 
   private displayToast(mensagem: string) {

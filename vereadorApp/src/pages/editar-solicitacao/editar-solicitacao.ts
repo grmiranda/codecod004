@@ -12,14 +12,17 @@ import { Solicitacao } from '../../model/solicitacao';
 export class EditarSolicitacaoPage {
 
   private solicitacao: Solicitacao = new Solicitacao();
+  public desabilitar = false;
 
-  constructor(public navParams: NavParams,
+  constructor(
+    public navParams: NavParams,
     public navController: NavController,
     public viewCtrl: ViewController,
     public actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     public fotoService: FotoService,
-    public solicitacaoService: SolicitacaoService) {
+    public solicitacaoService: SolicitacaoService
+    ) {
     this.solicitacao = JSON.parse(JSON.stringify(this.navParams.get("solicitacao")));
   }
 

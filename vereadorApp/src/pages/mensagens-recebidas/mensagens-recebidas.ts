@@ -8,6 +8,7 @@ import { ModalController } from 'ionic-angular';
 import { ModalAbrirMensagemPage } from '../modal-abrir-mensagem/modal-abrir-mensagem';
 import { ModalOpcoesPage } from '../modal-opcoes/modal-opcoes';
 import { Usuario } from '../../model/user';
+import { BadgesService } from '../../providers/badges-service';
 
 @Component({
   selector: 'page-mensagens-recebidas',
@@ -29,13 +30,16 @@ export class MensagensRecebidasPage {
     public actionSheetCtrl: ActionSheetController,
     public popoverCtrl: PopoverController,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public badgesService: BadgesService
+
   ) {
   }
 
   ionViewDidEnter() {
     this.storageService.get().then(res => {
       this.meuUser = res;
+      this.badgesService.publicar(this.meuUser.IDUsuario);
       this.carregar();
     });
   }
@@ -65,7 +69,7 @@ export class MensagensRecebidasPage {
   }
 
   private doRefresh(refresher) {
-    this.carregar();
+    this.ionViewDidEnter();
     setTimeout(() => {
       refresher.complete();
     }, 2000);

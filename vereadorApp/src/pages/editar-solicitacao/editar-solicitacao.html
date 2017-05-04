@@ -39,5 +39,5 @@
       </ion-row>
     </ion-grid>
   </ion-list>
-  <button class="blockbutton" (click)="editar()" color="secondary" ion-button block default>Salvar Edição</button>
+  <button class="blockbutton" (click)="editar()" color="secondary" [disabled]="desabilitar" ion-button block default>Salvar Edição</button>
 </ion-content>

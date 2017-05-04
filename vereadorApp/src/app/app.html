@@ -30,20 +30,20 @@
       <ion-item *ngIf="permissao == 1" (click)="menuAdm = !menuAdm; menuInfo= false;">
         Avaliações
       </ion-item>
-      <div class="menuFechado" [class.menuAvAberto]="menuAdm" style="margin-right: 10px">
+      <div class="menuFechado" [class.menuAvAberto]="menuAdm" style="margin-right: 10px; margin-bottom: 10px">
         <ion-item (click)="openPage(avaliarSolicitacaoPage);  menuAdm = false; menuInfo= false;">
-          Avaliar Solicitações
+          Avaliar Solicitações<ion-badge item-right *ngIf="solicitacao!=0">{{solicitacao}}</ion-badge>
         </ion-item>
         <ion-item (click)="openPage(avaliarPlPage);  menuAdm = false; menuInfo= false;">
-          Avaliar Projeto de lei
+          Avaliar Projeto de lei<ion-badge item-right *ngIf="pl!=0">{{pl}}</ion-badge>
         </ion-item>
         <ion-item (click)="openPage(avaliarDepoimentoPage);  menuAdm = false; menuInfo= false;">
-          Avaliar Depoimentos
+          Avaliar Depoimentos<ion-badge item-right *ngIf="depoimento!=0">{{depoimento}}</ion-badge>
         </ion-item>
       </div>
 
       <ion-item (click)="openPage(tabMensagemPage);  menuAdm = false; menuInfo= false;">
-        Mensagens
+        Mensagens<ion-badge item-right *ngIf="msg!=0">{{msg}}</ion-badge>
       </ion-item>
 
       <ion-item *ngIf="permissao == 1" (click)="openPage(buscaUsuario);  menuAdm = false; menuInfo= false;">

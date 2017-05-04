@@ -30,7 +30,7 @@
       <ion-item *ngIf="permissao == 1" (click)="menuAdm = !menuAdm; menuInfo= false;">
         Avaliações
       </ion-item>
-      <div class="menuFechado" [class.menuAvAberto]="menuAdm" style="margin-right: 10px; margin-bottom: 10px">
+      <div class="menuFechado" [class.menuAvAberto]="menuAdm" style="margin-right: 10px;">
         <ion-item (click)="openPage(avaliarSolicitacaoPage);  menuAdm = false; menuInfo= false;">
           Avaliar Solicitações<ion-badge item-right *ngIf="solicitacao!=0">{{solicitacao}}</ion-badge>
         </ion-item>
@@ -58,11 +58,11 @@
         Informações
       </ion-item>
       <div class="menuFechado" [class.menuInfoAberto]="menuInfo" style="margin-right: 10px">
-        <ion-item (click)="openPage(categoriasPage);  menuAdm = false; menuInfo= false;">
-          Telefones Úteis
-        </ion-item>
         <ion-item (click)="openPage(informacaoPage);  menuAdm = false; menuInfo= false;">
           Perguntas Frequentes
+        </ion-item>
+        <ion-item (click)="openPage(categoriasPage);  menuAdm = false; menuInfo= false;">
+          Telefones Úteis
         </ion-item>
       </div>
 

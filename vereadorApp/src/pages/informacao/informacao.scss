@@ -1,16 +1,25 @@
 page-informacao {
-    // ion-header button{
-    //     width: 10% !important;
-    // }
-    // ion-title{
-    //     text-align: center;
-    //     margin-right: 10%;
-    // }
-    .margemLimitada{
+  // ion-header button{
+  //     width: 10% !important;
+  // }
+  // ion-title{
+  //     text-align: center;
+  //     margin-right: 10%;
+  // }
+  .pergunta {
     white-space: pre-line;
-    margin-bottom: 0px;
-    padding-left: 5px;
-    font-variant: small-caps;
-    font-size: 20px;
-    }
+    margin-bottom: 0;
+    // padding-left: 5px;
+    // font-variant: small-caps;
+    font-size: 18px;
+  }
+
+  .resposta {
+    white-space: pre-line;
+    margin-bottom: 0;
+    padding-left: 8px;
+    padding-top: 6px;
+    // font-variant: small-caps;
+    font-size: 15px;
+  }
 }

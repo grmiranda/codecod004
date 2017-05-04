@@ -44,6 +44,7 @@ export class TrofeuCidadaniaPage {
 
   private getMyRank() {
     this.pontuacaoService.getPontuacaoPorID(this.myID).then(res => {
+      this.loading.dismiss();
       if (!res.error) {
         this.myRank = res.data;
       } else {

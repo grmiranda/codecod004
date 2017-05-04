@@ -84,10 +84,20 @@ export class EventoPage {
   }
 
   private converterDataParaTexto(data):string{
-    if(data.getMonth() + 1 < 10 ){
-      return `${data.getFullYear()}-0${data.getMonth() + 1}-${data.getDate()}`;
+
+    let dataCerta = `${data.getFullYear()}`
+    if(data.getMonth() + 1 < 10){
+      dataCerta += `-0${data.getMonth() + 1}`;
     } else {
-      return `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`;
+      dataCerta += `-${data.getMonth() + 1}`;
     }
+
+    if(data.getDate() < 10 ){
+      dataCerta += `-0${data.getDate()}`;
+    } else {
+      dataCerta += `-${data.getDate()}`;
+    }
+
+    return dataCerta;
   }
 }

@@ -26,10 +26,6 @@
 		$row['nomeUsuario'] = $dado['nome'];
 		$row['fotoUsuario'] = $dado['fotoURL'];
 		
-		$idsPush = getIdApoio($idPostagem, $tipoPostagem);
-		$row['ids'] = $ids;
-		$row['pushs'] = $pushs;
-		
 		echo json_encode($row);
 	} 	
 	$con->close();	

@@ -98,6 +98,7 @@ export class MyApp {
     });
     platform.ready().then(() => {
       var notificationOpenedCallback = function (jsonData) {
+        //alert(JSON.stringify(jsonData));
       };
 
       window["plugins"].OneSignal

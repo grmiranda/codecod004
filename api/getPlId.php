@@ -2,6 +2,8 @@
 	include 'getLikeProjetoDeLei.php';
 	include 'mySQL.php';
 	require 'mySQL.php';
+	include 'getIdPush.php';
+
 ?>
 <?php 
 	$the_request = &$_GET;
@@ -30,7 +32,9 @@
 		$dado = $resultado->fetch_assoc();
 		$row['nomeUsuario'] = $dado['nome'];
 		$row['fotoUsuario'] = $dado['fotoURL'];
+
 		$info->pl = $row;
+
 		echo json_encode($info);
 	} 	
 	$con->close();	

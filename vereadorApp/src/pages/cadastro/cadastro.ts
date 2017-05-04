@@ -14,6 +14,7 @@ import { PushService } from '../../providers/push-service';
 export class CadastroPage {
 
   private usuario: Usuario = new Usuario();
+  private desabilitar = false;
 
   constructor(
     public navCtrl: NavController,
@@ -55,17 +56,19 @@ export class CadastroPage {
 
   private cadastrar() {
     if (this.valido()) {
+      this.desabilitar = true;
       this.pushService.getId().then(idPush => {
         this.usuario.Push = idPush;
         this.cadastroService.cadastrar(this.usuario).then(res => {
           if (res == false) {
             alert("Erro ao cadastrar Usuario");
+            this.desabilitar = false;
           } else {
             this.storage.set(res);
             this.navCtrl.setRoot(HomePage);
           }
-        })
-      });
+        }).catch(()=>this.desabilitar = false);
+      }).catch(()=>this.desabilitar = false);
     }
   }
 

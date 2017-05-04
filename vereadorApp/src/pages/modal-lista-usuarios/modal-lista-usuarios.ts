@@ -14,7 +14,11 @@ export class ModalListaUsuariosPage {
   private usuariosSelecionados: Usuario[] = [];
   private selecionando: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public view: ViewController
+    ) {
     this.listaUsuarios = navParams.get('listaUsuarios');
     this.usuariosSelecionados = navParams.get('usuariosSelecionados');
     if (this.usuariosSelecionados == undefined) {

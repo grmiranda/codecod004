@@ -39,6 +39,6 @@
       <button class="blockbutton" (click)="removerVideo()" color="danger" ion-button block default>Apagar Vídeo</button>
     </ion-item>
   </ion-list>
-  <button class="blockbutton2" (click)="editar()" color="secondary" ion-button block default>Salvar Edição</button>
+  <button class="blockbutton2" (click)="editar()"  color="secondary" [disabled]="desabilitar" ion-button block default>Salvar Edição</button>
 
 </ion-content>

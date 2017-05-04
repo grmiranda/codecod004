@@ -13,6 +13,7 @@ import { PublicacaoPage } from '../publicacao/publicacao';
 export class EditarPublicacaoPage {
 
   public publicacao: Publicacao = new Publicacao();
+  public desabilitar = false;
 
   constructor(
     public navCtrl: NavController,
@@ -29,6 +30,7 @@ export class EditarPublicacaoPage {
   }
 
   private editar() {
+    this.desabilitar = true;
     this.publicacaoService.editPublicacao(this.publicacao).then(res => {
       if (!res.error) {
         if (res.value) {
@@ -40,7 +42,7 @@ export class EditarPublicacaoPage {
       } else {
         this.showConfirm();
       }
-    });
+    }).catch(()=>this.desabilitar = false);
   }
 
   private addLink() {
@@ -183,7 +185,10 @@ export class EditarPublicacaoPage {
       message: 'Tentar Novamente ?',
       buttons: [
         {
-          text: 'Cancelar'
+          text: 'Cancelar',
+          handler: () => {
+            this.desabilitar =false;
+          }
         },
         {
           text: 'Ok',

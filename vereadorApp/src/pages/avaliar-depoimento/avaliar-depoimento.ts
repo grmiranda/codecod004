@@ -42,9 +42,9 @@ export class AvaliarDepoimentoPage {
 
     this.depoimentoService.getDepoimentoAvaliar().then(depoimentos => {
       loader.dismiss();
-      if (depoimentos) {
-        this.depoimentos = depoimentos;
-      } else {
+      if (!depoimentos.error) {
+        this.depoimentos = depoimentos.data;
+      }else{
         this.tentarNovamente();
       }
     });
@@ -99,9 +99,9 @@ export class AvaliarDepoimentoPage {
   private doRefresh(refresher) {
     this.depoimentoService.getDepoimentoAvaliar().then(depoimentos => {
       refresher.complete();
-      if (depoimentos) {
-        this.depoimentos = depoimentos;
-      } else {
+      if (!depoimentos.error) {
+        this.depoimentos = depoimentos.data;
+      }else{
         this.tentarNovamente();
       }
     });

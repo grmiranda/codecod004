@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Publicacao } from '../model/publicacao';
 import 'rxjs/add/operator/toPromise';
+import { CriptografiaService } from './criptografia-service';
 
 @Injectable()
 export class PublicacaoService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private crip: CriptografiaService) {
 
   }
 
   public addPublicacao(publicacao: Publicacao): Promise<any> {
+    let dados = this.crip.enc(publicacao);
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addPublicacao.php', JSON.stringify(publicacao), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/addPublicacao.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractAddData(res))
       .catch(this.handleErrorMessage);
@@ -45,7 +47,7 @@ export class PublicacaoService {
 
   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
-    let data = res.json();
+    let data = this.crip.dec(res);
     if (data == null) {
       retorno.error = true;
     } else {

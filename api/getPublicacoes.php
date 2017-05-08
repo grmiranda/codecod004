@@ -1,9 +1,15 @@
 <?php
 	include 'mySQL.php';
 	require 'mySQL.php';
+	include 'criptografia.php';
+	// require 'criptografia.php';
+
 ?>
-<?php 
-	$vetor   = array();
+<?php
+	$vetor = array();
+
+	$cript = new Criptografia;
+
 	$the_request = &$_GET;
 	if (isset($_GET["id"])){
 		if ($_GET["id"] == ""){
@@ -22,6 +28,11 @@
 				$vetor[] = $row;
 			}
 			echo json_encode($vetor);
+			echo "\n";
+			echo "\n";
+			echo "\n";
+			echo $cript->enc(json_encode($vetor));
+
 		} else {
 			$id = $_GET['id'];
 			$sql = "SELECT * FROM publicacao WHERE IDPublicacao = '$id'";
@@ -40,10 +51,14 @@
 				$vetor = $result->fetch_assoc();
 				$vetor['fotoURL'] = $fotos;
 				echo json_encode($vetor);
+				echo $cript->enc(json_encode($vetor));
+
 			} else {
-				echo json_encode(false);
+
+				echo $cript->enc(json_encode(false));
+
 			}
 		}
-	} 	
-	$con->close();	
+	}
+	$con->close();
 ?>

@@ -89,6 +89,8 @@ import { OpcoesUsuarioService } from '../providers/opcoes-usuario-service';
 
 import { BadgesService } from '../providers/badges-service';
 
+import { CriptografiaService } from '../providers/criptografia-service';
+
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': 'f3c01288'
@@ -219,7 +221,7 @@ const cloudSettings: CloudSettings = {
   ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, Facebook, DeepLinkService, CallNumber, ShareService, FeedBackService, SocialSharing, DepoimentoService, MensagemService, PushService, OneSignal, BuscaUsuariosService, Storage,
-    StorageService, BadgesService, CadastroService, LikeService, FotoService, OpcoesUsuarioService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
+    StorageService, BadgesService, CadastroService, LikeService, CriptografiaService, FotoService, OpcoesUsuarioService, FacebookService, PublicacaoService, SolicitacaoService, RequerimentoService, EventoService,
     PontuacaoService, { provide: ErrorHandler, useClass: IonicErrorHandler }, GooglePlusService, ProjetoDeLeiService]
 
 

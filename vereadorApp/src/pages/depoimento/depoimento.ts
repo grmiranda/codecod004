@@ -29,12 +29,31 @@ export class DepoimentoPage {
 
     this.depoimentoService.getDepoimentoAprovados().then(depoimento=>{
       loading.dismiss();
-      if(depoimento){
-        this.depoimentos = depoimento;
+      if (!depoimento.error) {
+        this.depoimentos = depoimento.data;
       }else{
-        this.tentarNovamente();
+        this.showConfirm();
       }
     });
+  }
+
+  private showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Falha na conexão',
+      message: 'Tentar Novamente ?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.carregar();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   public novoDepoimento(){
@@ -44,10 +63,10 @@ export class DepoimentoPage {
   private doRefresh(refresher) {
     this.depoimentoService.getDepoimentoAprovados().then(depoimento=>{
       refresher.complete();
-      if(depoimento){
-        this.depoimentos = depoimento;
+      if (!depoimento.error) {
+        this.depoimentos = depoimento.data;
       }else{
-        this.tentarNovamente();
+        this.showConfirm();
       }
     });
   }

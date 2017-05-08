@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Solicitacao } from '../model/solicitacao';
 import 'rxjs/add/operator/toPromise';
+import { CriptografiaService } from './criptografia-service';
+
 
 @Injectable()
 export class SolicitacaoService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private crip: CriptografiaService) {
 
   }
 
@@ -69,7 +71,7 @@ export class SolicitacaoService {
 
   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
-    let data = res.json();
+    let data = this.crip.dec(res);
     if (data == null) {
       retorno.error = true;
     } else {

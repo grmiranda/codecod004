@@ -33,7 +33,6 @@ export class PlRecusadosPage {
     loading.present();
 
     this.projetoDeLeiService.getProjetosDeLei('cn').then(res => {
-      console.log(res);
       loading.dismiss();
       if (!res.error) {
         this.pls = res.data;

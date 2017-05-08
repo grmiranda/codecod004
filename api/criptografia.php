@@ -5,7 +5,7 @@ class Criptografia {
 
     function enc($word){
         $add_text = "esse texto deveria complicar";
-        $chave = 5;
+        $chave = 47;
        $word .= $add_text;
        $s = strlen($word)+1;
        $nw = "";
@@ -23,7 +23,8 @@ class Criptografia {
            }
            $nw = $nw.$word[$nindex-1];
        }
-       return $this->enc2($nw);
+      //  return $this->enc2($nw);
+       return $nw;
     }
 
 function enc2($word){
@@ -55,8 +56,11 @@ function enc2($word){
     */
     function dec($word){
 
-        $add_text = "segundaPassada";
-        $chave = 13;
+        // $add_text = "segundaPassada";
+        $add_text = "esse texto deveria complicar";
+
+        // $chave = 13;
+        $chave = 47;
 
        $s = strlen($word)+1;
        $nw = "";
@@ -82,7 +86,8 @@ function enc2($word){
            $nw = $nw.$word[$nindex-1];
        }
        $t = strlen($nw) - strlen($add_text);
-       return $this->dec2(substr($nw, 0, $t));
+       //  return $this->dec2(substr($nw, 0, $t));
+      return substr($nw, 0, $t);
     }
 
 	function dec2($word){

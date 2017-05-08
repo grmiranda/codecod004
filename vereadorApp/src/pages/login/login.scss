@@ -1,5 +1,5 @@
 page-login {
-h1.titulo { 
+h1.titulo {
     color: white;
     //color: rgb(240, 90, 0);
     text-align: center;
@@ -7,7 +7,7 @@ h1.titulo {
     font-family: merienda-one, cursive;
     line-height: 100%;
     font-weight: bold;
- } 
+ }
  h2.subtitulo{
     color:white;
     //color: rgb(240, 90, 0);
@@ -17,7 +17,7 @@ h1.titulo {
     font-weight: bold;
  }
  .escurecer{
-    //background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.2);
     height: 100%;
     top: 0;
     bottom: 0;
@@ -28,12 +28,12 @@ h1.titulo {
  .divisoria {
     position: absolute;
     text-align: center;
-    top: 0;
+    top: 50%;
     bottom: 50%;
     left: 0;
     right: 0;
     height: 30%;
-    margin: auto;    
+    margin: auto;
 }
 .footer-login{
   padding-left: 20px;
@@ -56,4 +56,3 @@ button{
 }
 
 }
-

@@ -213,12 +213,13 @@ export class MyApp {
         if (res.json() == true) {
           this.storageService.deslogar();
           this.menuCtrl.close();
-          this.navCtrl.setRoot(LoginPage);
         }
+        this.navCtrl.setRoot(LoginPage);
         this.bloqueia = false;
       }).catch(() => this.displayToast("Erro ao se conectar com o servidor"));
     }).catch(() => {
-      this.displayToast("Erro ao deslogar")
+      this.displayToast("Erro ao deslogar");
+      this.navCtrl.setRoot(LoginPage);
       this.bloqueia = false;
     });
   }

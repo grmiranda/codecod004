@@ -1,9 +1,9 @@
 <?php
-	include 'getLikeProjetoDeLei.php';
 	include 'mySQL.php';
 	require 'mySQL.php';
 	include 'getIdPush.php';
-
+	include 'getLikeProjetoDeLei.php';
+	
 ?>
 <?php 
 	$the_request = &$_GET;
@@ -32,7 +32,9 @@
 		$dado = $resultado->fetch_assoc();
 		$row['nomeUsuario'] = $dado['nome'];
 		$row['fotoUsuario'] = $dado['fotoURL'];
-
+		$idsPushs = getIdApoio($row['IDPL'], "pl", $con);
+		$info->ids = $idsPushs[0];
+		$info->pushs = $idsPushs[1];
 		$info->pl = $row;
 
 		echo json_encode($info);

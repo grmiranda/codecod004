@@ -1,8 +1,6 @@
 <?php 
-	include 'mySQL.php';
-	require 'mySQL.php';
 
-	function getIdApoio($idPostagem, $tipoPostagem){
+	function getIdApoio($idPostagem, $tipoPostagem, $con){
 		$retorno = array();
 		$ids = array();
 		$pushs = array();
@@ -29,9 +27,11 @@
 					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$tempID'";
 					$aux = $con->query($sql);
 					$aux = $aux->fetch_assoc();
-					$ids[] = $tempID;
-					if($aux['Push'] != ""){
-						$pushs[] = $aux['Push'];
+					if (!in_array($tempID, $ids)) { 
+						$ids[] = $tempID;
+						if($aux['Push'] != ""){
+							$pushs[] = $aux['Push'];
+						}
 					}
 				}
 			}
@@ -57,16 +57,18 @@
 					$sql = "SELECT * FROM usuario WHERE IDUsuario = '$tempID'";
 					$aux = $con->query($sql);
 					$aux = $aux->fetch_assoc();
-					$ids[] = $tempID;
-					if($aux['Push'] != ""){
-						$pushs[] = $aux['Push'];
+					if (!in_array($tempID, $ids)) { 
+						$ids[] = $tempID;
+						if($aux['Push'] != ""){
+							$pushs[] = $aux['Push'];
+						}
 					}
 				}
 			}
 		}
 		$retorno[] = $ids;
 		$retorno[] = $pushs;
-		return retorno;
+		return $retorno;
 	}
 
 ?>

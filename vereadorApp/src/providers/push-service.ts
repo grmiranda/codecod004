@@ -39,7 +39,8 @@ export class PushService {
       "include_player_ids": [pessoa.Push],
       "contents": { "en": mensagem },
       "android_group": 'appLuiz',
-      "android_group_message": {"en": "Você tem $[notif_count] novas notificações"}
+      "android_group_message": {"en": "Você tem $[notif_count] novas notificações"},
+      "large_icon": "http://www.dsoutlet.com.br/apiLuiz/imagens/Icone.png"
     }), { headers: this.headers }).toPromise().then(res => alert(res)).catch(error => alert("erro ao enviar notificações"));
   }
 
@@ -51,7 +52,8 @@ export class PushService {
       "included_segments": [grupo],
       "contents": { "en": mensagem },
       "android_group": 'appLuiz',
-      "android_group_message": {"en": "Você tem $[notif_count] novas notificações"}
+      "android_group_message": {"en": "Você tem $[notif_count] novas notificações"},
+      "large_icon": "http://www.dsoutlet.com.br/apiLuiz/imagens/Icone.png"
     }), { headers: this.headers }).toPromise().then(res => alert(res)).catch(error => alert("erro ao enviar notificações"));
   }
 

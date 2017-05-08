@@ -25,7 +25,9 @@
 		$dado = $resultado->fetch_assoc();
 		$row['nomeUsuario'] = $dado['nome'];
 		$row['fotoUsuario'] = $dado['fotoURL'];
-		
+		$idsPushs = getIdApoio($row['IDSolicitacao'], "solicitacao", $con);
+		$row['ids'] = $idsPushs[0];
+		$row['pushs'] = $idsPushs[1];
 		echo json_encode($row);
 	} 	
 	$con->close();	

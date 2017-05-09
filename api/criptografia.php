@@ -1,15 +1,14 @@
 <?php
 class Criptografia {
     function enc($word){
-        $add_text = "esse texto deveria complicar";
+        $add_text = "";
+
+
+        $add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
+
+
         $chave = 47;
 
-        if(strlen($word) < 20){ //95 por ser 20 da condição de encriptografar + 75 das lenhas que concana
-			$add_text = "admin id senha password username nome root administrador adm permissao c a teste";
-		} else {
-			$add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a configuracao seguranca idAdmin alto vereador teste";
-		}
-		
        $word .= $add_text;
        $s = strlen($word)+1;
        $nw = "";
@@ -58,7 +57,10 @@ function enc2($word){
     */
     function dec($word){
         // $add_text = "segundaPassada";
-        $add_text = "esse texto deveria complicar";
+          $add_text = "";
+
+          $add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
+
         // $chave = 13;
         $chave = 47;
        $s = strlen($word)+1;

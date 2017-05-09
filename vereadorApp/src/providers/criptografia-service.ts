@@ -59,18 +59,17 @@ export class CriptografiaService {
     }
 
     dec(palavra): any {
-        console.log(palavra);
         //palavra = palavra.json();
         //palavra = palavra.teste;
         palavra = palavra._body;
-        let add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a configuracao seguranca idAdmin alto vereador";
         let chave = 47;
+        let add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
 
-       
+        palavra = palavra.replace( /\*/g, '\\');
 
         let s = palavra.length + 1;
         let nw = "";
-        let n = chave
+        let n = chave;
         let nindex;
         for (let y = 1; y < s; y++) {
             let m = y * n;
@@ -93,6 +92,10 @@ export class CriptografiaService {
             nw = nw + palavra[nindex - 1];
         }
         let t = nw.length - add_text.length;
+        console.log(nw);
+        console.log(t);
+        console.log(add_text.length);
+        console.log(nw.substring(0, t));
         //return this.dec2(nw.substring(0, t));
         return JSON.parse((nw.substring(0, t)));
     }

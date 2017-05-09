@@ -38,12 +38,14 @@ export class BuscaUsuarioPage {
     loading.present();
 
     this.buscaService.getUserAll().then(users => {
-      this.usuarios = users;
-      this.usuariosAux = this.usuarios;
+      if (!users.error) {
+        this.usuarios = users.data;
+        this.usuariosAux = users.data;
+      } else {
+        //ocorreu um error
+        this.tentarNovamente();
+      }
       loading.dismiss();
-    }).catch(() => {
-      loading.dismiss()
-      this.tentarNovamente();
     });
   }
 

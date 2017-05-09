@@ -27,11 +27,7 @@
 				$row['fotoURL'] = $fotos;
 				$vetor[] = $row;
 			}
-			echo json_encode($vetor);
-			echo "\n";
-			echo "\n";
-			echo "\n";
-			echo $cript->enc(json_encode($vetor));
+            echo $cript->enc(str_ireplace("\\","*",json_encode($vetor)));
 
 		} else {
 			$id = $_GET['id'];
@@ -50,8 +46,7 @@
 				}
 				$vetor = $result->fetch_assoc();
 				$vetor['fotoURL'] = $fotos;
-				echo json_encode($vetor);
-				echo $cript->enc(json_encode($vetor));
+                echo $cript->enc(str_ireplace("\\","*",json_encode($vetor)));
 
 			} else {
 

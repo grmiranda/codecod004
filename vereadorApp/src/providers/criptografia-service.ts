@@ -10,6 +10,7 @@ export class CriptografiaService {
     enc(palavra) {
         palavra = JSON.stringify(palavra);
         palavra = palavra.replace( /\\/g, '*');
+        palavra = unescape(encodeURIComponent(palavra));
         let chave = 47;
         let add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
         palavra += add_text;
@@ -94,6 +95,7 @@ export class CriptografiaService {
         }
         let t = nw.length - add_text.length;
         //return this.dec2(nw.substring(0, t));
+        palavra = decodeURIComponent(escape(palavra));        
         return JSON.parse((nw.substring(0, t)));
     }
 

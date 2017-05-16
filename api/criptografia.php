@@ -11,11 +11,12 @@ class Criptografia
 
 
         $add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
-
+		
 
         $chave = 47;
 
         $word .= $add_text;
+		$word= utf8_encode($word);
         $s = strlen($word) + 1;
         $nw = "";
         $n = $chave;
@@ -42,9 +43,9 @@ class Criptografia
      */
     function dec($word)
     {
-
+		
         $word = str_ireplace("*", "\\", $word);
-
+		$word = utf8_decode($word);
         $add_text = "";
 
         $add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
@@ -74,8 +75,9 @@ class Criptografia
             $nw = $nw . $word[$nindex - 1];
         }
         $t = strlen($nw) - strlen($add_text);
-
-        return json_decode(substr($nw, 0, $t));
+		
+        //return substr($nw, 0, $t);
+		return json_decode(substr($nw, 0, $t));
     }
 
 }

@@ -48,6 +48,7 @@ export class PublicacaoService {
   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
     let data = this.crip.dec(res);
+    console.log(data);
     if (data == null) {
       retorno.error = true;
     } else {

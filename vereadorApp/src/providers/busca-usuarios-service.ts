@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Usuario } from '../model/user';
 import 'rxjs/add/operator/toPromise';
+import { CriptografiaService } from './criptografia-service';
 
 /*
   Generated class for the BuscaUsuariosService provider.
@@ -16,20 +17,36 @@ export class BuscaUsuariosService {
   private link: string = 'http://dsoutlet.com.br/apiLuiz/busca.php?id';
 
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private crip: CriptografiaService) {
     console.log('Hello BuscaUsuariosService Provider');
   }
 
-  getUserAll(): Promise<Usuario[]> {
-    return this.http.get(this.link).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
+  getUserAll(): Promise<any> {
+    return this.http.get(this.link).toPromise().then(res => this.extractGetData(res)).catch(this.handleErrorMessage);
   }
 
-  getUserList(id): Promise<Usuario[]>  {
-    return this.http.get('http://dsoutlet.com.br/apiLuiz/users.php?id=' + id).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
+  getUserList(id): Promise<any>  {
+    return this.http.get('http://dsoutlet.com.br/apiLuiz/users.php?id=' + id).toPromise().then(res => this.extractGetData(res)).catch(this.handleErrorMessage);
   }
 
-  getBanidoPermissao(id): Promise<boolean>  {
-    return this.http.get('http://dsoutlet.com.br/apiLuiz/banido.php?id=' + id).toPromise().then(res => res.json()).catch(() => alert("Erro ao se conectar com o servidor"));
+  getBanidoPermissao(id): Promise<any>  {
+    return this.http.get('http://dsoutlet.com.br/apiLuiz/banido.php?id=' + id).toPromise().then(res => this.extractGetData(res)).catch(this.handleErrorMessage);
+  }
+
+  private extractGetData(res) {
+    let retorno = { error: false, data: [] };
+    let data = this.crip.dec(res);
+    if (data == null) {
+      retorno.error = true;
+    } else {
+      retorno.data = data;
+    }
+    return retorno;
+  }
+
+  private handleErrorMessage(error: any) {
+    let retorno = { error: true };
+    return retorno;
   }
 
 }

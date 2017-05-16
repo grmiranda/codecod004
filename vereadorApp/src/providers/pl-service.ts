@@ -70,8 +70,9 @@ export class ProjetoDeLeiService {
   }
 
   public editProjetoDeLei(projetoDeLei: ProjetoDeLei): Promise<any> {
+    let dados = this.crip.enc(projetoDeLei);
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/editProjetoDeLei.php', JSON.stringify(projetoDeLei), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/editProjetoDeLei.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractEditData(res))
       .catch(this.handleErrorMessage);
@@ -95,7 +96,6 @@ export class ProjetoDeLeiService {
   }
 
   private handleErrorMessage(error: any) {
-    console.log(error);
     let retorno = { error: true };
     return retorno;
   }

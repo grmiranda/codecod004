@@ -85,8 +85,9 @@ export class SolicitacaoService {
   }
 
   public editSolicitacao(solicitacao: Solicitacao): Promise<any> {
+    let dados = this.crip.enc(solicitacao);
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/editSolicitacao.php', JSON.stringify(solicitacao), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/editSolicitacao.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractEditData(res))
       .catch(this.handleErrorMessage);

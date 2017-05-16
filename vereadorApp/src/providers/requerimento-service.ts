@@ -80,10 +80,9 @@ export class RequerimentoService {
   }
 
   public editRequerimento(requerimento: Requerimento): Promise<any> {
-    console.log("enviador");
-    console.log(requerimento);
+    let dados = this.crip.enc(requerimento);    
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/editRequerimento.php', JSON.stringify(requerimento), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/editRequerimento.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractEditData(res))
       .catch(this.handleErrorMessage);
@@ -92,7 +91,6 @@ export class RequerimentoService {
   private extractEditData(res: Response) {
     let retorno = { error: false, value: false };
     let data = res.json();
-    console.log(data);
     if (data === true) {
       retorno.value = true;
     }

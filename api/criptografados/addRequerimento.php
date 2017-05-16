@@ -3,14 +3,18 @@ include 'addPontuacao.php';
 include 'salvaImagem.php';
 include 'mySQL.php';
 require 'mySQL.php';
+include 'criptografia.php';
 ?>
 
 <?php
+
+$cript = new Criptografia;
+
 $the_request = &$_POST;
 $postdata = file_get_contents("php://input");
 
 if (isset($postdata)) {
-    $request = json_decode($postdata);
+    $request = $cript->dec($postdata);
 
     $fotoURL = $request->fotoURL;
     $IDSolicitacao = $request->IDSolicitacao;
@@ -35,9 +39,9 @@ if (isset($postdata)) {
 
         //adicionando todas as fotos relacionadas ao requerimento
         $i = 0;
-        foreach ($fotoURL as $foto){
-            $arquivo = 'imagens/requerimento/'.time().$i.$IDSolicitacao.'.jpeg'; //nome do arquivo que será gerado
-            $url = 'http://www.dsoutlet.com.br/apiLuiz/'.$arquivo; //url que leva até a imagem
+        foreach ($fotoURL as $foto) {
+            $arquivo = 'imagens/requerimento/' . time() . $i . $IDSolicitacao . '.jpeg'; //nome do arquivo que será gerado
+            $url = 'http://www.dsoutlet.com.br/apiLuiz/' . $arquivo; //url que leva até a imagem
             $i++;
             base64_to_jpeg($foto, $arquivo); //converte a foto base64 em jpeg
             $sql = "INSERT INTO fotourl (fotoURL, id, tipo) VALUES ('$url', '$id', 'requerimento')";
@@ -45,8 +49,8 @@ if (isset($postdata)) {
         }
 
         echo json_encode(true);
-		
-		//deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
+
+        //deleta as curtidas da solicitacao para livrar espaco e diminuir as buscas
         $sql = "DELETE FROM apoiosolicitacao WHERE IDSolicitacao = '$IDSolicitacao'";
         $con->query($sql);
 

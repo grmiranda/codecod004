@@ -42,7 +42,9 @@ class Criptografia
      */
     function dec($word)
     {
-        // $add_text = "segundaPassada";
+
+        $word = str_ireplace("*", "\\", $word);
+
         $add_text = "";
 
         $add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
@@ -72,8 +74,8 @@ class Criptografia
             $nw = $nw . $word[$nindex - 1];
         }
         $t = strlen($nw) - strlen($add_text);
-        //  return $this->dec2(substr($nw, 0, $t));
-        return substr($nw, 0, $t);
+
+        return json_decode(substr($nw, 0, $t));
     }
 
 }

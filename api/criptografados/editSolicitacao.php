@@ -4,16 +4,19 @@ include 'mySQL.php';
 include 'apagaImagem.php';
 require 'mySQL.php';
 include 'salvaImagem.php';
+include 'criptografia.php';
+
 ?>
 
 <?php
+$cript = new Criptografia;
 
 $the_request = &$_POST;
 
 $postdata = file_get_contents("php://input");
 
 if (isset($postdata)) {
-    $request = json_decode($postdata);
+    $request = $cript->dec($postdata);
 
     $IDSolicitacao = $request->IDSolicitacao;
     $fotoURL = $request->fotoURL;

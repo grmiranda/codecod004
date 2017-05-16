@@ -59,10 +59,9 @@ export class MensagensRecebidasPage {
     this.selecao = false;
     this.mensagemService.getMensagemRecebida(this.meuUser.IDUsuario).then(res => {
       loading.dismiss();
-      if (res) {
-        this.mensagens = res;
-        this.mensagensSelecionadas = [];
-      } else {
+      if (!res.error) {
+        this.mensagens = res.data;
+      }else{
         this.tentarNovamente();
       }
     });

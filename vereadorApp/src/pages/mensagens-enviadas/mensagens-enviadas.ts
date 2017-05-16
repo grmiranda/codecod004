@@ -53,9 +53,8 @@ export class MensagensEnviadasPage {
     this.selecao = false;
     this.mensagemService.getMensagemEnviada(this.meuUser.IDUsuario).then(res => {
       loading.dismiss();
-      if (res) {
-        this.mensagens = res;
-        this.mensagensSelecionadas = [];
+      if (!res.error) {
+        this.mensagens = res.data;
       } else {
         this.tentarNovamente();
       }

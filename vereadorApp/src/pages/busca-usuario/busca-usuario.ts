@@ -39,6 +39,7 @@ export class BuscaUsuarioPage {
 
     this.buscaService.getUserAll().then(users => {
       if (!users.error) {
+        users.data = users.data;
         this.usuarios = users.data;
         this.usuariosAux = users.data;
       } else {

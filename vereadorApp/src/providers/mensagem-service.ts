@@ -1,31 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { CorpoMensagem } from '../model/mensagem';
 import 'rxjs/add/operator/toPromise';
+import { CriptografiaService } from './criptografia-service';
 
 @Injectable()
 export class MensagemService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(public http: Http) {
+  constructor(
+    public http: Http, 
+    private crip: CriptografiaService
+  ) {
   }
 
   public enviarMensagem(mensagem : CorpoMensagem):Promise<boolean>{
-      // alert(JSON.stringify(mensagem));
-      return this.http.post("http://dsoutlet.com.br/apiLuiz/enviarMsg.php", JSON.stringify(mensagem), { headers: this.headers }).toPromise().then(res=>res.json())
+      let dados = this.crip.enc(mensagem);
+      return this.http.post("http://dsoutlet.com.br/apiLuiz/enviarMsg.php", dados, { headers: this.headers }).toPromise().then(res=>res.json())
       .catch(this.handleErrorMessage);
   }
 
-  public getMensagemEnviada(id):Promise<CorpoMensagem[]>{
-    return this.http.get("http://dsoutlet.com.br/apiLuiz/verSaida.php?id="+ id).toPromise().then(res=>res.json())
-    .catch(this.handleErrorMessage);
+  public getMensagemEnviada(id):Promise<any>{
+    return this.http.get("http://dsoutlet.com.br/apiLuiz/verSaida.php?id="+ id).toPromise().then(response => this.extractGetData(response))
+      .catch(this.handleErrorMessage);
   }
 
-  public getMensagemRecebida(id):Promise<CorpoMensagem[]>{
-    return this.http.get("http://dsoutlet.com.br/apiLuiz/caixaEntrada.php?id="+ id).toPromise().then(res=>res.json())
-    .catch(this.handleErrorMessage);
+  public getMensagemRecebida(id):Promise<any>{
+    return this.http.get("http://dsoutlet.com.br/apiLuiz/caixaEntrada.php?id="+ id).toPromise().then(response => this.extractGetData(response))
+      .catch(this.handleErrorMessage);
   }
 
   public ler(id, idu){
@@ -37,8 +41,20 @@ export class MensagemService {
     .toPromise().then(res=>res.json()).catch(this.handleErrorMessage);
   }
 
+    private extractGetData(res: Response) {
+    let retorno = { error: false, data: [] };
+    let data = this.crip.dec(res);
+    if (data == null) {
+      retorno.error = true;
+    } else {
+      retorno.data = data;
+    }
+    return retorno;
+  }
+
   private handleErrorMessage(error: any) {
-    return false;
+    let retorno = { error: true };
+    return retorno;
   }
 
 }

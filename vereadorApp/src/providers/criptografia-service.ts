@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-
+declare function escape(s:string): string;
+declare function unescape(s:string): string;
 @Injectable()
 export class CriptografiaService {
 
@@ -9,8 +10,10 @@ export class CriptografiaService {
 
     enc(palavra) {
         palavra = JSON.stringify(palavra);
+        palavra = palavra.replace( /\\/g, '*');
+        palavra = unescape(encodeURIComponent(palavra));
         let chave = 47;
-        let add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a configuracao seguranca idAdmin alto vereador";
+        let add_text = "user usuario idUser comum admin id senha password username nome root administrador adm permissao c a ADM comum";
         palavra += add_text;
         let s = palavra.length + 1;
         let nw = "";
@@ -92,11 +95,8 @@ export class CriptografiaService {
             nw = nw + palavra[nindex - 1];
         }
         let t = nw.length - add_text.length;
-        console.log(nw);
-        console.log(t);
-        console.log(add_text.length);
-        console.log(nw.substring(0, t));
         //return this.dec2(nw.substring(0, t));
+        palavra = decodeURIComponent(escape(palavra));        
         return JSON.parse((nw.substring(0, t)));
     }
 

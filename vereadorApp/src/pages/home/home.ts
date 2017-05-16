@@ -46,6 +46,7 @@ export class HomePage {
 
   banimento() {
     this.buscaUser.getBanidoPermissao(this.meuUser.IDUsuario).then(resposta => {
+      resposta = resposta.data;
       if ((+resposta[0])) {
         this.events.publish('banido');
       }

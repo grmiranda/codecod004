@@ -43,7 +43,7 @@ export class NovaPlPage {
       this.displayToast("Adicione uma ementa à Proposta");
     } else {
       this.pl.estado = 'tr';
-      this.pl.IDUsuario = this.myID;
+      this.pl.IDUsuario = 6;
       this.projetoDeLeiService.addProjetoDeLei(this.pl).then(res => {
         if (!res.error && res.value) {
           this.displayToast("Projeto criado com sucesso!");

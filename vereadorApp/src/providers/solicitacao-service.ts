@@ -14,14 +14,6 @@ export class SolicitacaoService {
     private http: Http, 
     private crip: CriptografiaService
     ) {
-      let texto = "Tomaré una decisión con la cigüeña.";
-      //console.log();
-      let code = unescape(encodeURIComponent(texto));
-      console.log(code);
-      let decode = decodeURIComponent(escape(code));
-      console.log(decode);
-
-
   }
 
   public addSolicitacao(solicitacao: Solicitacao): Promise<any> {

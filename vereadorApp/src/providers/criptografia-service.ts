@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-
+declare function escape(s:string): string;
+declare function unescape(s:string): string;
 @Injectable()
 export class CriptografiaService {
 

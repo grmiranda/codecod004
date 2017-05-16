@@ -9,7 +9,10 @@ export class PublicacaoService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http, private crip: CriptografiaService) {
+  constructor(
+    private http: Http, 
+    private crip: CriptografiaService
+    ) {
 
   }
 
@@ -48,7 +51,6 @@ export class PublicacaoService {
   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
     let data = this.crip.dec(res);
-    console.log(data);
     if (data == null) {
       retorno.error = true;
     } else {

@@ -15,7 +15,7 @@ export class DeepLinkService {
   private link: string = "https://api.branch.io/v1/url";
 
   constructor(public http: Http) {
-    console.log('Hello DeepLinkService Provider');
+    //console.log('Hello DeepLinkService Provider');
   }
 
   public criarLink(url: string): Promise<any> {

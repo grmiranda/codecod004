@@ -41,7 +41,6 @@ export class VisualizarSolicitacaoPage {
     storageService: StorageService
   ) {
     this.solicitacao = navParams.get('solicitacao');
-    console.log(this.solicitacao);
     if (this.solicitacao.titulo == "") {
       let loading = this.loadingCtrl.create({
         content: 'Carregando'
@@ -145,10 +144,13 @@ export class VisualizarSolicitacaoPage {
     profileModal.onDidDismiss((solicitacaoAtualizada) => {
       if (solicitacaoAtualizada) {
         this.solicitacaoService.editSolicitacao(solicitacaoAtualizada).then(res => {
+          this.solicitacao = solicitacaoAtualizada;
+          /*
           this.navCtrl.pop();
           let solicitacao = new Solicitacao();
           solicitacao.IDSolicitacao = solicitacaoAtualizada.IDSolicitacao;
           this.navCtrl.push(VisualizarSolicitacaoPage, { solicitacao: solicitacao })
+          */
         });
       }
     });
@@ -206,6 +208,7 @@ export class VisualizarSolicitacaoPage {
 
   private editRequerimento(requerimento) {
     this.requerimentoService.editRequerimento(requerimento).then(resReq => {
+      console.log(resReq);
       if (resReq.value) {
         this.displayToast("Requisição alterada com sucesso");
       } else {

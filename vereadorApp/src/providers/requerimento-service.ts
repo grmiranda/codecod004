@@ -2,27 +2,34 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Requerimento } from '../model/requerimento';
 import 'rxjs/add/operator/toPromise';
+import { CriptografiaService } from './criptografia-service';
+
 
 @Injectable()
 export class RequerimentoService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http, 
+    private crip: CriptografiaService
+    ) {
 
   }
 
   public addRequerimento(requerimento: Requerimento): Promise<any> {
+    let dados = this.crip.enc(requerimento);
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addRequerimento.php', JSON.stringify(requerimento), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/addRequerimento.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractAddData(res))
       .catch(this.handleErrorMessage);
   }
 
   public reprovarRequerimento(motivoNegacao): Promise<any> {
+    let dados = this.crip.enc(motivoNegacao);    
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addMotivo.php', JSON.stringify(motivoNegacao), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/addMotivo.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractAddData(res))
       .catch(this.handleErrorMessage);
@@ -46,7 +53,7 @@ export class RequerimentoService {
 
   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
-    let data = res.json();
+    let data = this.crip.dec(res);
     if (data == null) {
       retorno.error = true;
     } else {
@@ -73,6 +80,8 @@ export class RequerimentoService {
   }
 
   public editRequerimento(requerimento: Requerimento): Promise<any> {
+    console.log("enviador");
+    console.log(requerimento);
     return this.http
       .post('http://www.dsoutlet.com.br/apiLuiz/editRequerimento.php', JSON.stringify(requerimento), { headers: this.headers })
       .toPromise()
@@ -83,6 +92,7 @@ export class RequerimentoService {
   private extractEditData(res: Response) {
     let retorno = { error: false, value: false };
     let data = res.json();
+    console.log(data);
     if (data === true) {
       retorno.value = true;
     }

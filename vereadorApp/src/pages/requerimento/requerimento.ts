@@ -41,9 +41,9 @@ export class RequerimentoPage {
       var loading = this.loadingCtrl.create({
         content: 'Carregando'
       });
+      this.solicitacao = this.navParams.get("solicitacao");
 
       loading.present();
-      this.solicitacao = this.navParams.get("solicitacao");
       this.requerimentoService.getRequerimentosByID(this.solicitacao.IDSolicitacao).then(buscaRequerimento => {
         this.requerimento = buscaRequerimento.data;
         this.andamento = this.solicitacao.andamento.toString();

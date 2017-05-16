@@ -35,7 +35,8 @@ export class EnviarMensagemPage {
     this.storageService.get().then(usuarioAtual => {
       this.meuUsuario = usuarioAtual;
       this.buscarUsers.getUserList(usuarioAtual.IDUsuario).then(res => {
-        this.usuarios = res;
+        console.log(res.data);
+        this.usuarios = res.data;
         if (destinatariosTelaAnterior != undefined) {
           this.inserirDestinatarios(destinatariosTelaAnterior);
         }

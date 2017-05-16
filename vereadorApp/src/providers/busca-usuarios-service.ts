@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Usuario } from '../model/user';
 import 'rxjs/add/operator/toPromise';
@@ -17,8 +17,11 @@ export class BuscaUsuariosService {
   private link: string = 'http://dsoutlet.com.br/apiLuiz/busca.php?id';
 
 
-  constructor(public http: Http, private crip: CriptografiaService) {
-    console.log('Hello BuscaUsuariosService Provider');
+  constructor(
+    public http: Http, 
+    private crip: CriptografiaService
+    ) {
+   
   }
 
   getUserAll(): Promise<any> {
@@ -33,7 +36,7 @@ export class BuscaUsuariosService {
     return this.http.get('http://dsoutlet.com.br/apiLuiz/banido.php?id=' + id).toPromise().then(res => this.extractGetData(res)).catch(this.handleErrorMessage);
   }
 
-  private extractGetData(res) {
+   private extractGetData(res: Response) {
     let retorno = { error: false, data: [] };
     let data = this.crip.dec(res);
     if (data == null) {

@@ -9,13 +9,17 @@ export class ProjetoDeLeiService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http, private crip: CriptografiaService) {
+  constructor(
+    private http: Http, 
+    private crip: CriptografiaService
+    ) {
 
   }
 
   public addProjetoDeLei(projetoDeLei: ProjetoDeLei): Promise<any> {
+    let dados = this.crip.enc(projetoDeLei);
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addProjetoDeLei.php', JSON.stringify(projetoDeLei), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/addProjetoDeLei.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractAddData(res))
       .catch(this.handleErrorMessage);

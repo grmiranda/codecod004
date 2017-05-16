@@ -10,13 +10,17 @@ export class SolicitacaoService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http, private crip: CriptografiaService) {
+  constructor(
+    private http: Http, 
+    private crip: CriptografiaService
+    ) {
 
   }
 
   public addSolicitacao(solicitacao: Solicitacao): Promise<any> {
+    let dados = this.crip.enc(solicitacao);
     return this.http
-      .post('http://www.dsoutlet.com.br/apiLuiz/addSolicitacao.php', JSON.stringify(solicitacao), { headers: this.headers })
+      .post('http://www.dsoutlet.com.br/apiLuiz/addSolicitacao.php', dados, { headers: this.headers })
       .toPromise()
       .then(res => this.extractAddData(res))
       .catch(this.handleErrorMessage);

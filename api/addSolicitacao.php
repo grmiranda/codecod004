@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'mySQL.php';
     require 'mySQL.php';
 	include 'salvaImagem.php';	
@@ -7,18 +7,18 @@
 <?php
 	$the_request = &$_POST;
 	$postdata = file_get_contents("php://input");
-	
+
 	if (isset($postdata)){
 		$request  = json_decode($postdata);
-		
+
 		$fotoURL = $request->fotoURL;
 		$titulo = $request->titulo;
 		$descricao = $request->descricao;
-		
+
 		$dataEntrada = date('Y-m-d');
-		
+
 		$IDUsuario = $request->IDUsuario;
-		
+
 		if (isset($titulo)){
 			$sql= "INSERT INTO solicitacao (titulo, descricao, estado, dataEntrada, IDUsuario) VALUES ('$titulo', '$descricao', 'sa', '$dataEntrada', '$IDUsuario')";
 			$con->query($sql);

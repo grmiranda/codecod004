@@ -94,7 +94,7 @@ export class AgendaPage {
             startTime: new Date(eventoAtual.DataInicio),
             endTime: new Date(eventoAtual.DataTermino),
             descricao: eventoAtual.Descricao,
-            //allDay: eventoAtual.EventoDiario,
+            allDay: eventoAtual.EventoDiario,
             local: eventoAtual.Local,
             IDUsuario: eventoAtual.IDUsuario
           });

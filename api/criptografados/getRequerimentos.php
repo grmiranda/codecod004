@@ -19,7 +19,7 @@ if (isset($_GET["solicitacaoID"])) {
         $num = $result->num_rows;
 
         if ($num !== 1) {
-            echo $cript->enc(json_encode(false));
+            echo $cript->enc(false);
         } else {
             $dados = $result->fetch_assoc();
             $idrequerimento = $dados['IDRequerimento'];
@@ -31,7 +31,7 @@ if (isset($_GET["solicitacaoID"])) {
             }
             $dados['fotoURL'] = $fotos;
 
-            echo $cript->enc(str_ireplace("\\", "*", json_encode($dados)));
+            echo $cript->enc($dados);
         }
     }
 }

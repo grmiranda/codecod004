@@ -146,7 +146,7 @@ if (isset($_GET["estado"])) {
             }
         }
 
-        echo $cript->enc(str_ireplace("\\", "*", json_encode($vetor)));
+        echo $cript->enc($vetor);
 
     }
 }

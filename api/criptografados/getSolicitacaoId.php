@@ -35,7 +35,7 @@ if (isset($_GET["id"])) {
     $row['ids'] = $idsPushs[0];
     $row['pushs'] = $idsPushs[1];
 
-    echo $cript->enc(str_ireplace("\\", "*", json_encode($vetor)));
+    echo $cript->enc($vetor);
 
 }
 $con->close();

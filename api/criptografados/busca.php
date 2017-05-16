@@ -62,7 +62,7 @@ if (isset($_GET["id"])) {
             $vetor[] = $temp;
         }
 
-        echo $cript->enc(str_ireplace("\\", "*", json_encode($vetor)));
+        echo $cript->enc($vetor);
 
     } else {
         $id = $_GET["id"];
@@ -72,7 +72,7 @@ if (isset($_GET["id"])) {
         $num = $result->num_rows;
 
         if ($num !== 1) {
-            echo $cript->enc(json_encode(false));
+            echo $cript->enc(false);
         } else {
             $dados = $result->fetch_assoc();
             $userID = $dados['IDUsuario'];
@@ -108,7 +108,7 @@ if (isset($_GET["id"])) {
             $temp['Push'] = $dados['Push'];
 
 
-            echo $cript->enc(str_ireplace("\\", "*", json_encode($temp)));
+            echo $cript->enc($temp);
 
         }
     }

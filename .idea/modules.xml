@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/appVereador.iml" filepath="$PROJECT_DIR$/.idea/appVereador.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mundialradar/lumen/blog/.idea/blog.iml" filepath="$PROJECT_DIR$/../mundialradar/lumen/blog/.idea/blog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mundialradar/mundialradar/.idea/mundialradar.iml" filepath="$PROJECT_DIR$/../mundialradar/mundialradar/.idea/mundialradar.iml" />
+    </modules>
+  </component>
+</project>

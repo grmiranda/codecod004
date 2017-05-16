@@ -1,9 +1,13 @@
 <?php
 include 'mySQL.php';
 require 'mySQL.php';
+include 'criptografia.php';
+
 ?>
 <?php
 $vetor = array();
+$cript = new Criptografia;
+
 $the_request = &$_GET;
 if (isset($_GET["id"])) {
 
@@ -16,7 +20,9 @@ if (isset($_GET["id"])) {
         $num = $result->num_rows;
 
         if ($num !== 1) {
-            echo json_encode(false);
+
+            echo $cript->enc(false);
+
         } else {
             $dados = $result->fetch_assoc();
             $acesso = $dados['permissao'];
@@ -60,7 +66,9 @@ if (isset($_GET["id"])) {
 
                     $vetor[] = $temp;
                 }
-                echo json_encode($vetor);
+
+                echo $cript->enc($vetor);
+
             } else {
                 $sql = "SELECT * FROM usuario WHERE IDUsuario != '$id' AND permissao = '1'";
                 $result = $con->query($sql);
@@ -101,7 +109,9 @@ if (isset($_GET["id"])) {
 
                     $vetor[] = $temp;
                 }
-                echo json_encode($vetor);
+
+                echo $cript->enc($vetor);
+
             }
         }
     }

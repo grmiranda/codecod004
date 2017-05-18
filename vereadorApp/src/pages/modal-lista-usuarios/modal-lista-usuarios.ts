@@ -15,8 +15,8 @@ export class ModalListaUsuariosPage {
   private selecionando: boolean = false;
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public view: ViewController
     ) {
     this.listaUsuarios = navParams.get('listaUsuarios');
@@ -33,7 +33,7 @@ export class ModalListaUsuariosPage {
     if (!this.selecionando) {
       return '#ffffff';
     } if (this.usuariosSelecionados.indexOf(usuarioAtual) != -1) {
-      return '#0066ff';
+      return '#d3e8ff';
     } else {
       return '#ffffff';
     }

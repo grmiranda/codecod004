@@ -11,23 +11,23 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col col-11 col-sm>
+      <ion-col col-10 col-sm>
         <h4>Para: {{destinatarios}} </h4>
       </ion-col>
-      <ion-col col-1 col-sm>
-        <button ion-button style="margin-left: -10px" color="secondary" (click)="selecionarDestinatario()"><ion-icon right name="contacts" ></ion-icon></button>
+      <ion-col col-2 col-sm>
+        <button ion-button class="iconeSelecionar" color="secondary" (click)="selecionarDestinatario()"><ion-icon right name="md-person-add" ></ion-icon></button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-item class="itemtextarea">
     <ion-label floating>Mensagem</ion-label>
-    <ion-textarea autoresize name="mensagem" [(ngModel)]= "textoMensagem"></ion-textarea>
+    <ion-textarea autoresize name="mensagem" [(ngModel)]="textoMensagem"></ion-textarea>
   </ion-item>
 </ion-content>
 
 <ion-footer>
   <ion-item class="itemtextarea">
-    <button ion-button full  color="secondary" large [disabled]= "enviando" (click) = "enviar()">Enviar</button>
+    <button ion-button full  color="secondary" default [disabled]="enviando" (click) = "enviar()">Enviar</button>
   </ion-item>
 </ion-footer>

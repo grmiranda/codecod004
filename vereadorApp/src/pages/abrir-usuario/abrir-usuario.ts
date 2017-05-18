@@ -27,10 +27,6 @@ export class AbrirUsuarioPage {
     this.usuario = this.navParams.get('usuario');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AbrirUsuarioPage');
-  }
-
   nomePermisao(): string {
     if (this.usuario.permissao.toString() == 'Comum') {
       return "Administrar";
@@ -68,11 +64,11 @@ export class AbrirUsuarioPage {
     this.opcoesUsuarioService.banimento(this.usuario.IDUsuario).then(resposta => {
       if(resposta){
         this.usuario = resposta;
-        this.desabilitar = false;        
+        this.desabilitar = false;
         this.displayToast("Alteração feita com sucesso");
       }else{
-        this.desabilitar = false;                
-        this.displayToast("Erro ao fazer alteração");                
+        this.desabilitar = false;
+        this.displayToast("Erro ao fazer alteração");
       }
     }).catch(()=>this.desabilitar = false);
   }
@@ -82,11 +78,11 @@ export class AbrirUsuarioPage {
     this.opcoesUsuarioService.permissao(this.usuario.IDUsuario).then(resposta => {
       if(resposta){
         this.usuario = resposta;
-        this.desabilitar = false;        
-        this.displayToast("Alteração feita com sucesso");        
+        this.desabilitar = false;
+        this.displayToast("Alteração feita com sucesso");
       } else{
-        this.desabilitar = false;        
-        this.displayToast("Erro ao fazer alteração");        
+        this.desabilitar = false;
+        this.displayToast("Erro ao fazer alteração");
       }
     }).catch(()=>this.desabilitar = false);
   }

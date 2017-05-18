@@ -23,16 +23,16 @@ export class FacebookService {
   loginFacebook(push: string): Promise<any> {
     return Facebook.login(["public_profile","email"]).then(res => this.http.post(this.link, JSON.stringify({token: res.authResponse.userID, push: push}), { headers: this.headers })
     .toPromise().then(resposta=>resposta.json()).catch(()=>alert("erro ao tentar se conectar com servidor")))
-    .catch(()=>alert("erro ao tentar se conectar com o face"));
+    .catch(()=>alert("erro ao tentar se conectar com o Facebook"));
   }
 
   public getDados(id:string): Promise<Usuario> {
     return Facebook.api('/' + id + '?fields=id,name,gender,email,picture', []).then(result => this.getDadosAux(result))
-    .catch(()=>alert("erro ao tentar se conectar com api do face"));
+    .catch(()=>alert("erro ao tentar se conectar com Facebook"));
   }
 
   erro() {
-    alert("erro ao tentar se conectar com o servidor");
+    alert("Não foi possível se conectar com o servidor");
   }
 
   private getDadosAux(result){

@@ -244,7 +244,6 @@ export class SolicSolicitadosPage {
 
   private editRequerimento(requerimento) {
     this.requerimentoService.editRequerimento(requerimento).then(resReq => {
-        console.log(resReq);
       if (resReq.value) {
         this.displayToast("Requisição alterada com sucesso");
       } else {

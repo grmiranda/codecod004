@@ -20,7 +20,7 @@ export class PushService {
   }
 
   public getId(): Promise<any> {
-    return OneSignal.getIds().then(res => res.userId).catch(() => alert("erro ao pegar id"));
+    return OneSignal.getIds().then(res => res.userId);
   }
 
   addTag(tag: string) {
@@ -41,7 +41,7 @@ export class PushService {
       "android_group": 'appLuiz',
       "android_group_message": {"en": "Você tem $[notif_count] novas notificações"},
       "large_icon": "http://www.dsoutlet.com.br/apiLuiz/imagens/Icone.png"
-    }), { headers: this.headers }).toPromise().then(res => alert(res)).catch(error => alert("erro ao enviar notificações"));
+    }), { headers: this.headers }).toPromise().then(res => res);
   }
 
   pushGrupo(mensagem, grupo) {
@@ -54,7 +54,7 @@ export class PushService {
       "android_group": 'appLuiz',
       "android_group_message": {"en": "Você tem $[notif_count] novas notificações"},
       "large_icon": "http://www.dsoutlet.com.br/apiLuiz/imagens/Icone.png"
-    }), { headers: this.headers }).toPromise().then(res => alert(res)).catch(error => alert("erro ao enviar notificações"));
+    }), { headers: this.headers }).toPromise().then(res => res);
   }
 
 

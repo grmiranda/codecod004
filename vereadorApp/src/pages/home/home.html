@@ -38,7 +38,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom *ngIf="meuUser.permissao==1">
     <button ion-fab color="secondary" (click)="novaPublicacao()">
       <ion-icon name="add">
     </ion-icon>

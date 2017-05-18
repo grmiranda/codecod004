@@ -25,7 +25,7 @@ export class SolicPropostasPage {
   private solicitacoes: any[] = [];
   private myID;
   private loading;
-  private meuUser: Usuario;
+  private meuUser: Usuario = new Usuario();
 
   constructor(
     public navCtrl: NavController,

@@ -18,7 +18,7 @@ import { BuscaUsuariosService } from '../../providers/busca-usuarios-service';
 export class HomePage {
 
   private publicacoes: Publicacao[] = [];
-  private meuUser: Usuario;
+  private meuUser: Usuario = new Usuario();
 
   constructor(
     private platform: Platform,

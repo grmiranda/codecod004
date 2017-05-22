@@ -52,39 +52,44 @@
 			$sql = "SELECT * FROM usuario WHERE socialID = '$socialID'";
 			$result = $con->query($sql);
 
-			$dados = $result->fetch_assoc();
-
-			$id = $dados['IDUsuario'];
-
-			if ($genero == 'm'){
-				$genero == 'male';
+			if ($request->num_rows == 0){
+				echo json_encode(false);
 			} else {
-				$genero = 'female';
+
+				$dados = $result->fetch_assoc();
+
+				$id = $dados['IDUsuario'];
+
+				if ($genero == 'm'){
+					$genero == 'male';
+				} else {
+					$genero = 'female';
+				}
+
+				$vetor['IDUsuario']  = $id;
+				$vetor['nome']       = $nome;
+				$vetor['email']      = $email;
+				$vetor['genero']     = $genero;
+				$vetor['fotoURL']    = $fotoURL;
+				$vetor['socialID']   = $socialID;
+				$vetor['cpf']        = $cpf;
+				$vetor['nascimento'] = $nasc;
+				$vetor['telefone']   = $telefone;
+				$vetor['endereco']   = $endereco;
+				$vetor['bairro']     = $bairro;
+				$vetor['cidade']     = $cidade;
+				$vetor['UF']         = $UF;
+				$vetor['permissao']  = $permissao;
+				$vetor['Push']       = $push;
+
+				$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
+				$con->query($sql);
+
+				$sql = "INSERT INTO endereco (endereco, bairro, cidade, uf, IDUsuario) VALUES ('$endereco', '$bairro', '$cidade', '$UF', '$id')";
+				$con->query($sql);
+
+				echo json_encode($vetor);
 			}
-
-			$vetor['IDUsuario']  = $id;
-			$vetor['nome']       = $nome;
-			$vetor['email']      = $email;
- 			$vetor['genero']     = $genero;
-			$vetor['fotoURL']    = $fotoURL;
-			$vetor['socialID']   = $socialID;
-			$vetor['cpf']        = $cpf;
-			$vetor['nascimento'] = $nasc;
-			$vetor['telefone']   = $telefone;
-			$vetor['endereco']   = $endereco;
-			$vetor['bairro']     = $bairro;
-			$vetor['cidade']     = $cidade;
-			$vetor['UF']         = $UF;
-			$vetor['permissao']  = $permissao;
-			$vetor['Push']       = $push;
-
-			$sql = "INSERT INTO telefone (numero, IDUsuario) VALUES ('$telefone', '$id')";
-			$con->query($sql);
-
-			$sql = "INSERT INTO endereco (endereco, bairro, cidade, uf, IDUsuario) VALUES ('$endereco', '$bairro', '$cidade', '$UF', '$id')";
-			$con->query($sql);
-
-			echo json_encode($vetor);
 
 		} else {
 			echo json_encode(false);
